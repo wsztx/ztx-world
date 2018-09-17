@@ -7,7 +7,7 @@ import com.ztx.world.base.dao.UserMapper;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
 import com.ztx.world.base.service.UserService;
-import com.ztx.world.common.constant.Constants;
+import com.ztx.world.common.constants.Constants;
 
 @Service
 public class UserServiceImpl implements UserService {
