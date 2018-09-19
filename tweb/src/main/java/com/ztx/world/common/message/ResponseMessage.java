@@ -76,7 +76,7 @@ public class ResponseMessage<T>{
 	@Override
 	public String toString() {
 		return "MessageResult [code=" + code + ", message=" + message 
-				+ ", data=" + data.toString() + "]";
+				+ ", data=" + data == null ? "" : data.toString() + "]";
 	}
 	
 }
