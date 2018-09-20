@@ -16,4 +16,14 @@ public class Constants {
 	 * 未删除
 	 */
 	public static final int UNDELETE_STATUS = 1;
+	
+	/**
+	 * 全局session名称
+	 */
+	public static final String GLOBAL_SESSION = "globalData";
+	
+	/**
+	 * 登录session名称
+	 */
+	public static final String LOGIN_SESSION = "loginData";
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>My World</title>
+<title>Home Page.</title>
 <script type="text/javascript" src="${base}/resource/plugin/jquery-3.3.1/jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -13,14 +13,15 @@
 $(function(){
 	$.ajax({
 		type: "POST",
-		url: "${base}/test", 
+		url: "${base}/test2", 
 		data: {},
 		success: function(result){
-			console.log(result)
+			console.log(result);
 		    alert(result.message);
 		},
 		error: function(result){
-			
+			console.log(result);
+			alert(111);
 		}
 	});
 });

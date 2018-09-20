@@ -25,6 +25,7 @@ public class GlobalHandlerExceptionResolver implements HandlerExceptionResolver 
 			Object obj, Exception exception) {
 		String requestType = request.getHeader("X-Requested-With");
 		ModelAndView modelAndView = new ModelAndView();
+		// 如果是ajax请求
     	if("XMLHttpRequest".equals(requestType)){  
 	        // 使用FastJson提供的FastJsonJsonView视图返回，不需要捕获异常
 	        FastJsonJsonView view = new FastJsonJsonView();
@@ -34,14 +35,12 @@ public class GlobalHandlerExceptionResolver implements HandlerExceptionResolver 
 	        view.setAttributesMap(modelMap);
 	        modelAndView.setView(view);
     	}else{
-    		Map<String, Object> modelMap = new HashMap<String, Object>();
-    		modelMap.put("code", ResultCode.SYS_OPERATION_FAILED);
-    		modelMap.put("message", exception.getMessage());
-    		modelAndView.addAllObjects(modelMap);
-    		modelAndView.setViewName("redirect:/web/error/error.jsp");
+    		modelAndView.addObject("code", ResultCode.SYS_OPERATION_FAILED);
+    		modelAndView.addObject("message", exception.getMessage());
+    		modelAndView.setViewName("forward:/web/error/error.jsp");
     	}
     	
-    	log.debug("occurred exception.", exception);
+    	log.error("Exception occurred.", exception);
     	return modelAndView;
 	}
 
