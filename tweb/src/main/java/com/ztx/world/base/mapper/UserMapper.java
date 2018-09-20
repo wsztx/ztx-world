@@ -1,4 +1,4 @@
-package com.ztx.world.base.dao;
+package com.ztx.world.base.mapper;
 
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;

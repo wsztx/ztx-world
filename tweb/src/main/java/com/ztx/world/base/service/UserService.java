@@ -14,5 +14,5 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	boolean updateUser(User user);
+	int updateUser(User user);
 }

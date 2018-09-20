@@ -54,11 +54,20 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
 		<property name="mapperLocations" value="classpath:mapper/*/*.xml"></property>
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>dialect=mysql</value>
+					</property>
+				</bean>
+			</array>
+		</property>
 	</bean>
 
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 ,自动扫描了所有的XxxxMapper.xml对应的mapper接口文件,只要Mapper接口类和Mapper映射文件对应起来就可以了 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.ztx.world.*.dao" />
+		<property name="basePackage" value="com.ztx.world.*.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 
@@ -69,8 +78,32 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!--======= 事务配置 End =================== -->
 	<!-- 配置基于注解的声明式事务 -->
 	<!-- enables scanning for @Transactional annotations -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
+<!-- 	<tx:annotation-driven transaction-manager="transactionManager" /> -->
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"  />
+			<tx:method name="query*" read-only="true"  />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="count*" read-only="true" />
+			<tx:method name="is*" read-only="true" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="execute*" propagation="REQUIRED" />
+			<!--默认回滚机制是RuntimeException-->
+			<tx:method name="*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>    
+   
+	<aop:config>
+		<!--声明所有包含Service的类的所有方法使用事务-->
+		<aop:pointcut id="service" expression="execution(* com.ztx.world.*.service.impl.*Service*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="service" />
+	</aop:config>
+	
+	<!--======= 事务配置 End =================== -->
 </beans>
