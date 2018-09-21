@@ -13,7 +13,7 @@ function doLogin(){
 		type: "POST",
 		url: "${base}/base/user/login", 
 		dataType: "json",
-		data: {"user.loginName":"admin", "user.password":"123456"},
+		data: {"user.code":"admin", "user.password":"123456"},
 		success: function(result){
 			console.log(result);
 		    alert(result.message);

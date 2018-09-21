@@ -9,31 +9,26 @@ import java.util.Date;
  * 
  * @date 2018-09-21
  */
-public class User {
+public class Organization {
     /**
      * 主键
      */
     private Integer id;
 
     /**
-     * 逻辑删除位，0删除，1未删除
-     */
-    private Integer status;
-
-    /**
-     * 用户编码，登录名
+     * 机构编码
      */
     private String code;
 
     /**
-     * 名称
+     * 机构名称
      */
     private String name;
 
     /**
-     * 密码
+     * 逻辑删除位，0删除，1未删除
      */
-    private String password;
+    private Integer status;
 
     /**
      * 创建时间
@@ -45,25 +40,12 @@ public class User {
      */
     private Date updateTime;
 
-    /**
-     * 所属机构id
-     */
-    private Integer orgId;
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public String getCode() {
@@ -82,12 +64,12 @@ public class User {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {
@@ -104,13 +86,5 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Integer getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(Integer orgId) {
-        this.orgId = orgId;
     }
 }

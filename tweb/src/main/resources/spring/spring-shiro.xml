@@ -40,7 +40,7 @@
 				/resource/** = anon
 				/base/user/toLogin = anon
 				/base/user/login = anon
-				/base/user/logout = logout
+				/base/user/logout = anon
                 /** = authc
 			</value>
 		</property>

@@ -61,7 +61,7 @@ public class ShiroReaml extends AuthorizingRealm {
 		// 利用 username 查询数据库得到用户的信息.
 		UserExample example = new UserExample();
 		example.createCriteria().andStatusEqualTo(Constants.UNDELETE_STATUS)
-			.andLoginNameEqualTo((String) principal);
+			.andCodeEqualTo((String) principal);
 		List<User> userList = userMapper.selectByExample(example);
 		if (userList != null && userList.size() > 0) {
 			password = userList.get(0).getPassword();

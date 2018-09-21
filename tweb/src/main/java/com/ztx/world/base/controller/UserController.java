@@ -48,7 +48,7 @@ public class UserController {
 	        if (!currentUser.isAuthenticated()) {
 	            // 把用户名和密码封装为UsernamePasswordToken 对象
 	            UsernamePasswordToken token = new UsernamePasswordToken(
-	            		vo.getUser().getLoginName(), vo.getUser().getPassword());
+	            		vo.getUser().getCode(), vo.getUser().getPassword());
 	            token.setRememberMe(true);
                 // 执行登陆
                 currentUser.login(token);
@@ -58,6 +58,25 @@ public class UserController {
 		} catch (Exception e) {
 			responseData = new ResponseMessage<User>(ResultCode.SYS_OPERATION_FAILED);
 			log.error("登录异常.", e);
+		}
+    	
+    	return responseData;
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public ResponseMessage<User> logout(HttpServletRequest request, HttpServletResponse response, 
+    		UserVo vo){
+    	ResponseMessage<User> responseData;
+		try {
+	        // 获取当前的Subject
+	        Subject currentUser = SecurityUtils.getSubject();
+	        currentUser.logout();
+	        
+	        responseData = new ResponseMessage<User>(ResultCode.SYS_OPERATION_SUCCESS);
+		} catch (Exception e) {
+			responseData = new ResponseMessage<User>(ResultCode.SYS_OPERATION_FAILED);
+			log.error("登出异常.", e);
 		}
     	
     	return responseData;

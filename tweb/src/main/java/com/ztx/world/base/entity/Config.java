@@ -9,11 +9,16 @@ import java.util.Date;
  * 
  * @date 2018-09-21
  */
-public class User {
+public class Config {
     /**
      * 主键
      */
     private Integer id;
+
+    /**
+     * 配置编码
+     */
+    private String code;
 
     /**
      * 逻辑删除位，0删除，1未删除
@@ -21,19 +26,9 @@ public class User {
     private Integer status;
 
     /**
-     * 用户编码，登录名
+     * 配置名称
      */
-    private String code;
-
-    /**
-     * 名称
-     */
-    private String name;
-
-    /**
-     * 密码
-     */
-    private String password;
+    private String configName;
 
     /**
      * 创建时间
@@ -45,25 +40,12 @@ public class User {
      */
     private Date updateTime;
 
-    /**
-     * 所属机构id
-     */
-    private Integer orgId;
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public String getCode() {
@@ -74,20 +56,20 @@ public class User {
         this.code = code == null ? null : code.trim();
     }
 
-    public String getName() {
-        return name;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public String getPassword() {
-        return password;
+    public String getConfigName() {
+        return configName;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setConfigName(String configName) {
+        this.configName = configName == null ? null : configName.trim();
     }
 
     public Date getCreateTime() {
@@ -104,13 +86,5 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Integer getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(Integer orgId) {
-        this.orgId = orgId;
     }
 }
