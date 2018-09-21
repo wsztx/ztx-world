@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-09-14 17:08:52
+Date: 2018-09-21 14:40:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,10 +29,6 @@ CREATE TABLE `base_config` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of base_config
--- ----------------------------
-
--- ----------------------------
 -- Table structure for base_organization
 -- ----------------------------
 DROP TABLE IF EXISTS `base_organization`;
@@ -44,10 +40,6 @@ CREATE TABLE `base_organization` (
   `UPDATE_TIME` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of base_organization
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for base_power
@@ -63,10 +55,6 @@ CREATE TABLE `base_power` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of base_power
--- ----------------------------
-
--- ----------------------------
 -- Table structure for base_role
 -- ----------------------------
 DROP TABLE IF EXISTS `base_role`;
@@ -78,10 +66,6 @@ CREATE TABLE `base_role` (
   `UPDATE_TIME` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of base_role
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for base_role_power
@@ -96,27 +80,21 @@ CREATE TABLE `base_role_power` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of base_role_power
--- ----------------------------
-
--- ----------------------------
 -- Table structure for base_user
 -- ----------------------------
 DROP TABLE IF EXISTS `base_user`;
 CREATE TABLE `base_user` (
   `ID` int(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `STATUS` int(2) NOT NULL COMMENT '逻辑删除位，0删除，1未删除',
+  `LOGIN_NAME` varchar(64) NOT NULL COMMENT '登录名',
   `USER_NAME` varchar(64) DEFAULT NULL COMMENT '名称',
+  `PASSWORD` varchar(64) NOT NULL COMMENT '密码',
   `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
   `UPDATE_TIME` datetime DEFAULT NULL COMMENT '更新时间',
   `ORG_ID` int(32) DEFAULT NULL COMMENT '所属机构id',
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `UK_LOGIN_NAME` (`LOGIN_NAME`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of base_user
--- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '1', '张三', '2018-09-14 16:38:03', '2018-09-14 16:38:05', null);
 
 -- ----------------------------
 -- Table structure for base_user_role
@@ -129,7 +107,3 @@ CREATE TABLE `base_user_role` (
   `STATUS` int(2) NOT NULL COMMENT '逻辑删除位，0删除，1未删除',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of base_user_role
--- ----------------------------

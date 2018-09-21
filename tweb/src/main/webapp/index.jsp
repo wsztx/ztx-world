@@ -8,7 +8,7 @@
 </head>
 <body>
 <%
-	// 转发到首页
+	// 转发到登录页
 	request.getRequestDispatcher("/index").forward(request, response);
 %>
 </body>

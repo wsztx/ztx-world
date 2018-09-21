@@ -5,7 +5,9 @@
     <resultMap id="BaseResultMap" type="com.ztx.world.base.entity.User" >
         <id column="ID" property="id" jdbcType="INTEGER" />
         <result column="STATUS" property="status" jdbcType="INTEGER" />
+        <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
         <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
         <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
         <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
         <result column="ORG_ID" property="orgId" jdbcType="INTEGER" />
@@ -72,7 +74,7 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        ID, STATUS, USER_NAME, CREATE_TIME, UPDATE_TIME, ORG_ID
+        ID, STATUS, LOGIN_NAME, USER_NAME, PASSWORD, CREATE_TIME, UPDATE_TIME, ORG_ID
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.UserExample" >
@@ -110,12 +112,12 @@
     </delete>
 
     <insert id="insert" parameterType="com.ztx.world.base.entity.User" >
-        insert into base_user (ID, STATUS, USER_NAME, 
-            CREATE_TIME, UPDATE_TIME, ORG_ID
-            )
-        values (#{id,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
-            #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{orgId,jdbcType=INTEGER}
-            )
+        insert into base_user (ID, STATUS, LOGIN_NAME, 
+            USER_NAME, PASSWORD, CREATE_TIME, 
+            UPDATE_TIME, ORG_ID)
+        values (#{id,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, 
+            #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{updateTime,jdbcType=TIMESTAMP}, #{orgId,jdbcType=INTEGER})
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.User" >
@@ -127,8 +129,14 @@
             <if test="status != null" >
                 STATUS,
             </if>
+            <if test="loginName != null" >
+                LOGIN_NAME,
+            </if>
             <if test="userName != null" >
                 USER_NAME,
+            </if>
+            <if test="password != null" >
+                PASSWORD,
             </if>
             <if test="createTime != null" >
                 CREATE_TIME,
@@ -147,8 +155,14 @@
             <if test="status != null" >
                 #{status,jdbcType=INTEGER},
             </if>
+            <if test="loginName != null" >
+                #{loginName,jdbcType=VARCHAR},
+            </if>
             <if test="userName != null" >
                 #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null" >
                 #{createTime,jdbcType=TIMESTAMP},
@@ -178,8 +192,14 @@
             <if test="record.status != null" >
                 STATUS = #{record.status,jdbcType=INTEGER},
             </if>
+            <if test="record.loginName != null" >
+                LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
+            </if>
             <if test="record.userName != null" >
                 USER_NAME = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null" >
+                PASSWORD = #{record.password,jdbcType=VARCHAR},
             </if>
             <if test="record.createTime != null" >
                 CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
@@ -200,7 +220,9 @@
         update base_user
         set ID = #{record.id,jdbcType=INTEGER},
             STATUS = #{record.status,jdbcType=INTEGER},
+            LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
             USER_NAME = #{record.userName,jdbcType=VARCHAR},
+            PASSWORD = #{record.password,jdbcType=VARCHAR},
             CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
             UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
             ORG_ID = #{record.orgId,jdbcType=INTEGER}
@@ -215,8 +237,14 @@
             <if test="status != null" >
                 STATUS = #{status,jdbcType=INTEGER},
             </if>
+            <if test="loginName != null" >
+                LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+            </if>
             <if test="userName != null" >
                 USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                PASSWORD = #{password,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null" >
                 CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
@@ -234,7 +262,9 @@
     <update id="updateByPrimaryKey" parameterType="com.ztx.world.base.entity.User" >
         update base_user
         set STATUS = #{status,jdbcType=INTEGER},
+            LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
             USER_NAME = #{userName,jdbcType=VARCHAR},
+            PASSWORD = #{password,jdbcType=VARCHAR},
             CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
             UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
             ORG_ID = #{orgId,jdbcType=INTEGER}

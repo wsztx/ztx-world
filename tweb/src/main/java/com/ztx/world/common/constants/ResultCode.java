@@ -16,4 +16,9 @@ public class ResultCode {
 	 * 操作失败
 	 */
 	public static final String SYS_OPERATION_FAILED = "-1";
+	
+	/**
+	 * 登录成功
+	 */
+	public static final String LOGIN_SUCCESS = "1001";
 }

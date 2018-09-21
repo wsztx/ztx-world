@@ -18,9 +18,9 @@ import com.ztx.world.common.message.ResponseMessage;
 public class HomeController {
 	
 	private static Logger log = LoggerFactory.getLogger(HomeController.class);
-
+    
     @RequestMapping(value="/index", method=RequestMethod.GET)
-    public String getHomePage(HttpServletRequest request){
+    public String index(HttpServletRequest request){
         System.out.println("Home Page");
         return "index";
     }

@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  * @author wcyong
  * 
- * @date 2018-09-14
+ * @date 2018-09-21
  */
 public class User {
     /**
@@ -21,9 +21,19 @@ public class User {
     private Integer status;
 
     /**
+     * 登录名
+     */
+    private String loginName;
+
+    /**
      * 名称
      */
     private String userName;
+
+    /**
+     * 密码
+     */
+    private String password;
 
     /**
      * 创建时间
@@ -56,12 +66,28 @@ public class User {
         this.status = status;
     }
 
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName == null ? null : loginName.trim();
+    }
+
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public Date getCreateTime() {

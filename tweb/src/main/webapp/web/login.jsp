@@ -7,10 +7,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Home Page</title>
 <script type="text/javascript" src="${base}/resource/plugin/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+function doLogin(){
+	$.ajax({
+		type: "POST",
+		url: "${base}/base/user/login", 
+		dataType: "json",
+		data: {"user.loginName":"admin", "user.password":"123456"},
+		success: function(result){
+			console.log(result);
+		    alert(result.message);
+		},
+		error: function(result){
+			console.log(result);
+			alert(111);
+		}
+	});
+}
+</script>
 </head>
 <body>
-<script type="text/javascript">
-
-</script>
+<button onclick = "doLogin()">登录</button>
 </body>
 </html>
