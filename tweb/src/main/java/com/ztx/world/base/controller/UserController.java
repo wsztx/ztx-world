@@ -17,72 +17,54 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.service.UserService;
 import com.ztx.world.base.vo.UserVo;
-import com.ztx.world.common.constants.ResultCode;
-import com.ztx.world.common.message.ResponseMessage;
+import com.ztx.world.common.config.BaseAction;
+import com.ztx.world.common.config.ResponseData;
 
 @Controller
 @RequestMapping(value = "/base/user")
-public class UserController {
+public class UserController extends BaseAction{
 	
 	private static Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
     
-    @RequestMapping(value="/toLogin", method=RequestMethod.GET)
+    @RequestMapping(value = "tologin", method=RequestMethod.GET)
     public String toLogin(HttpServletRequest request){
         System.out.println("Login Page");
         return "login";
     }
     
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseMessage<User> login(HttpServletRequest request, HttpServletResponse response, 
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public ResponseData login(HttpServletRequest request, HttpServletResponse response, 
     		UserVo vo){
-    	ResponseMessage<User> responseData;
-		try {
-	        // 获取当前的Subject
-	        Subject currentUser = SecurityUtils.getSubject();
-	        // 测试当前的用户是否已经被认证，即是否已经登陆
-	        // 调用Subject的isAuthenticated
-	        if (!currentUser.isAuthenticated()) {
-	            // 把用户名和密码封装为UsernamePasswordToken 对象
-	            UsernamePasswordToken token = new UsernamePasswordToken(
-	            		vo.getUser().getCode(), vo.getUser().getPassword());
-	            token.setRememberMe(true);
-                // 执行登陆
-                currentUser.login(token);
-	        }
-	        
-	        responseData = new ResponseMessage<User>(ResultCode.LOGIN_SUCCESS);
-		} catch (Exception e) {
-			responseData = new ResponseMessage<User>(ResultCode.SYS_OPERATION_FAILED);
-			log.error("登录异常.", e);
-		}
-    	
-    	return responseData;
+        // 获取当前的Subject
+        Subject currentUser = SecurityUtils.getSubject();
+        // 测试当前的用户是否已经被认证，即是否已经登陆
+        // 调用Subject的isAuthenticated
+        if (!currentUser.isAuthenticated()) {
+            // 把用户名和密码封装为UsernamePasswordToken 对象
+            UsernamePasswordToken token = new UsernamePasswordToken(
+            		vo.getUser().getCode(), vo.getUser().getPassword());
+            token.setRememberMe(true);
+            // 执行登陆
+            currentUser.login(token);
+        }
+        return success();
     }
     
     @ResponseBody
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public ResponseMessage<User> logout(HttpServletRequest request, HttpServletResponse response, 
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    public ResponseData logout(HttpServletRequest request, HttpServletResponse response, 
     		UserVo vo){
-    	ResponseMessage<User> responseData;
-		try {
-	        // 获取当前的Subject
-	        Subject currentUser = SecurityUtils.getSubject();
-	        currentUser.logout();
-	        
-	        responseData = new ResponseMessage<User>(ResultCode.SYS_OPERATION_SUCCESS);
-		} catch (Exception e) {
-			responseData = new ResponseMessage<User>(ResultCode.SYS_OPERATION_FAILED);
-			log.error("登出异常.", e);
-		}
-    	
-    	return responseData;
+        // 获取当前的Subject
+        Subject currentUser = SecurityUtils.getSubject();
+        currentUser.logout();
+        return success("登出成功");
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "update", method = RequestMethod.POST)
     public String update(HttpServletRequest request, User user){
     	userService.updateUser(user);
         return "base/user/edit";

@@ -38,7 +38,8 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/resource/** = anon
-				/base/user/toLogin = anon
+				/demo/** = anon
+				/base/user/tologin = anon
 				/base/user/login = anon
 				/base/user/logout = anon
                 /** = authc

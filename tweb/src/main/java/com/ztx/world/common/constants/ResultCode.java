@@ -10,7 +10,7 @@ public class ResultCode {
 	/**
 	 * 操作成功
 	 */
-	public static final String SYS_OPERATION_SUCCESS = "200";
+	public static final String SYS_OPERATION_SUCCESS = "1";
 	
 	/**
 	 * 操作失败
@@ -18,7 +18,7 @@ public class ResultCode {
 	public static final String SYS_OPERATION_FAILED = "-1";
 	
 	/**
-	 * 登录成功
+	 * 登录失败
 	 */
-	public static final String LOGIN_SUCCESS = "1001";
+	public static final String LOGIN_FAIL = "10001";
 }

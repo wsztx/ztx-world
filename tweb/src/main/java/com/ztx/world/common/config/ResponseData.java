@@ -1,9 +1,9 @@
-package com.ztx.world.common.message;
+package com.ztx.world.common.config;
 
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.utils.ResultCodeUtil;
 
-public class ResponseMessage<T>{
+public class ResponseData{
 
 	/**
 	 * 返回码
@@ -18,7 +18,7 @@ public class ResponseMessage<T>{
 	/**
 	 * 返回数据
 	 */
-	private T data;
+	private Object data;
 
 	public String getCode() {
 		return code;
@@ -37,11 +37,11 @@ public class ResponseMessage<T>{
 		this.message = message;
 	}
 
-	public T getData() {
+	public Object getData() {
 		return data;
 	}
 
-	public void setData(T data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 	
@@ -55,7 +55,7 @@ public class ResponseMessage<T>{
 		this.message = message;
 	}
 	
-	public ResponseMessage(String resultCode) {
+	public ResponseData(String resultCode) {
 		this(resultCode, null);
 	}
 
@@ -63,11 +63,11 @@ public class ResponseMessage<T>{
 		return (data != null);
 	}
 
-	public ResponseMessage() {
+	public ResponseData() {
 		this(ResultCode.SYS_OPERATION_SUCCESS, null);
 	}
 
-	public ResponseMessage(String code, T data) {
+	public ResponseData(String code, Object data) {
 		this.code = code;
 		this.message = ResultCodeUtil.get(this.code);
 		this.data = data;

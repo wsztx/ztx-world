@@ -1,11 +1,13 @@
 package com.ztx.world.common.exception;
 
+import com.ztx.world.common.utils.ResultCodeUtil;
+
 /**
- * 业务错误
+ * 自定义基础异常
  * @author zhoutianxiang 2018年9月17日19:09:25
  * @since 1.0.0
  */
-public class BusinessException extends Exception {
+public class BasicException extends RuntimeException {
 
 	/**
 	 * 
@@ -37,20 +39,32 @@ public class BusinessException extends Exception {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
+	
+    public BasicException(){
+        super();
+    }
 
-	public BusinessException() {
-		super();
+	public BasicException(String resultCode) {
+		this(resultCode, ResultCodeUtil.get(resultCode));
 	}
-
-	public BusinessException(String errorCode, String errorMessage) {
-		super();
+	
+	public BasicException(String errorCode, String errorMessage) {
+		super(errorMessage);
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 	}
 
+    public BasicException(String message, Throwable cause){
+        super(message,cause);
+    }
+
+    public BasicException(Throwable cause) {
+        super(cause);
+    }
+	
 	@Override
 	public String toString() {
-		return "BusinessException [errorCode=" + errorCode + ", errorMessage=" + errorMessage + "]";
+		return "BasicException [errorCode=" + errorCode + ", errorMessage=" + errorMessage + "]";
 	}
 	
 }
