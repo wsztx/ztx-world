@@ -9,7 +9,7 @@ import java.util.Date;
  * 
  * @date 2018-10-14
  */
-public class Role {
+public class Constant {
     /**
      * 主键
      */
@@ -36,14 +36,19 @@ public class Role {
     private Long createUserId;
 
     /**
-     * 角色编码
+     * 常量类型
      */
-    private String roleCode;
+    private String constantType;
 
     /**
-     * 角色名
+     * 常量键
      */
-    private String roleName;
+    private String constantKey;
+
+    /**
+     * 常量值
+     */
+    private String constantValue;
 
     /**
      * 描述
@@ -90,20 +95,28 @@ public class Role {
         this.createUserId = createUserId;
     }
 
-    public String getRoleCode() {
-        return roleCode;
+    public String getConstantType() {
+        return constantType;
     }
 
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode == null ? null : roleCode.trim();
+    public void setConstantType(String constantType) {
+        this.constantType = constantType == null ? null : constantType.trim();
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getConstantKey() {
+        return constantKey;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName == null ? null : roleName.trim();
+    public void setConstantKey(String constantKey) {
+        this.constantKey = constantKey == null ? null : constantKey.trim();
+    }
+
+    public String getConstantValue() {
+        return constantValue;
+    }
+
+    public void setConstantValue(String constantValue) {
+        this.constantValue = constantValue == null ? null : constantValue.trim();
     }
 
     public String getDescription() {

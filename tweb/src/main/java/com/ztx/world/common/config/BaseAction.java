@@ -24,7 +24,7 @@ public class BaseAction {
 		ResponseData response = new ResponseData();
 		response.setCode(ResultCode.SYS_OPERATION_SUCCESS);
 		response.setMessage(ResultCodeUtil.get(ResultCode.SYS_OPERATION_SUCCESS));
-		response.setData(JSONObject.toJSON(data));
+		response.setData(JSONObject.toJSONString(data));
 		return response;
 	}
 	

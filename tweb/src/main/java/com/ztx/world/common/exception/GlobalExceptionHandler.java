@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ztx.world.common.config.ResponseData;
 import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.utils.ResponseUtil;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -36,12 +37,22 @@ public class GlobalExceptionHandler {
     @Order(value = 99)
     public ModelAndView exceptionHandler(HttpServletRequest request, HttpServletResponse response, 
     		Exception exception) throws  Exception{
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("code", ResultCode.SYS_OPERATION_FAILED);                   
-        modelAndView.addObject("message", exception.getMessage());   
-        modelAndView.setViewName(DEFAUL_ERROR_VIEW);     
-        log.error("Exception occurred.", exception);
-        return modelAndView;
+    	log.error("Exception occurred.", exception);
+    	String requestType = request.getHeader("X-Requested-With");
+    	// 如果是ajax请求
+    	if("XMLHttpRequest".equals(requestType)){
+        	ResponseData responseData = new ResponseData();
+        	responseData.setCode(ResultCode.SYS_OPERATION_FAILED);
+        	responseData.setMessage(exception.getMessage());
+        	ResponseUtil.writeJson(response, responseData);
+    		return null;
+    	}else{
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("code", ResultCode.SYS_OPERATION_FAILED);                   
+            modelAndView.addObject("message", exception.getMessage());   
+            modelAndView.setViewName(DEFAUL_ERROR_VIEW);
+            return modelAndView;
+    	}
     }
 
     /**
@@ -57,11 +68,11 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseData basicExceptionHandler(HttpServletRequest request, HttpServletResponse response, 
     		BasicException exception) throws Exception{
-    	ResponseData responseMess = new ResponseData();
-    	responseMess.setCode(exception.getErrorCode());
-    	responseMess.setMessage(exception.getMessage());
     	log.error("BasicException occurred.", exception);
-        return responseMess;
+    	ResponseData responseData = new ResponseData();
+    	responseData.setCode(exception.getErrorCode());
+    	responseData.setMessage(exception.getMessage());
+        return responseData;
     }
 
 }

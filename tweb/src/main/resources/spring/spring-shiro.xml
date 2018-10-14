@@ -26,9 +26,9 @@
 	<!-- 配置 ShiroFilter bean: 该 bean 的 id 必须和 web.xml 文件中配置的 shiro filter 的 name 一致 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/base/user/toLogin" />
+		<property name="loginUrl" value="/base/user/tologin" />
 		<property name="successUrl" value="/index" />
-		<property name="unauthorizedUrl" value="/base/user/toLogin" />
+		<property name="unauthorizedUrl" value="/base/user/tologin" />
 		<!--自定义过滤器-->
 <!-- 		<property name="filters">
         	<map>

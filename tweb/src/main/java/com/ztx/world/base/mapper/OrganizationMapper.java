@@ -10,7 +10,7 @@ public interface OrganizationMapper {
 
     int deleteByExample(OrganizationExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Organization record);
 
@@ -18,7 +18,7 @@ public interface OrganizationMapper {
 
     List<Organization> selectByExample(OrganizationExample example);
 
-    Organization selectByPrimaryKey(Integer id);
+    Organization selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Organization record, @Param("example") OrganizationExample example);
 

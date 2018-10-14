@@ -3,10 +3,10 @@
 <mapper namespace="com.ztx.world.base.mapper.UserRoleMapper" >
 
     <resultMap id="BaseResultMap" type="com.ztx.world.base.entity.UserRole" >
-        <id column="ID" property="id" jdbcType="INTEGER" />
-        <result column="USER_ID" property="userId" jdbcType="INTEGER" />
-        <result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
-        <result column="STATUS" property="status" jdbcType="INTEGER" />
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="role_id" property="roleId" jdbcType="BIGINT" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -70,7 +70,7 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        ID, USER_ID, ROLE_ID, STATUS
+        id, status, user_id, role_id
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.UserRoleExample" >
@@ -88,16 +88,16 @@
         </if>
     </select>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select 
         <include refid="Base_Column_List" />
         from base_user_role
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
         delete from base_user_role
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
 
     <delete id="deleteByExample" parameterType="com.ztx.world.base.entity.UserRoleExample" >
@@ -108,40 +108,40 @@
     </delete>
 
     <insert id="insert" parameterType="com.ztx.world.base.entity.UserRole" >
-        insert into base_user_role (ID, USER_ID, ROLE_ID, 
-            STATUS)
-        values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, 
-            #{status,jdbcType=INTEGER})
+        insert into base_user_role (id, status, user_id, 
+            role_id)
+        values (#{id,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, 
+            #{roleId,jdbcType=BIGINT})
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.UserRole" >
         insert into base_user_role
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
-                ID,
-            </if>
-            <if test="userId != null" >
-                USER_ID,
-            </if>
-            <if test="roleId != null" >
-                ROLE_ID,
+                id,
             </if>
             <if test="status != null" >
-                STATUS,
+                status,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="roleId != null" >
+                role_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null" >
-                #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="roleId != null" >
-                #{roleId,jdbcType=INTEGER},
+                #{id,jdbcType=BIGINT},
             </if>
             <if test="status != null" >
                 #{status,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null" >
+                #{roleId,jdbcType=BIGINT},
             </if>
         </trim>
     </insert>
@@ -157,16 +157,16 @@
         update base_user_role
         <set >
             <if test="record.id != null" >
-                ID = #{record.id,jdbcType=INTEGER},
-            </if>
-            <if test="record.userId != null" >
-                USER_ID = #{record.userId,jdbcType=INTEGER},
-            </if>
-            <if test="record.roleId != null" >
-                ROLE_ID = #{record.roleId,jdbcType=INTEGER},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.status != null" >
-                STATUS = #{record.status,jdbcType=INTEGER},
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null" >
+                user_id = #{record.userId,jdbcType=BIGINT},
+            </if>
+            <if test="record.roleId != null" >
+                role_id = #{record.roleId,jdbcType=BIGINT},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -176,10 +176,10 @@
 
     <update id="updateByExample" parameterType="map" >
         update base_user_role
-        set ID = #{record.id,jdbcType=INTEGER},
-            USER_ID = #{record.userId,jdbcType=INTEGER},
-            ROLE_ID = #{record.roleId,jdbcType=INTEGER},
-            STATUS = #{record.status,jdbcType=INTEGER}
+        set id = #{record.id,jdbcType=BIGINT},
+            status = #{record.status,jdbcType=INTEGER},
+            user_id = #{record.userId,jdbcType=BIGINT},
+            role_id = #{record.roleId,jdbcType=BIGINT}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -188,24 +188,24 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.ztx.world.base.entity.UserRole" >
         update base_user_role
         <set >
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
             <if test="userId != null" >
-                USER_ID = #{userId,jdbcType=INTEGER},
+                user_id = #{userId,jdbcType=BIGINT},
             </if>
             <if test="roleId != null" >
-                ROLE_ID = #{roleId,jdbcType=INTEGER},
-            </if>
-            <if test="status != null" >
-                STATUS = #{status,jdbcType=INTEGER},
+                role_id = #{roleId,jdbcType=BIGINT},
             </if>
         </set>
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.ztx.world.base.entity.UserRole" >
         update base_user_role
-        set USER_ID = #{userId,jdbcType=INTEGER},
-            ROLE_ID = #{roleId,jdbcType=INTEGER},
-            STATUS = #{status,jdbcType=INTEGER}
-        where ID = #{id,jdbcType=INTEGER}
+        set status = #{status,jdbcType=INTEGER},
+            user_id = #{userId,jdbcType=BIGINT},
+            role_id = #{roleId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

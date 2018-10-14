@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ztx.world.base.entity.User;
 import com.ztx.world.common.config.BaseAction;
 import com.ztx.world.common.config.ResponseData;
 import com.ztx.world.common.constants.ResultCode;
@@ -57,5 +58,15 @@ public class DemoController extends BaseAction {
     		throw new BasicException(ResultCode.LOGIN_FAIL);
     	}
     	return success("传到后台的数据");
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/test3", method=RequestMethod.GET)
+    public ResponseData test3(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	User user = new User();
+    	user.setId(123L);
+    	user.setUserName("测试");
+    	return success(user);
     }
 }

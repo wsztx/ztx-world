@@ -7,23 +7,13 @@ import java.util.Date;
  * 
  * @author wcyong
  * 
- * @date 2018-09-21
+ * @date 2018-10-14
  */
 public class Organization {
     /**
      * 主键
      */
-    private Integer id;
-
-    /**
-     * 机构编码
-     */
-    private String code;
-
-    /**
-     * 机构名称
-     */
-    private String name;
+    private Long id;
 
     /**
      * 逻辑删除位，0删除，1未删除
@@ -40,28 +30,32 @@ public class Organization {
      */
     private Date updateTime;
 
-    public Integer getId() {
+    /**
+     * 创建人id
+     */
+    private Long createUserId;
+
+    /**
+     * 机构编码
+     */
+    private String orgCode;
+
+    /**
+     * 机构名称
+     */
+    private String orgName;
+
+    /**
+     * 描述
+     */
+    private String description;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
     }
 
     public Integer getStatus() {
@@ -86,5 +80,37 @@ public class Organization {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public String getOrgCode() {
+        return orgCode;
+    }
+
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode == null ? null : orgCode.trim();
+    }
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName == null ? null : orgName.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

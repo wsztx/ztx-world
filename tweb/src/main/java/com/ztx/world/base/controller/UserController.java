@@ -46,7 +46,7 @@ public class UserController extends BaseAction{
         if (!currentUser.isAuthenticated()) {
             // 把用户名和密码封装为UsernamePasswordToken 对象
             UsernamePasswordToken token = new UsernamePasswordToken(
-            		vo.getUser().getCode(), vo.getUser().getPassword());
+            		vo.getUser().getUserCode(), vo.getUser().getPassword());
             token.setRememberMe(true);
             // 执行登陆
             currentUser.login(token);

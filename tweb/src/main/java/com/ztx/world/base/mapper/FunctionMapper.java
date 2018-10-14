@@ -10,7 +10,7 @@ public interface FunctionMapper {
 
     int deleteByExample(FunctionExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Function record);
 
@@ -18,7 +18,7 @@ public interface FunctionMapper {
 
     List<Function> selectByExample(FunctionExample example);
 
-    Function selectByPrimaryKey(Integer id);
+    Function selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Function record, @Param("example") FunctionExample example);
 

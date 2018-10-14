@@ -3,12 +3,14 @@
 <mapper namespace="com.ztx.world.base.mapper.ConfigMapper" >
 
     <resultMap id="BaseResultMap" type="com.ztx.world.base.entity.Config" >
-        <id column="ID" property="id" jdbcType="INTEGER" />
-        <result column="CODE" property="code" jdbcType="VARCHAR" />
-        <result column="STATUS" property="status" jdbcType="INTEGER" />
-        <result column="CONFIG_NAME" property="configName" jdbcType="VARCHAR" />
-        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+        <result column="config_code" property="configCode" jdbcType="VARCHAR" />
+        <result column="config_name" property="configName" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -72,7 +74,7 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        ID, CODE, STATUS, CONFIG_NAME, CREATE_TIME, UPDATE_TIME
+        id, status, create_time, update_time, create_user_id, config_code, config_name, description
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.ConfigExample" >
@@ -90,16 +92,16 @@
         </if>
     </select>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select 
         <include refid="Base_Column_List" />
         from base_config
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
         delete from base_config
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
 
     <delete id="deleteByExample" parameterType="com.ztx.world.base.entity.ConfigExample" >
@@ -110,54 +112,66 @@
     </delete>
 
     <insert id="insert" parameterType="com.ztx.world.base.entity.Config" >
-        insert into base_config (ID, CODE, STATUS, 
-            CONFIG_NAME, CREATE_TIME, UPDATE_TIME
-            )
-        values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-            #{configName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-            )
+        insert into base_config (id, status, create_time, 
+            update_time, create_user_id, config_code, 
+            config_name, description)
+        values (#{id,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{configCode,jdbcType=VARCHAR}, 
+            #{configName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.Config" >
         insert into base_config
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
-                ID,
-            </if>
-            <if test="code != null" >
-                CODE,
+                id,
             </if>
             <if test="status != null" >
-                STATUS,
-            </if>
-            <if test="configName != null" >
-                CONFIG_NAME,
+                status,
             </if>
             <if test="createTime != null" >
-                CREATE_TIME,
+                create_time,
             </if>
             <if test="updateTime != null" >
-                UPDATE_TIME,
+                update_time,
+            </if>
+            <if test="createUserId != null" >
+                create_user_id,
+            </if>
+            <if test="configCode != null" >
+                config_code,
+            </if>
+            <if test="configName != null" >
+                config_name,
+            </if>
+            <if test="description != null" >
+                description,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="code != null" >
-                #{code,jdbcType=VARCHAR},
+                #{id,jdbcType=BIGINT},
             </if>
             <if test="status != null" >
                 #{status,jdbcType=INTEGER},
-            </if>
-            <if test="configName != null" >
-                #{configName,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null" >
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null" >
                 #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null" >
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="configCode != null" >
+                #{configCode,jdbcType=VARCHAR},
+            </if>
+            <if test="configName != null" >
+                #{configName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -173,22 +187,28 @@
         update base_config
         <set >
             <if test="record.id != null" >
-                ID = #{record.id,jdbcType=INTEGER},
-            </if>
-            <if test="record.code != null" >
-                CODE = #{record.code,jdbcType=VARCHAR},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.status != null" >
-                STATUS = #{record.status,jdbcType=INTEGER},
-            </if>
-            <if test="record.configName != null" >
-                CONFIG_NAME = #{record.configName,jdbcType=VARCHAR},
+                status = #{record.status,jdbcType=INTEGER},
             </if>
             <if test="record.createTime != null" >
-                CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.updateTime != null" >
-                UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUserId != null" >
+                create_user_id = #{record.createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.configCode != null" >
+                config_code = #{record.configCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.configName != null" >
+                config_name = #{record.configName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.description != null" >
+                description = #{record.description,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -198,12 +218,14 @@
 
     <update id="updateByExample" parameterType="map" >
         update base_config
-        set ID = #{record.id,jdbcType=INTEGER},
-            CODE = #{record.code,jdbcType=VARCHAR},
-            STATUS = #{record.status,jdbcType=INTEGER},
-            CONFIG_NAME = #{record.configName,jdbcType=VARCHAR},
-            CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
-            UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+        set id = #{record.id,jdbcType=BIGINT},
+            status = #{record.status,jdbcType=INTEGER},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            create_user_id = #{record.createUserId,jdbcType=BIGINT},
+            config_code = #{record.configCode,jdbcType=VARCHAR},
+            config_name = #{record.configName,jdbcType=VARCHAR},
+            description = #{record.description,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -212,32 +234,40 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.ztx.world.base.entity.Config" >
         update base_config
         <set >
-            <if test="code != null" >
-                CODE = #{code,jdbcType=VARCHAR},
-            </if>
             <if test="status != null" >
-                STATUS = #{status,jdbcType=INTEGER},
-            </if>
-            <if test="configName != null" >
-                CONFIG_NAME = #{configName,jdbcType=VARCHAR},
+                status = #{status,jdbcType=INTEGER},
             </if>
             <if test="createTime != null" >
-                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null" >
-                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null" >
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="configCode != null" >
+                config_code = #{configCode,jdbcType=VARCHAR},
+            </if>
+            <if test="configName != null" >
+                config_name = #{configName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                description = #{description,jdbcType=VARCHAR},
             </if>
         </set>
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.ztx.world.base.entity.Config" >
         update base_config
-        set CODE = #{code,jdbcType=VARCHAR},
-            STATUS = #{status,jdbcType=INTEGER},
-            CONFIG_NAME = #{configName,jdbcType=VARCHAR},
-            CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-            UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
-        where ID = #{id,jdbcType=INTEGER}
+        set status = #{status,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_user_id = #{createUserId,jdbcType=BIGINT},
+            config_code = #{configCode,jdbcType=VARCHAR},
+            config_name = #{configName,jdbcType=VARCHAR},
+            description = #{description,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

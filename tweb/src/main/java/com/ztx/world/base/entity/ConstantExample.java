@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class FunctionExample {
+public class ConstantExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public FunctionExample() {
+    public ConstantExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -412,143 +412,213 @@ public class FunctionExample {
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeIsNull() {
-            addCriterion("function_code is null");
+        public Criteria andConstantTypeIsNull() {
+            addCriterion("constant_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeIsNotNull() {
-            addCriterion("function_code is not null");
+        public Criteria andConstantTypeIsNotNull() {
+            addCriterion("constant_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeEqualTo(String value) {
-            addCriterion("function_code =", value, "functionCode");
+        public Criteria andConstantTypeEqualTo(String value) {
+            addCriterion("constant_type =", value, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeNotEqualTo(String value) {
-            addCriterion("function_code <>", value, "functionCode");
+        public Criteria andConstantTypeNotEqualTo(String value) {
+            addCriterion("constant_type <>", value, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeGreaterThan(String value) {
-            addCriterion("function_code >", value, "functionCode");
+        public Criteria andConstantTypeGreaterThan(String value) {
+            addCriterion("constant_type >", value, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("function_code >=", value, "functionCode");
+        public Criteria andConstantTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("constant_type >=", value, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeLessThan(String value) {
-            addCriterion("function_code <", value, "functionCode");
+        public Criteria andConstantTypeLessThan(String value) {
+            addCriterion("constant_type <", value, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeLessThanOrEqualTo(String value) {
-            addCriterion("function_code <=", value, "functionCode");
+        public Criteria andConstantTypeLessThanOrEqualTo(String value) {
+            addCriterion("constant_type <=", value, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeLike(String value) {
-            addCriterion("function_code like", value, "functionCode");
+        public Criteria andConstantTypeLike(String value) {
+            addCriterion("constant_type like", value, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeNotLike(String value) {
-            addCriterion("function_code not like", value, "functionCode");
+        public Criteria andConstantTypeNotLike(String value) {
+            addCriterion("constant_type not like", value, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeIn(List<String> values) {
-            addCriterion("function_code in", values, "functionCode");
+        public Criteria andConstantTypeIn(List<String> values) {
+            addCriterion("constant_type in", values, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeNotIn(List<String> values) {
-            addCriterion("function_code not in", values, "functionCode");
+        public Criteria andConstantTypeNotIn(List<String> values) {
+            addCriterion("constant_type not in", values, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeBetween(String value1, String value2) {
-            addCriterion("function_code between", value1, value2, "functionCode");
+        public Criteria andConstantTypeBetween(String value1, String value2) {
+            addCriterion("constant_type between", value1, value2, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionCodeNotBetween(String value1, String value2) {
-            addCriterion("function_code not between", value1, value2, "functionCode");
+        public Criteria andConstantTypeNotBetween(String value1, String value2) {
+            addCriterion("constant_type not between", value1, value2, "constantType");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameIsNull() {
-            addCriterion("function_name is null");
+        public Criteria andConstantKeyIsNull() {
+            addCriterion("constant_key is null");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameIsNotNull() {
-            addCriterion("function_name is not null");
+        public Criteria andConstantKeyIsNotNull() {
+            addCriterion("constant_key is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameEqualTo(String value) {
-            addCriterion("function_name =", value, "functionName");
+        public Criteria andConstantKeyEqualTo(String value) {
+            addCriterion("constant_key =", value, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameNotEqualTo(String value) {
-            addCriterion("function_name <>", value, "functionName");
+        public Criteria andConstantKeyNotEqualTo(String value) {
+            addCriterion("constant_key <>", value, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameGreaterThan(String value) {
-            addCriterion("function_name >", value, "functionName");
+        public Criteria andConstantKeyGreaterThan(String value) {
+            addCriterion("constant_key >", value, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameGreaterThanOrEqualTo(String value) {
-            addCriterion("function_name >=", value, "functionName");
+        public Criteria andConstantKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("constant_key >=", value, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameLessThan(String value) {
-            addCriterion("function_name <", value, "functionName");
+        public Criteria andConstantKeyLessThan(String value) {
+            addCriterion("constant_key <", value, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameLessThanOrEqualTo(String value) {
-            addCriterion("function_name <=", value, "functionName");
+        public Criteria andConstantKeyLessThanOrEqualTo(String value) {
+            addCriterion("constant_key <=", value, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameLike(String value) {
-            addCriterion("function_name like", value, "functionName");
+        public Criteria andConstantKeyLike(String value) {
+            addCriterion("constant_key like", value, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameNotLike(String value) {
-            addCriterion("function_name not like", value, "functionName");
+        public Criteria andConstantKeyNotLike(String value) {
+            addCriterion("constant_key not like", value, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameIn(List<String> values) {
-            addCriterion("function_name in", values, "functionName");
+        public Criteria andConstantKeyIn(List<String> values) {
+            addCriterion("constant_key in", values, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameNotIn(List<String> values) {
-            addCriterion("function_name not in", values, "functionName");
+        public Criteria andConstantKeyNotIn(List<String> values) {
+            addCriterion("constant_key not in", values, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameBetween(String value1, String value2) {
-            addCriterion("function_name between", value1, value2, "functionName");
+        public Criteria andConstantKeyBetween(String value1, String value2) {
+            addCriterion("constant_key between", value1, value2, "constantKey");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionNameNotBetween(String value1, String value2) {
-            addCriterion("function_name not between", value1, value2, "functionName");
+        public Criteria andConstantKeyNotBetween(String value1, String value2) {
+            addCriterion("constant_key not between", value1, value2, "constantKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueIsNull() {
+            addCriterion("constant_value is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueIsNotNull() {
+            addCriterion("constant_value is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueEqualTo(String value) {
+            addCriterion("constant_value =", value, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueNotEqualTo(String value) {
+            addCriterion("constant_value <>", value, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueGreaterThan(String value) {
+            addCriterion("constant_value >", value, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueGreaterThanOrEqualTo(String value) {
+            addCriterion("constant_value >=", value, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueLessThan(String value) {
+            addCriterion("constant_value <", value, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueLessThanOrEqualTo(String value) {
+            addCriterion("constant_value <=", value, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueLike(String value) {
+            addCriterion("constant_value like", value, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueNotLike(String value) {
+            addCriterion("constant_value not like", value, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueIn(List<String> values) {
+            addCriterion("constant_value in", values, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueNotIn(List<String> values) {
+            addCriterion("constant_value not in", values, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueBetween(String value1, String value2) {
+            addCriterion("constant_value between", value1, value2, "constantValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstantValueNotBetween(String value1, String value2) {
+            addCriterion("constant_value not between", value1, value2, "constantValue");
             return (Criteria) this;
         }
 
