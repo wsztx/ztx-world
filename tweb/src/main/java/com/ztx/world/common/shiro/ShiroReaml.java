@@ -1,102 +1,116 @@
 package com.ztx.world.common.shiro;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
+import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
+import com.alibaba.druid.util.StringUtils;
+import com.ztx.world.base.entity.Permission;
+import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
 import com.ztx.world.base.mapper.UserMapper;
+import com.ztx.world.base.service.PermissionService;
+import com.ztx.world.base.service.RoleService;
 import com.ztx.world.common.constants.Constants;
 
 public class ShiroReaml extends AuthorizingRealm {
 	
+	private static Logger log = LoggerFactory.getLogger(ShiroReaml.class);
+	
     @Autowired
     private UserMapper userMapper;
     
-    String password;
+    @Autowired
+    private RoleService roleService;
+    
+    @Autowired
+    private PermissionService permissionService;
+    
+	public ShiroReaml() {
+		super();
+	}
+	
+	/**
+	 * 进行登录认证
+	 */
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) 
+			throws AuthenticationException {
+		
+		ShiroToken token = (ShiroToken) authcToken;
+		UserExample example = new UserExample();
+		example.createCriteria().andStatusEqualTo(Constants.UNDELETE_STATUS)
+			.andUserCodeEqualTo(token.getUsername())
+			.andPasswordEqualTo(token.getPswd());
+		List<User> userList = userMapper.selectByExample(example);
+		User user = null;
+		
+		if(CollectionUtils.isEmpty(userList)){
+			throw new AccountException("帐号或密码不正确！");
+		}else if(userList.get(0).getUserStatus() != Constants.UserStatusType.USER_NORMAL){
+			throw new DisabledAccountException("帐号被禁止登录！");
+		}else{
+			user = userList.get(0);
+			user.setLastLoginTime(new Date());
+			userMapper.updateByPrimaryKeySelective(user);
+		}
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+		return info;
+	}
 
 	/**
 	 * 授权
 	 */
 	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		// 获取登录的用户名
-		Object principal = principalCollection.getPrimaryPrincipal();
-		// 两个if根据判断赋予登录用户权限
-		if ("admin".equals(principal)) { 
-			info.addRole("admin");
-		}
-		if ("user".equals(principal)) {
-			info.addRole("list");
-		}
-
-		info.addRole("user");
-
-		return info;
-	}
-
-	/**
-	 * 进行登录认证
-	 */
-	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) 
-			throws AuthenticationException {
-		// token 中获取登录的 username
-		Object principal = token.getPrincipal();
-
-		// 利用 username 查询数据库得到用户的信息.
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        String usercode = String.valueOf(principals.getPrimaryPrincipal());
+        log.info("shiro权限检查,usercode:" + usercode);
+        
 		UserExample example = new UserExample();
 		example.createCriteria().andStatusEqualTo(Constants.UNDELETE_STATUS)
-			.andUserCodeEqualTo((String) principal);
+			.andUserCodeEqualTo(usercode);
 		List<User> userList = userMapper.selectByExample(example);
-		if (userList != null && userList.size() > 0) {
-			password = userList.get(0).getPassword();
+		if(!CollectionUtils.isEmpty(userList)){
+			User user = userList.get(0);
+            List<Role> roleList = roleService.findRoleByUserId(user.getId());
+            if(!CollectionUtils.isEmpty(roleList)){
+            	for(Role role : roleList){
+            		if(!StringUtils.isEmpty(role.getRoleCode())){
+            			authorizationInfo.addRole(role.getRoleCode());
+            			//log.info("角色:" + role.getRoleCode());
+            		}
+            		
+                    List<Permission> permissionList = permissionService
+                    		.findPermissionByRoleId(role.getId());
+                    if(!CollectionUtils.isEmpty(permissionList)){
+                    	for (Permission permission : permissionList){
+                            if (!StringUtils.isEmpty(permission.getPermissionValue())) {
+                            	//log.info("权限:" + permission.getPermissionValue());
+                                authorizationInfo.addStringPermission(permission.getPermissionValue());
+                            }
+                    	}
+                    }
+            	}
+            }
 		}
-		String credentials = password;
-		// 设置盐值 ，（加密的调料，让加密出来的东西更具安全性，一般是通过数据库查询出来的。
-		// 简单的说，就是把密码根据特定的东西而进行动态加密，如果别人不知道你的盐值，就解不出你的密码）
-		ByteSource credentialsSalt = new Md5Hash(Constants.SALT_SOURCE);
-
-		// 当前 Realm 的name
-		String realmName = getName();
-		// 返回值实例化
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(principal, 
-				credentials, credentialsSalt, realmName);
-
-		return info;
+        return authorizationInfo;
 	}
-
-	// init-method 配置.
-	public void setCredentialMatcher() {
-		HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
-		credentialsMatcher.setHashAlgorithmName("MD5");// MD5算法加密
-		credentialsMatcher.setHashIterations(1024);// 1024次循环加密
-		setCredentialsMatcher(credentialsMatcher);
-	}
-
-	// 用来测试的算出密码password盐值加密后的结果，下面方法用于新增用户添加到数据库操作的，我这里就直接用main获得，直接数据库添加了，省时间
-	public static void main(String[] args) {
-		String saltSource = Constants.SALT_SOURCE;
-		String hashAlgorithmName = "MD5";
-		String credentials = "123456";
-		Object salt = new Md5Hash(saltSource);
-		int hashIterations = 1024;
-		Object result = new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations);
-		System.out.println(result);
-	}
-
 }

@@ -3,14 +3,14 @@ package com.ztx.world.base.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleFunctionExample {
+public class RolePermissionExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public RoleFunctionExample() {
+    public RolePermissionExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -291,63 +291,63 @@ public class RoleFunctionExample {
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdIsNull() {
-            addCriterion("function_id is null");
+        public Criteria andPermissionIdIsNull() {
+            addCriterion("permission_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdIsNotNull() {
-            addCriterion("function_id is not null");
+        public Criteria andPermissionIdIsNotNull() {
+            addCriterion("permission_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdEqualTo(Long value) {
-            addCriterion("function_id =", value, "functionId");
+        public Criteria andPermissionIdEqualTo(Long value) {
+            addCriterion("permission_id =", value, "permissionId");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdNotEqualTo(Long value) {
-            addCriterion("function_id <>", value, "functionId");
+        public Criteria andPermissionIdNotEqualTo(Long value) {
+            addCriterion("permission_id <>", value, "permissionId");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdGreaterThan(Long value) {
-            addCriterion("function_id >", value, "functionId");
+        public Criteria andPermissionIdGreaterThan(Long value) {
+            addCriterion("permission_id >", value, "permissionId");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("function_id >=", value, "functionId");
+        public Criteria andPermissionIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("permission_id >=", value, "permissionId");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdLessThan(Long value) {
-            addCriterion("function_id <", value, "functionId");
+        public Criteria andPermissionIdLessThan(Long value) {
+            addCriterion("permission_id <", value, "permissionId");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdLessThanOrEqualTo(Long value) {
-            addCriterion("function_id <=", value, "functionId");
+        public Criteria andPermissionIdLessThanOrEqualTo(Long value) {
+            addCriterion("permission_id <=", value, "permissionId");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdIn(List<Long> values) {
-            addCriterion("function_id in", values, "functionId");
+        public Criteria andPermissionIdIn(List<Long> values) {
+            addCriterion("permission_id in", values, "permissionId");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdNotIn(List<Long> values) {
-            addCriterion("function_id not in", values, "functionId");
+        public Criteria andPermissionIdNotIn(List<Long> values) {
+            addCriterion("permission_id not in", values, "permissionId");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdBetween(Long value1, Long value2) {
-            addCriterion("function_id between", value1, value2, "functionId");
+        public Criteria andPermissionIdBetween(Long value1, Long value2) {
+            addCriterion("permission_id between", value1, value2, "permissionId");
             return (Criteria) this;
         }
 
-        public Criteria andFunctionIdNotBetween(Long value1, Long value2) {
-            addCriterion("function_id not between", value1, value2, "functionId");
+        public Criteria andPermissionIdNotBetween(Long value1, Long value2) {
+            addCriterion("permission_id not between", value1, value2, "permissionId");
             return (Criteria) this;
         }
     }

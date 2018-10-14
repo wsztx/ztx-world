@@ -5,36 +5,27 @@
 
 	<!-- 配置緩存管理器 -->
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-		<!-- 指定 ehcache 的配置文件，下面会给到 -->
 		<property name="cacheManagerConfigFile" value="classpath:config/ehcache.xml" />
 	</bean>
 
-	<!-- 配置进行授权和认证的 Realm，要新增一个java类来实现，下面会有，class=包名.类名，init-methood是初始化的方法 -->
-	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml" init-method="setCredentialMatcher"></bean>
+	<!-- 配置进行授权和认证的Realm -->
+	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml"></bean>
 
-	<!-- 配置 Shiro 的 SecurityManager Bean. -->
+	<!-- 配置Shiro的SecurityManager. -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="cacheManager" ref="cacheManager" />
 		<property name="realm" ref="shiroReaml" />
 	</bean>
 
-	<!-- 配置 Bean 后置处理器: 会自动的调用和 Spring 整合后各个组件的生命周期方法. -->
+	<!-- 配置Bean后置处理器. -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
-<!-- 	<bean id="role" class="com.sojson.core.shiro.filter.RoleFilter"/> -->
-
-	<!-- 配置 ShiroFilter bean: 该 bean 的 id 必须和 web.xml 文件中配置的 shiro filter 的 name 一致 -->
+	<!-- 配置 ShiroFilter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/base/user/tologin" />
 		<property name="successUrl" value="/index" />
 		<property name="unauthorizedUrl" value="/base/user/tologin" />
-		<!--自定义过滤器-->
-<!-- 		<property name="filters">
-        	<map>
-        		<entry key="logout" value-ref="systemLogoutFilter" />
-        	</map>
-        </property> -->
 		<property name="filterChainDefinitions">
 			<value>
 				/resource/** = anon

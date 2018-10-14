@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ztx.world.base.mapper.FunctionMapper" >
+<mapper namespace="com.ztx.world.base.mapper.PermissionMapper" >
 
-    <resultMap id="BaseResultMap" type="com.ztx.world.base.entity.Function" >
+    <resultMap id="BaseResultMap" type="com.ztx.world.base.entity.Permission" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="status" property="status" jdbcType="INTEGER" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
         <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
-        <result column="function_code" property="functionCode" jdbcType="VARCHAR" />
-        <result column="function_name" property="functionName" jdbcType="VARCHAR" />
+        <result column="permission_code" property="permissionCode" jdbcType="VARCHAR" />
+        <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
+        <result column="permission_value" property="permissionValue" jdbcType="VARCHAR" />
         <result column="description" property="description" jdbcType="VARCHAR" />
     </resultMap>
 
@@ -74,17 +75,17 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, status, create_time, update_time, create_user_id, function_code, function_name, 
-        description
+        id, status, create_time, update_time, create_user_id, permission_code, permission_name, 
+        permission_value, description
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.FunctionExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.PermissionExample" >
         select
         <if test="distinct" >
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from base_function
+        from base_permission
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
@@ -96,33 +97,35 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select 
         <include refid="Base_Column_List" />
-        from base_function
+        from base_permission
         where id = #{id,jdbcType=BIGINT}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-        delete from base_function
+        delete from base_permission
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.ztx.world.base.entity.FunctionExample" >
-        delete from base_function
+    <delete id="deleteByExample" parameterType="com.ztx.world.base.entity.PermissionExample" >
+        delete from base_permission
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.ztx.world.base.entity.Function" >
-        insert into base_function (id, status, create_time, 
-            update_time, create_user_id, function_code, 
-            function_name, description)
+    <insert id="insert" parameterType="com.ztx.world.base.entity.Permission" >
+        insert into base_permission (id, status, create_time, 
+            update_time, create_user_id, permission_code, 
+            permission_name, permission_value, description
+            )
         values (#{id,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-            #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{functionCode,jdbcType=VARCHAR}, 
-            #{functionName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+            #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{permissionCode,jdbcType=VARCHAR}, 
+            #{permissionName,jdbcType=VARCHAR}, #{permissionValue,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+            )
     </insert>
 
-    <insert id="insertSelective" parameterType="com.ztx.world.base.entity.Function" >
-        insert into base_function
+    <insert id="insertSelective" parameterType="com.ztx.world.base.entity.Permission" >
+        insert into base_permission
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
                 id,
@@ -139,11 +142,14 @@
             <if test="createUserId != null" >
                 create_user_id,
             </if>
-            <if test="functionCode != null" >
-                function_code,
+            <if test="permissionCode != null" >
+                permission_code,
             </if>
-            <if test="functionName != null" >
-                function_name,
+            <if test="permissionName != null" >
+                permission_name,
+            </if>
+            <if test="permissionValue != null" >
+                permission_value,
             </if>
             <if test="description != null" >
                 description,
@@ -165,11 +171,14 @@
             <if test="createUserId != null" >
                 #{createUserId,jdbcType=BIGINT},
             </if>
-            <if test="functionCode != null" >
-                #{functionCode,jdbcType=VARCHAR},
+            <if test="permissionCode != null" >
+                #{permissionCode,jdbcType=VARCHAR},
             </if>
-            <if test="functionName != null" >
-                #{functionName,jdbcType=VARCHAR},
+            <if test="permissionName != null" >
+                #{permissionName,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionValue != null" >
+                #{permissionValue,jdbcType=VARCHAR},
             </if>
             <if test="description != null" >
                 #{description,jdbcType=VARCHAR},
@@ -177,15 +186,15 @@
         </trim>
     </insert>
 
-    <select id="countByExample" parameterType="com.ztx.world.base.entity.FunctionExample" resultType="java.lang.Integer" >
-        select count(*) from base_function
+    <select id="countByExample" parameterType="com.ztx.world.base.entity.PermissionExample" resultType="java.lang.Integer" >
+        select count(*) from base_permission
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
-        update base_function
+        update base_permission
         <set >
             <if test="record.id != null" >
                 id = #{record.id,jdbcType=BIGINT},
@@ -202,11 +211,14 @@
             <if test="record.createUserId != null" >
                 create_user_id = #{record.createUserId,jdbcType=BIGINT},
             </if>
-            <if test="record.functionCode != null" >
-                function_code = #{record.functionCode,jdbcType=VARCHAR},
+            <if test="record.permissionCode != null" >
+                permission_code = #{record.permissionCode,jdbcType=VARCHAR},
             </if>
-            <if test="record.functionName != null" >
-                function_name = #{record.functionName,jdbcType=VARCHAR},
+            <if test="record.permissionName != null" >
+                permission_name = #{record.permissionName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.permissionValue != null" >
+                permission_value = #{record.permissionValue,jdbcType=VARCHAR},
             </if>
             <if test="record.description != null" >
                 description = #{record.description,jdbcType=VARCHAR},
@@ -218,22 +230,23 @@
     </update>
 
     <update id="updateByExample" parameterType="map" >
-        update base_function
+        update base_permission
         set id = #{record.id,jdbcType=BIGINT},
             status = #{record.status,jdbcType=INTEGER},
             create_time = #{record.createTime,jdbcType=TIMESTAMP},
             update_time = #{record.updateTime,jdbcType=TIMESTAMP},
             create_user_id = #{record.createUserId,jdbcType=BIGINT},
-            function_code = #{record.functionCode,jdbcType=VARCHAR},
-            function_name = #{record.functionName,jdbcType=VARCHAR},
+            permission_code = #{record.permissionCode,jdbcType=VARCHAR},
+            permission_name = #{record.permissionName,jdbcType=VARCHAR},
+            permission_value = #{record.permissionValue,jdbcType=VARCHAR},
             description = #{record.description,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.ztx.world.base.entity.Function" >
-        update base_function
+    <update id="updateByPrimaryKeySelective" parameterType="com.ztx.world.base.entity.Permission" >
+        update base_permission
         <set >
             <if test="status != null" >
                 status = #{status,jdbcType=INTEGER},
@@ -247,11 +260,14 @@
             <if test="createUserId != null" >
                 create_user_id = #{createUserId,jdbcType=BIGINT},
             </if>
-            <if test="functionCode != null" >
-                function_code = #{functionCode,jdbcType=VARCHAR},
+            <if test="permissionCode != null" >
+                permission_code = #{permissionCode,jdbcType=VARCHAR},
             </if>
-            <if test="functionName != null" >
-                function_name = #{functionName,jdbcType=VARCHAR},
+            <if test="permissionName != null" >
+                permission_name = #{permissionName,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionValue != null" >
+                permission_value = #{permissionValue,jdbcType=VARCHAR},
             </if>
             <if test="description != null" >
                 description = #{description,jdbcType=VARCHAR},
@@ -260,14 +276,15 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.ztx.world.base.entity.Function" >
-        update base_function
+    <update id="updateByPrimaryKey" parameterType="com.ztx.world.base.entity.Permission" >
+        update base_permission
         set status = #{status,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP},
             update_time = #{updateTime,jdbcType=TIMESTAMP},
             create_user_id = #{createUserId,jdbcType=BIGINT},
-            function_code = #{functionCode,jdbcType=VARCHAR},
-            function_name = #{functionName,jdbcType=VARCHAR},
+            permission_code = #{permissionCode,jdbcType=VARCHAR},
+            permission_name = #{permissionName,jdbcType=VARCHAR},
+            permission_value = #{permissionValue,jdbcType=VARCHAR},
             description = #{description,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>

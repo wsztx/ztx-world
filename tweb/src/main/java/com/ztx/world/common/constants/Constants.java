@@ -31,4 +31,9 @@ public class Constants {
 	 * 登录session名称
 	 */
 	public static final String LOGIN_SESSION = "loginData";
+	
+	
+	public static final class UserStatusType{
+		public static final Integer USER_NORMAL = 0;
+	}
 }

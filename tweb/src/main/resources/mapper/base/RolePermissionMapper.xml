@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ztx.world.base.mapper.RoleFunctionMapper" >
+<mapper namespace="com.ztx.world.base.mapper.RolePermissionMapper" >
 
-    <resultMap id="BaseResultMap" type="com.ztx.world.base.entity.RoleFunction" >
+    <resultMap id="BaseResultMap" type="com.ztx.world.base.entity.RolePermission" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="status" property="status" jdbcType="INTEGER" />
         <result column="role_id" property="roleId" jdbcType="BIGINT" />
-        <result column="function_id" property="functionId" jdbcType="BIGINT" />
+        <result column="permission_id" property="permissionId" jdbcType="BIGINT" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -70,16 +70,16 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, status, role_id, function_id
+        id, status, role_id, permission_id
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.RoleFunctionExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.RolePermissionExample" >
         select
         <if test="distinct" >
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from base_role_function
+        from base_role_permission
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
@@ -91,31 +91,31 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select 
         <include refid="Base_Column_List" />
-        from base_role_function
+        from base_role_permission
         where id = #{id,jdbcType=BIGINT}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-        delete from base_role_function
+        delete from base_role_permission
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.ztx.world.base.entity.RoleFunctionExample" >
-        delete from base_role_function
+    <delete id="deleteByExample" parameterType="com.ztx.world.base.entity.RolePermissionExample" >
+        delete from base_role_permission
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.ztx.world.base.entity.RoleFunction" >
-        insert into base_role_function (id, status, role_id, 
-            function_id)
+    <insert id="insert" parameterType="com.ztx.world.base.entity.RolePermission" >
+        insert into base_role_permission (id, status, role_id, 
+            permission_id)
         values (#{id,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{roleId,jdbcType=BIGINT}, 
-            #{functionId,jdbcType=BIGINT})
+            #{permissionId,jdbcType=BIGINT})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.ztx.world.base.entity.RoleFunction" >
-        insert into base_role_function
+    <insert id="insertSelective" parameterType="com.ztx.world.base.entity.RolePermission" >
+        insert into base_role_permission
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
                 id,
@@ -126,8 +126,8 @@
             <if test="roleId != null" >
                 role_id,
             </if>
-            <if test="functionId != null" >
-                function_id,
+            <if test="permissionId != null" >
+                permission_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -140,21 +140,21 @@
             <if test="roleId != null" >
                 #{roleId,jdbcType=BIGINT},
             </if>
-            <if test="functionId != null" >
-                #{functionId,jdbcType=BIGINT},
+            <if test="permissionId != null" >
+                #{permissionId,jdbcType=BIGINT},
             </if>
         </trim>
     </insert>
 
-    <select id="countByExample" parameterType="com.ztx.world.base.entity.RoleFunctionExample" resultType="java.lang.Integer" >
-        select count(*) from base_role_function
+    <select id="countByExample" parameterType="com.ztx.world.base.entity.RolePermissionExample" resultType="java.lang.Integer" >
+        select count(*) from base_role_permission
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
-        update base_role_function
+        update base_role_permission
         <set >
             <if test="record.id != null" >
                 id = #{record.id,jdbcType=BIGINT},
@@ -165,8 +165,8 @@
             <if test="record.roleId != null" >
                 role_id = #{record.roleId,jdbcType=BIGINT},
             </if>
-            <if test="record.functionId != null" >
-                function_id = #{record.functionId,jdbcType=BIGINT},
+            <if test="record.permissionId != null" >
+                permission_id = #{record.permissionId,jdbcType=BIGINT},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -175,18 +175,18 @@
     </update>
 
     <update id="updateByExample" parameterType="map" >
-        update base_role_function
+        update base_role_permission
         set id = #{record.id,jdbcType=BIGINT},
             status = #{record.status,jdbcType=INTEGER},
             role_id = #{record.roleId,jdbcType=BIGINT},
-            function_id = #{record.functionId,jdbcType=BIGINT}
+            permission_id = #{record.permissionId,jdbcType=BIGINT}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.ztx.world.base.entity.RoleFunction" >
-        update base_role_function
+    <update id="updateByPrimaryKeySelective" parameterType="com.ztx.world.base.entity.RolePermission" >
+        update base_role_permission
         <set >
             <if test="status != null" >
                 status = #{status,jdbcType=INTEGER},
@@ -194,18 +194,18 @@
             <if test="roleId != null" >
                 role_id = #{roleId,jdbcType=BIGINT},
             </if>
-            <if test="functionId != null" >
-                function_id = #{functionId,jdbcType=BIGINT},
+            <if test="permissionId != null" >
+                permission_id = #{permissionId,jdbcType=BIGINT},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.ztx.world.base.entity.RoleFunction" >
-        update base_role_function
+    <update id="updateByPrimaryKey" parameterType="com.ztx.world.base.entity.RolePermission" >
+        update base_role_permission
         set status = #{status,jdbcType=INTEGER},
             role_id = #{roleId,jdbcType=BIGINT},
-            function_id = #{functionId,jdbcType=BIGINT}
+            permission_id = #{permissionId,jdbcType=BIGINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

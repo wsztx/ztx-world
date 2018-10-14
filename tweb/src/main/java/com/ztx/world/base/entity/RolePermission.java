@@ -7,7 +7,7 @@ package com.ztx.world.base.entity;
  * 
  * @date 2018-10-14
  */
-public class RoleFunction {
+public class RolePermission {
     /**
      * 主键
      */
@@ -26,7 +26,7 @@ public class RoleFunction {
     /**
      * 权限id
      */
-    private Long functionId;
+    private Long permissionId;
 
     public Long getId() {
         return id;
@@ -52,11 +52,11 @@ public class RoleFunction {
         this.roleId = roleId;
     }
 
-    public Long getFunctionId() {
-        return functionId;
+    public Long getPermissionId() {
+        return permissionId;
     }
 
-    public void setFunctionId(Long functionId) {
-        this.functionId = functionId;
+    public void setPermissionId(Long permissionId) {
+        this.permissionId = permissionId;
     }
 }

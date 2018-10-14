@@ -9,7 +9,7 @@ import java.util.Date;
  * 
  * @date 2018-10-14
  */
-public class Function {
+public class Permission {
     /**
      * 主键
      */
@@ -38,12 +38,17 @@ public class Function {
     /**
      * 权限编码
      */
-    private String functionCode;
+    private String permissionCode;
 
     /**
      * 权限名称
      */
-    private String functionName;
+    private String permissionName;
+
+    /**
+     * 权限值
+     */
+    private String permissionValue;
 
     /**
      * 描述
@@ -90,20 +95,28 @@ public class Function {
         this.createUserId = createUserId;
     }
 
-    public String getFunctionCode() {
-        return functionCode;
+    public String getPermissionCode() {
+        return permissionCode;
     }
 
-    public void setFunctionCode(String functionCode) {
-        this.functionCode = functionCode == null ? null : functionCode.trim();
+    public void setPermissionCode(String permissionCode) {
+        this.permissionCode = permissionCode == null ? null : permissionCode.trim();
     }
 
-    public String getFunctionName() {
-        return functionName;
+    public String getPermissionName() {
+        return permissionName;
     }
 
-    public void setFunctionName(String functionName) {
-        this.functionName = functionName == null ? null : functionName.trim();
+    public void setPermissionName(String permissionName) {
+        this.permissionName = permissionName == null ? null : permissionName.trim();
+    }
+
+    public String getPermissionValue() {
+        return permissionValue;
+    }
+
+    public void setPermissionValue(String permissionValue) {
+        this.permissionValue = permissionValue == null ? null : permissionValue.trim();
     }
 
     public String getDescription() {
