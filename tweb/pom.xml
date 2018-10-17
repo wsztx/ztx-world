@@ -15,6 +15,7 @@
     	<log4j.version>1.2.12</log4j.version>
     	<mysql.version>5.1.35</mysql.version>
     	<shiro.version>1.3.2</shiro.version>
+    	<pinyin4j.version>2.5.0</pinyin4j.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -230,6 +231,11 @@
       		<version>${shiro.version}</version>
     	</dependency>
 		
+		<dependency>
+            <groupId>org.clojars.cbilson</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>${pinyin4j.version}</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<finalName>tweb</finalName>	
