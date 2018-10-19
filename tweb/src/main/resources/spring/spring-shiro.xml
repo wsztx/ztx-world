@@ -11,7 +11,7 @@
 
 	<!-- 配置进行授权和认证的Realm -->
 	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml">
-		<property name="cacheManager" ref="redisCacheManager"/>
+<!-- 		<property name="cacheManager" ref="redisCacheManager"/> -->
 	</bean>
 	
 	<bean id="redisSessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO"></bean>
@@ -22,7 +22,7 @@
     </bean>
     
     <!--sessionManager-->
-    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+    <bean id="sessionManager" class="com.ztx.world.common.shiro.CustomSessionManager">
         <property name="sessionDAO" ref="redisSessionDAO"/>
         <property name="sessionIdCookie" ref="simpleCookie"/>
     </bean>
@@ -30,8 +30,8 @@
 	<!-- 配置Shiro的SecurityManager. -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="cacheManager" ref="redisCacheManager" />
-		<property name="realm" ref="shiroReaml" />
 		<property name="sessionManager" ref="sessionManager"/>
+		<property name="realm" ref="shiroReaml" />
 	</bean>
 
 	<!-- Shiro生命周期处理器. -->

@@ -17,17 +17,6 @@ public class Constants {
 	 */
 	public static final int UNDELETE_STATUS = 1;
 	
-	/**
-	 * 全局session名称
-	 */
-	public static final String GLOBAL_SESSION = "globalData";
-	
-	/**
-	 * 登录session名称
-	 */
-	public static final String LOGIN_SESSION = "loginData";
-	
-	
 	public static final class UserStatusType{
 		public static final Integer USER_NORMAL = 0;
 	}

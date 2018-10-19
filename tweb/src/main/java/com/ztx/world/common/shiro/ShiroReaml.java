@@ -21,11 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import com.alibaba.druid.util.StringUtils;
+import com.ztx.world.base.entity.CustomSession;
 import com.ztx.world.base.entity.Permission;
 import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
-import com.ztx.world.base.entity.CustomSession;
 import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.service.PermissionService;
 import com.ztx.world.base.service.RoleService;
@@ -63,7 +63,6 @@ public class ShiroReaml extends AuthorizingRealm {
 			.andPasswordEqualTo(token.getPswd());
 		List<User> userList = userMapper.selectByExample(example);
 		User user = null;
-		
 		if(CollectionUtils.isEmpty(userList)){
 			throw new AccountException("帐号或密码不正确！");
 		}else if(userList.get(0).getUserStatus() != Constants.UserStatusType.USER_NORMAL){
@@ -75,7 +74,6 @@ public class ShiroReaml extends AuthorizingRealm {
 		}
 		CustomSession userSession = new CustomSession();
 		BeanUtil.copyProperties(user, userSession);
-		String abc = getName();
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), getName());
 		return info;
 	}

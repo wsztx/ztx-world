@@ -3,10 +3,12 @@ package com.ztx.world.common.system;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.ztx.world.common.constants.Constants;
+import com.ztx.world.base.entity.CustomSession;
+import com.ztx.world.common.redis.RedisClient;
 
 public class HttpInterceptorAdapter extends HandlerInterceptorAdapter {
 
@@ -26,8 +28,8 @@ public class HttpInterceptorAdapter extends HandlerInterceptorAdapter {
 	    String basePath = request.getScheme() + "://" + request.getServerName() + ":" 
 	    		+ request.getServerPort() + path;
 		modelAndView.addObject("base", basePath);
-		modelAndView.addObject(Constants.LOGIN_SESSION, 
-				request.getSession().getAttribute(Constants.LOGIN_SESSION));
+		CustomSession customSession = new CustomSession();
+		modelAndView.addObject("custom.session", customSession);
 		super.postHandle(request, response, handler, modelAndView);
 	}
 	
