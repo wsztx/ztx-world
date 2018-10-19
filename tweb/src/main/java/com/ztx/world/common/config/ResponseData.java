@@ -44,13 +44,8 @@ public class ResponseData{
 	public void setData(Object data) {
 		this.data = data;
 	}
-	
-	public void setResultCodeAndMessage(String code) {
-		this.code = code;
-		this.message = ResultCodeUtil.get(this.code);
-	}
 
-	public void setResultCodeAndMessage(String code, String message) {
+	public void setCodeAndMessage(String code, String message) {
 		this.code = code;
 		this.message = message;
 	}
@@ -70,6 +65,12 @@ public class ResponseData{
 	public ResponseData(String code, Object data) {
 		this.code = code;
 		this.message = ResultCodeUtil.get(this.code);
+		this.data = data;
+	}
+	
+	public ResponseData(String code, String message, Object data) {
+		this.code = code;
+		this.message = message;
 		this.data = data;
 	}
 

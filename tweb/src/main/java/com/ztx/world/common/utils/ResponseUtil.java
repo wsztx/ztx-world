@@ -13,7 +13,7 @@ public class ResponseUtil {
 	
 	private static Logger log = LoggerFactory.getLogger(ResponseUtil.class);
 
-	public static void writeJson(HttpServletResponse response, Object object){
+	public static void writeJson(HttpServletResponse response, Object object) {
         response.setContentType("application/json;charset=UTF-8");
         response.setHeader("Cache-Control", "no-store");
         response.setHeader("Pragrma", "no-cache");

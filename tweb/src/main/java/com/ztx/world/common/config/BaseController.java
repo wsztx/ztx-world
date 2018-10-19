@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.utils.ResultCodeUtil;
 
-public class BaseAction {
+public class BaseController {
 	
 	protected ResponseData success(){
 		ResponseData response = new ResponseData();

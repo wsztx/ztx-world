@@ -11,6 +11,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<context:component-scan base-package="com.ztx.world"></context:component-scan>
 
 	<import resource="classpath:spring/spring-mybatis.xml" />
+	<import resource="classpath:spring/spring-redis.xml"/>
 	<import resource="classpath:spring/spring-shiro.xml"/>
 	<import resource="classpath:spring/spring-mvc.xml" />
 

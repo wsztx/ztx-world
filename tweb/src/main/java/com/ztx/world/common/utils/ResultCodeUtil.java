@@ -11,7 +11,7 @@ public class ResultCodeUtil {
 
 	private static final String DEFAULT_ERRORCODE_FILE = "resultCode.properties";
 	private static Properties errorCodes = new Properties();
-	private static final Logger logger = LoggerFactory.getLogger(ResultCodeUtil.class);
+	private static final Logger log = LoggerFactory.getLogger(ResultCodeUtil.class);
 
 	private static boolean isLoad;
 
@@ -21,7 +21,7 @@ public class ResultCodeUtil {
 				.getResourceAsStream("config/" + DEFAULT_ERRORCODE_FILE);){
 			// 构造时获取到项目的物理根目录
 			if (fis == null){
-				logger.error("ResultCodeUtil-文件未找到。");
+				log.error("ResultCodeUtil error,文件未找到.");
 				return ret;
 			}
 
@@ -30,7 +30,7 @@ public class ResultCodeUtil {
 			ret = true;
 			
 		} catch (IOException e){
-			logger.error("ResultCodeUtil-初始化异常", e);
+			log.error("ResultCodeUtil error,初始化异常.", e);
 		}
 		return ret;
 	}
@@ -51,7 +51,7 @@ public class ResultCodeUtil {
 
 			return new String(ret.getBytes("ISO-8859-1"), "utf-8");
 		} catch (Exception e){
-			logger.error("ResultCodeUtil-字符转换异常", e);
+			log.error("ResultCodeUtil error,字符转换异常.", e);
 			return "";
 		}
 	}

@@ -8,10 +8,7 @@
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<!-- 配置db文件 -->
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations" value="classpath:spring/db.properties" />
-	</bean>
+	<context:property-placeholder location="classpath:spring/db.properties" ignore-unresolvable="true" />
 
 	<!-- 配置数据源 ，使用的alibba的数据库 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"

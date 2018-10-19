@@ -4,21 +4,40 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- 配置緩存管理器 -->
-	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-		<property name="cacheManagerConfigFile" value="classpath:config/ehcache.xml" />
+	<bean id="redisCacheManager" class="org.crazycake.shiro.RedisCacheManager">
+		<property name="keyPrefix" value="shiro_redis_session:"/>
+        <property name="redisManager" ref="redisClient"/>
 	</bean>
 
 	<!-- 配置进行授权和认证的Realm -->
-	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml"></bean>
+	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml">
+		<property name="cacheManager" ref="redisCacheManager"/>
+	</bean>
+	
+	<bean id="redisSessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO"></bean>
+	
+	<bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg name="name" value="custom.session"/>
+        <property name="path" value="/"/>
+    </bean>
+    
+    <!--sessionManager-->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="sessionDAO" ref="redisSessionDAO"/>
+        <property name="sessionIdCookie" ref="simpleCookie"/>
+    </bean>
 
 	<!-- 配置Shiro的SecurityManager. -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="cacheManager" ref="cacheManager" />
+		<property name="cacheManager" ref="redisCacheManager" />
 		<property name="realm" ref="shiroReaml" />
+		<property name="sessionManager" ref="sessionManager"/>
 	</bean>
 
-	<!-- 配置Bean后置处理器. -->
+	<!-- Shiro生命周期处理器. -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+    <bean id="kickoutControlFilter" class="com.ztx.world.common.shiro.KickoutControlFilter"></bean>
 
 	<!-- 配置 ShiroFilter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -26,6 +45,11 @@
 		<property name="loginUrl" value="/base/user/tologin" />
 		<property name="successUrl" value="/index" />
 		<property name="unauthorizedUrl" value="/base/user/tologin" />
+		<property name="filters">
+			<map>
+				<entry key="kickout" value-ref="kickoutControlFilter"/>
+			</map>
+		</property>
 		<property name="filterChainDefinitions">
 			<value>
 				/resource/** = anon

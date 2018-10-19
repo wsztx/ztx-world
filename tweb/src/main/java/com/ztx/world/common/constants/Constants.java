@@ -18,11 +18,6 @@ public class Constants {
 	public static final int UNDELETE_STATUS = 1;
 	
 	/**
-	 * shiro的md5加密盐值
-	 */
-	public static final String SALT_SOURCE = "w6s8z6t8xstkw";
-	
-	/**
 	 * 全局session名称
 	 */
 	public static final String GLOBAL_SESSION = "globalData";

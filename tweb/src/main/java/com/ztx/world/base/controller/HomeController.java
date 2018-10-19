@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ztx.world.common.config.BaseAction;
+import com.ztx.world.common.config.BaseController;
 
 @Controller
-public class HomeController extends BaseAction {
+public class HomeController extends BaseController {
 	
 	private static Logger log = LoggerFactory.getLogger(HomeController.class);
     
