@@ -13,10 +13,13 @@ function doLogin(){
 		type: "POST",
 		url: "${base}/base/user/login", 
 		dataType: "json",
-		data: {"user.code":"admin", "user.password":"123456"},
+		data: {"userCode":"admin", "password":"123456"},
 		success: function(result){
-			console.log(result);
-		    alert(result.message);
+			if(result.code == 1){
+				alert("登录成功");
+			}else{
+				alert(result.message);
+			}
 		},
 		error: function(result){
 			console.log(result);
@@ -24,9 +27,27 @@ function doLogin(){
 		}
 	});
 }
+function doLogout(){
+	$.ajax({
+		type: "POST",
+		url: "${base}/base/user/logout", 
+		dataType: "json",
+		data: {"userCode":"admin", "password":"123456"},
+		success: function(result){
+			if(result.code == 1){
+				alert("退出成功");
+			}else{
+				alert(result.message);
+			}
+		},
+		error: function(result){
+		}
+	});
+}
 </script>
 </head>
 <body>
 <button onclick = "doLogin()">登录</button>
+<button onclick = "doLogout()">登出</button>
 </body>
 </html>

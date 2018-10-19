@@ -49,7 +49,7 @@
 		</javaClientGenerator>
 		
 		<!-- 指定数据库表 -->
-		<table tableName="base_role_permission" domainObjectName="RolePermission" schema="" ></table>
+		<table tableName="base_organization" domainObjectName="Organization" schema="" ></table>
 		
 		<!-- 有些表的字段需要指定java类型
 		 <table schema="" tableName="">

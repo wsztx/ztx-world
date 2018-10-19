@@ -69,7 +69,7 @@ public class OrganizationExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-14
+     * @date 2018-10-19
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -621,6 +621,76 @@ public class OrganizationExample {
             addCriterion("description not between", value1, value2, "description");
             return (Criteria) this;
         }
+
+        public Criteria andOrgPathIsNull() {
+            addCriterion("org_path is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathIsNotNull() {
+            addCriterion("org_path is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathEqualTo(String value) {
+            addCriterion("org_path =", value, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathNotEqualTo(String value) {
+            addCriterion("org_path <>", value, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathGreaterThan(String value) {
+            addCriterion("org_path >", value, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathGreaterThanOrEqualTo(String value) {
+            addCriterion("org_path >=", value, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathLessThan(String value) {
+            addCriterion("org_path <", value, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathLessThanOrEqualTo(String value) {
+            addCriterion("org_path <=", value, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathLike(String value) {
+            addCriterion("org_path like", value, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathNotLike(String value) {
+            addCriterion("org_path not like", value, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathIn(List<String> values) {
+            addCriterion("org_path in", values, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathNotIn(List<String> values) {
+            addCriterion("org_path not in", values, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathBetween(String value1, String value2) {
+            addCriterion("org_path between", value1, value2, "orgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgPathNotBetween(String value1, String value2) {
+            addCriterion("org_path not between", value1, value2, "orgPath");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -635,7 +705,7 @@ public class OrganizationExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-14
+     * @date 2018-10-19
      */
     public static class Criterion {
         private String condition;

@@ -25,10 +25,12 @@ import com.ztx.world.base.entity.Permission;
 import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
+import com.ztx.world.base.entity.CustomSession;
 import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.service.PermissionService;
 import com.ztx.world.base.service.RoleService;
 import com.ztx.world.common.constants.Constants;
+import com.ztx.world.common.utils.BeanUtil;
 
 public class ShiroReaml extends AuthorizingRealm {
 	
@@ -71,6 +73,9 @@ public class ShiroReaml extends AuthorizingRealm {
 			user.setLastLoginTime(new Date());
 			userMapper.updateByPrimaryKeySelective(user);
 		}
+		CustomSession userSession = new CustomSession();
+		BeanUtil.copyProperties(user, userSession);
+		String abc = getName();
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), getName());
 		return info;
 	}

@@ -18,7 +18,7 @@ public class ResultCode {
 	public static final String SYS_OPERATION_FAILED = "-1";
 	
 	/**
-	 * 登录失败
+	 * 参数异常
 	 */
-	public static final String LOGIN_FAIL = "10001";
+	public static final String LOGIN_ARG_ERROR = "10001";
 }

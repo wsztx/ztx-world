@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  * @author wcyong
  * 
- * @date 2018-10-14
+ * @date 2018-10-19
  */
 public class Organization {
     /**
@@ -49,6 +49,11 @@ public class Organization {
      * 描述
      */
     private String description;
+
+    /**
+     * 机构路径
+     */
+    private String orgPath;
 
     public Long getId() {
         return id;
@@ -112,5 +117,13 @@ public class Organization {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public String getOrgPath() {
+        return orgPath;
+    }
+
+    public void setOrgPath(String orgPath) {
+        this.orgPath = orgPath == null ? null : orgPath.trim();
     }
 }

@@ -55,7 +55,7 @@ public class DemoController extends BaseController {
     	if(CollectionUtils.isEmpty(list)){
     		log.debug("list is empty.");
     		// 手动抛出的异常
-    		throw new BasicException(ResultCode.LOGIN_FAIL);
+    		throw new BasicException(ResultCode.LOGIN_ARG_ERROR);
     	}
     	return success("传到后台的数据");
     }
