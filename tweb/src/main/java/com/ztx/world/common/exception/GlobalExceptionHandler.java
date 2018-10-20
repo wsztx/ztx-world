@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ztx.world.common.config.ResponseData;
+import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.utils.ResponseUtil;
 
@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
     	String requestType = request.getHeader("X-Requested-With");
     	// 如果是ajax请求
     	if("XMLHttpRequest".equals(requestType)){
-        	ResponseData responseData = new ResponseData();
+        	BaseResponse responseData = new BaseResponse();
         	responseData.setSuccess(false);
         	responseData.setCode(ResultCode.SYS_OPERATION_FAILED);
         	responseData.setMessage(exception.getMessage());
@@ -67,10 +67,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BasicException.class)
     @Order(value = 1)
     @ResponseBody
-    public ResponseData basicExceptionHandler(HttpServletRequest request, HttpServletResponse response, 
+    public BaseResponse basicExceptionHandler(HttpServletRequest request, HttpServletResponse response, 
     		BasicException exception) throws Exception{
     	log.error("BasicException occurred.", exception);
-    	ResponseData responseData = new ResponseData();
+    	BaseResponse responseData = new BaseResponse();
     	responseData.setSuccess(false);
     	responseData.setCode(exception.getCode());
     	responseData.setMessage(exception.getMessage());

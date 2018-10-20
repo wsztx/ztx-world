@@ -18,7 +18,7 @@ import com.ztx.world.base.entity.User;
 import com.ztx.world.base.service.UserService;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.CustomSession;
-import com.ztx.world.common.config.ResponseData;
+import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.shiro.ShiroToken;
@@ -41,7 +41,7 @@ public class UserController extends BaseController{
     
     @ResponseBody
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ResponseData login(HttpServletRequest request, HttpServletResponse response, 
+    public BaseResponse login(HttpServletRequest request, HttpServletResponse response, 
     		CustomSession user){
     	if(user == null || StringUtils.isEmpty(user.getUserCode()) || StringUtils.isEmpty(user.getPassword())){
     		throw new BasicException(ResultCode.BASE_ARG_ERROR);
@@ -58,7 +58,7 @@ public class UserController extends BaseController{
     
     @ResponseBody
     @RequestMapping(value = "logout", method = RequestMethod.POST)
-    public ResponseData logout(HttpServletRequest request, HttpServletResponse response){
+    public BaseResponse logout(HttpServletRequest request, HttpServletResponse response){
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
         return success("登出成功");

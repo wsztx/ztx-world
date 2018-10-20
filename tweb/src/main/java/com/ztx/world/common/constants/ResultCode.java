@@ -15,7 +15,7 @@ public class ResultCode {
 	/**
 	 * 操作失败
 	 */
-	public static final Integer SYS_OPERATION_FAILED = -1;
+	public static final Integer SYS_OPERATION_FAILED = 0;
 	
 	/**
 	 * 参数异常

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ztx.world.base.entity.User;
 import com.ztx.world.common.config.BaseController;
-import com.ztx.world.common.config.ResponseData;
+import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 
@@ -43,7 +43,7 @@ public class DemoController extends BaseController {
     
     @ResponseBody
     @RequestMapping(value="/test2", method=RequestMethod.GET)
-    public ResponseData test2(HttpServletRequest request, HttpServletResponse response) 
+    public BaseResponse test2(HttpServletRequest request, HttpServletResponse response) 
     		throws Exception{
     	String test = "";
     	List<String> list = new ArrayList<String>();
@@ -62,7 +62,7 @@ public class DemoController extends BaseController {
     
     @ResponseBody
     @RequestMapping(value="/test3", method=RequestMethod.GET)
-    public ResponseData test3(HttpServletRequest request, HttpServletResponse response) 
+    public BaseResponse test3(HttpServletRequest request, HttpServletResponse response) 
     		throws Exception{
     	User user = new User();
     	user.setId(123L);

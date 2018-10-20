@@ -14,7 +14,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ztx.world.common.config.ResponseData;
+import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.utils.ResponseUtil;
 
@@ -45,7 +45,7 @@ public class KickoutControlFilter extends AccessControlFilter {
         // 判断是否已经踢出;如果是Ajax访问,那么给予json返回值提示;如果是普通请求,直接跳转到登录页
         Boolean marker = (Boolean)session.getAttribute(KICKOUT_STATUS);
         if (null != marker && marker) {
-        	ResponseData data = new ResponseData();
+        	BaseResponse data = new BaseResponse();
             // 判断是不是Ajax请求
             if ("XMLHttpRequest".equals(requestType)) {
                 data.setCode(ResultCode.SYS_OPERATION_FAILED);
