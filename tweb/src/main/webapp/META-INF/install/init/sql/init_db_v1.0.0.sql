@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-10-20 00:26:02
+Date: 2018-10-20 22:37:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,6 +54,26 @@ CREATE TABLE `base_constant` (
 
 -- ----------------------------
 -- Records of base_constant
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_department
+-- ----------------------------
+DROP TABLE IF EXISTS `base_department`;
+CREATE TABLE `base_department` (
+  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `status` int(2) NOT NULL COMMENT '逻辑删除位，0删除，1未删除',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
+  `dept_code` varchar(64) DEFAULT NULL COMMENT '部门编码',
+  `dept_name` varchar(64) DEFAULT NULL COMMENT '部门名称',
+  `description` varchar(256) DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of base_department
 -- ----------------------------
 
 -- ----------------------------
@@ -151,6 +171,7 @@ CREATE TABLE `base_user` (
   `user_name` varchar(64) DEFAULT NULL COMMENT '名称',
   `password` varchar(64) DEFAULT NULL COMMENT '密码',
   `org_id` bigint(32) DEFAULT NULL COMMENT '所属机构id',
+  `dept_id` bigint(32) DEFAULT NULL COMMENT '所属部门id',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
   `user_status` int(4) DEFAULT NULL COMMENT '用户状态，0正常',
@@ -161,7 +182,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', null, 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', null, '2018-10-20 00:24:50', '0');
+INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', null, 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', null, null, '2018-10-20 22:19:00', '0');
 
 -- ----------------------------
 -- Table structure for base_user_role
