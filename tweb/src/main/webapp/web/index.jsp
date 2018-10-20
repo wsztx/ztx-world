@@ -10,7 +10,7 @@
 </head>
 <body>
 <script type="text/javascript">
-
+Welcome to home page.
 </script>
 </body>
 </html>

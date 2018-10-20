@@ -21,8 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import com.alibaba.druid.util.StringUtils;
-import com.ztx.world.base.entity.Department;
-import com.ztx.world.base.entity.Organization;
 import com.ztx.world.base.entity.Permission;
 import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.User;
@@ -59,7 +57,7 @@ public class ShiroReaml extends AuthorizingRealm {
 	}
 	
 	/**
-	 * 进行登录认证
+	 * 登录认证
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) 
@@ -96,36 +94,31 @@ public class ShiroReaml extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        String usercode = String.valueOf(principals.getPrimaryPrincipal());
-        log.info("shiro权限检查,usercode:" + usercode);
+        CustomSession customSession = (CustomSession)principals.getPrimaryPrincipal();
+        log.info("shiro权限检查,usercode:" + customSession.getUser().getUserCode());
         
-		UserExample example = new UserExample();
-		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
-			.andUserCodeEqualTo(usercode);
-		List<User> userList = userMapper.selectByExample(example);
-		if(!CollectionUtils.isEmpty(userList)){
-			User user = userList.get(0);
-            List<Role> roleList = roleService.findRoleByUserId(user.getId());
-            if(!CollectionUtils.isEmpty(roleList)){
-            	for(Role role : roleList){
-            		if(!StringUtils.isEmpty(role.getRoleCode())){
-            			authorizationInfo.addRole(role.getRoleCode());
-            			//log.info("角色:" + role.getRoleCode());
-            		}
-            		
-                    List<Permission> permissionList = permissionService
-                    		.findPermissionByRoleId(role.getId());
-                    if(!CollectionUtils.isEmpty(permissionList)){
-                    	for (Permission permission : permissionList){
-                            if (!StringUtils.isEmpty(permission.getPermissionValue())) {
-                            	//log.info("权限:" + permission.getPermissionValue());
-                                authorizationInfo.addStringPermission(permission.getPermissionValue());
-                            }
-                    	}
-                    }
-            	}
-            }
-		}
+		User user = customSession.getUser();
+        List<Role> roleList = roleService.findRoleByUserId(user.getId());
+        if(!CollectionUtils.isEmpty(roleList)){
+        	for(Role role : roleList){
+        		if(!StringUtils.isEmpty(role.getRoleCode())){
+        			authorizationInfo.addRole(role.getRoleCode());
+        			//log.info("角色:" + role.getRoleCode());
+        		}
+        		
+                List<Permission> permissionList = permissionService
+                		.findPermissionByRoleId(role.getId());
+                if(!CollectionUtils.isEmpty(permissionList)){
+                	for (Permission permission : permissionList){
+                        if (!StringUtils.isEmpty(permission.getPermissionValue())) {
+                        	//log.info("权限:" + permission.getPermissionValue());
+                            authorizationInfo.addStringPermission(permission.getPermissionValue());
+                        }
+                	}
+                }
+        	}
+        }
+        
         return authorizationInfo;
 	}
 	
@@ -140,7 +133,7 @@ public class ShiroReaml extends AuthorizingRealm {
     }
     
     /**
-     * 指定principalCollection 清除
+     * 指定principalCollection清除
      */
     public void clearCachedAuthorizationInfo(PrincipalCollection principalCollection) {
         SimplePrincipalCollection principals = new SimplePrincipalCollection(
