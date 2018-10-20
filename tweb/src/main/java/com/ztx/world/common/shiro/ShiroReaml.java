@@ -72,9 +72,9 @@ public class ShiroReaml extends AuthorizingRealm {
 			user.setLastLoginTime(new Date());
 			userMapper.updateByPrimaryKeySelective(user);
 		}
-		CustomSession userSession = new CustomSession();
-		BeanUtil.copyProperties(user, userSession);
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+		CustomSession customSession = new CustomSession();
+		BeanUtil.copyProperties(user, customSession);
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customSession, user.getPassword(), getName());
 		return info;
 	}
 

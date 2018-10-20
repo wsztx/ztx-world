@@ -50,7 +50,7 @@ public class UserController extends BaseController{
         // 当前的用户是否已经被认证,即是否已经登陆
         if (!currentUser.isAuthenticated()) {
         	ShiroToken token = new ShiroToken(user.getUserCode(), MD5Util.md5(user.getPassword()));
-            //token.setRememberMe(true);
+            token.setRememberMe(true);
             currentUser.login(token);
         }
         return success();

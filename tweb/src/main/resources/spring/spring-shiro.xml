@@ -11,7 +11,7 @@
 
 	<!-- 配置进行授权和认证的Realm -->
 	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml">
-<!-- 		<property name="cacheManager" ref="redisCacheManager"/> -->
+		<property name="cacheManager" ref="redisCacheManager"/>
 	</bean>
 	
 	<bean id="redisSessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO"></bean>
