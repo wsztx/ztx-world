@@ -21,16 +21,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import com.alibaba.druid.util.StringUtils;
+import com.ztx.world.base.entity.Department;
+import com.ztx.world.base.entity.Organization;
 import com.ztx.world.base.entity.Permission;
 import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
+import com.ztx.world.base.mapper.DepartmentMapper;
+import com.ztx.world.base.mapper.OrganizationMapper;
 import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.service.PermissionService;
 import com.ztx.world.base.service.RoleService;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
-import com.ztx.world.common.utils.BeanUtil;
 
 public class ShiroReaml extends AuthorizingRealm {
 	
@@ -38,6 +41,12 @@ public class ShiroReaml extends AuthorizingRealm {
 	
     @Autowired
     private UserMapper userMapper;
+    
+    @Autowired
+    private DepartmentMapper departmentMapper;
+    
+    @Autowired
+    private OrganizationMapper organizationMapper;
     
     @Autowired
     private RoleService roleService;
@@ -72,8 +81,11 @@ public class ShiroReaml extends AuthorizingRealm {
 			user.setLastLoginTime(new Date());
 			userMapper.updateByPrimaryKeySelective(user);
 		}
+		
 		CustomSession customSession = new CustomSession();
-		BeanUtil.copyProperties(user, customSession);
+		customSession.setUser(user);
+		customSession.setOrg(organizationMapper.selectByPrimaryKey(user.getOrgId()));
+		customSession.setDept(departmentMapper.selectByPrimaryKey(user.getDeptId()));
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customSession, user.getPassword(), getName());
 		return info;
 	}

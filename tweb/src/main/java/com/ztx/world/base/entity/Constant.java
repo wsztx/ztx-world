@@ -3,11 +3,9 @@ package com.ztx.world.base.entity;
 import java.util.Date;
 
 /**
- * 
- * 
- * @author wcyong
- * 
- * @date 2018-10-14
+ * 表base_constant
+ * @author ztx
+ *
  */
 public class Constant {
     /**

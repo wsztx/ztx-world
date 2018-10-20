@@ -4,18 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
- * 
- * @author wcyong
- * 
- * @date 2018-10-14
+ * 表base_user
+ * @author ztx
+ *
  */
-public class User implements Serializable{
-
-	/**
+public class User implements Serializable {
+	
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -8177642392162328997L;
+	private static final long serialVersionUID = 5722857458559610819L;
 
 	/**
      * 主键
@@ -61,6 +59,11 @@ public class User implements Serializable{
      * 所属机构id
      */
     private Long orgId;
+
+    /**
+     * 所属部门id
+     */
+    private Long deptId;
 
     /**
      * 描述
@@ -147,6 +150,14 @@ public class User implements Serializable{
 
     public void setOrgId(Long orgId) {
         this.orgId = orgId;
+    }
+
+    public Long getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Long deptId) {
+        this.deptId = deptId;
     }
 
     public String getDescription() {

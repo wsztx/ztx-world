@@ -15,7 +15,7 @@ function doLogin(){
 		dataType: "json",
 		data: {"userCode":"admin", "password":"123456"},
 		success: function(result){
-			if(result.code == 1){
+			if(result.success){
 				alert("登录成功");
 			}else{
 				alert(result.message);

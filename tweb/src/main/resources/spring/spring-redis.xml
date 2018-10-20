@@ -2,33 +2,43 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:redis="http://www.springframework.org/schema/redis"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/redis 
+    http://www.springframework.org/schema/redis/spring-redis-1.0.xsd">
 	
 	<context:property-placeholder location="classpath:spring/redis.properties" ignore-unresolvable="true" />
-
-    <bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="${redis.pool.maxActive}"/>
-        <property name="maxIdle" value="${redis.pool.maxIdle}"/>
-        <property name="maxWaitMillis" value="${redis.pool.maxWait}"/>
-        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>
+    
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.pool.maxIdle}"></property>
+        <property name="maxTotal" value="${redis.pool.maxActive}"></property>
+        <property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}"></property>
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"></property>
     </bean>
-
-    <bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
-        <constructor-arg ref="redisPoolConfig"/>
-        <constructor-arg value="${redis.host}"/>
-        <constructor-arg type="int" value="${redis.port}"/>
-        <constructor-arg type="int" value="${redis.timeout}"/>
-        <constructor-arg type="java.lang.String" value="${redis.password}"/>
-        <constructor-arg type="int" value="${redis.dbindex}"/>
+    
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="usePool" value="${redis.pooled}"></property>
+        <property name="hostName" value="${redis.host}"></property>
+        <property name="port" value="${redis.port}"></property>
+        <property name="password" value="${redis.password}"></property>
+        <property name="poolConfig" ref="jedisPoolConfig"></property>
     </bean>
-
-    <bean id="redisClient" class="com.ztx.world.common.redis.RedisClient">
-        <constructor-arg name="jedisPool" ref="jedisPool"/>
-        <property name="expire" value="${redis.default.expire}"/>
+    
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"></property>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+        </property>
     </bean>
 
 </beans>

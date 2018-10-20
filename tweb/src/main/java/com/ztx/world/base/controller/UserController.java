@@ -42,7 +42,7 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public BaseResponse login(HttpServletRequest request, HttpServletResponse response, 
-    		CustomSession user){
+    		User user){
     	if(user == null || StringUtils.isEmpty(user.getUserCode()) || StringUtils.isEmpty(user.getPassword())){
     		throw new BasicException(ResultCode.BASE_ARG_ERROR);
     	}
@@ -64,7 +64,7 @@ public class UserController extends BaseController{
         return success("登出成功");
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.POST)
+    @RequestMapping(value = "update", method = RequestMethod.GET)
     public String update(HttpServletRequest request, User user){
     	userService.updateUser(user);
         return "base/user/edit";

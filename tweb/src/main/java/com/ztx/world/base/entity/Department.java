@@ -1,14 +1,20 @@
 package com.ztx.world.base.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 表base_permission
+ * 表base_department
  * @author ztx
  *
  */
-public class Permission {
+public class Department implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3655838547381367278L;
+
+	/**
      * 主键
      */
     private Long id;
@@ -34,19 +40,14 @@ public class Permission {
     private Long createUserId;
 
     /**
-     * 权限编码
+     * 部门编码
      */
-    private String permissionCode;
+    private String deptCode;
 
     /**
-     * 权限名称
+     * 部门名称
      */
-    private String permissionName;
-
-    /**
-     * 权限值
-     */
-    private String permissionValue;
+    private String deptName;
 
     /**
      * 描述
@@ -93,28 +94,20 @@ public class Permission {
         this.createUserId = createUserId;
     }
 
-    public String getPermissionCode() {
-        return permissionCode;
+    public String getDeptCode() {
+        return deptCode;
     }
 
-    public void setPermissionCode(String permissionCode) {
-        this.permissionCode = permissionCode == null ? null : permissionCode.trim();
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 
-    public String getPermissionName() {
-        return permissionName;
+    public String getDeptName() {
+        return deptName;
     }
 
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName == null ? null : permissionName.trim();
-    }
-
-    public String getPermissionValue() {
-        return permissionValue;
-    }
-
-    public void setPermissionValue(String permissionValue) {
-        this.permissionValue = permissionValue == null ? null : permissionValue.trim();
+    public void setDeptName(String deptName) {
+        this.deptName = deptName == null ? null : deptName.trim();
     }
 
     public String getDescription() {

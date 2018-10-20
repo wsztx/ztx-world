@@ -2,44 +2,40 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<!-- 配置緩存管理器 -->
-	<bean id="redisCacheManager" class="org.crazycake.shiro.RedisCacheManager">
-		<property name="keyPrefix" value="shiro_redis_session:"/>
-        <property name="redisManager" ref="redisClient"/>
-	</bean>
-
-	<!-- 配置进行授权和认证的Realm -->
-	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml">
-		<property name="cacheManager" ref="redisCacheManager"/>
-	</bean>
-	
-	<bean id="redisSessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO"></bean>
-	
-	<bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <constructor-arg name="name" value="custom.session"/>
-        <property name="path" value="/"/>
+    
+    <bean id="redisManager" class="com.ztx.world.common.redis.RedisManager"></bean>
+    
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"></bean>
+    
+    <bean id="sessionDAO" class="com.ztx.world.common.shiro.CustomSessionDAO">
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"></property>
     </bean>
     
-    <!--sessionManager-->
     <bean id="sessionManager" class="com.ztx.world.common.shiro.CustomSessionManager">
-        <property name="sessionDAO" ref="redisSessionDAO"/>
-        <property name="sessionIdCookie" ref="simpleCookie"/>
+    	<!-- 设置超时时间 -->
+        <property name="globalSessionTimeout" value="1800000"></property>
+        <property name="deleteInvalidSessions" value="true"></property>
+        <property name="sessionDAO" ref="sessionDAO"></property>
+        <property name="sessionIdCookie" ref="simpleCookie" />
+    </bean>
+    
+    <bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg name="name" value="custom.session" />
+        <property name="path" value="/" />
+        <property name="httpOnly" value="true"/>
+    </bean>
+    
+	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml"></bean>
+	
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="sessionManager" ref="sessionManager"></property>
+        <property name="realm" ref="shiroReaml"></property>
     </bean>
 
-	<!-- 配置Shiro的SecurityManager. -->
-	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="cacheManager" ref="redisCacheManager" />
-		<property name="sessionManager" ref="sessionManager"/>
-		<property name="realm" ref="shiroReaml" />
-	</bean>
-
-	<!-- Shiro生命周期处理器. -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
     <bean id="kickoutControlFilter" class="com.ztx.world.common.shiro.KickoutControlFilter"></bean>
 
-	<!-- 配置 ShiroFilter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/base/user/tologin" />

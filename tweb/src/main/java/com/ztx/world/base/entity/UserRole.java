@@ -1,11 +1,9 @@
 package com.ztx.world.base.entity;
 
 /**
- * 
- * 
- * @author wcyong
- * 
- * @date 2018-10-14
+ * 表base_user_role
+ * @author ztx
+ *
  */
 public class UserRole {
     /**
