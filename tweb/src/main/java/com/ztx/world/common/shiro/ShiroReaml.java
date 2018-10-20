@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import com.alibaba.druid.util.StringUtils;
-import com.ztx.world.base.entity.CustomSession;
 import com.ztx.world.base.entity.Permission;
 import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.User;
@@ -29,6 +28,7 @@ import com.ztx.world.base.entity.UserExample;
 import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.service.PermissionService;
 import com.ztx.world.base.service.RoleService;
+import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.Constants;
 import com.ztx.world.common.utils.BeanUtil;
 

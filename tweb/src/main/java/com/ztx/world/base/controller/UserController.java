@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ztx.world.base.entity.User;
-import com.ztx.world.base.entity.CustomSession;
 import com.ztx.world.base.service.UserService;
 import com.ztx.world.common.config.BaseController;
+import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.config.ResponseData;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;

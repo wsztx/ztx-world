@@ -1,6 +1,8 @@
-package com.ztx.world.base.entity;
+package com.ztx.world.common.config;
 
 import java.io.Serializable;
+
+import com.ztx.world.base.entity.User;
 
 public class CustomSession extends User implements Serializable {
 

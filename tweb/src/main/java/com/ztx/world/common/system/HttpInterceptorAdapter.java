@@ -3,12 +3,10 @@ package com.ztx.world.common.system;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.ztx.world.base.entity.CustomSession;
-import com.ztx.world.common.redis.RedisClient;
+import com.ztx.world.common.config.CustomSession;
 
 public class HttpInterceptorAdapter extends HandlerInterceptorAdapter {
 
