@@ -7,7 +7,7 @@ import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
 import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.service.UserService;
-import com.ztx.world.common.constants.Constants;
+import com.ztx.world.common.constants.BaseConstants;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int updateUser(User user) {
 		UserExample example = new UserExample();
-		example.createCriteria().andStatusEqualTo(Constants.UNDELETE_STATUS)
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 			.andIdEqualTo(user.getId());
 		int id = userMapper.updateByExampleSelective(user, example);
 		return id;

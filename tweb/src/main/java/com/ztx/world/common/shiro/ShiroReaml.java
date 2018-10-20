@@ -29,7 +29,7 @@ import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.service.PermissionService;
 import com.ztx.world.base.service.RoleService;
 import com.ztx.world.common.config.CustomSession;
-import com.ztx.world.common.constants.Constants;
+import com.ztx.world.common.constants.BaseConstants;
 import com.ztx.world.common.utils.BeanUtil;
 
 public class ShiroReaml extends AuthorizingRealm {
@@ -58,14 +58,14 @@ public class ShiroReaml extends AuthorizingRealm {
 		
 		ShiroToken token = (ShiroToken) authcToken;
 		UserExample example = new UserExample();
-		example.createCriteria().andStatusEqualTo(Constants.UNDELETE_STATUS)
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 			.andUserCodeEqualTo(token.getUsername())
 			.andPasswordEqualTo(token.getPswd());
 		List<User> userList = userMapper.selectByExample(example);
 		User user = null;
 		if(CollectionUtils.isEmpty(userList)){
 			throw new AccountException("帐号或密码不正确！");
-		}else if(userList.get(0).getUserStatus() != Constants.UserStatusType.USER_NORMAL){
+		}else if(userList.get(0).getUserStatus() != BaseConstants.UserStatusType.USER_NORMAL){
 			throw new DisabledAccountException("帐号被禁止登录！");
 		}else{
 			user = userList.get(0);
@@ -88,7 +88,7 @@ public class ShiroReaml extends AuthorizingRealm {
         log.info("shiro权限检查,usercode:" + usercode);
         
 		UserExample example = new UserExample();
-		example.createCriteria().andStatusEqualTo(Constants.UNDELETE_STATUS)
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 			.andUserCodeEqualTo(usercode);
 		List<User> userList = userMapper.selectByExample(example);
 		if(!CollectionUtils.isEmpty(userList)){
