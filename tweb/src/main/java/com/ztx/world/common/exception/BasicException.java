@@ -17,45 +17,45 @@ public class BasicException extends RuntimeException {
 	/**
 	 * 错误编码
 	 */
-	private String errorCode;
+	private Integer code;
 	
 	/**
 	 * 错误信息
 	 */
-	private String errorMessage;
-
-	public String getErrorCode() {
-		return errorCode;
-	}
-
-	public void setErrorCode(String errorCode) {
-		this.errorCode = errorCode;
-	}
-
-	public String getErrorMessage() {
-		return errorMessage;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
+	private String msg;
 	
-    public BasicException(){
+    public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public BasicException(){
         super();
     }
 
-	public BasicException(String resultCode) {
-		this(resultCode, ResultCodeUtil.get(resultCode));
+	public BasicException(Integer code) {
+		this(code, ResultCodeUtil.get(code));
 	}
 	
-	public BasicException(String errorCode, String errorMessage) {
-		super(errorMessage);
-		this.errorCode = errorCode;
-		this.errorMessage = errorMessage;
+	public BasicException(Integer code, String message) {
+		super(message);
+		this.code = code;
+		this.msg = message;
 	}
 
     public BasicException(String message, Throwable cause){
-        super(message,cause);
+        super(message, cause);
     }
 
     public BasicException(Throwable cause) {
@@ -64,7 +64,7 @@ public class BasicException extends RuntimeException {
 	
 	@Override
 	public String toString() {
-		return "BasicException [errorCode=" + errorCode + ", errorMessage=" + errorMessage + "]";
+		return "BasicException [errorCode=" + code + ", errorMessage=" + msg + "]";
 	}
 	
 }

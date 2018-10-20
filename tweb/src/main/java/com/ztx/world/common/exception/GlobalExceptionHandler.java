@@ -42,6 +42,7 @@ public class GlobalExceptionHandler {
     	// 如果是ajax请求
     	if("XMLHttpRequest".equals(requestType)){
         	ResponseData responseData = new ResponseData();
+        	responseData.setSuccess(false);
         	responseData.setCode(ResultCode.SYS_OPERATION_FAILED);
         	responseData.setMessage(exception.getMessage());
         	ResponseUtil.writeJson(response, responseData);
@@ -70,7 +71,8 @@ public class GlobalExceptionHandler {
     		BasicException exception) throws Exception{
     	log.error("BasicException occurred.", exception);
     	ResponseData responseData = new ResponseData();
-    	responseData.setCode(exception.getErrorCode());
+    	responseData.setSuccess(false);
+    	responseData.setCode(exception.getCode());
     	responseData.setMessage(exception.getMessage());
         return responseData;
     }

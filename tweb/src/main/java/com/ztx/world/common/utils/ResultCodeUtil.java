@@ -30,20 +30,20 @@ public class ResultCodeUtil {
 			ret = true;
 			
 		} catch (IOException e){
-			log.error("ResultCodeUtil error,初始化异常.", e);
+			log.error("ResultCodeUtil error,文件初始化异常.", e);
 		}
 		return ret;
 	}
 
-	public static String get(String key){
+	public static String get(Integer key){
 		try{
-			if ("".equals(key)) {
+			if(key == null){
 				return "";
 			}
 			if (!isLoad){
 				init();
 			}
-			String ret = errorCodes.getProperty(key);
+			String ret = errorCodes.getProperty(String.valueOf(key));
 
 			if (ret == null){
 				return "";

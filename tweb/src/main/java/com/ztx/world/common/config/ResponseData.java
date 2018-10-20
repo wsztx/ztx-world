@@ -1,14 +1,20 @@
 package com.ztx.world.common.config;
 
-import com.ztx.world.common.constants.ResultCode;
-import com.ztx.world.common.utils.ResultCodeUtil;
+import java.io.Serializable;
 
-public class ResponseData{
+import com.alibaba.fastjson.JSON;
+
+public class ResponseData implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5465994090441876991L;
 
 	/**
 	 * 返回码
 	 */
-	private String code;
+	private Integer code;
 	
 	/**
 	 * 返回信息
@@ -19,14 +25,18 @@ public class ResponseData{
 	 * 返回数据
 	 */
 	private Object data;
-
-	public String getCode() {
+	
+	/**
+	 * 是否成功
+	 */
+	private Boolean success;
+	
+    public Integer getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
-		this.setMessage(ResultCodeUtil.get(code));
 	}
 
 	public String getMessage() {
@@ -45,39 +55,16 @@ public class ResponseData{
 		this.data = data;
 	}
 
-	public void setCodeAndMessage(String code, String message) {
-		this.code = code;
-		this.message = message;
-	}
-	
-	public ResponseData(String resultCode) {
-		this(resultCode, null);
+	public Boolean getSuccess() {
+		return success;
 	}
 
-	public boolean hasData() {
-		return (data != null);
+	public void setSuccess(Boolean success) {
+		this.success = success;
 	}
 
-	public ResponseData() {
-		this(ResultCode.SYS_OPERATION_SUCCESS, null);
-	}
-
-	public ResponseData(String code, Object data) {
-		this.code = code;
-		this.message = ResultCodeUtil.get(this.code);
-		this.data = data;
-	}
-	
-	public ResponseData(String code, String message, Object data) {
-		this.code = code;
-		this.message = message;
-		this.data = data;
-	}
-
-	@Override
-	public String toString() {
-		return "ResponseMessage [code=" + code + ", message=" + message 
-				+ ", data=" + (data == null ? "" : data.toString()) + "]";
-	}
+	public String toJSONString() {
+        return JSON.toJSONString(this);
+    }
 	
 }

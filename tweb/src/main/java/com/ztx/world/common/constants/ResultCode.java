@@ -10,15 +10,20 @@ public class ResultCode {
 	/**
 	 * 操作成功
 	 */
-	public static final String SYS_OPERATION_SUCCESS = "1";
+	public static final Integer SYS_OPERATION_SUCCESS = 1;
 	
 	/**
 	 * 操作失败
 	 */
-	public static final String SYS_OPERATION_FAILED = "-1";
+	public static final Integer SYS_OPERATION_FAILED = -1;
 	
 	/**
 	 * 参数异常
 	 */
-	public static final String LOGIN_ARG_ERROR = "10001";
+	public static final Integer BASE_ARG_ERROR = 10001;
+	
+	/**
+	 * 数据异常
+	 */
+	public static final Integer BASE_DATA_ERROR = 10002;
 }

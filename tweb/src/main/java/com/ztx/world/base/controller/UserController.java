@@ -44,7 +44,7 @@ public class UserController extends BaseController{
     public ResponseData login(HttpServletRequest request, HttpServletResponse response, 
     		CustomSession user){
     	if(user == null || StringUtils.isEmpty(user.getUserCode()) || StringUtils.isEmpty(user.getPassword())){
-    		throw new BasicException(ResultCode.LOGIN_ARG_ERROR);
+    		throw new BasicException(ResultCode.BASE_ARG_ERROR);
     	}
         Subject currentUser = SecurityUtils.getSubject();
         // 当前的用户是否已经被认证,即是否已经登陆
