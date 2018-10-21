@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ztx.world.common.redis.RedisOperator;
+import com.ztx.world.common.system.SpringApplicationContextUtil;
 
 public class BaseTest {
 
@@ -19,10 +20,14 @@ public class BaseTest {
 //	}
 	
 	
+//	public static void main(String[] args) {
+//		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring.xml");
+//		RedisOperator operator = context.getBean("redisOperator", RedisOperator.class);
+//		System.out.println(operator.get("111111"));
+//		//operator.set("111111", "傻逼水水水水");
+//	}
+	
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring.xml");
-		RedisOperator operator = context.getBean("redisOperator", RedisOperator.class);
-		System.out.println(operator.get("111111"));
-		//operator.set("111111", "傻逼水水水水");
+		SpringApplicationContextUtil.getBean("redisOperator");
 	}
 }
