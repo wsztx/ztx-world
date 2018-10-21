@@ -13,7 +13,7 @@
     
     <bean id="sessionManager" class="com.ztx.world.common.shiro.CustomSessionManager">
     	<!-- 设置超时时间 -->
-        <property name="globalSessionTimeout" value="1800000"></property>
+        <property name="globalSessionTimeout" value="${shiro.globalSessionTimeout}"></property>
         <property name="deleteInvalidSessions" value="true"></property>
         <property name="sessionDAO" ref="sessionDAO"></property>
         <property name="sessionIdCookie" ref="simpleCookie" />

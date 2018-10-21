@@ -7,30 +7,19 @@
    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<!-- 配置db文件 -->
-	<context:property-placeholder location="classpath:spring/db.properties" ignore-unresolvable="true" />
-
 	<!-- 配置数据源 ，使用的alibba的数据库 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
-		<!-- 基本属性 url、user、password -->
-		<property name="driverClassName" value="${db_driverClassName}" />
-		<property name="url" value="${db_url}" />
-		<property name="username" value="${db_username}" />
-		<property name="password" value="${db_password}" />
-
-		<!-- 配置初始化大小、最小、最大 -->
-		<property name="initialSize" value="10" />
-		<property name="minIdle" value="10" />
-		<property name="maxActive" value="50" />
-
-		<!-- 配置获取连接等待超时的时间 -->
-		<property name="maxWait" value="60000" />
-		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-		<property name="timeBetweenEvictionRunsMillis" value="60000" />
-
-		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="driverClassName" value="${db.driverClassName}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="initialSize" value="${db.initialSize}" />
+		<property name="minIdle" value="${db.minIdle}" />
+		<property name="maxActive" value="${db.maxActive}" />
+		<property name="maxWait" value="${db.maxWait}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${db.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${db.minEvictableIdleTimeMillis}" />
 
 		<property name="validationQuery" value="SELECT 'x'" />
 		<property name="testWhileIdle" value="true" />
