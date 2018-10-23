@@ -7,7 +7,7 @@
     
     <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"></bean>
     
-    <bean id="sessionDAO" class="com.ztx.world.common.shiro.CustomSessionDAO">
+    <bean id="sessionDAO" class="com.ztx.world.common.shiro.RedisSessionDAO">
         <property name="sessionIdGenerator" ref="sessionIdGenerator"></property>
     </bean>
     

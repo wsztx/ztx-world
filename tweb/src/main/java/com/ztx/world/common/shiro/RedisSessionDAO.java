@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.ztx.world.common.redis.RedisManager;
 
 @Component
-public class CustomSessionDAO extends AbstractSessionDAO {
+public class RedisSessionDAO extends AbstractSessionDAO {
 
     @Autowired
     private RedisManager redisManager;
