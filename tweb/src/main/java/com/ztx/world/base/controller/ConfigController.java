@@ -21,11 +21,33 @@ public class ConfigController extends BaseController {
 
 	@RequiresPermissions(value = {"base:config:tolist"})
     @RequestMapping(value="/tolist", method=RequestMethod.GET)
-    public String test1(HttpServletRequest request, HttpServletResponse response, 
+    public String toList(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
-    	model.addAttribute("listData", "listData123");
-    	model.addAttribute("data", "data123");
     	
     	return "base/config/list";
+    }
+	
+	@RequiresPermissions(value = {"base:config:toadd"})
+    @RequestMapping(value="/toadd", method=RequestMethod.GET)
+    public String toAdd(HttpServletRequest request, HttpServletResponse response, 
+    		Model model) throws Exception{
+    	
+    	return "base/config/add";
+    }
+	
+	@RequiresPermissions(value = {"base:config:toedit"})
+    @RequestMapping(value="/toedit", method=RequestMethod.GET)
+    public String toEdit(HttpServletRequest request, HttpServletResponse response, 
+    		Model model) throws Exception{
+    	
+    	return "base/config/edit";
+    }
+	
+	@RequiresPermissions(value = {"base:config:toview"})
+    @RequestMapping(value="/toview", method=RequestMethod.GET)
+    public String toView(HttpServletRequest request, HttpServletResponse response, 
+    		Model model) throws Exception{
+    	
+    	return "base/config/view";
     }
 }
