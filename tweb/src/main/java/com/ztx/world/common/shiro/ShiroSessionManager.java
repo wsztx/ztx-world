@@ -31,6 +31,7 @@ public class ShiroSessionManager extends DefaultWebSessionManager {
                 return (Session) sessionObj;
             }
         }
+        // 此处调用会造成日志连续两次打印,Found 'custom.session' cookie value
         Session session = super.retrieveSession(sessionKey);
         if (request != null && null != sessionId) {
             request.setAttribute(sessionId.toString(), session);
