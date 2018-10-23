@@ -7,13 +7,18 @@ import java.util.List;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ztx.world.common.redis.RedisManager;
+import com.ztx.world.common.utils.SerializeUtil;
 
 @Component
 public class RedisSessionDAO extends AbstractSessionDAO {
+	
+	private static Logger log = LoggerFactory.getLogger(SerializeUtil.class);
 
     @Autowired
     private RedisManager redisManager;
@@ -21,7 +26,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
     @Override
     public void delete(Session session) {
         if(session == null || session.getId() == null){
-            System.out.println("Session is null");
+        	log.info("Session is null.");
             return;
         }
         redisManager.hdelete(session.getId().toString());
@@ -36,7 +41,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
     @Override
     public void update(Session session) throws UnknownSessionException {
         if(session == null || session.getId() == null){
-            System.out.println("Session is null");
+        	log.info("Session is null.");
             return;
         }
         Serializable sessionId = session.getId();

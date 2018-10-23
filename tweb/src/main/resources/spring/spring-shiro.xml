@@ -2,8 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    
-    <bean id="redisManager" class="com.ztx.world.common.redis.RedisManager"></bean>
+
+    <bean id="redisCacheManager" class="com.ztx.world.common.redis.RedisCacheManager"></bean>
     
     <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"></bean>
     
@@ -16,6 +16,7 @@
         <property name="globalSessionTimeout" value="${shiro.globalSessionTimeout}"></property>
         <property name="deleteInvalidSessions" value="true"></property>
         <property name="sessionDAO" ref="sessionDAO"></property>
+         <property name="sessionIdCookieEnabled" value="true"/>
         <property name="sessionIdCookie" ref="simpleCookie" />
     </bean>
     
@@ -30,6 +31,7 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="sessionManager" ref="sessionManager"></property>
         <property name="realm" ref="shiroReaml"></property>
+        <property name="cacheManager" ref="redisCacheManager"></property>
     </bean>
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
