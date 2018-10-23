@@ -1,5 +1,6 @@
 package com.ztx.world.base.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,8 +8,13 @@ import java.util.Date;
  * @author zhoutianxiang
  *
  */
-public class Organization {
+public class Organization implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4210337110725594205L;
+
+	/**
      * 主键
      */
     private Long id;

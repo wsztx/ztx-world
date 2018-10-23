@@ -11,5 +11,5 @@ public interface PermissionService {
 	 * @param id
 	 * @return
 	 */
-	List<Permission> findPermissionByRoleId(Long id);
+	List<Permission> findPermissionsByRoleId(Long id);
 }

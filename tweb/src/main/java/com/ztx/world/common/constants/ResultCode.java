@@ -26,4 +26,9 @@ public class ResultCode {
 	 * 数据异常
 	 */
 	public static final Integer BASE_DATA_ERROR = 10002;
+	
+	/**
+	 * 权限异常
+	 */
+	public static final Integer BASE_AUTH_ERROR = 10003;
 }

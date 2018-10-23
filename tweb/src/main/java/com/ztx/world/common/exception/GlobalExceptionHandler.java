@@ -3,6 +3,7 @@ package com.ztx.world.common.exception;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -77,4 +78,35 @@ public class GlobalExceptionHandler {
         return responseData;
     }
 
+    /**
+     * 匹配抛出shiro权限异常
+     * @param request
+     * @param response
+     * @param exception
+     * @return
+     * @throws Exception
+     */
+    @ExceptionHandler(value = UnauthorizedException.class)
+    @Order(value = 2)
+    @ResponseBody
+    public ModelAndView unauthorizedExceptionHandler(HttpServletRequest request, HttpServletResponse response, 
+    		UnauthorizedException exception) throws Exception{
+    	log.error("UnauthorizedException occurred.", exception);
+    	String requestType = request.getHeader("X-Requested-With");
+    	// 如果是ajax请求
+    	if("XMLHttpRequest".equals(requestType)){
+        	BaseResponse responseData = new BaseResponse();
+        	responseData.setSuccess(false);
+        	responseData.setCode(ResultCode.BASE_AUTH_ERROR);
+        	responseData.setMessage(exception.getMessage());
+        	ResponseUtil.writeJson(response, responseData);
+    		return null;
+    	}else{
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("code", ResultCode.BASE_AUTH_ERROR);                   
+            modelAndView.addObject("message", exception.getMessage());   
+            modelAndView.setViewName(DEFAUL_ERROR_VIEW);
+            return modelAndView;
+    	}
+    }
 }

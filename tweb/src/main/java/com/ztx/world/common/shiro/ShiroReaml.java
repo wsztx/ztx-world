@@ -98,7 +98,7 @@ public class ShiroReaml extends AuthorizingRealm {
         log.info("shiro权限检查,usercode:" + customSession.getUser().getUserCode());
         
 		User user = customSession.getUser();
-        List<Role> roleList = roleService.findRoleByUserId(user.getId());
+        List<Role> roleList = roleService.findRolesByUserId(user.getId());
         if(!CollectionUtils.isEmpty(roleList)){
         	for(Role role : roleList){
         		if(!StringUtils.isEmpty(role.getRoleCode())){
@@ -107,7 +107,7 @@ public class ShiroReaml extends AuthorizingRealm {
         		}
         		
                 List<Permission> permissionList = permissionService
-                		.findPermissionByRoleId(role.getId());
+                		.findPermissionsByRoleId(role.getId());
                 if(!CollectionUtils.isEmpty(permissionList)){
                 	for (Permission permission : permissionList){
                         if (!StringUtils.isEmpty(permission.getPermissionValue())) {

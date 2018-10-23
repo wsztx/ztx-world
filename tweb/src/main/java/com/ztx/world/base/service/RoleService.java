@@ -11,5 +11,5 @@ public interface RoleService {
 	 * @param id
 	 * @return
 	 */
-	List<Role> findRoleByUserId(Long id);
+	List<Role> findRolesByUserId(Long id);
 }

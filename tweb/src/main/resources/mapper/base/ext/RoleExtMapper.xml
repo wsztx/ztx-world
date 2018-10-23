@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ztx.world.base.mapper.ext.RoleExtMapper">
+
+	<select id="findRolesByUserId" resultMap="com.ztx.world.base.mapper.RoleMapper.BaseResultMap">
+		select role.* from base_role role
+		inner join base_user_role userRole on role.id = userRole.role_id and userRole.user_id = #{id}
+		where role.status = 1
+	</select>
+	
+</mapper>
