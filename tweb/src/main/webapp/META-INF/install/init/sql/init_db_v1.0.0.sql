@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local_mysql
+Source Server         : mysql_local
 Source Server Version : 50630
 Source Host           : localhost:3306
 Source Database       : tworld
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-10-20 22:37:39
+Date: 2018-10-23 14:51:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,27 +36,6 @@ CREATE TABLE `base_config` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for base_constant
--- ----------------------------
-DROP TABLE IF EXISTS `base_constant`;
-CREATE TABLE `base_constant` (
-  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `status` int(2) NOT NULL COMMENT '逻辑删除位，0删除，1未删除',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `update_time` datetime NOT NULL COMMENT '更新时间',
-  `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人id',
-  `constant_type` varchar(64) DEFAULT NULL COMMENT '常量类型',
-  `constant_key` varchar(64) DEFAULT NULL COMMENT '常量键',
-  `constant_value` varchar(64) DEFAULT NULL COMMENT '常量值',
-  `description` varchar(256) DEFAULT NULL COMMENT '描述',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of base_constant
--- ----------------------------
-
--- ----------------------------
 -- Table structure for base_department
 -- ----------------------------
 DROP TABLE IF EXISTS `base_department`;
@@ -74,6 +53,27 @@ CREATE TABLE `base_department` (
 
 -- ----------------------------
 -- Records of base_department
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_dictionary
+-- ----------------------------
+DROP TABLE IF EXISTS `base_dictionary`;
+CREATE TABLE `base_dictionary` (
+  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `status` int(2) NOT NULL COMMENT '逻辑删除位，0删除，1未删除',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人id',
+  `dictionary_type` varchar(64) DEFAULT NULL COMMENT '字典类型',
+  `dictionary_key` varchar(64) DEFAULT NULL COMMENT '字典键',
+  `dictionary_value` varchar(64) DEFAULT NULL COMMENT '字典值',
+  `description` varchar(256) DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of base_dictionary
 -- ----------------------------
 
 -- ----------------------------

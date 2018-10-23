@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ConstantExample {
+public class DictionaryExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ConstantExample() {
+    public DictionaryExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -69,7 +69,7 @@ public class ConstantExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-14
+     * @date 2018-10-23
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -412,213 +412,213 @@ public class ConstantExample {
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIsNull() {
-            addCriterion("constant_type is null");
+        public Criteria andDictionaryTypeIsNull() {
+            addCriterion("dictionary_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIsNotNull() {
-            addCriterion("constant_type is not null");
+        public Criteria andDictionaryTypeIsNotNull() {
+            addCriterion("dictionary_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeEqualTo(String value) {
-            addCriterion("constant_type =", value, "constantType");
+        public Criteria andDictionaryTypeEqualTo(String value) {
+            addCriterion("dictionary_type =", value, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNotEqualTo(String value) {
-            addCriterion("constant_type <>", value, "constantType");
+        public Criteria andDictionaryTypeNotEqualTo(String value) {
+            addCriterion("dictionary_type <>", value, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeGreaterThan(String value) {
-            addCriterion("constant_type >", value, "constantType");
+        public Criteria andDictionaryTypeGreaterThan(String value) {
+            addCriterion("dictionary_type >", value, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("constant_type >=", value, "constantType");
+        public Criteria andDictionaryTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("dictionary_type >=", value, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeLessThan(String value) {
-            addCriterion("constant_type <", value, "constantType");
+        public Criteria andDictionaryTypeLessThan(String value) {
+            addCriterion("dictionary_type <", value, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeLessThanOrEqualTo(String value) {
-            addCriterion("constant_type <=", value, "constantType");
+        public Criteria andDictionaryTypeLessThanOrEqualTo(String value) {
+            addCriterion("dictionary_type <=", value, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeLike(String value) {
-            addCriterion("constant_type like", value, "constantType");
+        public Criteria andDictionaryTypeLike(String value) {
+            addCriterion("dictionary_type like", value, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNotLike(String value) {
-            addCriterion("constant_type not like", value, "constantType");
+        public Criteria andDictionaryTypeNotLike(String value) {
+            addCriterion("dictionary_type not like", value, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIn(List<String> values) {
-            addCriterion("constant_type in", values, "constantType");
+        public Criteria andDictionaryTypeIn(List<String> values) {
+            addCriterion("dictionary_type in", values, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNotIn(List<String> values) {
-            addCriterion("constant_type not in", values, "constantType");
+        public Criteria andDictionaryTypeNotIn(List<String> values) {
+            addCriterion("dictionary_type not in", values, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeBetween(String value1, String value2) {
-            addCriterion("constant_type between", value1, value2, "constantType");
+        public Criteria andDictionaryTypeBetween(String value1, String value2) {
+            addCriterion("dictionary_type between", value1, value2, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNotBetween(String value1, String value2) {
-            addCriterion("constant_type not between", value1, value2, "constantType");
+        public Criteria andDictionaryTypeNotBetween(String value1, String value2) {
+            addCriterion("dictionary_type not between", value1, value2, "dictionaryType");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyIsNull() {
-            addCriterion("constant_key is null");
+        public Criteria andDictionaryKeyIsNull() {
+            addCriterion("dictionary_key is null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyIsNotNull() {
-            addCriterion("constant_key is not null");
+        public Criteria andDictionaryKeyIsNotNull() {
+            addCriterion("dictionary_key is not null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyEqualTo(String value) {
-            addCriterion("constant_key =", value, "constantKey");
+        public Criteria andDictionaryKeyEqualTo(String value) {
+            addCriterion("dictionary_key =", value, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyNotEqualTo(String value) {
-            addCriterion("constant_key <>", value, "constantKey");
+        public Criteria andDictionaryKeyNotEqualTo(String value) {
+            addCriterion("dictionary_key <>", value, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyGreaterThan(String value) {
-            addCriterion("constant_key >", value, "constantKey");
+        public Criteria andDictionaryKeyGreaterThan(String value) {
+            addCriterion("dictionary_key >", value, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("constant_key >=", value, "constantKey");
+        public Criteria andDictionaryKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("dictionary_key >=", value, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyLessThan(String value) {
-            addCriterion("constant_key <", value, "constantKey");
+        public Criteria andDictionaryKeyLessThan(String value) {
+            addCriterion("dictionary_key <", value, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyLessThanOrEqualTo(String value) {
-            addCriterion("constant_key <=", value, "constantKey");
+        public Criteria andDictionaryKeyLessThanOrEqualTo(String value) {
+            addCriterion("dictionary_key <=", value, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyLike(String value) {
-            addCriterion("constant_key like", value, "constantKey");
+        public Criteria andDictionaryKeyLike(String value) {
+            addCriterion("dictionary_key like", value, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyNotLike(String value) {
-            addCriterion("constant_key not like", value, "constantKey");
+        public Criteria andDictionaryKeyNotLike(String value) {
+            addCriterion("dictionary_key not like", value, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyIn(List<String> values) {
-            addCriterion("constant_key in", values, "constantKey");
+        public Criteria andDictionaryKeyIn(List<String> values) {
+            addCriterion("dictionary_key in", values, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyNotIn(List<String> values) {
-            addCriterion("constant_key not in", values, "constantKey");
+        public Criteria andDictionaryKeyNotIn(List<String> values) {
+            addCriterion("dictionary_key not in", values, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyBetween(String value1, String value2) {
-            addCriterion("constant_key between", value1, value2, "constantKey");
+        public Criteria andDictionaryKeyBetween(String value1, String value2) {
+            addCriterion("dictionary_key between", value1, value2, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantKeyNotBetween(String value1, String value2) {
-            addCriterion("constant_key not between", value1, value2, "constantKey");
+        public Criteria andDictionaryKeyNotBetween(String value1, String value2) {
+            addCriterion("dictionary_key not between", value1, value2, "dictionaryKey");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueIsNull() {
-            addCriterion("constant_value is null");
+        public Criteria andDictionaryValueIsNull() {
+            addCriterion("dictionary_value is null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueIsNotNull() {
-            addCriterion("constant_value is not null");
+        public Criteria andDictionaryValueIsNotNull() {
+            addCriterion("dictionary_value is not null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueEqualTo(String value) {
-            addCriterion("constant_value =", value, "constantValue");
+        public Criteria andDictionaryValueEqualTo(String value) {
+            addCriterion("dictionary_value =", value, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueNotEqualTo(String value) {
-            addCriterion("constant_value <>", value, "constantValue");
+        public Criteria andDictionaryValueNotEqualTo(String value) {
+            addCriterion("dictionary_value <>", value, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueGreaterThan(String value) {
-            addCriterion("constant_value >", value, "constantValue");
+        public Criteria andDictionaryValueGreaterThan(String value) {
+            addCriterion("dictionary_value >", value, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueGreaterThanOrEqualTo(String value) {
-            addCriterion("constant_value >=", value, "constantValue");
+        public Criteria andDictionaryValueGreaterThanOrEqualTo(String value) {
+            addCriterion("dictionary_value >=", value, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueLessThan(String value) {
-            addCriterion("constant_value <", value, "constantValue");
+        public Criteria andDictionaryValueLessThan(String value) {
+            addCriterion("dictionary_value <", value, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueLessThanOrEqualTo(String value) {
-            addCriterion("constant_value <=", value, "constantValue");
+        public Criteria andDictionaryValueLessThanOrEqualTo(String value) {
+            addCriterion("dictionary_value <=", value, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueLike(String value) {
-            addCriterion("constant_value like", value, "constantValue");
+        public Criteria andDictionaryValueLike(String value) {
+            addCriterion("dictionary_value like", value, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueNotLike(String value) {
-            addCriterion("constant_value not like", value, "constantValue");
+        public Criteria andDictionaryValueNotLike(String value) {
+            addCriterion("dictionary_value not like", value, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueIn(List<String> values) {
-            addCriterion("constant_value in", values, "constantValue");
+        public Criteria andDictionaryValueIn(List<String> values) {
+            addCriterion("dictionary_value in", values, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueNotIn(List<String> values) {
-            addCriterion("constant_value not in", values, "constantValue");
+        public Criteria andDictionaryValueNotIn(List<String> values) {
+            addCriterion("dictionary_value not in", values, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueBetween(String value1, String value2) {
-            addCriterion("constant_value between", value1, value2, "constantValue");
+        public Criteria andDictionaryValueBetween(String value1, String value2) {
+            addCriterion("dictionary_value between", value1, value2, "dictionaryValue");
             return (Criteria) this;
         }
 
-        public Criteria andConstantValueNotBetween(String value1, String value2) {
-            addCriterion("constant_value not between", value1, value2, "constantValue");
+        public Criteria andDictionaryValueNotBetween(String value1, String value2) {
+            addCriterion("dictionary_value not between", value1, value2, "dictionaryValue");
             return (Criteria) this;
         }
 
@@ -705,7 +705,7 @@ public class ConstantExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-14
+     * @date 2018-10-23
      */
     public static class Criterion {
         private String condition;

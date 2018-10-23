@@ -3,11 +3,13 @@ package com.ztx.world.base.entity;
 import java.util.Date;
 
 /**
- * 表base_constant
- * @author ztx
- *
+ * 
+ * 
+ * @author wcyong
+ * 
+ * @date 2018-10-23
  */
-public class Constant {
+public class Dictionary {
     /**
      * 主键
      */
@@ -34,19 +36,19 @@ public class Constant {
     private Long createUserId;
 
     /**
-     * 常量类型
+     * 字典类型
      */
-    private String constantType;
+    private String dictionaryType;
 
     /**
-     * 常量键
+     * 字典键
      */
-    private String constantKey;
+    private String dictionaryKey;
 
     /**
-     * 常量值
+     * 字典值
      */
-    private String constantValue;
+    private String dictionaryValue;
 
     /**
      * 描述
@@ -93,28 +95,28 @@ public class Constant {
         this.createUserId = createUserId;
     }
 
-    public String getConstantType() {
-        return constantType;
+    public String getDictionaryType() {
+        return dictionaryType;
     }
 
-    public void setConstantType(String constantType) {
-        this.constantType = constantType == null ? null : constantType.trim();
+    public void setDictionaryType(String dictionaryType) {
+        this.dictionaryType = dictionaryType == null ? null : dictionaryType.trim();
     }
 
-    public String getConstantKey() {
-        return constantKey;
+    public String getDictionaryKey() {
+        return dictionaryKey;
     }
 
-    public void setConstantKey(String constantKey) {
-        this.constantKey = constantKey == null ? null : constantKey.trim();
+    public void setDictionaryKey(String dictionaryKey) {
+        this.dictionaryKey = dictionaryKey == null ? null : dictionaryKey.trim();
     }
 
-    public String getConstantValue() {
-        return constantValue;
+    public String getDictionaryValue() {
+        return dictionaryValue;
     }
 
-    public void setConstantValue(String constantValue) {
-        this.constantValue = constantValue == null ? null : constantValue.trim();
+    public void setDictionaryValue(String dictionaryValue) {
+        this.dictionaryValue = dictionaryValue == null ? null : dictionaryValue.trim();
     }
 
     public String getDescription() {

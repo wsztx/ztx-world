@@ -63,10 +63,4 @@ public class UserController extends BaseController{
         currentUser.logout();
         return success("登出成功");
     }
-
-    @RequestMapping(value = "update", method = RequestMethod.GET)
-    public String update(HttpServletRequest request, User user){
-    	userService.updateUser(user);
-        return "base/user/edit";
-    }
 }
