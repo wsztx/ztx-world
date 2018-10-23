@@ -2,7 +2,7 @@ package com.ztx.world.base.entity;
 
 /**
  * 表base_role_permission
- * @author ztx
+ * @author zhoutianxiang
  *
  */
 public class RolePermission {
@@ -10,11 +10,6 @@ public class RolePermission {
      * 主键
      */
     private Long id;
-
-    /**
-     * 逻辑删除位，0删除，1未删除
-     */
-    private Integer status;
 
     /**
      * 角色id
@@ -32,14 +27,6 @@ public class RolePermission {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public Long getRoleId() {

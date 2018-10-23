@@ -69,7 +69,7 @@ public class RoleExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-14
+     * @date 2018-10-23
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -635,7 +635,7 @@ public class RoleExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-14
+     * @date 2018-10-23
      */
     public static class Criterion {
         private String condition;

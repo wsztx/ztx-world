@@ -2,7 +2,7 @@ package com.ztx.world.base.entity;
 
 /**
  * 表base_user_role
- * @author ztx
+ * @author zhoutianxiang
  *
  */
 public class UserRole {
@@ -10,11 +10,6 @@ public class UserRole {
      * 主键
      */
     private Long id;
-
-    /**
-     * 逻辑删除位，0删除，1未删除
-     */
-    private Integer status;
 
     /**
      * 用户ID
@@ -32,14 +27,6 @@ public class UserRole {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public Long getUserId() {

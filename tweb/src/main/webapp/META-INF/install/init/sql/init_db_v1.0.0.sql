@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-10-23 14:51:42
+Date: 2018-10-23 17:26:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,8 +25,10 @@ CREATE TABLE `base_config` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `config_code` varchar(64) DEFAULT NULL COMMENT '配置编码',
+  `config_type` varchar(64) DEFAULT NULL COMMENT '配置类型',
+  `config_key` varchar(64) DEFAULT NULL COMMENT '配置键',
   `config_name` varchar(64) DEFAULT NULL COMMENT '配置名称',
+  `config_value` varchar(64) DEFAULT NULL COMMENT '配置值',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -49,11 +51,12 @@ CREATE TABLE `base_department` (
   `dept_name` varchar(64) DEFAULT NULL COMMENT '部门名称',
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_department
 -- ----------------------------
+INSERT INTO `base_department` VALUES ('1', '1', '2018-10-23 17:16:29', '2018-10-23 17:16:33', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for base_dictionary
@@ -67,6 +70,7 @@ CREATE TABLE `base_dictionary` (
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人id',
   `dictionary_type` varchar(64) DEFAULT NULL COMMENT '字典类型',
   `dictionary_key` varchar(64) DEFAULT NULL COMMENT '字典键',
+  `dictionary_name` varchar(64) DEFAULT NULL COMMENT '字典名称',
   `dictionary_value` varchar(64) DEFAULT NULL COMMENT '字典值',
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
@@ -92,11 +96,12 @@ CREATE TABLE `base_organization` (
   `org_path` varchar(64) DEFAULT NULL COMMENT '机构路径',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_CODE` (`org_code`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_organization
 -- ----------------------------
+INSERT INTO `base_organization` VALUES ('1', '1', '2018-10-23 17:16:01', '2018-10-23 17:16:04', '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for base_permission
@@ -135,11 +140,12 @@ CREATE TABLE `base_role` (
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_CODE` (`role_code`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_role
 -- ----------------------------
+INSERT INTO `base_role` VALUES ('1', '1', '2018-10-23 17:14:46', '2018-10-23 17:14:48', '1', 'admin', '系统管理员', null);
 
 -- ----------------------------
 -- Table structure for base_role_permission
@@ -147,7 +153,6 @@ CREATE TABLE `base_role` (
 DROP TABLE IF EXISTS `base_role_permission`;
 CREATE TABLE `base_role_permission` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `status` int(2) NOT NULL COMMENT '逻辑删除位，0删除，1未删除',
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(32) DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`)
@@ -182,7 +187,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', null, 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', null, null, '2018-10-20 22:19:00', '0');
+INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-10-20 22:19:00', '0');
 
 -- ----------------------------
 -- Table structure for base_user_role
@@ -190,12 +195,12 @@ INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:
 DROP TABLE IF EXISTS `base_user_role`;
 CREATE TABLE `base_user_role` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `status` int(2) NOT NULL COMMENT '逻辑删除位，0删除，1未删除',
   `user_id` bigint(32) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_user_role
 -- ----------------------------
+INSERT INTO `base_user_role` VALUES ('1', '1', '1');

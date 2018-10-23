@@ -3,11 +3,9 @@ package com.ztx.world.base.entity;
 import java.util.Date;
 
 /**
- * 
- * 
- * @author wcyong
- * 
- * @date 2018-10-23
+ * 表base_dictionary
+ * @author zhoutianxiang
+ *
  */
 public class Dictionary {
     /**
@@ -44,6 +42,11 @@ public class Dictionary {
      * 字典键
      */
     private String dictionaryKey;
+
+    /**
+     * 字典名称
+     */
+    private String dictionaryName;
 
     /**
      * 字典值
@@ -109,6 +112,14 @@ public class Dictionary {
 
     public void setDictionaryKey(String dictionaryKey) {
         this.dictionaryKey = dictionaryKey == null ? null : dictionaryKey.trim();
+    }
+
+    public String getDictionaryName() {
+        return dictionaryName;
+    }
+
+    public void setDictionaryName(String dictionaryName) {
+        this.dictionaryName = dictionaryName == null ? null : dictionaryName.trim();
     }
 
     public String getDictionaryValue() {

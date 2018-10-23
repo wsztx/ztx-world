@@ -1,20 +1,14 @@
 package com.ztx.world.base.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 表base_department
- * @author ztx
+ * @author zhoutianxiang
  *
  */
-public class Department implements Serializable {
+public class Department {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3655838547381367278L;
-
-	/**
      * 主键
      */
     private Long id;

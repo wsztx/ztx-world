@@ -4,7 +4,6 @@
 
     <resultMap id="BaseResultMap" type="com.ztx.world.base.entity.RolePermission" >
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="status" property="status" jdbcType="INTEGER" />
         <result column="role_id" property="roleId" jdbcType="BIGINT" />
         <result column="permission_id" property="permissionId" jdbcType="BIGINT" />
     </resultMap>
@@ -70,7 +69,7 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, status, role_id, permission_id
+        id, role_id, permission_id
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.RolePermissionExample" >
@@ -108,10 +107,10 @@
     </delete>
 
     <insert id="insert" parameterType="com.ztx.world.base.entity.RolePermission" >
-        insert into base_role_permission (id, status, role_id, 
-            permission_id)
-        values (#{id,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{roleId,jdbcType=BIGINT}, 
-            #{permissionId,jdbcType=BIGINT})
+        insert into base_role_permission (id, role_id, permission_id
+            )
+        values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{permissionId,jdbcType=BIGINT}
+            )
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.RolePermission" >
@@ -119,9 +118,6 @@
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
                 id,
-            </if>
-            <if test="status != null" >
-                status,
             </if>
             <if test="roleId != null" >
                 role_id,
@@ -133,9 +129,6 @@
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
                 #{id,jdbcType=BIGINT},
-            </if>
-            <if test="status != null" >
-                #{status,jdbcType=INTEGER},
             </if>
             <if test="roleId != null" >
                 #{roleId,jdbcType=BIGINT},
@@ -159,9 +152,6 @@
             <if test="record.id != null" >
                 id = #{record.id,jdbcType=BIGINT},
             </if>
-            <if test="record.status != null" >
-                status = #{record.status,jdbcType=INTEGER},
-            </if>
             <if test="record.roleId != null" >
                 role_id = #{record.roleId,jdbcType=BIGINT},
             </if>
@@ -177,7 +167,6 @@
     <update id="updateByExample" parameterType="map" >
         update base_role_permission
         set id = #{record.id,jdbcType=BIGINT},
-            status = #{record.status,jdbcType=INTEGER},
             role_id = #{record.roleId,jdbcType=BIGINT},
             permission_id = #{record.permissionId,jdbcType=BIGINT}
         <if test="_parameter != null" >
@@ -188,9 +177,6 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.ztx.world.base.entity.RolePermission" >
         update base_role_permission
         <set >
-            <if test="status != null" >
-                status = #{status,jdbcType=INTEGER},
-            </if>
             <if test="roleId != null" >
                 role_id = #{roleId,jdbcType=BIGINT},
             </if>
@@ -203,8 +189,7 @@
 
     <update id="updateByPrimaryKey" parameterType="com.ztx.world.base.entity.RolePermission" >
         update base_role_permission
-        set status = #{status,jdbcType=INTEGER},
-            role_id = #{roleId,jdbcType=BIGINT},
+        set role_id = #{roleId,jdbcType=BIGINT},
             permission_id = #{permissionId,jdbcType=BIGINT}
         where id = #{id,jdbcType=BIGINT}
     </update>

@@ -71,9 +71,9 @@ public class ShiroReaml extends AuthorizingRealm {
 		List<User> userList = userMapper.selectByExample(example);
 		User user = null;
 		if(CollectionUtils.isEmpty(userList)){
-			throw new AccountException("帐号或密码不正确！");
+			throw new AccountException("帐号或密码不正确!");
 		}else if(userList.get(0).getUserStatus() != BaseConstants.UserStatusType.USER_NORMAL){
-			throw new DisabledAccountException("帐号被禁止登录！");
+			throw new DisabledAccountException("帐号被禁止登录!");
 		}else{
 			user = userList.get(0);
 			user.setLastLoginTime(new Date());
@@ -89,7 +89,7 @@ public class ShiroReaml extends AuthorizingRealm {
 	}
 
 	/**
-	 * 授权
+	 * 用户授权
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

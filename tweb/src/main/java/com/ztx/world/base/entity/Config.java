@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * 表base_config
- * @author ztx
+ * @author zhoutianxiang
  *
  */
 public class Config {
@@ -34,14 +34,24 @@ public class Config {
     private Long createUserId;
 
     /**
-     * 配置编码
+     * 配置类型
      */
-    private String configCode;
+    private String configType;
+
+    /**
+     * 配置键
+     */
+    private String configKey;
 
     /**
      * 配置名称
      */
     private String configName;
+
+    /**
+     * 配置值
+     */
+    private String configValue;
 
     /**
      * 描述
@@ -88,12 +98,20 @@ public class Config {
         this.createUserId = createUserId;
     }
 
-    public String getConfigCode() {
-        return configCode;
+    public String getConfigType() {
+        return configType;
     }
 
-    public void setConfigCode(String configCode) {
-        this.configCode = configCode == null ? null : configCode.trim();
+    public void setConfigType(String configType) {
+        this.configType = configType == null ? null : configType.trim();
+    }
+
+    public String getConfigKey() {
+        return configKey;
+    }
+
+    public void setConfigKey(String configKey) {
+        this.configKey = configKey == null ? null : configKey.trim();
     }
 
     public String getConfigName() {
@@ -102,6 +120,14 @@ public class Config {
 
     public void setConfigName(String configName) {
         this.configName = configName == null ? null : configName.trim();
+    }
+
+    public String getConfigValue() {
+        return configValue;
+    }
+
+    public void setConfigValue(String configValue) {
+        this.configValue = configValue == null ? null : configValue.trim();
     }
 
     public String getDescription() {

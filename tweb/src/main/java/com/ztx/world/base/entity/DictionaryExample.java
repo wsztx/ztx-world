@@ -552,6 +552,76 @@ public class DictionaryExample {
             return (Criteria) this;
         }
 
+        public Criteria andDictionaryNameIsNull() {
+            addCriterion("dictionary_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameIsNotNull() {
+            addCriterion("dictionary_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameEqualTo(String value) {
+            addCriterion("dictionary_name =", value, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameNotEqualTo(String value) {
+            addCriterion("dictionary_name <>", value, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameGreaterThan(String value) {
+            addCriterion("dictionary_name >", value, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameGreaterThanOrEqualTo(String value) {
+            addCriterion("dictionary_name >=", value, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameLessThan(String value) {
+            addCriterion("dictionary_name <", value, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameLessThanOrEqualTo(String value) {
+            addCriterion("dictionary_name <=", value, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameLike(String value) {
+            addCriterion("dictionary_name like", value, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameNotLike(String value) {
+            addCriterion("dictionary_name not like", value, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameIn(List<String> values) {
+            addCriterion("dictionary_name in", values, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameNotIn(List<String> values) {
+            addCriterion("dictionary_name not in", values, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameBetween(String value1, String value2) {
+            addCriterion("dictionary_name between", value1, value2, "dictionaryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDictionaryNameNotBetween(String value1, String value2) {
+            addCriterion("dictionary_name not between", value1, value2, "dictionaryName");
+            return (Criteria) this;
+        }
+
         public Criteria andDictionaryValueIsNull() {
             addCriterion("dictionary_value is null");
             return (Criteria) this;

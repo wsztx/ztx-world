@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * 表base_role
- * @author ztx
+ * @author zhoutianxiang
  *
  */
 public class Role {

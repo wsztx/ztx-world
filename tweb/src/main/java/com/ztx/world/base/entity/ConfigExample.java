@@ -69,7 +69,7 @@ public class ConfigExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-14
+     * @date 2018-10-23
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -412,73 +412,143 @@ public class ConfigExample {
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeIsNull() {
-            addCriterion("config_code is null");
+        public Criteria andConfigTypeIsNull() {
+            addCriterion("config_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeIsNotNull() {
-            addCriterion("config_code is not null");
+        public Criteria andConfigTypeIsNotNull() {
+            addCriterion("config_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeEqualTo(String value) {
-            addCriterion("config_code =", value, "configCode");
+        public Criteria andConfigTypeEqualTo(String value) {
+            addCriterion("config_type =", value, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeNotEqualTo(String value) {
-            addCriterion("config_code <>", value, "configCode");
+        public Criteria andConfigTypeNotEqualTo(String value) {
+            addCriterion("config_type <>", value, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeGreaterThan(String value) {
-            addCriterion("config_code >", value, "configCode");
+        public Criteria andConfigTypeGreaterThan(String value) {
+            addCriterion("config_type >", value, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("config_code >=", value, "configCode");
+        public Criteria andConfigTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("config_type >=", value, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeLessThan(String value) {
-            addCriterion("config_code <", value, "configCode");
+        public Criteria andConfigTypeLessThan(String value) {
+            addCriterion("config_type <", value, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeLessThanOrEqualTo(String value) {
-            addCriterion("config_code <=", value, "configCode");
+        public Criteria andConfigTypeLessThanOrEqualTo(String value) {
+            addCriterion("config_type <=", value, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeLike(String value) {
-            addCriterion("config_code like", value, "configCode");
+        public Criteria andConfigTypeLike(String value) {
+            addCriterion("config_type like", value, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeNotLike(String value) {
-            addCriterion("config_code not like", value, "configCode");
+        public Criteria andConfigTypeNotLike(String value) {
+            addCriterion("config_type not like", value, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeIn(List<String> values) {
-            addCriterion("config_code in", values, "configCode");
+        public Criteria andConfigTypeIn(List<String> values) {
+            addCriterion("config_type in", values, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeNotIn(List<String> values) {
-            addCriterion("config_code not in", values, "configCode");
+        public Criteria andConfigTypeNotIn(List<String> values) {
+            addCriterion("config_type not in", values, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeBetween(String value1, String value2) {
-            addCriterion("config_code between", value1, value2, "configCode");
+        public Criteria andConfigTypeBetween(String value1, String value2) {
+            addCriterion("config_type between", value1, value2, "configType");
             return (Criteria) this;
         }
 
-        public Criteria andConfigCodeNotBetween(String value1, String value2) {
-            addCriterion("config_code not between", value1, value2, "configCode");
+        public Criteria andConfigTypeNotBetween(String value1, String value2) {
+            addCriterion("config_type not between", value1, value2, "configType");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyIsNull() {
+            addCriterion("config_key is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyIsNotNull() {
+            addCriterion("config_key is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyEqualTo(String value) {
+            addCriterion("config_key =", value, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyNotEqualTo(String value) {
+            addCriterion("config_key <>", value, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyGreaterThan(String value) {
+            addCriterion("config_key >", value, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("config_key >=", value, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyLessThan(String value) {
+            addCriterion("config_key <", value, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyLessThanOrEqualTo(String value) {
+            addCriterion("config_key <=", value, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyLike(String value) {
+            addCriterion("config_key like", value, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyNotLike(String value) {
+            addCriterion("config_key not like", value, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyIn(List<String> values) {
+            addCriterion("config_key in", values, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyNotIn(List<String> values) {
+            addCriterion("config_key not in", values, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyBetween(String value1, String value2) {
+            addCriterion("config_key between", value1, value2, "configKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigKeyNotBetween(String value1, String value2) {
+            addCriterion("config_key not between", value1, value2, "configKey");
             return (Criteria) this;
         }
 
@@ -549,6 +619,76 @@ public class ConfigExample {
 
         public Criteria andConfigNameNotBetween(String value1, String value2) {
             addCriterion("config_name not between", value1, value2, "configName");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueIsNull() {
+            addCriterion("config_value is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueIsNotNull() {
+            addCriterion("config_value is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueEqualTo(String value) {
+            addCriterion("config_value =", value, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueNotEqualTo(String value) {
+            addCriterion("config_value <>", value, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueGreaterThan(String value) {
+            addCriterion("config_value >", value, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueGreaterThanOrEqualTo(String value) {
+            addCriterion("config_value >=", value, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueLessThan(String value) {
+            addCriterion("config_value <", value, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueLessThanOrEqualTo(String value) {
+            addCriterion("config_value <=", value, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueLike(String value) {
+            addCriterion("config_value like", value, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueNotLike(String value) {
+            addCriterion("config_value not like", value, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueIn(List<String> values) {
+            addCriterion("config_value in", values, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueNotIn(List<String> values) {
+            addCriterion("config_value not in", values, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueBetween(String value1, String value2) {
+            addCriterion("config_value between", value1, value2, "configValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfigValueNotBetween(String value1, String value2) {
+            addCriterion("config_value not between", value1, value2, "configValue");
             return (Criteria) this;
         }
 
@@ -635,7 +775,7 @@ public class ConfigExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-14
+     * @date 2018-10-23
      */
     public static class Criterion {
         private String condition;

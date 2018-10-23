@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * 表base_permission
- * @author ztx
+ * @author zhoutianxiang
  *
  */
 public class Permission {

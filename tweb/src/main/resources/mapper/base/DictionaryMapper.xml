@@ -10,6 +10,7 @@
         <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
         <result column="dictionary_type" property="dictionaryType" jdbcType="VARCHAR" />
         <result column="dictionary_key" property="dictionaryKey" jdbcType="VARCHAR" />
+        <result column="dictionary_name" property="dictionaryName" jdbcType="VARCHAR" />
         <result column="dictionary_value" property="dictionaryValue" jdbcType="VARCHAR" />
         <result column="description" property="description" jdbcType="VARCHAR" />
     </resultMap>
@@ -76,7 +77,7 @@
 
     <sql id="Base_Column_List" >
         id, status, create_time, update_time, create_user_id, dictionary_type, dictionary_key, 
-        dictionary_value, description
+        dictionary_name, dictionary_value, description
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.DictionaryExample" >
@@ -116,12 +117,12 @@
     <insert id="insert" parameterType="com.ztx.world.base.entity.Dictionary" >
         insert into base_dictionary (id, status, create_time, 
             update_time, create_user_id, dictionary_type, 
-            dictionary_key, dictionary_value, description
-            )
+            dictionary_key, dictionary_name, dictionary_value, 
+            description)
         values (#{id,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
             #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{dictionaryType,jdbcType=VARCHAR}, 
-            #{dictionaryKey,jdbcType=VARCHAR}, #{dictionaryValue,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
-            )
+            #{dictionaryKey,jdbcType=VARCHAR}, #{dictionaryName,jdbcType=VARCHAR}, #{dictionaryValue,jdbcType=VARCHAR}, 
+            #{description,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.Dictionary" >
@@ -147,6 +148,9 @@
             </if>
             <if test="dictionaryKey != null" >
                 dictionary_key,
+            </if>
+            <if test="dictionaryName != null" >
+                dictionary_name,
             </if>
             <if test="dictionaryValue != null" >
                 dictionary_value,
@@ -176,6 +180,9 @@
             </if>
             <if test="dictionaryKey != null" >
                 #{dictionaryKey,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryName != null" >
+                #{dictionaryName,jdbcType=VARCHAR},
             </if>
             <if test="dictionaryValue != null" >
                 #{dictionaryValue,jdbcType=VARCHAR},
@@ -217,6 +224,9 @@
             <if test="record.dictionaryKey != null" >
                 dictionary_key = #{record.dictionaryKey,jdbcType=VARCHAR},
             </if>
+            <if test="record.dictionaryName != null" >
+                dictionary_name = #{record.dictionaryName,jdbcType=VARCHAR},
+            </if>
             <if test="record.dictionaryValue != null" >
                 dictionary_value = #{record.dictionaryValue,jdbcType=VARCHAR},
             </if>
@@ -238,6 +248,7 @@
             create_user_id = #{record.createUserId,jdbcType=BIGINT},
             dictionary_type = #{record.dictionaryType,jdbcType=VARCHAR},
             dictionary_key = #{record.dictionaryKey,jdbcType=VARCHAR},
+            dictionary_name = #{record.dictionaryName,jdbcType=VARCHAR},
             dictionary_value = #{record.dictionaryValue,jdbcType=VARCHAR},
             description = #{record.description,jdbcType=VARCHAR}
         <if test="_parameter != null" >
@@ -266,6 +277,9 @@
             <if test="dictionaryKey != null" >
                 dictionary_key = #{dictionaryKey,jdbcType=VARCHAR},
             </if>
+            <if test="dictionaryName != null" >
+                dictionary_name = #{dictionaryName,jdbcType=VARCHAR},
+            </if>
             <if test="dictionaryValue != null" >
                 dictionary_value = #{dictionaryValue,jdbcType=VARCHAR},
             </if>
@@ -284,6 +298,7 @@
             create_user_id = #{createUserId,jdbcType=BIGINT},
             dictionary_type = #{dictionaryType,jdbcType=VARCHAR},
             dictionary_key = #{dictionaryKey,jdbcType=VARCHAR},
+            dictionary_name = #{dictionaryName,jdbcType=VARCHAR},
             dictionary_value = #{dictionaryValue,jdbcType=VARCHAR},
             description = #{description,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
