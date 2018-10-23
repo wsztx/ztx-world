@@ -13,12 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ztx.world.common.redis.RedisManager;
-import com.ztx.world.common.utils.SerializeUtil;
 
 @Component
 public class RedisSessionDAO extends AbstractSessionDAO {
 	
-	private static Logger log = LoggerFactory.getLogger(SerializeUtil.class);
+	private static Logger log = LoggerFactory.getLogger(RedisSessionDAO.class);
 
     @Autowired
     private RedisManager redisManager;
@@ -26,7 +25,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
     @Override
     public void delete(Session session) {
         if(session == null || session.getId() == null){
-        	log.info("Session is null.");
+        	log.debug("Session is null.");
             return;
         }
         redisManager.hdelete(session.getId().toString());
@@ -41,7 +40,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
     @Override
     public void update(Session session) throws UnknownSessionException {
         if(session == null || session.getId() == null){
-        	log.info("Session is null.");
+        	log.debug("Session is null.");
             return;
         }
         Serializable sessionId = session.getId();
