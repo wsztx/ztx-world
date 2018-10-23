@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-10-23 17:26:15
+Date: 2018-10-23 19:04:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -94,8 +94,7 @@ CREATE TABLE `base_organization` (
   `org_name` varchar(64) DEFAULT NULL COMMENT '机构名称',
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
   `org_path` varchar(64) DEFAULT NULL COMMENT '机构路径',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_CODE` (`org_code`) USING BTREE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -117,13 +116,16 @@ CREATE TABLE `base_permission` (
   `permission_name` varchar(64) DEFAULT NULL COMMENT '权限名称',
   `permission_value` varchar(64) DEFAULT NULL COMMENT '权限值',
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_CODE` (`permission_code`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_permission
 -- ----------------------------
+INSERT INTO `base_permission` VALUES ('1', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '100000', '配置列表页面', 'base:config:tolist', null);
+INSERT INTO `base_permission` VALUES ('2', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '100001', '配置新增页面', 'base:config:toadd', null);
+INSERT INTO `base_permission` VALUES ('3', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '100002', '配置编辑页面', 'base:config:toedit', null);
+INSERT INTO `base_permission` VALUES ('4', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '100003', '配置查看页面', 'base:config:toview', null);
 
 -- ----------------------------
 -- Table structure for base_role
@@ -138,8 +140,7 @@ CREATE TABLE `base_role` (
   `role_code` varchar(64) DEFAULT NULL COMMENT '角色编码',
   `role_name` varchar(64) DEFAULT NULL COMMENT '角色名',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_CODE` (`role_code`) USING BTREE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -156,11 +157,15 @@ CREATE TABLE `base_role_permission` (
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(32) DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_role_permission
 -- ----------------------------
+INSERT INTO `base_role_permission` VALUES ('1', '1', '1');
+INSERT INTO `base_role_permission` VALUES ('2', '1', '2');
+INSERT INTO `base_role_permission` VALUES ('3', '1', '3');
+INSERT INTO `base_role_permission` VALUES ('4', '1', '4');
 
 -- ----------------------------
 -- Table structure for base_user
@@ -187,7 +192,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-10-20 22:19:00', '0');
+INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-10-23 18:02:56', '0');
 
 -- ----------------------------
 -- Table structure for base_user_role
