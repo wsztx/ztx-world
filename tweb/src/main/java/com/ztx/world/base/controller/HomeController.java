@@ -15,8 +15,7 @@ import com.ztx.world.common.config.BaseController;
 public class HomeController extends BaseController {
 	
 	private static Logger log = LoggerFactory.getLogger(HomeController.class);
-    
-	@RequiresPermissions("index")
+
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index(HttpServletRequest request) throws Exception{
         System.out.println("Home Page");

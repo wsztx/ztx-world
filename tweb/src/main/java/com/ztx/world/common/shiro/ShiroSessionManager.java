@@ -16,7 +16,7 @@ import org.apache.shiro.web.session.mgt.WebSessionKey;
  * @author ztx
  *
  */
-public class CustomSessionManager extends DefaultWebSessionManager {
+public class ShiroSessionManager extends DefaultWebSessionManager {
 
 	@Override
 	protected Session retrieveSession(SessionKey sessionKey) throws UnknownSessionException {

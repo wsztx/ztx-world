@@ -28,7 +28,9 @@ public class RedisSessionDAO extends AbstractSessionDAO {
         	log.debug("Session is null.");
             return;
         }
-        redisManager.hdelete(session.getId().toString());
+        Serializable sessionId = session.getId(); 
+        log.debug("Delete session,id = {}.", sessionId.toString());
+        redisManager.hdelete(sessionId.toString());
     }
 
     @Override
@@ -44,21 +46,22 @@ public class RedisSessionDAO extends AbstractSessionDAO {
             return;
         }
         Serializable sessionId = session.getId();
+        log.debug("Update session,id = {}.", sessionId.toString());
         redisManager.hadd(sessionId.toString(), session);
     }
 
     @Override
     protected Serializable doCreate(Session session) {
         Serializable sessionId = generateSessionId(session);
+        log.debug("Create session,id = {}.", sessionId.toString());
         assignSessionId(session, sessionId);
-        // 添加进redis
         redisManager.hadd(sessionId.toString(), session);
-        
         return sessionId;
     }
 
     @Override
     protected Session doReadSession(Serializable sessionId) {
+    	log.debug("Read session,id = {}.", sessionId.toString());
         return redisManager.hget(sessionId.toString());
     }
 }

@@ -11,9 +11,9 @@
         <property name="sessionIdGenerator" ref="sessionIdGenerator"></property>
     </bean>
     
-    <bean id="sessionManager" class="com.ztx.world.common.shiro.CustomSessionManager">
-    	<!-- 设置超时时间 -->
-        <property name="globalSessionTimeout" value="${shiro.globalSessionTimeout}"></property>
+    <bean id="sessionManager" class="com.ztx.world.common.shiro.ShiroSessionManager">
+    	<!-- 设置超时时间,单位毫秒 -->
+        <property name="globalSessionTimeout" value="1800000"></property>
         <property name="deleteInvalidSessions" value="true"></property>
         <property name="sessionDAO" ref="sessionDAO"></property>
         <property name="sessionIdCookieEnabled" value="true"/>
@@ -30,8 +30,8 @@
 	
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="sessionManager" ref="sessionManager"></property>
-        <property name="realm" ref="shiroReaml"></property>
         <property name="cacheManager" ref="redisCacheManager"></property>
+        <property name="realm" ref="shiroReaml"></property>
     </bean>
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />

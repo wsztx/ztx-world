@@ -11,7 +11,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<context:component-scan base-package="com.ztx.world"></context:component-scan>
 	
 	<!-- 导入properties文件 -->
-	<context:property-placeholder location="classpath:spring/db.properties,classpath:spring/redis.properties,classpath:spring/shiro.properties" ignore-unresolvable="true" />
+	<context:property-placeholder location="classpath:spring/db.properties,classpath:spring/redis.properties" ignore-unresolvable="true" />
 
 	<import resource="classpath:spring/spring-mybatis.xml" />
 	<import resource="classpath:spring/spring-redis.xml"/>
