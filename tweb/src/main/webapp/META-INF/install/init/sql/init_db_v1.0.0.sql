@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-10-23 17:26:15
+Date: 2018-10-23 18:37:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -119,11 +119,12 @@ CREATE TABLE `base_permission` (
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_CODE` (`permission_code`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_permission
 -- ----------------------------
+INSERT INTO `base_permission` VALUES ('1', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '100000', '配置列表页面', 'base:config:tolist', null);
 
 -- ----------------------------
 -- Table structure for base_role
@@ -156,11 +157,12 @@ CREATE TABLE `base_role_permission` (
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(32) DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_role_permission
 -- ----------------------------
+INSERT INTO `base_role_permission` VALUES ('1', '1', '1');
 
 -- ----------------------------
 -- Table structure for base_user
@@ -187,7 +189,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-10-20 22:19:00', '0');
+INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-10-23 18:02:56', '0');
 
 -- ----------------------------
 -- Table structure for base_user_role
