@@ -35,7 +35,7 @@ public class UserController extends BaseController{
     
     @RequestMapping(value = "tologin", method=RequestMethod.GET)
     public String toLogin(HttpServletRequest request){
-        System.out.println("Login Page");
+    	log.info("Login Page.");
         return "login";
     }
     

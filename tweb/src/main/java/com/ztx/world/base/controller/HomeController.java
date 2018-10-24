@@ -2,7 +2,6 @@ package com.ztx.world.base.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index(HttpServletRequest request) throws Exception{
-        System.out.println("Home Page");
+    	log.info("Home Page.");
         return "index";
     }
 }
