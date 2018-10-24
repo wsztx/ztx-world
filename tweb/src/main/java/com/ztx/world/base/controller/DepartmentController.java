@@ -14,40 +14,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ztx.world.common.config.BaseController;
 
 @Controller
-@RequestMapping(value = "/base/dept")
+@RequestMapping(value = "/base/department")
 public class DepartmentController extends BaseController {
 
 	private static Logger log = LoggerFactory.getLogger(DepartmentController.class);
 	
-	@RequiresPermissions(value = {"base:dept:tolist"})
+	@RequiresPermissions(value = {"base:department:tolist"})
     @RequestMapping(value="/tolist", method=RequestMethod.GET)
     public String toList(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
-    	return "base/dept/list";
+    	return "base/department/list";
     }
 	
-	@RequiresPermissions(value = {"base:dept:toadd"})
+	@RequiresPermissions(value = {"base:department:toadd"})
     @RequestMapping(value="/toadd", method=RequestMethod.GET)
     public String toAdd(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
-    	return "base/dept/add";
+    	return "base/department/add";
     }
 	
-	@RequiresPermissions(value = {"base:dept:toedit"})
+	@RequiresPermissions(value = {"base:department:toedit"})
     @RequestMapping(value="/toedit", method=RequestMethod.GET)
     public String toEdit(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
-    	return "base/dept/edit";
+    	return "base/department/edit";
     }
 	
-	@RequiresPermissions(value = {"base:dept:toview"})
+	@RequiresPermissions(value = {"base:department:toview"})
     @RequestMapping(value="/toview", method=RequestMethod.GET)
     public String toView(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
-    	return "base/dept/view";
+    	return "base/department/view";
     }
 }
