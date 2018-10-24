@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-edit!!!!!!!
+view!!!!!!!
 </body>
 </html>
