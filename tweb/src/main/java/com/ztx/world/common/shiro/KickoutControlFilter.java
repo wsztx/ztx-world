@@ -69,7 +69,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		// 最大同时在线数
 		Integer maxSession = 1;
-		ConfigMapper configMapper = SpringApplicationContextUtil.getBean("configMapper", ConfigMapper.class);
+		ConfigMapper configMapper = SpringApplicationContextUtil.getBean(ConfigMapper.class);
 		ConfigExample example = new ConfigExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 				.andConfigTypeEqualTo(ConfigTableConstants.ConfigUserLogin.TYPE_USER_LOGIN)
@@ -81,7 +81,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 		
 		Subject subject = getSubject(request, response);
 		if (!subject.isAuthenticated() && !subject.isRemembered()) {
-			// 如果没有登录，直接进行之后的流程
+			// 如果没有登录,直接进行之后的流程
 			return true;
 		}
 

@@ -38,7 +38,7 @@
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
-	<bean id="kickoutSessionControlFilter" class="com.ztx.world.common.shiro.KickoutControlFilter">  
+	<bean id="kickoutControlFilter" class="com.ztx.world.common.shiro.KickoutControlFilter">  
         <property name="cacheManager" ref="redisCacheManager"/>  
         <property name="sessionManager" ref="sessionManager"/>
         <property name="kickoutAfter" value="false"/>
@@ -60,7 +60,7 @@
 				/resource/** = anon
 				/demo/** = anon
 				/base/user/tologin = anon
-				/base/user/login = anon
+				/base/user/login = kickout
 				/base/user/logout = anon
                 /** = authc
 			</value>
