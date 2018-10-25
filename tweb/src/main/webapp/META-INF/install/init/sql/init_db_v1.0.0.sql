@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-10-24 17:59:14
+Date: 2018-10-25 21:01:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,11 +31,12 @@ CREATE TABLE `base_config` (
   `config_value` varchar(64) DEFAULT NULL COMMENT '配置值',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_config
 -- ----------------------------
+INSERT INTO `base_config` VALUES ('1', '1', '2018-10-24 18:26:26', '2018-10-24 18:26:28', '1', 'user.login', 'online.max', '用户同时最大在线数', '1', '');
 
 -- ----------------------------
 -- Table structure for base_department

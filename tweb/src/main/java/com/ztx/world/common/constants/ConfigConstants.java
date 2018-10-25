@@ -16,4 +16,9 @@ public class ConfigConstants {
 	 * shiro_redis_session
 	 */
 	public static final String SHIRO_REDIS_SESSION_PRE = "shiro_redis_session:";
+	
+	/**
+	 * shiro_kickout_session
+	 */
+	public static final String SHIRO_KICKOUT_SESSION = "shiro_kickout_session";
 }

@@ -1,103 +1,152 @@
 package com.ztx.world.common.shiro;
 
 import java.io.Serializable;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.DefaultSessionKey;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
+import com.ztx.world.base.entity.Config;
+import com.ztx.world.base.entity.ConfigExample;
+import com.ztx.world.base.mapper.ConfigMapper;
 import com.ztx.world.common.config.BaseResponse;
+import com.ztx.world.common.config.CustomSession;
+import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ConfigConstants;
+import com.ztx.world.common.constants.ConfigTableConstants;
 import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.system.SpringApplicationContextUtil;
 import com.ztx.world.common.utils.ResponseUtil;
+import com.ztx.world.common.utils.ResultCodeUtil;
 
 public class KickoutControlFilter extends AccessControlFilter {
+	// 踢出后到的地址
+	private String kickoutUrl;
+	// 踢出之前登录的/之后登录的用户 ,默认踢出之前登录的用户
+	private boolean kickoutAfter = false;
 
-	private static Logger log = LoggerFactory.getLogger(KickoutControlFilter.class);
+	private SessionManager sessionManager;
 	
-    /**
-     * 踢出状态，true标示踢出
-     */
-    final static String KICKOUT_STATUS = KickoutControlFilter.class.getCanonicalName() 
-    		+ "_kickout_status"; 
-	
-	@Override
-	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) 
-			throws Exception {
-        HttpServletRequest httpRequest = ((HttpServletRequest)request);
-        HttpServletResponse httpResponse = ((HttpServletResponse)response);
-        String requestType = httpRequest.getHeader("X-Requested-With");
-        String url = httpRequest.getRequestURI();
-        Subject subject = getSubject(request, response);
-        // 如果没有登录就直接return true
-        if(!subject.isAuthenticated() && !subject.isRemembered()){
-            return true;
-        }
-        Session session = subject.getSession();
-        Serializable sessionId = session.getId();
-        // 判断是否已经踢出;如果是Ajax访问,那么给予json返回值提示;如果是普通请求,直接跳转到登录页
-        Boolean marker = (Boolean)session.getAttribute(KICKOUT_STATUS);
-        if (null != marker && marker) {
-        	BaseResponse data = new BaseResponse();
-            // 判断是不是Ajax请求
-            if ("XMLHttpRequest".equals(requestType)) {
-                data.setCode(ResultCode.SYS_OPERATION_FAILED);
-                data.setMessage("您已经在其他地方登录,请重新登录!");
-                ResponseUtil.writeJson(httpResponse, data);
-            }
-            return false;
-        }
-        
-        //获取用户账号
-        String userName = (String)subject.getPrincipal();
-        
-//        //从缓存获取用户Session信息 <userName,SessionId>
-//        String jedisSessionId = JedisUtils.get(userName);
-//        
-//        //如果已经包含当前Session，并且是同一个用户，跳过。
-//        if(null!=jedisSessionId && jedisSessionId.equals((String)sessionId)){
-//            //更新存储到缓存1个小时（这个时间最好和session的有效期一致或者大于session的有效期）
-//            JedisUtils.setex(userName, 3600, (String)sessionId);
-//            return true;
-//        }
-//        //如果用户相同，Session不相同，那么就要处理了
-//        /**
-//         * 如果用户Id相同,Session不相同
-//         * 1.获取到原来的session，并且标记为踢出。
-//         * 2.继续走
-//         */
-//        if(null!=jedisSessionId && !jedisSessionId.equals((String)sessionId)){
-//            //标记session已经踢出
-//            session.setAttribute(KICKOUT_STATUS, Boolean.TRUE);
-//            //存储到缓存1个小时（这个时间最好和session的有效期一致或者大于session的有效期）
-//            JedisUtils.setex(userName, 3600, (String)sessionId);
-//            return true;
-//        }
-//        
-//        if(null==jedisSessionId){
-//            //存储到缓存1个小时（这个时间最好和session的有效期一致或者大于session的有效期）
-//            JedisUtils.setex(userName, 3600, (String)sessionId);
-//        }
-        return true;
+	private Cache<String, Deque<Serializable>> cache;
+
+	public void setKickoutUrl(String kickoutUrl) {
+		this.kickoutUrl = kickoutUrl;
+	}
+
+	public void setKickoutAfter(boolean kickoutAfter) {
+		this.kickoutAfter = kickoutAfter;
+	}
+
+	public void setSessionManager(SessionManager sessionManager) {
+		this.sessionManager = sessionManager;
+	}
+
+	public void setCacheManager(CacheManager cacheManager) {
+		this.cache = cacheManager.getCache(ConfigConstants.SHIRO_KICKOUT_SESSION);
 	}
 
 	@Override
-	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) 
-			throws Exception {
-        // 退出,正常清除Session
-        Subject subject = getSubject(request, response);
-        subject.logout();
-        WebUtils.getSavedRequest(request);
-        // 重定向
-        WebUtils.issueRedirect(request, response, "/tologin");
-        return false;
+	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, 
+			Object mappedValue) throws Exception {
+		return false;
+	}
+
+	@Override
+	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+		// 最大同时在线数
+		Integer maxSession = 1;
+		ConfigMapper configMapper = SpringApplicationContextUtil.getBean("configMapper", ConfigMapper.class);
+		ConfigExample example = new ConfigExample();
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+				.andConfigTypeEqualTo(ConfigTableConstants.ConfigUserLogin.TYPE_USER_LOGIN)
+				.andConfigKeyEqualTo(ConfigTableConstants.ConfigUserLogin.KEY_ONLINE_MAX);
+		List<Config> configList = configMapper.selectByExample(example);
+		if(!CollectionUtils.isEmpty(configList)){
+			maxSession = Integer.valueOf(configList.get(0).getConfigValue());
+		}
+		
+		Subject subject = getSubject(request, response);
+		if (!subject.isAuthenticated() && !subject.isRemembered()) {
+			// 如果没有登录，直接进行之后的流程
+			return true;
+		}
+
+		Session session = subject.getSession();
+		CustomSession customSession = (CustomSession) subject.getPrincipal();
+		String usercode = customSession.getUser().getUserCode();
+		Serializable sessionId = session.getId();
+
+		// 同步控制
+		Deque<Serializable> deque = cache.get(usercode);
+		if (deque == null) {
+			deque = new LinkedList<Serializable>();
+			cache.put(usercode, deque);
+		}
+
+		// 如果队列里没有此sessionId,且用户没有被踢出,放入队列
+		if (!deque.contains(sessionId) && session.getAttribute("kickout") == null) {
+			deque.push(sessionId);
+		}
+
+		// 如果队列里的sessionId数超出最大会话数,开始踢人
+		while (deque.size() > maxSession) {
+			Serializable kickoutSessionId = null;
+			// 如果踢出后者
+			if (kickoutAfter) {
+				kickoutSessionId = deque.removeFirst();
+			// 否则踢出前者
+			} else { 
+				kickoutSessionId = deque.removeLast();
+			}
+			try {
+				Session kickoutSession = sessionManager.getSession(new DefaultSessionKey(kickoutSessionId));
+				if (kickoutSession != null) {
+					// 设置会话的kickout属性表示踢出了
+					kickoutSession.setAttribute("kickout", true);
+				}
+			// ignore exception
+			} catch (Exception e) {}
+		}
+
+		// 如果被踢出了,直接退出,重定向到踢出后的地址
+		if (session.getAttribute("kickout") != null) {
+			// 会话被踢出了
+			try {
+				subject.logout();
+			} catch (Exception e) {}
+			saveRequest(request);
+
+			HttpServletRequest httpRequest = WebUtils.toHttp(request);
+			HttpServletResponse httpResponse = WebUtils.toHttp(response);
+			String requestType = httpRequest.getHeader("X-Requested-With");
+			if ("XMLHttpRequest".equals(requestType)) {
+	        	BaseResponse responseData = new BaseResponse();
+	        	responseData.setSuccess(false);
+	        	responseData.setCode(ResultCode.SHIRO_KICKOUT_ERROR);
+	        	responseData.setMessage(ResultCodeUtil.get(ResultCode.SYS_OPERATION_SUCCESS));
+	        	ResponseUtil.writeJson(httpResponse, responseData);
+				return false;
+			} else {
+				WebUtils.issueRedirect(request, response, kickoutUrl);
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }

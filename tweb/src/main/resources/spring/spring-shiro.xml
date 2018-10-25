@@ -38,7 +38,12 @@
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
-    <bean id="kickoutControlFilter" class="com.ztx.world.common.shiro.KickoutControlFilter"></bean>
+	<bean id="kickoutSessionControlFilter" class="com.ztx.world.common.shiro.KickoutControlFilter">  
+        <property name="cacheManager" ref="redisCacheManager"/>  
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="kickoutAfter" value="false"/>
+        <property name="kickoutUrl" value="/base/user/tologin"/>  
+    </bean>
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />

@@ -31,4 +31,9 @@ public class ResultCode {
 	 * 权限异常
 	 */
 	public static final Integer BASE_AUTH_ERROR = 10003;
+	
+	/**
+	 * 用户被强制退出
+	 */
+	public static final Integer SHIRO_KICKOUT_ERROR = 10004;
 }
