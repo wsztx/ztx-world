@@ -24,6 +24,8 @@
         <constructor-arg name="name" value="custom.session" />
         <property name="path" value="/" />
         <property name="httpOnly" value="true"/>
+        <!-- 默认记住7天（单位：秒） -->
+		<property name="maxAge" value="604800" />
     </bean>
     
 	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml"></bean>
