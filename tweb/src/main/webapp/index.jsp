@@ -7,6 +7,10 @@
 <title>Home Page</title>
 </head>
 <body>
+Welcome to home page.
+<script type="text/javascript">
+	
+</script>
 <%
 	// 转发到登录页
 	request.getRequestDispatcher("/index").forward(request, response);

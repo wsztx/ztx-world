@@ -21,4 +21,9 @@ public class ConfigConstants {
 	 * shiro_kickout_session
 	 */
 	public static final String SHIRO_KICKOUT_SESSION = "shiro_kickout_session";
+	
+	/**
+	 * 禁止直接访问的页面
+	 */
+	public static final String FORBID_VIEW = "/web/";
 }
