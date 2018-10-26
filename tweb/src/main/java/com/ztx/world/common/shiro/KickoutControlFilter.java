@@ -92,7 +92,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 
 		// 同步控制
 		Deque<Serializable> deque = cache.get(usercode);
-		if (deque == null) {
+		if (CollectionUtils.isEmpty(deque)) {
 			deque = new LinkedList<Serializable>();
 			cache.put(usercode, deque);
 		}

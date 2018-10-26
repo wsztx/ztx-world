@@ -60,9 +60,9 @@
 				/resource/** = anon
 				/demo/** = anon
 				/base/user/tologin = anon
-				/base/user/login = kickout
+				/base/user/login = anon
 				/base/user/logout = anon
-                /** = authc
+                /** = kickout,authc
 			</value>
 		</property>
 	</bean>

@@ -8,8 +8,9 @@
 <title>Home Page</title>
 </head>
 <body>
-<script type="text/javascript">
 Welcome to home page.
+<script type="text/javascript">
+	
 </script>
 </body>
 </html>
