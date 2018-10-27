@@ -26,7 +26,6 @@ import com.ztx.world.base.mapper.ConfigMapper;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
-import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ConfigTableConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.system.SpringApplicationContextUtil;
@@ -56,7 +55,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 	}
 
 	public void setCacheManager(CacheManager cacheManager) {
-		this.cache = cacheManager.getCache(ConfigConstants.SHIRO_KICKOUT_SESSION);
+		this.cache = cacheManager.getCache("shiro-kickout-session");
 	}
 
 	@Override
@@ -80,8 +79,8 @@ public class KickoutControlFilter extends AccessControlFilter {
 		}
 		
 		Subject subject = getSubject(request, response);
+		// 如果没有登录,直接进行之后的流程
 		if (!subject.isAuthenticated() && !subject.isRemembered()) {
-			// 如果没有登录,直接进行之后的流程
 			return true;
 		}
 
@@ -94,12 +93,12 @@ public class KickoutControlFilter extends AccessControlFilter {
 		Deque<Serializable> deque = cache.get(usercode);
 		if (CollectionUtils.isEmpty(deque)) {
 			deque = new LinkedList<Serializable>();
-			cache.put(usercode, deque);
 		}
 
 		// 如果队列里没有此sessionId,且用户没有被踢出,放入队列
 		if (!deque.contains(sessionId) && session.getAttribute("kickout") == null) {
 			deque.push(sessionId);
+			cache.put(usercode, deque);
 		}
 
 		// 如果队列里的sessionId数超出最大会话数,开始踢人
@@ -130,8 +129,8 @@ public class KickoutControlFilter extends AccessControlFilter {
 			} catch (Exception e) {}
 			saveRequest(request);
 
-			HttpServletRequest httpRequest = WebUtils.toHttp(request);
-			HttpServletResponse httpResponse = WebUtils.toHttp(response);
+			HttpServletRequest httpRequest = (HttpServletRequest)request;
+			HttpServletResponse httpResponse = (HttpServletResponse)response;
 			String requestType = httpRequest.getHeader("X-Requested-With");
 			if ("XMLHttpRequest".equals(requestType)) {
 	        	BaseResponse responseData = new BaseResponse();

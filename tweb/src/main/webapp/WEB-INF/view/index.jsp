@@ -6,11 +6,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Home Page</title>
+<script type="text/javascript" src="${base}/resource/plugin/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+function doLogin(){
+	$.ajax({
+		type: "POST",
+		url: "${base}/base/user/login", 
+		dataType: "json",
+		data: {"userCode":"admin", "password":"123456"},
+		success: function(result){
+			if(result.success){
+				location.href = "${base}/index";
+			}else{
+				alert(result.message);
+			}
+		},
+		error: function(result){
+
+		}
+	});
+}
+</script>
 </head>
 <body>
 Welcome to home page.
-<script type="text/javascript">
-	
-</script>
+<button onclick = "doLogin()">登录</button>
 </body>
 </html>

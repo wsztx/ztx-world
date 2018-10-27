@@ -16,14 +16,13 @@ function doLogin(){
 		data: {"userCode":"admin", "password":"123456"},
 		success: function(result){
 			if(result.success){
-				alert("登录成功");
+				location.href = "${base}/index";
 			}else{
 				alert(result.message);
 			}
 		},
 		error: function(result){
-			console.log(result);
-			alert(111);
+
 		}
 	});
 }
@@ -35,7 +34,7 @@ function doLogout(){
 		data: {"userCode":"admin", "password":"123456"},
 		success: function(result){
 			if(result.code == 1){
-				alert("退出成功");
+				location.href = "${base}/base/user/tologin";
 			}else{
 				alert(result.message);
 			}
