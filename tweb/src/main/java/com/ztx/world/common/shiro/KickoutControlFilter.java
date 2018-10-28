@@ -18,17 +18,14 @@ import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import com.ztx.world.base.entity.Config;
-import com.ztx.world.base.entity.ConfigExample;
-import com.ztx.world.base.mapper.ConfigMapper;
+import com.ztx.world.base.service.ConfigService;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.config.CustomSession;
-import com.ztx.world.common.constants.BaseConstants;
-import com.ztx.world.common.constants.ConfigTableConstants;
 import com.ztx.world.common.constants.ResultCode;
-import com.ztx.world.common.system.SpringApplicationContextUtil;
 import com.ztx.world.common.utils.ResponseUtil;
 import com.ztx.world.common.utils.ResultCodeUtil;
 
@@ -41,6 +38,9 @@ public class KickoutControlFilter extends AccessControlFilter {
 	private SessionManager sessionManager;
 	
 	private Cache<String, Deque<Serializable>> cache;
+	
+	@Autowired
+	private ConfigService configService;
 
 	public void setKickoutUrl(String kickoutUrl) {
 		this.kickoutUrl = kickoutUrl;
@@ -67,16 +67,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		// 最大同时在线数
-		Integer maxSession = 1;
-		ConfigMapper configMapper = SpringApplicationContextUtil.getBean(ConfigMapper.class);
-		ConfigExample example = new ConfigExample();
-		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
-				.andConfigTypeEqualTo(ConfigTableConstants.ConfigUserLogin.TYPE_USER_LOGIN)
-				.andConfigKeyEqualTo(ConfigTableConstants.ConfigUserLogin.KEY_ONLINE_MAX);
-		List<Config> configList = configMapper.selectByExample(example);
-		if(!CollectionUtils.isEmpty(configList)){
-			maxSession = Integer.valueOf(configList.get(0).getConfigValue());
-		}
+		Integer maxSession = this.getMaxSession();
 		
 		Subject subject = getSubject(request, response);
 		// 如果没有登录,直接进行之后的流程
@@ -146,6 +137,24 @@ public class KickoutControlFilter extends AccessControlFilter {
 		}
 
 		return true;
+	}
+	
+	/**
+	 * 获取用户同时在线最大用户数
+	 * @return
+	 */
+	private Integer getMaxSession(){
+		Integer maxSession = 1;
+		List<Config> configList = configService.getConfigByType("user.login");
+		if(!CollectionUtils.isEmpty(configList)){
+			for(Config config : configList){
+				if("online.max".equals(config.getConfigKey())) {
+					maxSession = Integer.valueOf(config.getConfigValue());
+				}
+			}
+		}
+		
+		return maxSession;
 	}
 
 }

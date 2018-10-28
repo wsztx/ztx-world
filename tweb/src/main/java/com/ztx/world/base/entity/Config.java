@@ -3,9 +3,11 @@ package com.ztx.world.base.entity;
 import java.util.Date;
 
 /**
- * 表base_config
- * @author zhoutianxiang
- *
+ * 
+ * 
+ * @author wcyong
+ * 
+ * @date 2018-10-28
  */
 public class Config {
     /**
@@ -52,6 +54,11 @@ public class Config {
      * 配置值
      */
     private String configValue;
+
+    /**
+     * 是否启用,1启用,0禁用
+     */
+    private Integer useStatus;
 
     /**
      * 描述
@@ -128,6 +135,14 @@ public class Config {
 
     public void setConfigValue(String configValue) {
         this.configValue = configValue == null ? null : configValue.trim();
+    }
+
+    public Integer getUseStatus() {
+        return useStatus;
+    }
+
+    public void setUseStatus(Integer useStatus) {
+        this.useStatus = useStatus;
     }
 
     public String getDescription() {

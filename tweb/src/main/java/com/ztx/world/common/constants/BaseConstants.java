@@ -18,6 +18,16 @@ public class BaseConstants {
 	public static final int UNDELETE_STATUS = 1;
 	
 	/**
+	 * 未启用
+	 */
+	public static final int UNUSE_STATUS = 0;
+	
+	/**
+	 * 启用
+	 */
+	public static final int USE_STATUS = 1;
+	
+	/**
 	 * 用户状态常量
 	 * @author zhoutianxiang
 	 *

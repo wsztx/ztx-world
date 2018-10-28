@@ -8,6 +8,6 @@
 <title>服务器异常</title>
 </head>
 <body>
-错误码${code }，服务器异常：${message }
+错误码${code },服务器异常:${message }
 </body>
 </html>

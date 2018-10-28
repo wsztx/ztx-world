@@ -69,7 +69,7 @@ public class ConfigExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-23
+     * @date 2018-10-28
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -692,6 +692,66 @@ public class ConfigExample {
             return (Criteria) this;
         }
 
+        public Criteria andUseStatusIsNull() {
+            addCriterion("use_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusIsNotNull() {
+            addCriterion("use_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusEqualTo(Integer value) {
+            addCriterion("use_status =", value, "useStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusNotEqualTo(Integer value) {
+            addCriterion("use_status <>", value, "useStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusGreaterThan(Integer value) {
+            addCriterion("use_status >", value, "useStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("use_status >=", value, "useStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusLessThan(Integer value) {
+            addCriterion("use_status <", value, "useStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("use_status <=", value, "useStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusIn(List<Integer> values) {
+            addCriterion("use_status in", values, "useStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusNotIn(List<Integer> values) {
+            addCriterion("use_status not in", values, "useStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusBetween(Integer value1, Integer value2) {
+            addCriterion("use_status between", value1, value2, "useStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("use_status not between", value1, value2, "useStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andDescriptionIsNull() {
             addCriterion("description is null");
             return (Criteria) this;
@@ -775,7 +835,7 @@ public class ConfigExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-10-23
+     * @date 2018-10-28
      */
     public static class Criterion {
         private String condition;

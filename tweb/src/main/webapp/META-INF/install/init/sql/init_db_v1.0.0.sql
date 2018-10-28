@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql_local
+Source Server         : local_mysql
 Source Server Version : 50630
 Source Host           : localhost:3306
 Source Database       : tworld
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-10-25 21:01:15
+Date: 2018-10-28 12:19:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,6 +29,7 @@ CREATE TABLE `base_config` (
   `config_key` varchar(64) DEFAULT NULL COMMENT '配置键',
   `config_name` varchar(64) DEFAULT NULL COMMENT '配置名称',
   `config_value` varchar(64) DEFAULT NULL COMMENT '配置值',
+  `use_status` int(2) DEFAULT NULL COMMENT '是否启用,1启用,0禁用',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -36,7 +37,7 @@ CREATE TABLE `base_config` (
 -- ----------------------------
 -- Records of base_config
 -- ----------------------------
-INSERT INTO `base_config` VALUES ('1', '1', '2018-10-24 18:26:26', '2018-10-24 18:26:28', '1', 'user.login', 'online.max', '用户同时最大在线数', '1', '');
+INSERT INTO `base_config` VALUES ('1', '1', '2018-10-24 18:26:26', '2018-10-24 18:26:28', '1', 'user.login', 'online.max', '用户同时最大在线数', '1', '1', '');
 
 -- ----------------------------
 -- Table structure for base_department
