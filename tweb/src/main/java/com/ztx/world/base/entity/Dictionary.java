@@ -1,5 +1,6 @@
 package com.ztx.world.base.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,8 +8,13 @@ import java.util.Date;
  * @author zhoutianxiang
  *
  */
-public class Dictionary {
+public class Dictionary implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2106271663005809427L;
+
+	/**
      * 主键
      */
     private Long id;

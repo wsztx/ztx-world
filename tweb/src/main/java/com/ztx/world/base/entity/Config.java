@@ -1,5 +1,6 @@
 package com.ztx.world.base.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,8 +10,13 @@ import java.util.Date;
  * 
  * @date 2018-10-28
  */
-public class Config {
+public class Config implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6561551461689878794L;
+
+	/**
      * 主键
      */
     private Long id;

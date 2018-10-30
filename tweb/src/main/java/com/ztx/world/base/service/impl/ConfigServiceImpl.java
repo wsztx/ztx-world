@@ -27,16 +27,14 @@ public class ConfigServiceImpl implements ConfigService {
 		String cacheType = "config." + configType;
 		List<Config> configList = null;
 		if(redisOperator.hasKey(cacheType)){
-			List<Object> objectList = redisOperator.lGet(cacheType, 0, -1);
-			Object object = (Object) objectList;
-			configList = (List<Config>)object ;
+			configList = (List<Config>)redisOperator.get(cacheType);
 		}else{
 			ConfigExample example = new ConfigExample();
 			example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 					.andUseStatusEqualTo(BaseConstants.USE_STATUS)
 					.andConfigTypeEqualTo(configType);
 			configList = configMapper.selectByExample(example);
-			redisOperator.lSet(cacheType, configList);
+			redisOperator.set(cacheType, configList);
 		}
 		return configList;
 	}

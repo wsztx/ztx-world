@@ -62,7 +62,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
 				List<Config> list = configMapper.selectByExample(example);
 				if(!CollectionUtils.isEmpty(list)){
 					String cacheKey = "config." + type;
-					redisOperator.lSet(cacheKey, list);
+					redisOperator.set(cacheKey, list);
 				}
 			}
 		}
@@ -77,7 +77,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
 				List<Dictionary> list = dictionaryMapper.selectByExample(example);
 				if(!CollectionUtils.isEmpty(list)){
 					String cacheKey = "dictionary." + type;
-					redisOperator.lSet(cacheKey, list);
+					redisOperator.set(cacheKey, list);
 				}
 			}
 		}

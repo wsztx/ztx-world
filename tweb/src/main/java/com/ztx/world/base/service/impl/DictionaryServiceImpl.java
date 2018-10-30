@@ -28,9 +28,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 		String cacheType = "dictionary." + dictionaryType;
 		List<Dictionary> dictionaryList = null;
 		if(redisOperator.hasKey(cacheType)){
-			List<Object> objectList = redisOperator.lGet(cacheType, 0, -1);
-			Object object = (Object) objectList;
-			dictionaryList = (List<Dictionary>)object;
+			dictionaryList = (List<Dictionary>)redisOperator.get(cacheType);
 		}else{
 			DictionaryExample example = new DictionaryExample();
 			example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
