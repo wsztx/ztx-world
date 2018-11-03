@@ -127,7 +127,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 	        	BaseResponse responseData = new BaseResponse();
 	        	responseData.setSuccess(false);
 	        	responseData.setCode(ResultCode.SHIRO_KICKOUT_ERROR);
-	        	responseData.setMessage(ResultCodeUtil.get(ResultCode.SYS_OPERATION_SUCCESS));
+	        	responseData.setMessage(ResultCodeUtil.get(ResultCode.SHIRO_KICKOUT_ERROR));
 	        	ResponseUtil.writeJson(httpResponse, responseData);
 				return false;
 			} else {

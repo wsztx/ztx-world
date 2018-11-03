@@ -37,8 +37,13 @@ public class UserController extends BaseController{
     
     @RequestMapping(value = "tologin", method=RequestMethod.GET)
     public String toLogin(HttpServletRequest request){
-    	log.info("Login Page.");
-        return "login";
+    	Subject currentUser = SecurityUtils.getSubject();
+    	if (currentUser.isAuthenticated()){
+    		return "redirect:/index";
+    	}else{
+        	log.info("Login Page.");
+            return "login";
+    	}
     }
     
     @ResponseBody
