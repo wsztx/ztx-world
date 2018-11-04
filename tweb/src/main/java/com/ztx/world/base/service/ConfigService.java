@@ -12,25 +12,25 @@ public interface ConfigService {
 	 * @param configType
 	 * @return
 	 */
-	public List<Config> getConfigByType(String configType);
+	List<Config> getConfigByType(String configType);
 	
 	/**
 	 * 新增配置
 	 * @param config
 	 * @return
 	 */
-	public Long saveConfig(ConfigVo config);
+	Long saveConfig(ConfigVo config);
 	
 	/**
 	 * 修改配置
 	 * @param config
 	 * @return
 	 */
-	public Long updateConfig(ConfigVo config);
+	Long updateConfig(ConfigVo config);
 	
 	/**
 	 * 删除配置信息
 	 * @param ids
 	 */
-	public void deleteConfig(List<Long> ids);
+	void deleteConfig(List<Long> ids);
 }

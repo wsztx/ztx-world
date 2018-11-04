@@ -1,5 +1,7 @@
 package com.ztx.world.base.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -140,8 +142,8 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base:user:delete"})
     @RequestMapping(value="/delete", method = RequestMethod.GET)
-    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
+    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
+    		List<Long> ids) throws Exception{
     	
     	return success();
     }

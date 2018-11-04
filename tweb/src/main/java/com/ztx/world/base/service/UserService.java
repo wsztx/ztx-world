@@ -1,5 +1,7 @@
 package com.ztx.world.base.service;
 
+import java.util.List;
+
 import com.ztx.world.base.entity.User;
 
 /**
@@ -14,5 +16,11 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	int updateUser(User user);
+	Long updateUser(User user);
+	
+	/**
+	 * 删除用户
+	 * @param ids
+	 */
+	void deleteUser(List<Long> ids);
 }

@@ -12,4 +12,10 @@ public interface RoleService {
 	 * @return
 	 */
 	List<Role> findRolesByUserId(Long id);
+	
+	/**
+	 * 删除角色
+	 * @param ids
+	 */
+	void deleteRole(List<Long> ids);
 }

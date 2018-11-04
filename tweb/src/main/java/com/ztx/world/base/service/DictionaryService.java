@@ -10,5 +10,5 @@ public interface DictionaryService {
 	 * 根据字典类型或取所有数据
 	 * @return
 	 */
-	public List<Dictionary> getDictionaryByType(String dictionaryType);
+	List<Dictionary> getDictionaryByType(String dictionaryType);
 }

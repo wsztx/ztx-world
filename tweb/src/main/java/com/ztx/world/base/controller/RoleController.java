@@ -1,17 +1,21 @@
 package com.ztx.world.base.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ztx.world.base.service.RoleService;
 import com.ztx.world.base.vo.RoleVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
@@ -23,6 +27,9 @@ import com.ztx.world.common.exception.BasicException;
 public class RoleController extends BaseController {
 	
 	private static Logger log = LoggerFactory.getLogger(RoleController.class);
+	
+	@Autowired
+	private RoleService roleService;
 
 	@RequiresPermissions(value = {"base:role:tolist"})
     @RequestMapping(value="/tolist", method = RequestMethod.GET)
@@ -93,9 +100,9 @@ public class RoleController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base:role:delete"})
     @RequestMapping(value="/delete", method = RequestMethod.GET)
-    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
-    	
+    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
+    		List<Long> ids) throws Exception{
+    	roleService.deleteRole(ids);
     	return success();
     }
 }
