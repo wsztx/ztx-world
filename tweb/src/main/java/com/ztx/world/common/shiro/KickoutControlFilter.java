@@ -78,7 +78,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 
 		Session session = subject.getSession();
 		CustomSession customSession = (CustomSession) subject.getPrincipal();
-		String usercode = customSession.getUser().getUserCode();
+		String usercode = customSession.getUserCode();
 		Serializable sessionId = session.getId();
 
 		// 同步控制

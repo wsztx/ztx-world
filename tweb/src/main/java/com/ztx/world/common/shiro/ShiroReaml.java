@@ -25,9 +25,8 @@ import com.ztx.world.base.entity.Permission;
 import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
-import com.ztx.world.base.mapper.DepartmentMapper;
-import com.ztx.world.base.mapper.OrganizationMapper;
 import com.ztx.world.base.mapper.UserMapper;
+import com.ztx.world.base.mapper.ext.UserExtMapper;
 import com.ztx.world.base.service.PermissionService;
 import com.ztx.world.base.service.RoleService;
 import com.ztx.world.common.config.CustomSession;
@@ -41,10 +40,7 @@ public class ShiroReaml extends AuthorizingRealm {
     private UserMapper userMapper;
     
     @Autowired
-    private DepartmentMapper departmentMapper;
-    
-    @Autowired
-    private OrganizationMapper organizationMapper;
+    private UserExtMapper userExtMapper;
     
     @Autowired
     private RoleService roleService;
@@ -71,9 +67,9 @@ public class ShiroReaml extends AuthorizingRealm {
 		List<User> userList = userMapper.selectByExample(example);
 		User user = null;
 		if(CollectionUtils.isEmpty(userList)){
-			throw new AccountException("帐号或密码不正确!");
+			throw new AccountException("用户名或密码不正确!");
 		}else if(userList.get(0).getUserStatus() != BaseConstants.UserStatusType.USER_NORMAL){
-			throw new DisabledAccountException("帐号被禁止登录!");
+			throw new DisabledAccountException("用户被禁止登录!");
 		}else{
 			user = userList.get(0);
 			user.setLastLoginTime(new Date());
@@ -81,9 +77,9 @@ public class ShiroReaml extends AuthorizingRealm {
 		}
 		
 		CustomSession customSession = new CustomSession();
-		customSession.setUser(user);
-		customSession.setOrg(organizationMapper.selectByPrimaryKey(user.getOrgId()));
-		customSession.setDept(departmentMapper.selectByPrimaryKey(user.getDeptId()));
+		if(user != null && user.getId() != null){
+			customSession = userExtMapper.getSessionByUserId(user.getId());
+		}
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customSession, user.getPassword(), getName());
 		return info;
 	}
@@ -95,29 +91,31 @@ public class ShiroReaml extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         CustomSession customSession = (CustomSession)principals.getPrimaryPrincipal();
-        log.info("shiro权限检查,usercode:" + customSession.getUser().getUserCode());
+        log.info("shiro权限检查,usercode:" + customSession.getUserCode());
         
-		User user = customSession.getUser();
-        List<Role> roleList = roleService.findRolesByUserId(user.getId());
-        if(!CollectionUtils.isEmpty(roleList)){
-        	for(Role role : roleList){
-        		if(!StringUtils.isEmpty(role.getRoleCode())){
-        			authorizationInfo.addRole(role.getRoleCode());
-        			//log.info("角色:" + role.getRoleCode());
-        		}
-        		
-                List<Permission> permissionList = permissionService
-                		.findPermissionsByRoleId(role.getId());
-                if(!CollectionUtils.isEmpty(permissionList)){
-                	for (Permission permission : permissionList){
-                        if (!StringUtils.isEmpty(permission.getPermissionValue())) {
-                        	//log.info("权限:" + permission.getPermissionValue());
-                            authorizationInfo.addStringPermission(permission.getPermissionValue());
-                        }
-                	}
-                }
-        	}
-        }
+		Long userId = customSession.getUserId();
+		if(userId != null){
+	        List<Role> roleList = roleService.findRolesByUserId(userId);
+	        if(!CollectionUtils.isEmpty(roleList)){
+	        	for(Role role : roleList){
+	        		if(!StringUtils.isEmpty(role.getRoleCode())){
+	        			authorizationInfo.addRole(role.getRoleCode());
+	        			//log.info("角色:" + role.getRoleCode());
+	        		}
+	        		
+	                List<Permission> permissionList = permissionService
+	                		.findPermissionsByRoleId(role.getId());
+	                if(!CollectionUtils.isEmpty(permissionList)){
+	                	for (Permission permission : permissionList){
+	                        if (!StringUtils.isEmpty(permission.getPermissionValue())) {
+	                        	//log.info("权限:" + permission.getPermissionValue());
+	                            authorizationInfo.addStringPermission(permission.getPermissionValue());
+	                        }
+	                	}
+	                }
+	        	}
+	        }
+		}
         
         return authorizationInfo;
 	}

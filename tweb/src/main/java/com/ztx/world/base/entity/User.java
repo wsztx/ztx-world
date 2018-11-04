@@ -1,6 +1,5 @@
 package com.ztx.world.base.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,11 +7,7 @@ import java.util.Date;
  * @author zhoutianxiang
  *
  */
-public class User implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5722857458559610819L;
+public class User {
 
 	/**
      * 主键
