@@ -9,7 +9,22 @@
 <script type="text/javascript" src="${base}/resource/plugin/jquery-3.3.1/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 function doOperate(){
-	
+	$.ajax({
+		type: "POST",
+		url: "${base}/base/user/save", 
+		dataType: "json",
+		data: {},
+		success: function(result){
+			if(result.success){
+				
+			}else{
+				alert(result.message);
+			}
+		},
+		error: function(result){
+
+		}
+	});
 }
 </script>
 </head>
