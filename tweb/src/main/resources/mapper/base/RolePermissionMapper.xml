@@ -107,6 +107,9 @@
     </delete>
 
     <insert id="insert" parameterType="com.ztx.world.base.entity.RolePermission" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into base_role_permission (id, role_id, permission_id
             )
         values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{permissionId,jdbcType=BIGINT}
@@ -114,11 +117,12 @@
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.RolePermission" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into base_role_permission
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
+            id,
             <if test="roleId != null" >
                 role_id,
             </if>
@@ -127,9 +131,7 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id,jdbcType=BIGINT},
-            </if>
+            #{id,jdbcType=BIGINT},
             <if test="roleId != null" >
                 #{roleId,jdbcType=BIGINT},
             </if>

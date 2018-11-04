@@ -6,9 +6,9 @@ import java.util.Date;
 /**
  * 
  * 
- * @author wcyong
+ * @author ztx
  * 
- * @date 2018-10-28
+ * @date 2018-11-04
  */
 public class Config implements Serializable {
     /**

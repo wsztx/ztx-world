@@ -3,13 +3,14 @@ package com.ztx.world.base.entity;
 import java.util.Date;
 
 /**
- * 表base_organization
- * @author zhoutianxiang
- *
+ * 
+ * 
+ * @author ztx
+ * 
+ * @date 2018-11-04
  */
 public class Organization {
-
-	/**
+    /**
      * 主键
      */
     private Long id;

@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 表base_dictionary
- * @author zhoutianxiang
- *
+ * 
+ * 
+ * @author ztx
+ * 
+ * @date 2018-11-04
  */
 public class Dictionary implements Serializable {
     /**
