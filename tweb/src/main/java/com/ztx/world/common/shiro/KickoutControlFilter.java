@@ -25,6 +25,7 @@ import com.ztx.world.base.entity.Config;
 import com.ztx.world.base.service.ConfigService;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.config.CustomSession;
+import com.ztx.world.common.constants.ConfigTableConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.utils.ResponseUtil;
 import com.ztx.world.common.utils.ResultCodeUtil;
@@ -145,10 +146,10 @@ public class KickoutControlFilter extends AccessControlFilter {
 	 */
 	private Integer getMaxSession(){
 		Integer maxSession = 1;
-		List<Config> configList = configService.getConfigByType("user.login");
+		List<Config> configList = configService.getConfigByType(ConfigTableConstants.TYPE_USER_LOGIN);
 		if(!CollectionUtils.isEmpty(configList)){
 			for(Config config : configList){
-				if("online.max".equals(config.getConfigKey())) {
+				if(ConfigTableConstants.KEY_ONLINE_MAX.equals(config.getConfigKey())) {
 					maxSession = Integer.valueOf(config.getConfigValue());
 				}
 			}
