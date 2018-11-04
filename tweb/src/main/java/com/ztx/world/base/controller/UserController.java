@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.service.UserService;
 import com.ztx.world.common.config.BaseController;
-import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
@@ -35,7 +34,7 @@ public class UserController extends BaseController{
     @Autowired
     private UserService userService;
     
-    @RequestMapping(value = "tologin", method=RequestMethod.GET)
+    @RequestMapping(value = "tologin", method = RequestMethod.GET)
     public String toLogin(HttpServletRequest request){
     	Subject currentUser = SecurityUtils.getSubject();
     	if (currentUser.isAuthenticated()){
@@ -72,7 +71,7 @@ public class UserController extends BaseController{
     }
     
 	@RequiresPermissions(value = {"base:user:tolist"})
-    @RequestMapping(value="/tolist", method=RequestMethod.GET)
+    @RequestMapping(value="/tolist", method = RequestMethod.GET)
     public String toList(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
@@ -80,7 +79,7 @@ public class UserController extends BaseController{
     }
 	
 	@RequiresPermissions(value = {"base:user:toadd"})
-    @RequestMapping(value="/toadd", method=RequestMethod.GET)
+    @RequestMapping(value="/toadd", method = RequestMethod.GET)
     public String toAdd(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
@@ -88,7 +87,7 @@ public class UserController extends BaseController{
     }
 	
 	@RequiresPermissions(value = {"base:user:toedit"})
-    @RequestMapping(value="/toedit", method=RequestMethod.GET)
+    @RequestMapping(value="/toedit", method = RequestMethod.GET)
     public String toEdit(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
@@ -96,10 +95,46 @@ public class UserController extends BaseController{
     }
 	
 	@RequiresPermissions(value = {"base:user:toview"})
-    @RequestMapping(value="/toview", method=RequestMethod.GET)
+    @RequestMapping(value="/toview", method = RequestMethod.GET)
     public String toView(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
     	return "base/user/view";
+    }
+	
+    @ResponseBody
+    @RequiresPermissions(value = {"base:user:save"})
+    @RequestMapping(value="/save", method = RequestMethod.POST)
+    public BaseResponse save(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	
+    	return success();
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:user:update"})
+    @RequestMapping(value="/update", method = RequestMethod.POST)
+    public BaseResponse update(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	
+    	return success();
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:user:page"})
+    @RequestMapping(value="/page", method = RequestMethod.GET)
+    public BaseResponse page(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	
+    	return success();
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:user:delete"})
+    @RequestMapping(value="/delete", method = RequestMethod.GET)
+    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	
+    	return success();
     }
 }

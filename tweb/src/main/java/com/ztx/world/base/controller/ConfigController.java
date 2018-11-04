@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ztx.world.common.config.BaseController;
+import com.ztx.world.common.config.BaseResponse;
 
 @Controller
 @RequestMapping(value = "/base/config")
@@ -20,7 +22,7 @@ public class ConfigController extends BaseController {
 	private static Logger log = LoggerFactory.getLogger(ConfigController.class);
 
 	@RequiresPermissions(value = {"base:config:tolist"})
-    @RequestMapping(value="/tolist", method=RequestMethod.GET)
+    @RequestMapping(value="/tolist", method = RequestMethod.GET)
     public String toList(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
@@ -28,7 +30,7 @@ public class ConfigController extends BaseController {
     }
 	
 	@RequiresPermissions(value = {"base:config:toadd"})
-    @RequestMapping(value="/toadd", method=RequestMethod.GET)
+    @RequestMapping(value="/toadd", method = RequestMethod.GET)
     public String toAdd(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
@@ -36,7 +38,7 @@ public class ConfigController extends BaseController {
     }
 	
 	@RequiresPermissions(value = {"base:config:toedit"})
-    @RequestMapping(value="/toedit", method=RequestMethod.GET)
+    @RequestMapping(value="/toedit", method = RequestMethod.GET)
     public String toEdit(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
@@ -44,10 +46,46 @@ public class ConfigController extends BaseController {
     }
 	
 	@RequiresPermissions(value = {"base:config:toview"})
-    @RequestMapping(value="/toview", method=RequestMethod.GET)
+    @RequestMapping(value="/toview", method = RequestMethod.GET)
     public String toView(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
     	
     	return "base/config/view";
+    }
+	
+    @ResponseBody
+    @RequiresPermissions(value = {"base:config:save"})
+    @RequestMapping(value="/save", method = RequestMethod.POST)
+    public BaseResponse save(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	
+    	return success();
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:config:update"})
+    @RequestMapping(value="/update", method = RequestMethod.POST)
+    public BaseResponse update(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	
+    	return success();
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:config:page"})
+    @RequestMapping(value="/page", method = RequestMethod.GET)
+    public BaseResponse page(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	
+    	return success();
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:config:delete"})
+    @RequestMapping(value="/delete", method = RequestMethod.GET)
+    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	
+    	return success();
     }
 }

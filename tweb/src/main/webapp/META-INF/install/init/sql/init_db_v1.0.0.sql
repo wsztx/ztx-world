@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-10-28 12:19:48
+Date: 2018-11-04 08:47:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,7 @@ CREATE TABLE `base_config` (
   `use_status` int(2) DEFAULT NULL COMMENT '是否启用,1启用,0禁用',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_config
@@ -119,7 +119,7 @@ CREATE TABLE `base_permission` (
   `permission_value` varchar(64) DEFAULT NULL COMMENT '权限值',
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_permission
@@ -129,26 +129,50 @@ INSERT INTO `base_permission` VALUES ('2', '1', '2018-10-23 17:59:55', '2018-10-
 INSERT INTO `base_permission` VALUES ('3', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01001002', '配置新增页面', 'base:config:toadd', null);
 INSERT INTO `base_permission` VALUES ('4', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01001003', '配置编辑页面', 'base:config:toedit', null);
 INSERT INTO `base_permission` VALUES ('5', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01001004', '配置查看页面', 'base:config:toview', null);
-INSERT INTO `base_permission` VALUES ('6', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01002001', '字典列表页面', 'base:dictionary:tolist', '');
-INSERT INTO `base_permission` VALUES ('7', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01002002', '字典新增页面', 'base:dictionary:toadd', '');
-INSERT INTO `base_permission` VALUES ('8', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01002003', '字典编辑页面', 'base:dictionary:toedit', '');
-INSERT INTO `base_permission` VALUES ('9', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01002004', '字典查看页面', 'base:dictionary:toview', '');
-INSERT INTO `base_permission` VALUES ('10', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01003001', '机构列表页面', 'base:organization:tolist', '');
-INSERT INTO `base_permission` VALUES ('11', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01003002', '机构新增页面', 'base:organization:toadd', '');
-INSERT INTO `base_permission` VALUES ('12', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01003003', '机构编辑页面', 'base:organization:toedit', '');
-INSERT INTO `base_permission` VALUES ('13', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01003004', '机构查看页面', 'base:organization:toview', '');
-INSERT INTO `base_permission` VALUES ('14', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01004001', '部门列表页面', 'base:department:tolist', '');
-INSERT INTO `base_permission` VALUES ('15', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01004002', '部门新增页面', 'base:department:toadd', '');
-INSERT INTO `base_permission` VALUES ('16', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01004003', '部门编辑页面', 'base:department:toedit', '');
-INSERT INTO `base_permission` VALUES ('17', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01004004', '部门查看页面', 'base:department:toview', '');
-INSERT INTO `base_permission` VALUES ('18', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01005001', '角色列表页面', 'base:role:tolist', '');
-INSERT INTO `base_permission` VALUES ('19', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01005002', '角色新增页面', 'base:role:toadd', '');
-INSERT INTO `base_permission` VALUES ('20', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01005003', '角色编辑页面', 'base:role:toedit', '');
-INSERT INTO `base_permission` VALUES ('21', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01005004', '角色查看页面', 'base:role:toview', '');
-INSERT INTO `base_permission` VALUES ('22', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01006001', '用户列表页面', 'base:user:tolist', '');
-INSERT INTO `base_permission` VALUES ('23', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01006002', '用户新增页面', 'base:user:toadd', '');
-INSERT INTO `base_permission` VALUES ('24', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01006003', '用户编辑页面', 'base:user:toedit', '');
-INSERT INTO `base_permission` VALUES ('25', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01006004', '用户查看页面', 'base:user:toview', '');
+INSERT INTO `base_permission` VALUES ('6', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01001005', '配置查询', 'base:config:page', '');
+INSERT INTO `base_permission` VALUES ('7', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01001006', '配置新增', 'base:config:save', '');
+INSERT INTO `base_permission` VALUES ('8', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01001007', '配置修改', 'base:config:update', '');
+INSERT INTO `base_permission` VALUES ('9', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01001008', '配置删除', 'base:config:delete', '');
+INSERT INTO `base_permission` VALUES ('10', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01002001', '字典列表页面', 'base:dictionary:tolist', '');
+INSERT INTO `base_permission` VALUES ('11', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01002002', '字典新增页面', 'base:dictionary:toadd', '');
+INSERT INTO `base_permission` VALUES ('12', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01002003', '字典编辑页面', 'base:dictionary:toedit', '');
+INSERT INTO `base_permission` VALUES ('13', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01002004', '字典查看页面', 'base:dictionary:toview', '');
+INSERT INTO `base_permission` VALUES ('14', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01002005', '字典查询', 'base:dictionary:page', '');
+INSERT INTO `base_permission` VALUES ('15', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01002006', '字典新增', 'base:dictionary:save', '');
+INSERT INTO `base_permission` VALUES ('16', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01002007', '字典修改', 'base:dictionary:update', '');
+INSERT INTO `base_permission` VALUES ('17', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01002008', '字典删除', 'base:dictionary:delete', '');
+INSERT INTO `base_permission` VALUES ('18', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01003001', '机构列表页面', 'base:organization:tolist', '');
+INSERT INTO `base_permission` VALUES ('19', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01003002', '机构新增页面', 'base:organization:toadd', '');
+INSERT INTO `base_permission` VALUES ('20', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01003003', '机构编辑页面', 'base:organization:toedit', '');
+INSERT INTO `base_permission` VALUES ('21', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01003004', '机构查看页面', 'base:organization:toview', '');
+INSERT INTO `base_permission` VALUES ('22', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01003005', '机构查询', 'base:organization:page', '');
+INSERT INTO `base_permission` VALUES ('23', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01003006', '机构新增', 'base:organization:save', '');
+INSERT INTO `base_permission` VALUES ('24', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01003007', '机构修改', 'base:organization:update', '');
+INSERT INTO `base_permission` VALUES ('25', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01003008', '机构删除', 'base:organization:delete', '');
+INSERT INTO `base_permission` VALUES ('26', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01004001', '部门列表页面', 'base:department:tolist', '');
+INSERT INTO `base_permission` VALUES ('27', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01004002', '部门新增页面', 'base:department:toadd', '');
+INSERT INTO `base_permission` VALUES ('28', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01004003', '部门编辑页面', 'base:department:toedit', '');
+INSERT INTO `base_permission` VALUES ('29', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01004004', '部门查看页面', 'base:department:toview', '');
+INSERT INTO `base_permission` VALUES ('30', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01004005', '部门查询', 'base:department:page', '');
+INSERT INTO `base_permission` VALUES ('31', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01004006', '部门新增', 'base:department:save', '');
+INSERT INTO `base_permission` VALUES ('32', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01004007', '部门修改', 'base:department:update', '');
+INSERT INTO `base_permission` VALUES ('33', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01004008', '部门删除', 'base:department:delete', '');
+INSERT INTO `base_permission` VALUES ('34', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01005001', '角色列表页面', 'base:role:tolist', '');
+INSERT INTO `base_permission` VALUES ('35', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01005002', '角色新增页面', 'base:role:toadd', '');
+INSERT INTO `base_permission` VALUES ('36', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01005003', '角色编辑页面', 'base:role:toedit', '');
+INSERT INTO `base_permission` VALUES ('37', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01005004', '角色查看页面', 'base:role:toview', '');
+INSERT INTO `base_permission` VALUES ('38', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01005005', '角色查询', 'base:role:page', '');
+INSERT INTO `base_permission` VALUES ('39', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01005006', '角色新增', 'base:role:save', '');
+INSERT INTO `base_permission` VALUES ('40', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01005007', '角色修改', 'base:role:update', '');
+INSERT INTO `base_permission` VALUES ('41', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01005008', '角色删除', 'base:role:delete', '');
+INSERT INTO `base_permission` VALUES ('42', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01006001', '用户列表页面', 'base:user:tolist', '');
+INSERT INTO `base_permission` VALUES ('43', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01006002', '用户新增页面', 'base:user:toadd', '');
+INSERT INTO `base_permission` VALUES ('44', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01006003', '用户编辑页面', 'base:user:toedit', '');
+INSERT INTO `base_permission` VALUES ('45', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01006004', '用户查看页面', 'base:user:toview', '');
+INSERT INTO `base_permission` VALUES ('46', '1', '2018-10-23 17:59:55', '2018-10-23 17:59:58', '1', '01006005', '用户查询', 'base:user:page', '');
+INSERT INTO `base_permission` VALUES ('47', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01006006', '用户新增', 'base:user:save', '');
+INSERT INTO `base_permission` VALUES ('48', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01006007', '用户修改', 'base:user:update', '');
+INSERT INTO `base_permission` VALUES ('49', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01006008', '用户删除', 'base:user:delete', '');
 
 -- ----------------------------
 -- Table structure for base_role
@@ -180,7 +204,7 @@ CREATE TABLE `base_role_permission` (
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(32) DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_role_permission
@@ -210,6 +234,30 @@ INSERT INTO `base_role_permission` VALUES ('22', '1', '22');
 INSERT INTO `base_role_permission` VALUES ('23', '1', '23');
 INSERT INTO `base_role_permission` VALUES ('24', '1', '24');
 INSERT INTO `base_role_permission` VALUES ('25', '1', '25');
+INSERT INTO `base_role_permission` VALUES ('26', '1', '26');
+INSERT INTO `base_role_permission` VALUES ('27', '1', '27');
+INSERT INTO `base_role_permission` VALUES ('28', '1', '28');
+INSERT INTO `base_role_permission` VALUES ('29', '1', '29');
+INSERT INTO `base_role_permission` VALUES ('30', '1', '30');
+INSERT INTO `base_role_permission` VALUES ('31', '1', '31');
+INSERT INTO `base_role_permission` VALUES ('32', '1', '32');
+INSERT INTO `base_role_permission` VALUES ('33', '1', '33');
+INSERT INTO `base_role_permission` VALUES ('34', '1', '34');
+INSERT INTO `base_role_permission` VALUES ('35', '1', '35');
+INSERT INTO `base_role_permission` VALUES ('36', '1', '36');
+INSERT INTO `base_role_permission` VALUES ('37', '1', '37');
+INSERT INTO `base_role_permission` VALUES ('38', '1', '38');
+INSERT INTO `base_role_permission` VALUES ('39', '1', '39');
+INSERT INTO `base_role_permission` VALUES ('40', '1', '40');
+INSERT INTO `base_role_permission` VALUES ('41', '1', '41');
+INSERT INTO `base_role_permission` VALUES ('42', '1', '42');
+INSERT INTO `base_role_permission` VALUES ('43', '1', '43');
+INSERT INTO `base_role_permission` VALUES ('44', '1', '44');
+INSERT INTO `base_role_permission` VALUES ('45', '1', '45');
+INSERT INTO `base_role_permission` VALUES ('46', '1', '46');
+INSERT INTO `base_role_permission` VALUES ('47', '1', '47');
+INSERT INTO `base_role_permission` VALUES ('48', '1', '48');
+INSERT INTO `base_role_permission` VALUES ('49', '1', '49');
 
 -- ----------------------------
 -- Table structure for base_user
@@ -236,7 +284,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-10-24 17:51:29', '0');
+INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-11-04 07:45:01', '0');
 
 -- ----------------------------
 -- Table structure for base_user_role
