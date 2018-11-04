@@ -28,12 +28,12 @@
 		<property name="maxAge" value="604800" />
     </bean>
     
-	<bean id="shiroReaml" class="com.ztx.world.common.shiro.ShiroReaml"></bean>
+	<bean id="shiroRealm" class="com.ztx.world.common.shiro.ShiroRealm"></bean>
 	
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="sessionManager" ref="sessionManager"></property>
         <property name="cacheManager" ref="redisCacheManager"></property>
-        <property name="realm" ref="shiroReaml"></property>
+        <property name="realm" ref="shiroRealm"></property>
     </bean>
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />

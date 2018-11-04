@@ -13,7 +13,7 @@ function doLogin(){
 		type: "POST",
 		url: "${base}/base/user/login", 
 		dataType: "json",
-		data: {"userCode":"admin", "password":"123456"},
+		data: {"userCode":"SuperAdmin", "password":"123456"},
 		success: function(result){
 			if(result.success){
 				location.href = "${base}/index";

@@ -27,6 +27,7 @@ import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.shiro.ShiroToken;
 import com.ztx.world.common.utils.MD5Util;
+import com.ztx.world.common.utils.ShiroUtil;
 
 @Controller
 @RequestMapping(value = "/base/user")
@@ -113,6 +114,9 @@ public class UserController extends BaseController{
 		if(user == null){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
 		}
+    	// 以下代码测试用
+    	ShiroUtil.clearAllCachedAuthorizationInfo();
+
     	return success();
     }
     

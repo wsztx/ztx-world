@@ -32,9 +32,9 @@ import com.ztx.world.base.service.RoleService;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
 
-public class ShiroReaml extends AuthorizingRealm {
+public class ShiroRealm extends AuthorizingRealm {
 	
-	private static Logger log = LoggerFactory.getLogger(ShiroReaml.class);
+	private static Logger log = LoggerFactory.getLogger(ShiroRealm.class);
 	
     @Autowired
     private UserMapper userMapper;
@@ -48,7 +48,7 @@ public class ShiroReaml extends AuthorizingRealm {
     @Autowired
     private PermissionService permissionService;
     
-	public ShiroReaml() {
+	public ShiroRealm() {
 		super();
 	}
 	
@@ -80,7 +80,7 @@ public class ShiroReaml extends AuthorizingRealm {
 		if(user != null && user.getId() != null){
 			customSession = userExtMapper.getSessionByUserId(user.getId());
 		}
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customSession, user.getPassword(), getName());
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customSession, user.getPassword(), user.getUserCode());
 		return info;
 	}
 
@@ -123,19 +123,19 @@ public class ShiroReaml extends AuthorizingRealm {
     /**
      * 清空当前用户权限信息
      */
-    public  void clearCachedAuthorizationInfo() {
+    public void clearCachedAuthorizationInfo() {
         PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
-        SimplePrincipalCollection principals = new SimplePrincipalCollection(
-                principalCollection, getName());
-        super.clearCachedAuthorizationInfo(principals);
+        this.clearCachedAuthorizationInfo(principalCollection);
     }
     
     /**
-     * 指定principalCollection清除
+     * 指定principalCollection清除权限信息
      */
     public void clearCachedAuthorizationInfo(PrincipalCollection principalCollection) {
+    	CustomSession customSession = (CustomSession)principalCollection.getPrimaryPrincipal();
         SimplePrincipalCollection principals = new SimplePrincipalCollection(
-                principalCollection, getName());
+                principalCollection, customSession.getUserCode());
         super.clearCachedAuthorizationInfo(principals);
     }
+    
 }

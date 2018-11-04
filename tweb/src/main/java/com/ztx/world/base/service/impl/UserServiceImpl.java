@@ -49,13 +49,15 @@ public class UserServiceImpl implements UserService {
 			
 			// 逻辑删除用户
 			for(Long id : ids){
-				User user = new User();
+				User user = userMapper.selectByPrimaryKey(id);
 				user.setId(id);
 				user.setStatus(BaseConstants.DELETE_STATUS);
 				userMapper.updateByPrimaryKeySelective(user);
+				
+				// 清除删除的用户权限缓存
+				
 			}
 			
-			// 清除该用户权限信息
 		}
 	}
 

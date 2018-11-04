@@ -13,7 +13,7 @@ function doOperate(){
 		type: "POST",
 		url: "${base}/base/user/save", 
 		dataType: "json",
-		data: {},
+		data: {"userCode":"SuperAdmin"},
 		success: function(result){
 			if(result.success){
 				

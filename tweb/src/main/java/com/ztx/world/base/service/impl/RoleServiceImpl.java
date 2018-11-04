@@ -59,9 +59,11 @@ public class RoleServiceImpl implements RoleService {
 				role.setId(id);
 				role.setStatus(BaseConstants.DELETE_STATUS);
 				roleMapper.updateByPrimaryKeySelective(role);
+				
+				// 删除该角色的用户权限
+				
 			}
 			
-			// 清除所有权限信息
 		}
 	}
 
