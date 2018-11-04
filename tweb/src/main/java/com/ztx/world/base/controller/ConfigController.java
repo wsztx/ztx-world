@@ -69,6 +69,9 @@ public class ConfigController extends BaseController {
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public BaseResponse save(HttpServletRequest request, HttpServletResponse response,
     		ConfigVo config) throws Exception{
+		if(config == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
 		if(StringUtils.isEmpty(config.getConfigType())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空!");
 		}
@@ -90,6 +93,9 @@ public class ConfigController extends BaseController {
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
     		ConfigVo config) throws Exception{
+		if(config == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
 		if(config.getId() == null){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置数据不存在!");
 		}

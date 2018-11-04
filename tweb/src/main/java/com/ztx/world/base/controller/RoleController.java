@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ztx.world.base.vo.RoleVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
+import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.exception.BasicException;
 
 @Controller
 @RequestMapping(value = "/base/role")
@@ -56,18 +59,25 @@ public class RoleController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base:role:save"})
     @RequestMapping(value="/save", method = RequestMethod.POST)
-    public BaseResponse save(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
-    	
+    public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
+    		RoleVo role) throws Exception{
+		if(role == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
     	return success();
     }
     
     @ResponseBody
     @RequiresPermissions(value = {"base:role:update"})
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public BaseResponse update(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
-    	
+    public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
+    		RoleVo role) throws Exception{
+		if(role == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		if("SuperAdmin".equals(role.getRoleCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法修改!");
+		}
     	return success();
     }
     

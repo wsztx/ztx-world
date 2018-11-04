@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.service.UserService;
+import com.ztx.world.base.vo.UserVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.constants.ResultCode;
@@ -105,18 +106,25 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base:user:save"})
     @RequestMapping(value="/save", method = RequestMethod.POST)
-    public BaseResponse save(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
-    	
+    public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
+    		UserVo user) throws Exception{
+		if(user == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
     	return success();
     }
     
     @ResponseBody
     @RequiresPermissions(value = {"base:user:update"})
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public BaseResponse update(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
-    	
+    public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
+    		UserVo user) throws Exception{
+		if(user == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		if("SuperAdmin".equals(user.getUserCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户超级管理员无法修改!");
+		}
     	return success();
     }
     

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-04 10:33:22
+Date: 2018-11-04 12:57:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -188,12 +188,15 @@ CREATE TABLE `base_role` (
   `role_name` varchar(64) DEFAULT NULL COMMENT '角色名',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_role
 -- ----------------------------
-INSERT INTO `base_role` VALUES ('1', '1', '2018-10-23 17:14:46', '2018-10-23 17:14:48', '1', 'admin', '系统管理员', null);
+INSERT INTO `base_role` VALUES ('1', '1', '2018-10-23 17:14:46', '2018-10-23 17:14:48', '1', 'SuperAdmin', '超级管理员', null);
+INSERT INTO `base_role` VALUES ('2', '1', '2018-11-04 12:49:55', '2018-11-04 12:49:57', '1', 'SystemAdmin', '系统管理员', null);
+INSERT INTO `base_role` VALUES ('3', '1', '2018-11-04 12:51:02', '2018-11-04 12:51:04', '1', 'BussinessAdmin', '业务管理员', null);
+INSERT INTO `base_role` VALUES ('4', '1', '2018-11-04 12:52:56', '2018-11-04 12:52:59', '1', 'OrdinaryUser', '普通用户', null);
 
 -- ----------------------------
 -- Table structure for base_role_permission
@@ -284,7 +287,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-11-04 10:28:48', '0');
+INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'SuperAdmin', '超级管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-11-04 12:35:34', '0');
 
 -- ----------------------------
 -- Table structure for base_user_role
