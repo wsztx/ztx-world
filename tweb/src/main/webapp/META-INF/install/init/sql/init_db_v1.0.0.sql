@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-04 08:47:40
+Date: 2018-11-04 10:33:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,7 +58,7 @@ CREATE TABLE `base_department` (
 -- ----------------------------
 -- Records of base_department
 -- ----------------------------
-INSERT INTO `base_department` VALUES ('1', '1', '2018-10-23 17:16:29', '2018-10-23 17:16:33', '1', null, null, null);
+INSERT INTO `base_department` VALUES ('1', '1', '2018-10-23 17:16:29', '2018-10-23 17:16:33', '1', null, '主控部门', null);
 
 -- ----------------------------
 -- Table structure for base_dictionary
@@ -102,7 +102,7 @@ CREATE TABLE `base_organization` (
 -- ----------------------------
 -- Records of base_organization
 -- ----------------------------
-INSERT INTO `base_organization` VALUES ('1', '1', '2018-10-23 17:16:01', '2018-10-23 17:16:04', '1', null, null, null, null);
+INSERT INTO `base_organization` VALUES ('1', '1', '2018-10-23 17:16:01', '2018-10-23 17:16:04', '1', null, '主控中心', null, null);
 
 -- ----------------------------
 -- Table structure for base_permission
@@ -284,7 +284,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-11-04 07:45:01', '0');
+INSERT INTO `base_user` VALUES ('1', '1', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'admin', '管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-11-04 10:28:48', '0');
 
 -- ----------------------------
 -- Table structure for base_user_role
