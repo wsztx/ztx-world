@@ -1,4 +1,4 @@
-package com.ztx.world.base.entity.others;
+package com.ztx.world.common.model;
 
 /**
  * 树封装类

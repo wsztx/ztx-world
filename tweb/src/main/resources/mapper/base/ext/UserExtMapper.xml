@@ -12,7 +12,7 @@
         <result column="org_id" property="orgId" jdbcType="BIGINT" />
         <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
         <result column="org_name" property="orgName" jdbcType="VARCHAR" />
-        <collection property="roleList" column="id=user_id" select="findRoleBeanList" />
+        <collection property="roleList" column="id=user_id" select="findRoleModelList" />
     </resultMap>
 
 	<select id="getSessionByUserId" resultMap="SessionResultMap">
@@ -24,7 +24,7 @@
 		where user.status = 1 and user.id = #{id}
 	</select>
 	
-	<select id="findRoleBeanList" resultType="com.ztx.world.base.entity.others.RoleBean">
+	<select id="findRoleModelList" resultType="com.ztx.world.common.model.RoleModel">
 		select role.id as roleId, role.role_code as roleCode, role.role_name as roleName 
 		from base_role role 
 		inner join base_user_role userRole on userRole.user_id = #{id} 

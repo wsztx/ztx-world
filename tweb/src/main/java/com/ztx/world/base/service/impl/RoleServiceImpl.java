@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.ztx.world.base.entity.Role;
-import com.ztx.world.base.entity.others.RoleBean;
 import com.ztx.world.base.mapper.RoleMapper;
 import com.ztx.world.base.mapper.ext.RoleExtMapper;
 import com.ztx.world.base.service.RoleService;
@@ -16,6 +15,7 @@ import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
+import com.ztx.world.common.model.RoleModel;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -36,7 +36,7 @@ public class RoleServiceImpl implements RoleService {
 	public void deleteRole(List<Long> ids) {
 		if(CollectionUtils.isEmpty(ids)){
 			CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
-			List<RoleBean> roleList = customSession.getRoleList();
+			List<RoleModel> roleList = customSession.getRoleList();
 			for(Long id : ids){
 				Role role = roleMapper.selectByPrimaryKey(id);
 				if(role != null){
@@ -44,8 +44,8 @@ public class RoleServiceImpl implements RoleService {
 						throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法删除!");
 					}
 					if(CollectionUtils.isEmpty(roleList)){
-						for(RoleBean roleBean : roleList){
-							if(id.equals(roleBean.getRoleId())){
+						for(RoleModel roleModel : roleList){
+							if(id.equals(roleModel.getRoleId())){
 								throw new BasicException(ResultCode.BASE_ARG_ERROR, "不能删除自己的角色!");
 							}
 						}

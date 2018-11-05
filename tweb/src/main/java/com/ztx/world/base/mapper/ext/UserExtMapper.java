@@ -2,8 +2,8 @@ package com.ztx.world.base.mapper.ext;
 
 import java.util.List;
 
-import com.ztx.world.base.entity.others.RoleBean;
 import com.ztx.world.common.config.CustomSession;
+import com.ztx.world.common.model.RoleModel;
 
 public interface UserExtMapper {
 
@@ -19,5 +19,5 @@ public interface UserExtMapper {
 	 * @param id
 	 * @return
 	 */
-	List<RoleBean> findRoleBeanList(Long id);
+	List<RoleModel> findRoleModelList(Long id);
 }

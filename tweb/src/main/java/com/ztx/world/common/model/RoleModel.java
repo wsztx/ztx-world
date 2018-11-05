@@ -1,8 +1,8 @@
-package com.ztx.world.base.entity.others;
+package com.ztx.world.common.model;
 
 import java.io.Serializable;
 
-public class RoleBean implements Serializable {
+public class RoleModel implements Serializable {
 
 	/**
 	 * 

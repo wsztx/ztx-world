@@ -3,7 +3,7 @@ package com.ztx.world.common.config;
 import java.io.Serializable;
 import java.util.List;
 
-import com.ztx.world.base.entity.others.RoleBean;
+import com.ztx.world.common.model.RoleModel;
 
 /**
  * 登录的自定义session
@@ -65,7 +65,7 @@ public class CustomSession implements Serializable {
 	/**
 	 * 角色集合
 	 */
-	private List<RoleBean> roleList;
+	private List<RoleModel> roleList;
 
 	public Long getUserId() {
 		return userId;
@@ -139,16 +139,12 @@ public class CustomSession implements Serializable {
 		this.orgName = orgName;
 	}
 
-	public List<RoleBean> getRoleList() {
+	public List<RoleModel> getRoleList() {
 		return roleList;
 	}
 
-	public void setRoleList(List<RoleBean> roleList) {
+	public void setRoleList(List<RoleModel> roleList) {
 		this.roleList = roleList;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	
 }
