@@ -75,6 +75,9 @@ public class ConfigController extends BaseController {
 		if(StringUtils.isEmpty(config.getConfigType())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空!");
 		}
+		if(StringUtils.isEmpty(config.getConfigName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空!");
+		}
 		if(StringUtils.isEmpty(config.getConfigKey())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空!");
 		}
@@ -82,9 +85,6 @@ public class ConfigController extends BaseController {
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
 		}
     	Long id = configService.saveConfig(config);
-		if(id == null){
-			throw new BasicException(ResultCode.SYS_OPERATION_FAILED, "新增配置失败!");
-		}
     	return success(id);
     }
     
@@ -102,6 +102,9 @@ public class ConfigController extends BaseController {
 		if(StringUtils.isEmpty(config.getConfigType())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空!");
 		}
+		if(StringUtils.isEmpty(config.getConfigName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空!");
+		}
 		if(StringUtils.isEmpty(config.getConfigKey())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空!");
 		}
@@ -109,10 +112,7 @@ public class ConfigController extends BaseController {
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
 		}
     	Long id = configService.updateConfig(config);
-		if(id == null){
-			throw new BasicException(ResultCode.SYS_OPERATION_FAILED, "修改配置失败!");
-		}
-    	return success();
+    	return success(id);
     }
     
     @ResponseBody

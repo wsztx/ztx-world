@@ -15,6 +15,8 @@ import com.ztx.world.base.service.ConfigService;
 import com.ztx.world.base.vo.ConfigVo;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.redis.RedisOperator;
 
 @Service
@@ -52,6 +54,9 @@ public class ConfigServiceImpl implements ConfigService {
 		CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
 		config.setCreateUserId(customSession.getUserId());
 		configMapper.insertSelective(config);
+		if(config.getId() == null){
+			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增配置失败!");
+		}
 		return config.getId();
 	}
 

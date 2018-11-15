@@ -1,5 +1,7 @@
 package com.ztx.world.common.exception;
 
+import java.text.MessageFormat;
+
 import com.ztx.world.common.utils.ResultCodeUtil;
 
 /**
@@ -40,31 +42,68 @@ public class BasicException extends RuntimeException {
 		this.msg = msg;
 	}
 
+	/**
+	 * 默认构造器
+	 */
 	public BasicException(){
         super();
     }
 
+	/**
+	 * 异常构造器
+	 * @param code
+	 */
 	public BasicException(Integer code) {
 		this(code, ResultCodeUtil.get(code));
 	}
 	
+	/**
+	 * 异常构造器
+	 * @param code
+	 * @param message
+	 */
 	public BasicException(Integer code, String message) {
 		super(message);
 		this.code = code;
 		this.msg = message;
 	}
 
+	/**
+	 * 异常构造器
+	 * @param message
+	 * @param cause
+	 */
     public BasicException(String message, Throwable cause){
         super(message, cause);
     }
 
+    /**
+     * 异常构造器
+     * @param cause
+     */
     public BasicException(Throwable cause) {
         super(cause);
     }
+    
+	/**
+	 * 异常构造器
+	 * @param code 代码
+	 * @param msgFormat 消息模板,内部会用MessageFormat拼接,模板类似:userid={0},message={1},date{2}
+	 * @param args 具体参数的值
+	 */
+    public BasicException(Integer code, String msgFormat, Object... args) {
+		super(MessageFormat.format(msgFormat, args));
+		this.code = code;
+		this.msg = MessageFormat.format(msgFormat, args);
+	}
 	
+	/**
+	 * 重写堆栈填充，不填充错误堆栈信息
+	 * @return
+	 */
 	@Override
-	public String toString() {
-		return "BasicException [errorCode=" + code + ", errorMessage=" + msg + "]";
+	public Throwable fillInStackTrace() {
+		return this;
 	}
 	
 }

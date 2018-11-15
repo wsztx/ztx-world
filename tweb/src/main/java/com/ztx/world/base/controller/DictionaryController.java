@@ -1,25 +1,36 @@
 package com.ztx.world.base.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ztx.world.base.service.DictionaryService;
+import com.ztx.world.base.vo.DictionaryVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
+import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.exception.BasicException;
 
 @Controller
 @RequestMapping(value = "/base/dictionary")
 public class DictionaryController extends BaseController {
 
 	private static Logger log = LoggerFactory.getLogger(DictionaryController.class);
+	
+	@Autowired
+	private DictionaryService dictionaryService;
 	
 	@RequiresPermissions(value = {"base:dictionary:tolist"})
     @RequestMapping(value="/tolist", method = RequestMethod.GET)
@@ -56,19 +67,52 @@ public class DictionaryController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base:dictionary:save"})
     @RequestMapping(value="/save", method = RequestMethod.POST)
-    public BaseResponse save(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
-    	
-    	return success();
+    public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
+    		DictionaryVo dictionary) throws Exception{
+    	if(dictionary == null){
+    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+    	}
+		if(StringUtils.isEmpty(dictionary.getDictionaryType())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryKey())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
+		}
+    	Long id = dictionaryService.saveDictionary(dictionary);
+    	return success(id);
     }
     
     @ResponseBody
     @RequiresPermissions(value = {"base:dictionary:update"})
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public BaseResponse update(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
-    	
-    	return success();
+    public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
+    		DictionaryVo dictionary) throws Exception{
+    	if(dictionary == null){
+    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+    	}
+		if(dictionary.getId() == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典数据不存在!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryType())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryKey())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
+		}
+    	Long id = dictionaryService.updateDictionary(dictionary);
+    	return success(id);
     }
     
     @ResponseBody
@@ -83,9 +127,9 @@ public class DictionaryController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base:dictionary:delete"})
     @RequestMapping(value="/delete", method = RequestMethod.GET)
-    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
-    	
+    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
+    		List<Long> ids) throws Exception{
+    	dictionaryService.deleteDictionary(ids);
     	return success();
     }
 }
