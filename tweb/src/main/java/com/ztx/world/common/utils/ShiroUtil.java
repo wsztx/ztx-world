@@ -2,6 +2,7 @@ package com.ztx.world.common.utils;
 
 import java.util.Collection;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
@@ -24,25 +25,62 @@ public class ShiroUtil {
 	private RedisSessionDAO sessionDAO;
     
     /**
-     * 清除所有权限缓存
+     * 清除所有用户权限缓存
      */
-    public void clearAllCache(){
-    	redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").clear();
+    public void clearAllAuthCache(){
+    	Collection<Session> sessions = sessionDAO.getActiveSessions();
+    	if(!CollectionUtils.isEmpty(sessions)){
+        	for(Session session : sessions){
+        		SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+        		redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").remove(principalCollection);
+        	}
+    	}
     }
     
     /**
-     * 清除指定用户的缓存
+     * 清除指定用户的权限缓存
      * @param userCode
      */
-    public void clearCache(String userCode){
+    public void clearAuthCache(String userCode){
     	if(!StringUtils.isEmpty(userCode)){
         	Collection<Session> sessions = sessionDAO.getActiveSessions();
         	if(!CollectionUtils.isEmpty(sessions)){
             	for(Session session : sessions){
-            		CustomSession mySession = (CustomSession)((SimplePrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY)).getPrimaryPrincipal();
+            		SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+            		CustomSession mySession = (CustomSession)principalCollection.getPrimaryPrincipal();
             		if(userCode.equals(mySession.getUserCode())){
-            			String sessionId = session.getId().toString();
-            			redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").remove(sessionId);
+            			redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").remove(principalCollection);
+            		}
+            	}
+        	}
+    	}
+    }
+    
+    /**
+     * 踢出所有用户
+     */
+    public void clearAllUser(){
+    	Collection<Session> sessions = sessionDAO.getActiveSessions();
+    	if(!CollectionUtils.isEmpty(sessions)){
+        	for(Session session : sessions){
+        		sessionDAO.delete(session);
+        	}
+    	}
+    }
+    
+    /**
+     * 踢出指定用户
+     * @param userCode
+     */
+    public void clearUser(String userCode){
+    	if(!StringUtils.isEmpty(userCode)){
+        	Collection<Session> sessions = sessionDAO.getActiveSessions();
+        	if(!CollectionUtils.isEmpty(sessions)){
+            	for(Session session : sessions){
+            		SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+            		CustomSession mySession = (CustomSession)principalCollection.getPrimaryPrincipal();
+            		if(userCode.equals(mySession.getUserCode())){
+            			sessionDAO.delete(session);
             		}
             	}
         	}

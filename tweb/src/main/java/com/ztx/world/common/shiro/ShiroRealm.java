@@ -120,23 +120,5 @@ public class ShiroRealm extends AuthorizingRealm {
         
         return authorizationInfo;
 	}
-	
-    /**
-     * 清空当前用户权限信息
-     */
-    public void clearCachedAuthorizationInfo() {
-        PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
-        this.clearCachedAuthorizationInfo(principalCollection);
-    }
-    
-    /**
-     * 指定principalCollection清除权限信息
-     */
-    public void clearCachedAuthorizationInfo(PrincipalCollection principalCollection) {
-    	CustomSession customSession = (CustomSession)principalCollection.getPrimaryPrincipal();
-        SimplePrincipalCollection principals = new SimplePrincipalCollection(
-                principalCollection, customSession.getUserCode());
-        super.clearCachedAuthorizationInfo(principals);
-    }
     
 }
