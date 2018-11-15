@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.ztx.world.base.entity.Role;
+import com.ztx.world.base.entity.UserRoleExample;
 import com.ztx.world.base.mapper.RoleMapper;
+import com.ztx.world.base.mapper.UserRoleMapper;
 import com.ztx.world.base.mapper.ext.RoleExtMapper;
 import com.ztx.world.base.service.RoleService;
 import com.ztx.world.common.config.CustomSession;
@@ -16,6 +18,7 @@ import com.ztx.world.common.constants.BaseConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.model.RoleModel;
+import com.ztx.world.common.utils.ShiroUtil;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -25,6 +28,12 @@ public class RoleServiceImpl implements RoleService {
 	
 	@Autowired
 	private RoleMapper roleMapper;
+	
+	@Autowired
+	private UserRoleMapper userRoleMapper;
+	
+	@Autowired
+	private ShiroUtil shiroUtil;
 
 	@Override
 	public List<Role> findRolesByUserId(Long id) {
@@ -43,6 +52,12 @@ public class RoleServiceImpl implements RoleService {
 					if("SuperAdmin".equals(role.getRoleCode())){
 						throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法删除!");
 					}
+					UserRoleExample example = new UserRoleExample();
+					example.createCriteria().andRoleIdEqualTo(id);
+					int count = userRoleMapper.countByExample(example);
+					if(count > 0){
+						throw new BasicException(ResultCode.BASE_ARG_ERROR, "已有用户分配角色" + role.getRoleName() + ",无法删除!");
+					}
 					if(CollectionUtils.isEmpty(roleList)){
 						for(RoleModel roleModel : roleList){
 							if(id.equals(roleModel.getRoleId())){
@@ -59,11 +74,7 @@ public class RoleServiceImpl implements RoleService {
 				role.setId(id);
 				role.setStatus(BaseConstants.DELETE_STATUS);
 				roleMapper.updateByPrimaryKeySelective(role);
-				
-				// 删除该角色的用户权限
-				
 			}
-			
 		}
 	}
 

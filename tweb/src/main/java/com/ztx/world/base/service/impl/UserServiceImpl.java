@@ -53,9 +53,6 @@ public class UserServiceImpl implements UserService {
 				user.setId(id);
 				user.setStatus(BaseConstants.DELETE_STATUS);
 				userMapper.updateByPrimaryKeySelective(user);
-				
-				// 清除删除的用户权限缓存
-				
 			}
 			
 		}

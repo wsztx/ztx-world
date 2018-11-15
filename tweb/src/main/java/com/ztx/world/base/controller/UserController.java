@@ -38,7 +38,10 @@ public class UserController extends BaseController{
     @Autowired
     private UserService userService;
     
-    @RequestMapping(value = "tologin", method = RequestMethod.GET)
+    @Autowired
+    private ShiroUtil shiroUtil;
+    
+    @RequestMapping(value = "/tologin", method = RequestMethod.GET)
     public String toLogin(HttpServletRequest request){
     	Subject currentUser = SecurityUtils.getSubject();
     	if (currentUser.isAuthenticated()){
@@ -50,7 +53,7 @@ public class UserController extends BaseController{
     }
     
     @ResponseBody
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public BaseResponse login(HttpServletRequest request, HttpServletResponse response, 
     		User user){
     	if(user == null || StringUtils.isEmpty(user.getUserCode()) || StringUtils.isEmpty(user.getPassword())){
@@ -67,7 +70,7 @@ public class UserController extends BaseController{
     }
     
     @ResponseBody
-    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public BaseResponse logout(HttpServletRequest request, HttpServletResponse response){
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
@@ -115,7 +118,7 @@ public class UserController extends BaseController{
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
 		}
     	// 以下代码测试用
-    	ShiroUtil.clearAllCachedAuthorizationInfo();
+		shiroUtil.clearAllCache();
 
     	return success();
     }

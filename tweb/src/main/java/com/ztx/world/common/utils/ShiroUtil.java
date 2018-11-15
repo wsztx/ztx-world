@@ -1,44 +1,24 @@
 package com.ztx.world.common.utils;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.cache.Cache;
-import org.apache.shiro.mgt.RealmSecurityManager;
-import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.ztx.world.common.shiro.ShiroRealm;
+import com.ztx.world.common.redis.RedisCacheManager;
 
+@Component
 public class ShiroUtil {
+	
+	@Autowired
+	private RedisCacheManager redisCacheManager;
     
     /**
-     * 指定principalCollection清除权限信息
+     * 清楚所有权限缓存
      */
-    public static void clearCachedAuthorizationInfo(PrincipalCollection principalCollection) {
-    	RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
-		ShiroRealm shiroRealm = (ShiroRealm)rsm.getRealms().iterator().next();
-		shiroRealm.clearCachedAuthorizationInfo(principalCollection);
+    public void clearAllCache(){
+    	redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm").clear();
     }
     
-    /**
-     * 清空当前用户权限信息
-     */
-    public static void clearCachedAuthorizationInfo(){
-    	RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
-		ShiroRealm shiroRealm = (ShiroRealm)rsm.getRealms().iterator().next();
-		shiroRealm.clearCachedAuthorizationInfo();
-    }
-    
-    /**
-     * 清空所有权限信息
-     */
-    public static void clearAllCachedAuthorizationInfo() {
-    	RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
-		ShiroRealm shiroRealm = (ShiroRealm)rsm.getRealms().iterator().next();
-        Cache<Object, AuthorizationInfo> cache = shiroRealm.getAuthorizationCache();
-        if (cache != null) {
-            for (Object key : cache.keys()) {
-                cache.remove(key);
-            }
-        }
+    public void clearCache(String sessionId){
+    	redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm").remove(sessionId);
     }
 }
