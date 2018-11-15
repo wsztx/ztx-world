@@ -48,8 +48,9 @@ public class ShiroRealm extends AuthorizingRealm {
     @Autowired
     private PermissionService permissionService;
     
-	public ShiroRealm() {
-		super();
+	@Override
+	public void setName(String name) {
+		super.setName("ShiroRealm");
 	}
 	
 	/**

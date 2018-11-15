@@ -118,7 +118,7 @@ public class UserController extends BaseController{
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
 		}
     	// 以下代码测试用
-		shiroUtil.clearAllCache();
+		shiroUtil.clearCache("SuperAdmin");
 
     	return success();
     }
