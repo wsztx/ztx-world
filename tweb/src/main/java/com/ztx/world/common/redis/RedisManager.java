@@ -8,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import com.ztx.world.common.constants.ConfigConstants;
+
 @Component
 public class RedisManager {
 
     @Autowired
     private RedisTemplate<String, Session> redisTemplate;
     
-    private static final String KEY = "shareSessionMap";
+    private static final String KEY = ConfigConstants.REDIS_SESSION;
     
     public void hadd(String sessionId, byte[] bytes){
         redisTemplate.boundHashOps(KEY).put(sessionId, bytes);

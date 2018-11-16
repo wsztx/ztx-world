@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
         // 当前的用户是否已经被认证,即是否已经登陆
         if (!currentUser.isAuthenticated()) {
         	ShiroToken token = new ShiroToken(user.getUserCode(), MD5Util.md5(user.getPassword()));
-            token.setRememberMe(true);
+            token.setRememberMe(false);
             currentUser.login(token);
             // 修改最后登录时间
             UserExample example = new UserExample();

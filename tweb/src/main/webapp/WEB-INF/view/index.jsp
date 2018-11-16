@@ -10,10 +10,10 @@
 <script type="text/javascript">
 function doOperate(){
 	$.ajax({
-		type: "POST",
-		url: "${base}/base/user/save", 
+		type: "GET",
+		url: "${base}/demo/test4", 
 		dataType: "json",
-		data: {"userCode":"SuperAdmin"},
+		data: {},
 		success: function(result){
 			if(result.success){
 				

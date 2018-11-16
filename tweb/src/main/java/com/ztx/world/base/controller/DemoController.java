@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -21,12 +22,16 @@ import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
+import com.ztx.world.common.utils.ShiroUtil;
 
 @Controller
 @RequestMapping(value = "/demo")
 public class DemoController extends BaseController {
 	
 	private static Logger log = LoggerFactory.getLogger(DemoController.class);
+	
+	@Autowired
+	private ShiroUtil shiroUtil;
     
     @RequestMapping(value="/test1", method=RequestMethod.GET)
     public String test1(HttpServletRequest request, HttpServletResponse response, 
@@ -68,5 +73,13 @@ public class DemoController extends BaseController {
     	user.setId(123L);
     	user.setUserName("测试");
     	return success(user);
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/test4", method=RequestMethod.GET)
+    public BaseResponse test4(HttpServletRequest request, HttpServletResponse response) 
+    		throws Exception{
+    	shiroUtil.deleteSession("SuperAdmin");
+    	return success();
     }
 }

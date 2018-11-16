@@ -13,14 +13,19 @@ public class ConfigConstants {
 	public static final String SALT_SOURCE = "w6s8z6t8xstkw";
 	
 	/**
-	 * shiro_redis_session
+	 * ShiroRedisSession
 	 */
-	public static final String SHIRO_REDIS_SESSION_PRE = "shiro_redis_session:";
+	public static final String SHIRO_REDIS_SESSION_PRE = "ShiroRedisSession:";
+	
+	/**
+	 * REDIS_SESSION
+	 */
+	public static final String REDIS_SESSION = "RedisSession";
 	
 	/**
 	 * shiro_kickout_session
 	 */
-	public static final String SHIRO_KICKOUT_SESSION = "shiro_kickout_session";
+	public static final String SHIRO_KICKOUT_SESSION = "ShiroKickoutSession";
 	
 	/**
 	 * 禁止直接访问的页面

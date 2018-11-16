@@ -66,9 +66,9 @@ public class ShiroRealm extends AuthorizingRealm {
 		List<User> userList = userMapper.selectByExample(example);
 		User user = null;
 		if(CollectionUtils.isEmpty(userList)){
-			throw new AccountException("用户名或密码不正确!");
+			throw new AccountException("用户名或密码不正确.");
 		}else if(userList.get(0).getUserStatus() != BaseConstants.UserStatusType.USER_NORMAL){
-			throw new DisabledAccountException("用户被禁止登录!");
+			throw new DisabledAccountException("用户被禁止登录.");
 		}else{
 			user = userList.get(0);
 			user.setLastLoginTime(new Date());
@@ -79,7 +79,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		if(user != null && user.getId() != null){
 			customSession = userExtMapper.getSessionByUserId(user.getId());
 		}
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customSession, user.getPassword(), user.getUserCode());
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customSession, user.getPassword(), getName());
 		return info;
 	}
 
