@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local_mysql
+Source Server         : mysql_local
 Source Server Version : 50630
 Source Host           : localhost:3306
 Source Database       : tworld
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-04 12:57:29
+Date: 2018-11-16 18:25:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,7 +49,7 @@ CREATE TABLE `base_department` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `dept_code` varchar(64) DEFAULT NULL COMMENT '部门编码',
+  `dept_code` varchar(64) NOT NULL COMMENT '部门编码',
   `dept_name` varchar(64) DEFAULT NULL COMMENT '部门名称',
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
@@ -58,7 +58,7 @@ CREATE TABLE `base_department` (
 -- ----------------------------
 -- Records of base_department
 -- ----------------------------
-INSERT INTO `base_department` VALUES ('1', '1', '2018-10-23 17:16:29', '2018-10-23 17:16:33', '1', null, '主控部门', null);
+INSERT INTO `base_department` VALUES ('1', '1', '2018-10-23 17:16:29', '2018-10-23 17:16:33', '1', '', '主控部门', null);
 
 -- ----------------------------
 -- Table structure for base_dictionary
@@ -92,7 +92,7 @@ CREATE TABLE `base_organization` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `org_code` varchar(64) DEFAULT NULL COMMENT '机构编码',
+  `org_code` varchar(64) NOT NULL COMMENT '机构编码',
   `org_name` varchar(64) DEFAULT NULL COMMENT '机构名称',
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
   `org_path` varchar(64) DEFAULT NULL COMMENT '机构路径',
@@ -102,7 +102,7 @@ CREATE TABLE `base_organization` (
 -- ----------------------------
 -- Records of base_organization
 -- ----------------------------
-INSERT INTO `base_organization` VALUES ('1', '1', '2018-10-23 17:16:01', '2018-10-23 17:16:04', '1', null, '主控中心', null, null);
+INSERT INTO `base_organization` VALUES ('1', '1', '2018-10-23 17:16:01', '2018-10-23 17:16:04', '1', '', '主控中心', null, null);
 
 -- ----------------------------
 -- Table structure for base_permission
@@ -114,12 +114,12 @@ CREATE TABLE `base_permission` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `permission_code` varchar(64) DEFAULT NULL COMMENT '权限编码',
+  `permission_code` varchar(64) NOT NULL COMMENT '权限编码',
   `permission_name` varchar(64) DEFAULT NULL COMMENT '权限名称',
   `permission_value` varchar(64) DEFAULT NULL COMMENT '权限值',
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_permission
@@ -173,6 +173,9 @@ INSERT INTO `base_permission` VALUES ('46', '1', '2018-10-23 17:59:55', '2018-10
 INSERT INTO `base_permission` VALUES ('47', '1', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01006006', '用户新增', 'base:user:save', '');
 INSERT INTO `base_permission` VALUES ('48', '1', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01006007', '用户修改', 'base:user:update', '');
 INSERT INTO `base_permission` VALUES ('49', '1', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01006008', '用户删除', 'base:user:delete', '');
+INSERT INTO `base_permission` VALUES ('50', '1', '2018-11-16 18:20:58', '2018-11-16 18:21:00', '1', '01006009', '用户分配角色', 'base:user:distributerole', null);
+INSERT INTO `base_permission` VALUES ('51', '1', '2018-11-16 18:23:25', '2018-11-16 18:23:26', '1', '01006010', '用户修改密码', 'base:user:modifypassword', null);
+INSERT INTO `base_permission` VALUES ('52', '0', '2018-11-16 18:24:27', '2018-11-16 18:24:29', '1', '01006011', '用户重置密码', 'base:user:resetpassword', null);
 
 -- ----------------------------
 -- Table structure for base_role
@@ -184,7 +187,7 @@ CREATE TABLE `base_role` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `role_code` varchar(64) DEFAULT NULL COMMENT '角色编码',
+  `role_code` varchar(64) NOT NULL COMMENT '角色编码',
   `role_name` varchar(64) DEFAULT NULL COMMENT '角色名',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
@@ -207,7 +210,7 @@ CREATE TABLE `base_role_permission` (
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(32) DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_role_permission
@@ -261,6 +264,9 @@ INSERT INTO `base_role_permission` VALUES ('46', '1', '46');
 INSERT INTO `base_role_permission` VALUES ('47', '1', '47');
 INSERT INTO `base_role_permission` VALUES ('48', '1', '48');
 INSERT INTO `base_role_permission` VALUES ('49', '1', '49');
+INSERT INTO `base_role_permission` VALUES ('50', '1', '50');
+INSERT INTO `base_role_permission` VALUES ('51', '1', '51');
+INSERT INTO `base_role_permission` VALUES ('52', '1', '52');
 
 -- ----------------------------
 -- Table structure for base_user
@@ -272,7 +278,7 @@ CREATE TABLE `base_user` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `user_code` varchar(64) DEFAULT NULL COMMENT '用户编码，登录名',
+  `user_code` varchar(64) NOT NULL COMMENT '用户编码，登录名',
   `user_name` varchar(64) DEFAULT NULL COMMENT '名称',
   `password` varchar(64) DEFAULT NULL COMMENT '密码',
   `org_id` bigint(32) DEFAULT NULL COMMENT '所属机构id',
@@ -280,8 +286,7 @@ CREATE TABLE `base_user` (
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
   `user_status` int(4) DEFAULT NULL COMMENT '用户状态，0正常',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_LOGIN_CODE` (`user_code`) USING BTREE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------

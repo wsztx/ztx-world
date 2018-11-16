@@ -106,7 +106,8 @@ public class DictionaryServiceImpl implements DictionaryService {
 		DictionaryExample example = new DictionaryExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 			.andDictionaryTypeEqualTo(dictionary.getDictionaryType())
-			.andDictionaryKeyEqualTo(dictionary.getDictionaryKey());
+			.andDictionaryKeyEqualTo(dictionary.getDictionaryKey())
+			.andIdNotEqualTo(dictionary.getId());
 		int count = dictionaryMapper.countByExample(example);
 		if(count >= 1){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型与键的组合已存在!");
