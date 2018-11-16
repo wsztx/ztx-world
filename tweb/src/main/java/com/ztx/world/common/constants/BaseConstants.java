@@ -6,16 +6,11 @@ package com.ztx.world.common.constants;
  * @since 1.0.0
  */
 public class BaseConstants {
-
-	/**
-	 * 已删除
-	 */
-	public static final int DELETE_STATUS = 0;
 	
 	/**
 	 * 未删除
 	 */
-	public static final int UNDELETE_STATUS = 1;
+	public static final Long UNDELETE_STATUS = 0L;
 	
 	/**
 	 * 未启用

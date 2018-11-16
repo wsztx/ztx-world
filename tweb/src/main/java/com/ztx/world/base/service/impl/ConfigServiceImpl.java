@@ -130,7 +130,7 @@ public class ConfigServiceImpl implements ConfigService {
 			for(Long id : ids){
 				Config config = configMapper.selectByPrimaryKey(id);
 				config.setId(id);
-				config.setStatus(BaseConstants.DELETE_STATUS);
+				config.setStatus(-id);
 				configMapper.updateByPrimaryKeySelective(config);
 				
 				// 删除缓存信息

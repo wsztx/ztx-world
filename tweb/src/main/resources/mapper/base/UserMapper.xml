@@ -4,7 +4,7 @@
 
     <resultMap id="BaseResultMap" type="com.ztx.world.base.entity.User" >
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="BIGINT" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
         <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
@@ -126,7 +126,7 @@
             user_name, password, org_id, 
             dept_id, description, last_login_time, 
             user_status)
-        values (#{id,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+        values (#{id,jdbcType=BIGINT}, #{status,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
             #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{userCode,jdbcType=VARCHAR}, 
             #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, 
             #{deptId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
@@ -180,7 +180,7 @@
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             #{id,jdbcType=BIGINT},
             <if test="status != null" >
-                #{status,jdbcType=INTEGER},
+                #{status,jdbcType=BIGINT},
             </if>
             <if test="createTime != null" >
                 #{createTime,jdbcType=TIMESTAMP},
@@ -232,7 +232,7 @@
                 id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.status != null" >
-                status = #{record.status,jdbcType=INTEGER},
+                status = #{record.status,jdbcType=BIGINT},
             </if>
             <if test="record.createTime != null" >
                 create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -276,7 +276,7 @@
     <update id="updateByExample" parameterType="map" >
         update base_user
         set id = #{record.id,jdbcType=BIGINT},
-            status = #{record.status,jdbcType=INTEGER},
+            status = #{record.status,jdbcType=BIGINT},
             create_time = #{record.createTime,jdbcType=TIMESTAMP},
             update_time = #{record.updateTime,jdbcType=TIMESTAMP},
             create_user_id = #{record.createUserId,jdbcType=BIGINT},
@@ -297,7 +297,7 @@
         update base_user
         <set >
             <if test="status != null" >
-                status = #{status,jdbcType=INTEGER},
+                status = #{status,jdbcType=BIGINT},
             </if>
             <if test="createTime != null" >
                 create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -338,7 +338,7 @@
 
     <update id="updateByPrimaryKey" parameterType="com.ztx.world.base.entity.User" >
         update base_user
-        set status = #{status,jdbcType=INTEGER},
+        set status = #{status,jdbcType=BIGINT},
             create_time = #{createTime,jdbcType=TIMESTAMP},
             update_time = #{updateTime,jdbcType=TIMESTAMP},
             create_user_id = #{createUserId,jdbcType=BIGINT},

@@ -5,7 +5,7 @@
 	<select id="findPermissionsByRoleId" resultMap="com.ztx.world.base.mapper.PermissionMapper.BaseResultMap">
 		select perm.* from base_permission perm
 		inner join base_role_permission rolePerm on perm.id = rolePerm.permission_id and rolePerm.role_id = #{id}
-		where perm.status = 1
+		where perm.status = 0
 	</select>
 	
 </mapper>

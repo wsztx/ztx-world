@@ -5,12 +5,12 @@
 	<select id="findRolesByUserId" resultMap="com.ztx.world.base.mapper.RoleMapper.BaseResultMap">
 		select role.* from base_role role
 		inner join base_user_role userRole on role.id = userRole.role_id and userRole.user_id = #{id}
-		where role.status = 1
+		where role.status = 0
 	</select>
 	
 	<select id="findUserCodesByRoleId" resultType="java.lang.String">
 		select u.user_code from base_user u 
 		inner join base_user_role ur on u.id = ur.user_id and ur.role_id = #{id}
-		where u.status = 1 
+		where u.status = 0 
 	</select>
 </mapper>

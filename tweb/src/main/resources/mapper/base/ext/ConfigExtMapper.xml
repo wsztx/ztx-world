@@ -3,7 +3,7 @@
 <mapper namespace="com.ztx.world.base.mapper.ext.ConfigExtMapper">
 
 	<select id="findConfigTypes" resultType="java.lang.String">
-		select distinct config_type from base_config where status = 1 and use_status = 1
+		select distinct config_type from base_config where status = 0 and use_status = 1
 	</select>
 	
 </mapper>

@@ -129,7 +129,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 			for(Long id : ids){
 				Dictionary dictionary = dictionaryMapper.selectByPrimaryKey(id);
 				dictionary.setId(id);
-				dictionary.setStatus(BaseConstants.DELETE_STATUS);
+				dictionary.setStatus(-id);
 				dictionaryMapper.updateByPrimaryKeySelective(dictionary);
 				
 				// 删除缓存信息

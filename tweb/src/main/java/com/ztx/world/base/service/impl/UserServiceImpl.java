@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 			for(Long id : ids){
 				User user = userMapper.selectByPrimaryKey(id);
 				user.setId(id);
-				user.setStatus(BaseConstants.DELETE_STATUS);
+				user.setStatus(-id);
 				userMapper.updateByPrimaryKeySelective(user);
 			}
 			

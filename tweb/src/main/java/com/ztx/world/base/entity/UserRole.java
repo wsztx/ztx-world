@@ -5,7 +5,7 @@ package com.ztx.world.base.entity;
  * 
  * @author ztx
  * 
- * @date 2018-11-04
+ * @date 2018-11-16
  */
 public class UserRole {
     /**

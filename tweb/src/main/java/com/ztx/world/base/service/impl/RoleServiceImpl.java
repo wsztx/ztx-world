@@ -83,7 +83,7 @@ public class RoleServiceImpl implements RoleService {
 				// 删除角色表信息
 				Role role = new Role();
 				role.setId(id);
-				role.setStatus(BaseConstants.DELETE_STATUS);
+				role.setStatus(-id);
 				roleMapper.updateByPrimaryKeySelective(role);
 				
 				// 删除角色权限关联表信息

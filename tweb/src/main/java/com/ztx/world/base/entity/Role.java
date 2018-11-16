@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  * @author ztx
  * 
- * @date 2018-11-04
+ * @date 2018-11-16
  */
 public class Role {
     /**
@@ -16,9 +16,9 @@ public class Role {
     private Long id;
 
     /**
-     * 逻辑删除位，0删除，1未删除
+     * 逻辑删除位，0未删除
      */
-    private Integer status;
+    private Long status;
 
     /**
      * 创建时间
@@ -58,11 +58,11 @@ public class Role {
         this.id = id;
     }
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 

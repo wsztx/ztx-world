@@ -3,7 +3,7 @@
 <mapper namespace="com.ztx.world.base.mapper.ext.DictionaryExtMapper">
 
 	<select id="findDictionaryTypes" resultType="java.lang.String">
-		select distinct dictionary_type from base_dictionary where status = 1
+		select distinct dictionary_type from base_dictionary where status = 0
 	</select>
 	
 </mapper>
