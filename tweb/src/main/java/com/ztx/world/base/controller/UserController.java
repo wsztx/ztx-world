@@ -27,7 +27,6 @@ import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.shiro.ShiroToken;
 import com.ztx.world.common.utils.MD5Util;
-import com.ztx.world.common.utils.ShiroUtil;
 
 @Controller
 @RequestMapping(value = "/base/user")
@@ -37,9 +36,6 @@ public class UserController extends BaseController{
 
     @Autowired
     private UserService userService;
-    
-    @Autowired
-    private ShiroUtil shiroUtil;
     
     @RequestMapping(value = "/tologin", method = RequestMethod.GET)
     public String toLogin(HttpServletRequest request){
@@ -74,7 +70,7 @@ public class UserController extends BaseController{
     public BaseResponse logout(HttpServletRequest request, HttpServletResponse response){
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
-        return success("登出成功");
+        return success();
     }
     
 	@RequiresPermissions(value = {"base:user:tolist"})
@@ -117,11 +113,11 @@ public class UserController extends BaseController{
 		if(user == null){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
 		}
-		//shiroUtil.clearAllAuthCache();
-    	// 以下代码测试用
-		shiroUtil.clearUser("SuperAdmin");
-
-    	return success();
+		if(StringUtils.isEmpty(user.getUserCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名不能为空!");
+		}
+		Long id = userService.saveUser(user);
+    	return success(id);
     }
     
     @ResponseBody
@@ -132,10 +128,17 @@ public class UserController extends BaseController{
 		if(user == null){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
 		}
+		if(user.getId() == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
+		}
+		if(StringUtils.isEmpty(user.getUserCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名不能为空!");
+		}
 		if("SuperAdmin".equals(user.getUserCode())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户超级管理员无法修改!");
 		}
-    	return success();
+		Long id = userService.updateUser(user);
+    	return success(id);
     }
     
     @ResponseBody
@@ -152,7 +155,7 @@ public class UserController extends BaseController{
     @RequestMapping(value="/delete", method = RequestMethod.GET)
     public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
     		List<Long> ids) throws Exception{
-    	
-    	return success();
+    	userService.deleteUser(ids);
+    	return success(ids);
     }
 }

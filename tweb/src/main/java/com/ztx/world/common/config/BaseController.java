@@ -18,10 +18,6 @@ public class BaseController {
 	protected BaseResponse success(){
 		return result(true, ResultCode.SYS_OPERATION_SUCCESS, ResultCodeUtil.get(ResultCode.SYS_OPERATION_SUCCESS), null);
 	}
-	
-	protected BaseResponse success(String message){
-		return result(true, ResultCode.SYS_OPERATION_SUCCESS, message, null);
-	}
 
 	protected BaseResponse success(Object data){
 		return result(true, ResultCode.SYS_OPERATION_SUCCESS, ResultCodeUtil.get(ResultCode.SYS_OPERATION_SUCCESS), JSONObject.toJSONString(data));

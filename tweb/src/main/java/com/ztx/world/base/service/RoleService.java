@@ -3,6 +3,7 @@ package com.ztx.world.base.service;
 import java.util.List;
 
 import com.ztx.world.base.entity.Role;
+import com.ztx.world.base.vo.RoleVo;
 
 public interface RoleService {
 
@@ -18,4 +19,18 @@ public interface RoleService {
 	 * @param ids
 	 */
 	void deleteRole(List<Long> ids);
+	
+	/**
+	 * 新建角色
+	 * @param role
+	 * @return
+	 */
+	Long saveRole(RoleVo role);
+	
+	/**
+	 * 修改角色
+	 * @param role
+	 * @return
+	 */
+	Long updateRole(RoleVo role);
 }

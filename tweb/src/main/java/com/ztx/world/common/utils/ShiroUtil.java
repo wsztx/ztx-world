@@ -1,8 +1,8 @@
 package com.ztx.world.common.utils;
 
 import java.util.Collection;
+import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
@@ -57,9 +57,28 @@ public class ShiroUtil {
     }
     
     /**
+     * 清除指定用户集合的权限缓存
+     * @param userCode
+     */
+    public void clearAuthCache(List<String> userCodes){
+    	if(CollectionUtils.isEmpty(userCodes)){
+        	Collection<Session> sessions = sessionDAO.getActiveSessions();
+        	if(!CollectionUtils.isEmpty(sessions)){
+            	for(Session session : sessions){
+            		SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+            		CustomSession mySession = (CustomSession)principalCollection.getPrimaryPrincipal();
+            		if(userCodes.contains(mySession.getUserCode())){
+            			redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").remove(principalCollection);
+            		}
+            	}
+        	}
+    	}
+    }
+    
+    /**
      * 踢出所有用户
      */
-    public void clearAllUser(){
+    public void deleteAllSession(){
     	Collection<Session> sessions = sessionDAO.getActiveSessions();
     	if(!CollectionUtils.isEmpty(sessions)){
         	for(Session session : sessions){
@@ -72,7 +91,7 @@ public class ShiroUtil {
      * 踢出指定用户
      * @param userCode
      */
-    public void clearUser(String userCode){
+    public void deleteSession(String userCode){
     	if(!StringUtils.isEmpty(userCode)){
         	Collection<Session> sessions = sessionDAO.getActiveSessions();
         	if(!CollectionUtils.isEmpty(sessions)){
