@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.ztx.world.base.entity.Role;
+import com.ztx.world.base.entity.RoleExample;
 import com.ztx.world.base.entity.RolePermission;
 import com.ztx.world.base.entity.RolePermissionExample;
 import com.ztx.world.base.entity.UserRoleExample;
@@ -113,6 +114,13 @@ public class RoleServiceImpl implements RoleService {
 		if(StringUtils.isEmpty(role.getRoleName())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色名称不能为空!");
 		}
+		RoleExample example = new RoleExample();
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+			.andRoleCodeEqualTo(role.getRoleCode());
+		int count = roleMapper.countByExample(example);
+		if(count >= 1){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码" + role.getRoleCode() + "已存在!");
+		}
 		role.setStatus(BaseConstants.UNDELETE_STATUS);
 		role.setCreateTime(new Date());
 		role.setUpdateTime(new Date());
@@ -151,6 +159,14 @@ public class RoleServiceImpl implements RoleService {
 		}
 		if("SuperAdmin".equals(role.getRoleCode())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法修改!");
+		}
+		RoleExample roleExample = new RoleExample();
+		roleExample.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+			.andRoleCodeEqualTo(role.getRoleCode())
+			.andIdNotEqualTo(role.getId());
+		int count = roleMapper.countByExample(roleExample);
+		if(count >= 1){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码" + role.getRoleCode() + "已存在!");
 		}
 		role.setUpdateTime(new Date());
 		roleMapper.updateByPrimaryKeySelective(role);

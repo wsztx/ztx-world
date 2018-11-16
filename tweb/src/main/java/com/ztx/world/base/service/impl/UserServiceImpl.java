@@ -119,6 +119,7 @@ public class UserServiceImpl implements UserService {
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名" + user.getUserCode() + "已存在!");
 		}
 		user.setUpdateTime(new Date());
+		user.setPassword(null);
 		userMapper.updateByPrimaryKeySelective(user);
 		return user.getId();
 	}
@@ -142,6 +143,11 @@ public class UserServiceImpl implements UserService {
 			userRole.setUserId(id);
 			userRoleMapper.insertSelective(userRole);
 		}
+		// 删除用户的权限缓存信息
+		User user = userMapper.selectByPrimaryKey(id);
+		if(user != null){
+			shiroUtil.clearAuthCache(user.getUserCode());
+		}
 	}
 
 	@Override
@@ -155,7 +161,16 @@ public class UserServiceImpl implements UserService {
 		if(StringUtils.isEmpty(newPassword)){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "新密码不能为空!");
 		}
-		
+		UserExample example = new UserExample();
+		example.createCriteria().andPasswordEqualTo(MD5Util.md5(oldPassword)).andIdEqualTo(id);
+		int count = userMapper.countByExample(example);
+		if(count == 0){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "原密码不正确!");
+		}
+		User record = new User();
+		record.setId(id);
+		record.setPassword(MD5Util.md5(newPassword));
+		userMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override

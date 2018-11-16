@@ -64,6 +64,14 @@ public class ConfigServiceImpl implements ConfigService {
 		if(StringUtils.isEmpty(config.getConfigValue())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
 		}
+		ConfigExample example = new ConfigExample();
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+			.andConfigTypeEqualTo(config.getConfigType())
+			.andConfigKeyEqualTo(config.getConfigKey());
+		int count = configMapper.countByExample(example);
+		if(count >= 1){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型与键的组合已存在!");
+		}
 		config.setStatus(BaseConstants.UNDELETE_STATUS);
 		config.setCreateTime(new Date());
 		config.setUpdateTime(new Date());
@@ -95,6 +103,14 @@ public class ConfigServiceImpl implements ConfigService {
 		}
 		if(StringUtils.isEmpty(config.getConfigValue())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
+		}
+		ConfigExample example = new ConfigExample();
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+			.andConfigTypeEqualTo(config.getConfigType())
+			.andConfigKeyEqualTo(config.getConfigKey());
+		int count = configMapper.countByExample(example);
+		if(count >= 1){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型与键的组合已存在!");
 		}
 		config.setUpdateTime(new Date());
 		configMapper.updateByPrimaryKeySelective(config);

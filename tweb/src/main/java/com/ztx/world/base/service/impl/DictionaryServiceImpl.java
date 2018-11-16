@@ -63,6 +63,14 @@ public class DictionaryServiceImpl implements DictionaryService {
 		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
 		}
+		DictionaryExample example = new DictionaryExample();
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+			.andDictionaryTypeEqualTo(dictionary.getDictionaryType())
+			.andDictionaryKeyEqualTo(dictionary.getDictionaryKey());
+		int count = dictionaryMapper.countByExample(example);
+		if(count >= 1){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型与键的组合已存在!");
+		}
 		dictionary.setStatus(BaseConstants.UNDELETE_STATUS);
 		dictionary.setCreateTime(new Date());
 		dictionary.setUpdateTime(new Date());
@@ -94,6 +102,14 @@ public class DictionaryServiceImpl implements DictionaryService {
 		}
 		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
+		}
+		DictionaryExample example = new DictionaryExample();
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+			.andDictionaryTypeEqualTo(dictionary.getDictionaryType())
+			.andDictionaryKeyEqualTo(dictionary.getDictionaryKey());
+		int count = dictionaryMapper.countByExample(example);
+		if(count >= 1){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型与键的组合已存在!");
 		}
 		dictionary.setUpdateTime(new Date());
 		dictionaryMapper.updateByPrimaryKeySelective(dictionary);
