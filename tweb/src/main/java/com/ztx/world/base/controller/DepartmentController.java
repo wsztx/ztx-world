@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ztx.world.base.service.DepartmentService;
 import com.ztx.world.base.vo.DepartmentVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
@@ -23,6 +25,9 @@ import com.ztx.world.common.config.BaseResponse;
 public class DepartmentController extends BaseController {
 
 	private static Logger log = LoggerFactory.getLogger(DepartmentController.class);
+	
+	@Autowired
+	private DepartmentService departmentService;
 	
 	@RequiresPermissions(value = {"base:department:tolist"})
     @RequestMapping(value="/tolist", method = RequestMethod.GET)
@@ -61,8 +66,8 @@ public class DepartmentController extends BaseController {
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
     		DepartmentVo department) throws Exception{
-    	
-    	return success();
+    	Long id = departmentService.saveDepartment(department);
+    	return success(id);
     }
     
     @ResponseBody
@@ -70,8 +75,8 @@ public class DepartmentController extends BaseController {
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
     		DepartmentVo department) throws Exception{
-    	
-    	return success();
+    	Long id = departmentService.updateDepartment(department);
+    	return success(id);
     }
     
     @ResponseBody
@@ -88,7 +93,7 @@ public class DepartmentController extends BaseController {
     @RequestMapping(value="/delete", method = RequestMethod.GET)
     public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
     		List<Long> ids) throws Exception{
-    	
-    	return success();
+    	departmentService.deleteDepartment(ids);
+    	return success(ids);
     }
 }

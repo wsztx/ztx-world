@@ -140,7 +140,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 
 	@Override
 	public void deleteDictionary(List<Long> ids) {
-		if(CollectionUtils.isEmpty(ids)){
+		if(!CollectionUtils.isEmpty(ids)){
 			for(Long id : ids){
 				Dictionary dictionary = dictionaryMapper.selectByPrimaryKey(id);
 				dictionary.setId(id);

@@ -141,7 +141,7 @@ public class ConfigServiceImpl implements ConfigService {
 
 	@Override
 	public void deleteConfig(List<Long> ids) {
-		if(CollectionUtils.isEmpty(ids)){
+		if(!CollectionUtils.isEmpty(ids)){
 			for(Long id : ids){
 				Config config = configMapper.selectByPrimaryKey(id);
 				config.setId(id);

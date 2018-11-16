@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(List<Long> ids) {
-		if(CollectionUtils.isEmpty(ids)){
+		if(!CollectionUtils.isEmpty(ids)){
 			CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
 			for(Long id : ids){
 				User user = userMapper.selectByPrimaryKey(id);

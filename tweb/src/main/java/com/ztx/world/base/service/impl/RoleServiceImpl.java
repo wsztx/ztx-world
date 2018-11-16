@@ -53,7 +53,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public void deleteRole(List<Long> ids) {
-		if(CollectionUtils.isEmpty(ids)){
+		if(!CollectionUtils.isEmpty(ids)){
 			CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
 			List<RoleModel> roleList = customSession.getRoleList();
 			for(Long id : ids){
