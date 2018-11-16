@@ -7,6 +7,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import com.ztx.world.base.entity.Config;
 import com.ztx.world.base.entity.ConfigExample;
@@ -48,6 +49,21 @@ public class ConfigServiceImpl implements ConfigService {
 
 	@Override
 	public Long saveConfig(ConfigVo config) {
+		if(config == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		if(StringUtils.isEmpty(config.getConfigType())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空!");
+		}
+		if(StringUtils.isEmpty(config.getConfigName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空!");
+		}
+		if(StringUtils.isEmpty(config.getConfigKey())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空!");
+		}
+		if(StringUtils.isEmpty(config.getConfigValue())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
+		}
 		config.setStatus(BaseConstants.UNDELETE_STATUS);
 		config.setCreateTime(new Date());
 		config.setUpdateTime(new Date());
@@ -62,6 +78,24 @@ public class ConfigServiceImpl implements ConfigService {
 
 	@Override
 	public Long updateConfig(ConfigVo config) {
+		if(config == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		if(config.getId() == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置数据不存在!");
+		}
+		if(StringUtils.isEmpty(config.getConfigType())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空!");
+		}
+		if(StringUtils.isEmpty(config.getConfigName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空!");
+		}
+		if(StringUtils.isEmpty(config.getConfigKey())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空!");
+		}
+		if(StringUtils.isEmpty(config.getConfigValue())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
+		}
 		config.setUpdateTime(new Date());
 		configMapper.updateByPrimaryKeySelective(config);
 		

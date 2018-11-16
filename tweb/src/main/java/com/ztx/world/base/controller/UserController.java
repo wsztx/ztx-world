@@ -110,12 +110,6 @@ public class UserController extends BaseController{
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
     		UserVo user) throws Exception{
-		if(user == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
-		}
-		if(StringUtils.isEmpty(user.getUserCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名不能为空!");
-		}
 		Long id = userService.saveUser(user);
     	return success(id);
     }
@@ -125,18 +119,6 @@ public class UserController extends BaseController{
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
     		UserVo user) throws Exception{
-		if(user == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
-		}
-		if(user.getId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
-		}
-		if(StringUtils.isEmpty(user.getUserCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名不能为空!");
-		}
-		if("SuperAdmin".equals(user.getUserCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户超级管理员无法修改!");
-		}
 		Long id = userService.updateUser(user);
     	return success(id);
     }
@@ -157,5 +139,45 @@ public class UserController extends BaseController{
     		List<Long> ids) throws Exception{
     	userService.deleteUser(ids);
     	return success(ids);
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:user:distributerole"})
+    @RequestMapping(value="/distributerole", method = RequestMethod.POST)
+    public BaseResponse distributeRole(HttpServletRequest request, HttpServletResponse response, 
+    		UserVo user) throws Exception{
+		if(user == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		Long id = user.getId();
+		List<Long> roleIds = user.getRoleIds();
+		userService.saveUserRole(id, roleIds);
+    	return success(id);
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:user:modifypassword"})
+    @RequestMapping(value="/modifypassword", method = RequestMethod.POST)
+    public BaseResponse modifyPassword(HttpServletRequest request, HttpServletResponse response, 
+    		UserVo user) throws Exception{
+		if(user == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		Long id = user.getId();
+		userService.updatePassword(id, user.getOldPassword(), user.getNewPassword());
+    	return success(id);
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:user:resetpassword"})
+    @RequestMapping(value="/resetpassword", method = RequestMethod.POST)
+    public BaseResponse resetPassword(HttpServletRequest request, HttpServletResponse response, 
+    		UserVo user) throws Exception{
+		if(user == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		Long id = user.getId();
+		userService.resetPassword(id);
+    	return success(id);
     }
 }

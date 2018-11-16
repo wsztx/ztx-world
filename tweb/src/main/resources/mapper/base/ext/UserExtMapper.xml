@@ -31,4 +31,10 @@
 		where role.status = 1 and userRole.role_id = role.id 
 	</select>
 	
+	<select id="findUserCodesByIds" resultType="java.lang.String">
+		select user_code from base_user where id in 
+		<foreach collection="ids" index="index" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
 </mapper>

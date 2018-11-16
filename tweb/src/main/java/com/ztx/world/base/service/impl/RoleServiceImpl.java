@@ -7,6 +7,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.RolePermission;
@@ -103,6 +104,15 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public Long saveRole(RoleVo role) {
+		if(role == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		if(StringUtils.isEmpty(role.getRoleCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码不能为空!");
+		}
+		if(StringUtils.isEmpty(role.getRoleName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色名称不能为空!");
+		}
 		role.setStatus(BaseConstants.UNDELETE_STATUS);
 		role.setCreateTime(new Date());
 		role.setUpdateTime(new Date());
@@ -127,6 +137,21 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public Long updateRole(RoleVo role) {
+		if(role == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		if(role.getId() == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色不存在!");
+		}
+		if(StringUtils.isEmpty(role.getRoleCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码不能为空!");
+		}
+		if(StringUtils.isEmpty(role.getRoleName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色名称不能为空!");
+		}
+		if("SuperAdmin".equals(role.getRoleCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法修改!");
+		}
 		role.setUpdateTime(new Date());
 		roleMapper.updateByPrimaryKeySelective(role);
 		// 删除原来的角色权限

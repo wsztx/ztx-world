@@ -69,21 +69,6 @@ public class DictionaryController extends BaseController {
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
     		DictionaryVo dictionary) throws Exception{
-    	if(dictionary == null){
-    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
-    	}
-		if(StringUtils.isEmpty(dictionary.getDictionaryType())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空!");
-		}
-		if(StringUtils.isEmpty(dictionary.getDictionaryName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空!");
-		}
-		if(StringUtils.isEmpty(dictionary.getDictionaryKey())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空!");
-		}
-		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
-		}
     	Long id = dictionaryService.saveDictionary(dictionary);
     	return success(id);
     }
@@ -93,24 +78,6 @@ public class DictionaryController extends BaseController {
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
     		DictionaryVo dictionary) throws Exception{
-    	if(dictionary == null){
-    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
-    	}
-		if(dictionary.getId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典数据不存在!");
-		}
-		if(StringUtils.isEmpty(dictionary.getDictionaryType())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空!");
-		}
-		if(StringUtils.isEmpty(dictionary.getDictionaryName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空!");
-		}
-		if(StringUtils.isEmpty(dictionary.getDictionaryKey())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空!");
-		}
-		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
-		}
     	Long id = dictionaryService.updateDictionary(dictionary);
     	return success(id);
     }

@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,8 +19,6 @@ import com.ztx.world.base.service.RoleService;
 import com.ztx.world.base.vo.RoleVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
-import com.ztx.world.common.constants.ResultCode;
-import com.ztx.world.common.exception.BasicException;
 
 @Controller
 @RequestMapping(value = "/base/role")
@@ -69,15 +66,6 @@ public class RoleController extends BaseController {
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
     		RoleVo role) throws Exception{
-		if(role == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
-		}
-		if(StringUtils.isEmpty(role.getRoleCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码不能为空!");
-		}
-		if(StringUtils.isEmpty(role.getRoleName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色名称不能为空!");
-		}
 		Long id = roleService.saveRole(role);
     	return success(id);
     }
@@ -87,21 +75,6 @@ public class RoleController extends BaseController {
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
     		RoleVo role) throws Exception{
-		if(role == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
-		}
-		if(role.getId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色不存在!");
-		}
-		if(StringUtils.isEmpty(role.getRoleCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码不能为空!");
-		}
-		if(StringUtils.isEmpty(role.getRoleName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色名称不能为空!");
-		}
-		if("SuperAdmin".equals(role.getRoleCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法修改!");
-		}
 		Long id = roleService.updateRole(role);
     	return success(id);
     }

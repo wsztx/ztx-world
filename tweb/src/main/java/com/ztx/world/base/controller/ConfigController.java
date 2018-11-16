@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,8 +19,6 @@ import com.ztx.world.base.service.ConfigService;
 import com.ztx.world.base.vo.ConfigVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
-import com.ztx.world.common.constants.ResultCode;
-import com.ztx.world.common.exception.BasicException;
 
 @Controller
 @RequestMapping(value = "/base/config")
@@ -69,21 +66,6 @@ public class ConfigController extends BaseController {
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public BaseResponse save(HttpServletRequest request, HttpServletResponse response,
     		ConfigVo config) throws Exception{
-		if(config == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
-		}
-		if(StringUtils.isEmpty(config.getConfigType())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空!");
-		}
-		if(StringUtils.isEmpty(config.getConfigName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空!");
-		}
-		if(StringUtils.isEmpty(config.getConfigKey())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空!");
-		}
-		if(StringUtils.isEmpty(config.getConfigValue())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
-		}
     	Long id = configService.saveConfig(config);
     	return success(id);
     }
@@ -93,24 +75,6 @@ public class ConfigController extends BaseController {
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
     		ConfigVo config) throws Exception{
-		if(config == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
-		}
-		if(config.getId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置数据不存在!");
-		}
-		if(StringUtils.isEmpty(config.getConfigType())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空!");
-		}
-		if(StringUtils.isEmpty(config.getConfigName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空!");
-		}
-		if(StringUtils.isEmpty(config.getConfigKey())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空!");
-		}
-		if(StringUtils.isEmpty(config.getConfigValue())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
-		}
     	Long id = configService.updateConfig(config);
     	return success(id);
     }

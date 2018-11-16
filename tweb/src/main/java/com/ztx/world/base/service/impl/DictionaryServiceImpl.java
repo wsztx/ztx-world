@@ -7,6 +7,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import com.ztx.world.base.entity.Dictionary;
 import com.ztx.world.base.entity.DictionaryExample;
@@ -47,6 +48,21 @@ public class DictionaryServiceImpl implements DictionaryService {
 
 	@Override
 	public Long saveDictionary(DictionaryVo dictionary) {
+    	if(dictionary == null){
+    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+    	}
+		if(StringUtils.isEmpty(dictionary.getDictionaryType())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryKey())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
+		}
 		dictionary.setStatus(BaseConstants.UNDELETE_STATUS);
 		dictionary.setCreateTime(new Date());
 		dictionary.setUpdateTime(new Date());
@@ -61,6 +77,24 @@ public class DictionaryServiceImpl implements DictionaryService {
 
 	@Override
 	public Long updateDictionary(DictionaryVo dictionary) {
+    	if(dictionary == null){
+    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+    	}
+		if(dictionary.getId() == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典数据不存在!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryType())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryName())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryKey())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空!");
+		}
+		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
+		}
 		dictionary.setUpdateTime(new Date());
 		dictionaryMapper.updateByPrimaryKeySelective(dictionary);
 		

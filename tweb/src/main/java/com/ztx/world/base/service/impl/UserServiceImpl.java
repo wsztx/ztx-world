@@ -7,18 +7,22 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
 import com.ztx.world.base.entity.UserRole;
+import com.ztx.world.base.entity.UserRoleExample;
 import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.mapper.UserRoleMapper;
+import com.ztx.world.base.mapper.ext.UserExtMapper;
 import com.ztx.world.base.service.UserService;
 import com.ztx.world.base.vo.UserVo;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
+import com.ztx.world.common.utils.MD5Util;
 import com.ztx.world.common.utils.ShiroUtil;
 
 @Service
@@ -26,6 +30,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private UserExtMapper userExtMapper;
 	
 	@Autowired
 	private UserRoleMapper userRoleMapper;
@@ -55,46 +62,111 @@ public class UserServiceImpl implements UserService {
 				user.setId(id);
 				user.setStatus(BaseConstants.DELETE_STATUS);
 				userMapper.updateByPrimaryKeySelective(user);
-				
-				// 强制将用户登出
-				shiroUtil.deleteSession(user.getUserCode());
 			}
 			
+			List<String> codes = userExtMapper.findUserCodesByIds(ids);
+			// 强制将用户登出
+			shiroUtil.deleteSession(codes);
 		}
 	}
 
 	@Override
 	public Long saveUser(UserVo user) {
-		List<Long> roleIds = user.getRoleIds();
-		if(CollectionUtils.isEmpty(roleIds)){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户角色不能为空!");
+		if(user == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		if(StringUtils.isEmpty(user.getUserCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名不能为空!");
+		}
+		UserExample example = new UserExample();
+		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+			.andUserCodeEqualTo(user.getUserCode());
+		int count = userMapper.countByExample(example);
+		if(count >= 1){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名" + user.getUserCode() + "已存在!");
 		}
 		user.setStatus(BaseConstants.UNDELETE_STATUS);
 		user.setCreateTime(new Date());
 		user.setUpdateTime(new Date());
 		CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
 		user.setCreateUserId(customSession.getUserId());
+		// 设置用户初始密码为password
+		user.setPassword(MD5Util.md5("password"));
 		userMapper.insertSelective(user);
 		if(user.getId() == null){
 			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增用户失败!");
-		}
-		// 插入用户角色关联表
-		for(Long id : roleIds){
-			UserRole userRole = new UserRole();
-			userRole.setRoleId(id);
-			userRole.setUserId(user.getId());
-			userRoleMapper.insertSelective(userRole);
 		}
 		return user.getId();
 	}
 
 	@Override
 	public Long updateUser(UserVo user) {
+		if(user == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+		}
+		if(user.getId() == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
+		}
+		if("SuperAdmin".equals(user.getUserCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户超级管理员无法修改!");
+		}
 		UserExample example = new UserExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
-			.andIdEqualTo(user.getId());
-		userMapper.updateByExampleSelective(user, example);
+			.andUserCodeEqualTo(user.getUserCode())
+			.andIdNotEqualTo(user.getId());
+		int count = userMapper.countByExample(example);
+		if(count >= 1){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名" + user.getUserCode() + "已存在!");
+		}
+		user.setUpdateTime(new Date());
+		userMapper.updateByPrimaryKeySelective(user);
 		return user.getId();
+	}
+
+	@Override
+	public void saveUserRole(Long id, List<Long> roleIds) {
+		if(id == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
+		}
+		if(CollectionUtils.isEmpty(roleIds)){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户角色不能为空!");
+		}
+		// 删除原有分配的角色
+		UserRoleExample example = new UserRoleExample();
+		example.createCriteria().andUserIdEqualTo(id);
+		userRoleMapper.deleteByExample(example);
+		// 插入用户角色关联表
+		for(Long roleId : roleIds){
+			UserRole userRole = new UserRole();
+			userRole.setRoleId(roleId);
+			userRole.setUserId(id);
+			userRoleMapper.insertSelective(userRole);
+		}
+	}
+
+	@Override
+	public void updatePassword(Long id, String oldPassword, String newPassword) {
+		if(id == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
+		}
+		if(StringUtils.isEmpty(oldPassword)){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "原密码不能为空!");
+		}
+		if(StringUtils.isEmpty(newPassword)){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "新密码不能为空!");
+		}
+		
+	}
+
+	@Override
+	public void resetPassword(Long id) {
+		if(id == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
+		}
+		User user = new User();
+		user.setId(id);
+		user.setPassword(MD5Util.md5("password"));
+		userMapper.updateByPrimaryKeySelective(user);
 	}
 
 }

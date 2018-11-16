@@ -30,4 +30,25 @@ public interface UserService {
 	 * @return
 	 */
 	Long updateUser(UserVo user);
+	
+	/**
+	 * 修改用户的角色
+	 * @param id
+	 * @param roleIds
+	 */
+	void saveUserRole(Long id, List<Long> roleIds);
+	
+	/**
+	 * 修改密码
+	 * @param id
+	 * @param oldPassword
+	 * @param newPassword
+	 */
+	void updatePassword(Long id, String oldPassword, String newPassword);
+	
+	/**
+	 * 重置密码
+	 * @param id
+	 */
+	void resetPassword(Long id);
 }

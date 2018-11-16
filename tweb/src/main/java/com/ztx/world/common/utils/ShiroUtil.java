@@ -105,4 +105,23 @@ public class ShiroUtil {
         	}
     	}
     }
+    
+    /**
+     * 踢出指定用户集合
+     * @param userCode
+     */
+    public void deleteSession(List<String> userCodes){
+    	if(CollectionUtils.isEmpty(userCodes)){
+        	Collection<Session> sessions = sessionDAO.getActiveSessions();
+        	if(!CollectionUtils.isEmpty(sessions)){
+            	for(Session session : sessions){
+            		SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+            		CustomSession mySession = (CustomSession)principalCollection.getPrimaryPrincipal();
+            		if(userCodes.contains(mySession.getUserCode())){
+            			sessionDAO.delete(session);
+            		}
+            	}
+        	}
+    	}
+    }
 }
