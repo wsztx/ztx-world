@@ -1,5 +1,7 @@
 package com.ztx.world.base.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ztx.world.base.vo.DepartmentVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
 
@@ -56,8 +59,8 @@ public class DepartmentController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base:department:save"})
     @RequestMapping(value="/save", method = RequestMethod.POST)
-    public BaseResponse save(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
+    public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
+    		DepartmentVo department) throws Exception{
     	
     	return success();
     }
@@ -65,8 +68,8 @@ public class DepartmentController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base:department:update"})
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public BaseResponse update(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
+    public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
+    		DepartmentVo department) throws Exception{
     	
     	return success();
     }
@@ -83,8 +86,8 @@ public class DepartmentController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base:department:delete"})
     @RequestMapping(value="/delete", method = RequestMethod.GET)
-    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
+    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
+    		List<Long> ids) throws Exception{
     	
     	return success();
     }
