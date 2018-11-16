@@ -14,6 +14,14 @@ public interface DictionaryService {
 	List<Dictionary> getDictionaryByType(String dictionaryType);
 	
 	/**
+	 * 获取字典值
+	 * @param dictionaryType
+	 * @param dictionaryKey
+	 * @return
+	 */
+	String getDictionaryValue(String dictionaryType, String dictionaryKey);
+	
+	/**
 	 * 新增字典
 	 * @param dictionary
 	 * @return

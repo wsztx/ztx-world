@@ -3,7 +3,6 @@ package com.ztx.world.common.shiro;
 import java.io.Serializable;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -21,7 +20,6 @@ import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
-import com.ztx.world.base.entity.Config;
 import com.ztx.world.base.service.ConfigService;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.config.CustomSession;
@@ -68,7 +66,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		// 最大同时在线数
-		Integer maxSession = this.getMaxSession();
+		Integer maxSession = Integer.valueOf(configService.getConfigValue(ConfigTableConstants.TYPE_USER_LOGIN, ConfigTableConstants.KEY_ONLINE_MAX));
 		
 		Subject subject = getSubject(request, response);
 		// 如果没有登录,直接进行之后的流程
@@ -138,24 +136,6 @@ public class KickoutControlFilter extends AccessControlFilter {
 		}
 
 		return true;
-	}
-	
-	/**
-	 * 获取用户同时在线最大用户数
-	 * @return
-	 */
-	private Integer getMaxSession(){
-		Integer maxSession = 1;
-		List<Config> configList = configService.getConfigByType(ConfigTableConstants.TYPE_USER_LOGIN);
-		if(!CollectionUtils.isEmpty(configList)){
-			for(Config config : configList){
-				if(ConfigTableConstants.KEY_ONLINE_MAX.equals(config.getConfigKey())) {
-					maxSession = Integer.valueOf(config.getConfigValue());
-				}
-			}
-		}
-		
-		return maxSession;
 	}
 
 }

@@ -45,6 +45,21 @@ public class DictionaryServiceImpl implements DictionaryService {
 		}
 		return dictionaryList;
 	}
+	
+	@Override
+	public String getDictionaryValue(String dictionaryType, String dictionaryKey) {
+		String value = "";
+		List<Dictionary> dictionaryList = this.getDictionaryByType(dictionaryType);
+		if(!CollectionUtils.isEmpty(dictionaryList)){
+			for(Dictionary d : dictionaryList){
+				if(d.getDictionaryKey().equals(dictionaryKey)){
+					value = d.getDictionaryValue();
+					break;
+				}
+			}
+		}
+		return value;
+	}
 
 	@Override
 	public Long saveDictionary(DictionaryVo dictionary) {

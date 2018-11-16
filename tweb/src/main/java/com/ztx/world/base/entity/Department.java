@@ -50,6 +50,11 @@ public class Department {
      */
     private String description;
 
+    /**
+     * 上级机构id
+     */
+    private Long parentId;
+
     public Long getId() {
         return id;
     }
@@ -112,5 +117,13 @@ public class Department {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 }

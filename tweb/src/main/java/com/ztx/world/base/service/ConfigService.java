@@ -15,6 +15,14 @@ public interface ConfigService {
 	List<Config> getConfigByType(String configType);
 	
 	/**
+	 * 获取配置值
+	 * @param configType
+	 * @param configKey
+	 * @return
+	 */
+	String getConfigValue(String configType, String configKey);
+	
+	/**
 	 * 新增配置
 	 * @param config
 	 * @return

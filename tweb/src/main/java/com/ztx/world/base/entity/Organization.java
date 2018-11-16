@@ -55,6 +55,11 @@ public class Organization {
      */
     private String orgPath;
 
+    /**
+     * 上级机构id
+     */
+    private Long parentId;
+
     public Long getId() {
         return id;
     }
@@ -125,5 +130,13 @@ public class Organization {
 
     public void setOrgPath(String orgPath) {
         this.orgPath = orgPath == null ? null : orgPath.trim();
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 }

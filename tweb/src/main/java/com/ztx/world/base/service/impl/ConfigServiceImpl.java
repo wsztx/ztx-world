@@ -46,6 +46,21 @@ public class ConfigServiceImpl implements ConfigService {
 		}
 		return configList;
 	}
+	
+	@Override
+	public String getConfigValue(String configType, String configKey) {
+		String value = "";
+		List<Config> configList = this.getConfigByType(configType);
+		if(!CollectionUtils.isEmpty(configList)){
+			for(Config c : configList){
+				if(c.getConfigKey().equals(configKey)){
+					value = c.getConfigValue();
+					break;
+				}
+			}
+		}
+		return value;
+	}
 
 	@Override
 	public Long saveConfig(ConfigVo config) {
