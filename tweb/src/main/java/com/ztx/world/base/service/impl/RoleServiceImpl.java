@@ -60,18 +60,18 @@ public class RoleServiceImpl implements RoleService {
 				Role role = roleMapper.selectByPrimaryKey(id);
 				if(role != null){
 					if("SuperAdmin".equals(role.getRoleCode())){
-						throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法删除!");
+						throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法删除.");
 					}
 					UserRoleExample example = new UserRoleExample();
 					example.createCriteria().andRoleIdEqualTo(id);
 					int count = userRoleMapper.countByExample(example);
 					if(count > 0){
-						throw new BasicException(ResultCode.BASE_ARG_ERROR, "已有用户分配角色" + role.getRoleName() + ",无法删除!");
+						throw new BasicException(ResultCode.BASE_ARG_ERROR, "已有用户分配角色" + role.getRoleName() + ",无法删除.");
 					}
 					if(CollectionUtils.isEmpty(roleList)){
 						for(RoleModel roleModel : roleList){
 							if(id.equals(roleModel.getRoleId())){
-								throw new BasicException(ResultCode.BASE_ARG_ERROR, "不能删除自己的角色!");
+								throw new BasicException(ResultCode.BASE_ARG_ERROR, "不能删除自己的角色.");
 							}
 						}
 					}
@@ -106,20 +106,20 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Long saveRole(RoleVo role) {
 		if(role == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
 		}
 		if(StringUtils.isEmpty(role.getRoleCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码不能为空.");
 		}
 		if(StringUtils.isEmpty(role.getRoleName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色名称不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色名称不能为空.");
 		}
 		RoleExample example = new RoleExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 			.andRoleCodeEqualTo(role.getRoleCode());
 		int count = roleMapper.countByExample(example);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码" + role.getRoleCode() + "已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码" + role.getRoleCode() + "已存在.");
 		}
 		role.setStatus(BaseConstants.UNDELETE_STATUS);
 		role.setCreateTime(new Date());
@@ -128,7 +128,7 @@ public class RoleServiceImpl implements RoleService {
 		role.setCreateUserId(customSession.getUserId());
 		roleMapper.insertSelective(role);
 		if(role.getId() == null){
-			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增角色失败!");
+			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增角色失败.");
 		}
 		// 新增角色权限
 		List<Long> permissionIds = role.getPermissionIds();
@@ -146,19 +146,19 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Long updateRole(RoleVo role) {
 		if(role == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
 		}
 		if(role.getId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色不存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色不存在.");
 		}
 		if(StringUtils.isEmpty(role.getRoleCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码不能为空.");
 		}
 		if(StringUtils.isEmpty(role.getRoleName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色名称不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色名称不能为空.");
 		}
 		if("SuperAdmin".equals(role.getRoleCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法修改!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法修改.");
 		}
 		RoleExample roleExample = new RoleExample();
 		roleExample.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
@@ -166,7 +166,7 @@ public class RoleServiceImpl implements RoleService {
 			.andIdNotEqualTo(role.getId());
 		int count = roleMapper.countByExample(roleExample);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码" + role.getRoleCode() + "已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码" + role.getRoleCode() + "已存在.");
 		}
 		role.setUpdateTime(new Date());
 		roleMapper.updateByPrimaryKeySelective(role);

@@ -65,19 +65,19 @@ public class ConfigServiceImpl implements ConfigService {
 	@Override
 	public Long saveConfig(ConfigVo config) {
 		if(config == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
 		}
 		if(StringUtils.isEmpty(config.getConfigType())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空.");
 		}
 		if(StringUtils.isEmpty(config.getConfigName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空.");
 		}
 		if(StringUtils.isEmpty(config.getConfigKey())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空.");
 		}
 		if(StringUtils.isEmpty(config.getConfigValue())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空.");
 		}
 		ConfigExample example = new ConfigExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
@@ -85,7 +85,7 @@ public class ConfigServiceImpl implements ConfigService {
 			.andConfigKeyEqualTo(config.getConfigKey());
 		int count = configMapper.countByExample(example);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型与键的组合已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型与键的组合已存在.");
 		}
 		config.setStatus(BaseConstants.UNDELETE_STATUS);
 		config.setCreateTime(new Date());
@@ -94,7 +94,7 @@ public class ConfigServiceImpl implements ConfigService {
 		config.setCreateUserId(customSession.getUserId());
 		configMapper.insertSelective(config);
 		if(config.getId() == null){
-			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增配置失败!");
+			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增配置失败.");
 		}
 		return config.getId();
 	}
@@ -102,22 +102,22 @@ public class ConfigServiceImpl implements ConfigService {
 	@Override
 	public Long updateConfig(ConfigVo config) {
 		if(config == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
 		}
 		if(config.getId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置数据不存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置数据不存在.");
 		}
 		if(StringUtils.isEmpty(config.getConfigType())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型不能为空.");
 		}
 		if(StringUtils.isEmpty(config.getConfigName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置名称不能为空.");
 		}
 		if(StringUtils.isEmpty(config.getConfigKey())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置键不能为空.");
 		}
 		if(StringUtils.isEmpty(config.getConfigValue())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置值不能为空.");
 		}
 		ConfigExample example = new ConfigExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
@@ -126,7 +126,7 @@ public class ConfigServiceImpl implements ConfigService {
 			.andIdNotEqualTo(config.getId());
 		int count = configMapper.countByExample(example);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型与键的组合已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "配置类型与键的组合已存在.");
 		}
 		config.setUpdateTime(new Date());
 		configMapper.updateByPrimaryKeySelective(config);

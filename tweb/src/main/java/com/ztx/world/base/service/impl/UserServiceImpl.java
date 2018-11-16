@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -22,6 +23,7 @@ import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
+import com.ztx.world.common.shiro.ShiroToken;
 import com.ztx.world.common.utils.MD5Util;
 import com.ztx.world.common.utils.ShiroUtil;
 
@@ -39,6 +41,32 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private ShiroUtil shiroUtil;
+	
+	@Override
+	public void login(UserVo user) {
+		if(user == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
+		}
+		if(StringUtils.isEmpty(user.getUserCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名不能为空.");
+		}
+		if(StringUtils.isEmpty(user.getPassword())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户密码不能为空.");
+		}
+        Subject currentUser = SecurityUtils.getSubject();
+        // 当前的用户是否已经被认证,即是否已经登陆
+        if (!currentUser.isAuthenticated()) {
+        	ShiroToken token = new ShiroToken(user.getUserCode(), MD5Util.md5(user.getPassword()));
+            token.setRememberMe(true);
+            currentUser.login(token);
+            // 修改最后登录时间
+            UserExample example = new UserExample();
+            example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS).andUserCodeEqualTo(user.getUserCode());
+            User record = new User();
+            record.setLastLoginTime(new Date());
+            userMapper.updateByExampleSelective(record, example);
+        }
+	}
 
 	@Override
 	public void deleteUser(List<Long> ids) {
@@ -48,10 +76,10 @@ public class UserServiceImpl implements UserService {
 				User user = userMapper.selectByPrimaryKey(id);
 				if(user != null){
 					if("SuperAdmin".equals(user.getUserCode())){
-						throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户超级管理员无法删除!");
+						throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户超级管理员无法删除.");
 					}
 					if(customSession != null && id.equals(customSession.getUserId())){
-						throw new BasicException(ResultCode.BASE_ARG_ERROR, "不能删除自己!");
+						throw new BasicException(ResultCode.BASE_ARG_ERROR, "不能删除自己.");
 					}
 				}
 			}
@@ -73,17 +101,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Long saveUser(UserVo user) {
 		if(user == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
 		}
 		if(StringUtils.isEmpty(user.getUserCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名不能为空.");
 		}
 		UserExample example = new UserExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 			.andUserCodeEqualTo(user.getUserCode());
 		int count = userMapper.countByExample(example);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名" + user.getUserCode() + "已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名" + user.getUserCode() + "已存在.");
 		}
 		user.setStatus(BaseConstants.UNDELETE_STATUS);
 		user.setCreateTime(new Date());
@@ -94,7 +122,7 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(MD5Util.md5("password"));
 		userMapper.insertSelective(user);
 		if(user.getId() == null){
-			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增用户失败!");
+			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增用户失败.");
 		}
 		return user.getId();
 	}
@@ -102,13 +130,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Long updateUser(UserVo user) {
 		if(user == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
 		}
 		if(user.getId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在.");
 		}
 		if("SuperAdmin".equals(user.getUserCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户超级管理员无法修改!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户超级管理员无法修改.");
 		}
 		UserExample example = new UserExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
@@ -116,7 +144,7 @@ public class UserServiceImpl implements UserService {
 			.andIdNotEqualTo(user.getId());
 		int count = userMapper.countByExample(example);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名" + user.getUserCode() + "已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名" + user.getUserCode() + "已存在.");
 		}
 		user.setUpdateTime(new Date());
 		user.setPassword(null);
@@ -127,10 +155,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void saveUserRole(Long id, List<Long> roleIds) {
 		if(id == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在.");
 		}
 		if(CollectionUtils.isEmpty(roleIds)){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户角色不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户角色不能为空.");
 		}
 		// 删除原有分配的角色
 		UserRoleExample example = new UserRoleExample();
@@ -153,19 +181,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updatePassword(Long id, String oldPassword, String newPassword) {
 		if(id == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在.");
 		}
 		if(StringUtils.isEmpty(oldPassword)){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "原密码不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "原密码不能为空.");
 		}
 		if(StringUtils.isEmpty(newPassword)){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "新密码不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "新密码不能为空.");
 		}
 		UserExample example = new UserExample();
 		example.createCriteria().andPasswordEqualTo(MD5Util.md5(oldPassword)).andIdEqualTo(id);
 		int count = userMapper.countByExample(example);
 		if(count == 0){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "原密码不正确!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "原密码不正确.");
 		}
 		User record = new User();
 		record.setId(id);
@@ -176,7 +204,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void resetPassword(Long id) {
 		if(id == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在.");
 		}
 		User user = new User();
 		user.setId(id);

@@ -12,6 +12,12 @@ import com.ztx.world.base.vo.UserVo;
 public interface UserService {
 	
 	/**
+	 * 用户登录
+	 * @param user
+	 */
+	void login(UserVo user);
+	
+	/**
 	 * 删除用户
 	 * @param ids
 	 */

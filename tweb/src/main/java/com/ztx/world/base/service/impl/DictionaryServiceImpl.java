@@ -64,19 +64,19 @@ public class DictionaryServiceImpl implements DictionaryService {
 	@Override
 	public Long saveDictionary(DictionaryVo dictionary) {
     	if(dictionary == null){
-    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
     	}
 		if(StringUtils.isEmpty(dictionary.getDictionaryType())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空.");
 		}
 		if(StringUtils.isEmpty(dictionary.getDictionaryName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空.");
 		}
 		if(StringUtils.isEmpty(dictionary.getDictionaryKey())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空.");
 		}
 		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空.");
 		}
 		DictionaryExample example = new DictionaryExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
@@ -84,7 +84,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 			.andDictionaryKeyEqualTo(dictionary.getDictionaryKey());
 		int count = dictionaryMapper.countByExample(example);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型与键的组合已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型与键的组合已存在.");
 		}
 		dictionary.setStatus(BaseConstants.UNDELETE_STATUS);
 		dictionary.setCreateTime(new Date());
@@ -93,7 +93,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 		dictionary.setCreateUserId(customSession.getUserId());
 		dictionaryMapper.insertSelective(dictionary);
 		if(dictionary.getId() == null){
-			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增字典失败!");
+			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增字典失败.");
 		}
 		return dictionary.getId();
 	}
@@ -101,22 +101,22 @@ public class DictionaryServiceImpl implements DictionaryService {
 	@Override
 	public Long updateDictionary(DictionaryVo dictionary) {
     	if(dictionary == null){
-    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+    		throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
     	}
 		if(dictionary.getId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典数据不存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典数据不存在.");
 		}
 		if(StringUtils.isEmpty(dictionary.getDictionaryType())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型不能为空.");
 		}
 		if(StringUtils.isEmpty(dictionary.getDictionaryName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典名称不能为空.");
 		}
 		if(StringUtils.isEmpty(dictionary.getDictionaryKey())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典键不能为空.");
 		}
 		if(StringUtils.isEmpty(dictionary.getDictionaryValue())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典值不能为空.");
 		}
 		DictionaryExample example = new DictionaryExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
@@ -125,7 +125,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 			.andIdNotEqualTo(dictionary.getId());
 		int count = dictionaryMapper.countByExample(example);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型与键的组合已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "字典类型与键的组合已存在.");
 		}
 		dictionary.setUpdateTime(new Date());
 		dictionaryMapper.updateByPrimaryKeySelective(dictionary);

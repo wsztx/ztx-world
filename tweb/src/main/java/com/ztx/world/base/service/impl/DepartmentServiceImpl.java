@@ -33,23 +33,23 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public Long saveDepartment(DepartmentVo department) {
 		if(department == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
 		}
 		if(StringUtils.isEmpty(department.getDeptCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门编码不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门编码不能为空.");
 		}
 		if(StringUtils.isEmpty(department.getDeptName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门名称不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门名称不能为空.");
 		}
 		if(department.getParentId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门上级机构不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门上级机构不能为空.");
 		}
 		DepartmentExample example = new DepartmentExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 			.andDeptCodeEqualTo(department.getDeptCode());
 		int count = departmentMapper.countByExample(example);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门编码已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门编码已存在.");
 		}
 		department.setStatus(BaseConstants.UNDELETE_STATUS);
 		department.setCreateTime(new Date());
@@ -58,7 +58,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		department.setCreateUserId(customSession.getUserId());
 		departmentMapper.insertSelective(department);
 		if(department.getId() == null){
-			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增部门失败!");
+			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增部门失败.");
 		}
 		return department.getId();
 	}
@@ -66,19 +66,19 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public Long updateDepartment(DepartmentVo department) {
 		if(department == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空.");
 		}
 		if(department.getId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门不存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门不存在.");
 		}
 		if(StringUtils.isEmpty(department.getDeptCode())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门编码不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门编码不能为空.");
 		}
 		if(StringUtils.isEmpty(department.getDeptName())){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门名称不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门名称不能为空.");
 		}
 		if(department.getParentId() == null){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门上级机构不能为空!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门上级机构不能为空.");
 		}
 		DepartmentExample example = new DepartmentExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
@@ -86,7 +86,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 			.andIdNotEqualTo(department.getId());
 		int count = departmentMapper.countByExample(example);
 		if(count >= 1){
-			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门编码已存在!");
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门编码已存在.");
 		}
 		department.setUpdateTime(new Date());
 		departmentMapper.updateByPrimaryKeySelective(department);
@@ -100,7 +100,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 			example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS).andDeptIdIn(ids);
 			int count = userMapper.countByExample(example);
 			if(count > 0){
-				throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门下存在用户,无法删除!");
+				throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门下存在用户,无法删除.");
 			}
 			
 			for(Long id : ids){
