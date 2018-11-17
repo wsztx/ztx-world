@@ -18,17 +18,13 @@ public class ConfigConstants {
 	public static final String SHIRO_REDIS_SESSION_PRE = "ShiroRedisSession:";
 	
 	/**
-	 * REDIS_SESSION
+	 * RedisSession
 	 */
 	public static final String REDIS_SESSION = "RedisSession";
 	
 	/**
-	 * shiro_kickout_session
+	 * ShiroKickoutSession
 	 */
 	public static final String SHIRO_KICKOUT_SESSION = "ShiroKickoutSession";
 	
-	/**
-	 * 禁止直接访问的页面
-	 */
-	public static final String FORBID_VIEW = "/web/";
 }

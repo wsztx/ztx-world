@@ -3,7 +3,6 @@ package com.ztx.world.common.utils;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
