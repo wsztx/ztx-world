@@ -51,6 +51,14 @@ public class SessionControlFilter extends AccessControlFilter {
 					if(newSession != null){
 						// 修改用户信息
 						mySession.setUserName(newSession.getUserName());
+						mySession.setSessionVersion(newSession.getSessionVersion());
+						mySession.setDeptId(newSession.getDeptId());
+						mySession.setDeptCode(newSession.getDeptCode());
+						mySession.setDeptName(newSession.getDeptName());
+						mySession.setOrgId(newSession.getOrgId());
+						mySession.setOrgCode(newSession.getOrgCode());
+						mySession.setOrgName(newSession.getOrgName());
+						mySession.setRoleList(newSession.getRoleList());
 					}else{
 						// 如果sessions是空的,说明用户被删了或者踢了
 						try {
