@@ -17,6 +17,13 @@ public interface UserExtMapper {
 	CustomSession getSessionByUserId(Long id);
 	
 	/**
+	 * 根据用户code获取登录的session信息
+	 * @param id
+	 * @return
+	 */
+	CustomSession getSessionByUserCode(String userCode);
+	
+	/**
 	 * 获取role集合
 	 * @param id
 	 * @return

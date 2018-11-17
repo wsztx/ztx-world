@@ -24,6 +24,15 @@
 		where user.status = 0 and user.id = #{id}
 	</select>
 	
+	<select id="getSessionByUserCode" resultMap="SessionResultMap">
+		select user.id as user_id, user.user_code, user.user_name, dept.id as dept_id, 
+		dept.dept_code, dept.dept_name, org.id as org_id, org.org_code, org.org_name 
+		from base_user user 
+		left join base_department dept on dept.status = 0 and user.dept_id = dept.id
+		left join base_organization org on org.status = 0 and user.org_id = org.id
+		where user.status = 0 and user.user_code = #{userCode}
+	</select>
+	
 	<select id="findRoleModelList" resultType="com.ztx.world.common.model.RoleModel">
 		select role.id as roleId, role.role_code as roleCode, role.role_name as roleName 
 		from base_role role 
