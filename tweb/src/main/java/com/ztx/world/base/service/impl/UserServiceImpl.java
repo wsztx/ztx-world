@@ -59,12 +59,6 @@ public class UserServiceImpl implements UserService {
         	ShiroToken token = new ShiroToken(user.getUserCode(), MD5Util.md5(user.getPassword()));
             token.setRememberMe(false);
             currentUser.login(token);
-            // 修改最后登录时间
-            UserExample example = new UserExample();
-            example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS).andUserCodeEqualTo(user.getUserCode());
-            User record = new User();
-            record.setLastLoginTime(new Date());
-            userMapper.updateByExampleSelective(record, example);
         }
 	}
 
