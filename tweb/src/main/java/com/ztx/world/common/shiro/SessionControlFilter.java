@@ -5,6 +5,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
@@ -49,18 +51,14 @@ public class SessionControlFilter extends AccessControlFilter {
 				if(!StringUtils.isEmpty(version) && !version.equals(mySession.getSessionVersion())){
 					CustomSession newSession = userExtMapper.getSessionByUserId(mySession.getUserId());
 					if(newSession != null){
-						// 修改用户信息
-						mySession.setUserName(newSession.getUserName());
-						mySession.setSessionVersion(newSession.getSessionVersion());
-						mySession.setDeptId(newSession.getDeptId());
-						mySession.setDeptCode(newSession.getDeptCode());
-						mySession.setDeptName(newSession.getDeptName());
-						mySession.setOrgId(newSession.getOrgId());
-						mySession.setOrgCode(newSession.getOrgCode());
-						mySession.setOrgName(newSession.getOrgName());
-						mySession.setRoleList(newSession.getRoleList());
+						// 切换用户信息
+				    	PrincipalCollection principalCollection = subject.getPrincipals(); 
+				    	String realmName = principalCollection.getRealmNames().iterator().next();
+				    	PrincipalCollection newPrincipalCollection = 
+				    			new SimplePrincipalCollection(newSession, realmName);
+				    	subject.runAs(newPrincipalCollection);
 					}else{
-						// 如果sessions是空的,说明用户被删了或者踢了
+						// 如果sessions是空的,说明用户被删了
 						try {
 							subject.logout();
 						} catch (Exception e) {}

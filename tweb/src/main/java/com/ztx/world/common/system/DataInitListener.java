@@ -26,7 +26,7 @@ import com.ztx.world.common.redis.RedisOperator;
  *
  */
 @Component
-public class DataSourceInitListener implements ApplicationListener<ContextRefreshedEvent> {
+public class DataInitListener implements ApplicationListener<ContextRefreshedEvent> {
 	
 	@Autowired
 	private ConfigMapper configMapper;

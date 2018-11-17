@@ -7,12 +7,8 @@ package com.ztx.world.common.constants;
  */
 public class ConfigTableConstants {
 
-	/**
-	 * 登录相关配置
-	 */
+	// 登录相关配置
 	public static final String TYPE_USER_LOGIN = "user.login";
-	/**
-	 * 同一用户最大在线数
-	 */
+	// 同一用户最大在线数
 	public static final String KEY_ONLINE_MAX = "online.max";
 }
