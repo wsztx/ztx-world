@@ -33,6 +33,11 @@ public class CustomSession implements Serializable {
 	private String userName;
 	
 	/**
+	 * 用户版本号,uuid
+	 */
+	private String sessionVersion;
+	
+	/**
 	 * 部门id
 	 */
 	private Long deptId;
@@ -146,5 +151,12 @@ public class CustomSession implements Serializable {
 	public void setRoleList(List<RoleModel> roleList) {
 		this.roleList = roleList;
 	}
-	
+
+	public String getSessionVersion() {
+		return sessionVersion;
+	}
+
+	public void setSessionVersion(String sessionVersion) {
+		this.sessionVersion = sessionVersion;
+	}
 }

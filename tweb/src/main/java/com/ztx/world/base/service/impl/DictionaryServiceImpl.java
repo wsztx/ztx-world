@@ -16,6 +16,7 @@ import com.ztx.world.base.service.DictionaryService;
 import com.ztx.world.base.vo.DictionaryVo;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.redis.RedisOperator;
@@ -32,7 +33,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Dictionary> getDictionaryByType(String dictionaryType) {
-		String cacheType = "dictionary." + dictionaryType;
+		String cacheType = ConfigConstants.DICTIONARY_PRE + dictionaryType;
 		List<Dictionary> dictionaryList = null;
 		if(redisOperator.hasKey(cacheType)){
 			dictionaryList = (List<Dictionary>)redisOperator.get(cacheType);
@@ -131,7 +132,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 		dictionaryMapper.updateByPrimaryKeySelective(dictionary);
 		
 		// 删除缓存信息
-		String cacheType = "dictionary." + dictionary.getDictionaryType();
+		String cacheType = ConfigConstants.DICTIONARY_PRE + dictionary.getDictionaryType();
 		if(redisOperator.hasKey(cacheType)){
 			redisOperator.del(cacheType);
 		}
@@ -148,7 +149,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 				dictionaryMapper.updateByPrimaryKeySelective(dictionary);
 				
 				// 删除缓存信息
-				String cacheType = "dictionary." + dictionary.getDictionaryType();
+				String cacheType = ConfigConstants.DICTIONARY_PRE + dictionary.getDictionaryType();
 				if(redisOperator.hasKey(cacheType)){
 					redisOperator.del(cacheType);
 				}

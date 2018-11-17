@@ -44,6 +44,10 @@
         <property name="kickoutAfter" value="false"/>
         <property name="kickoutUrl" value="/base/user/tologin"/>  
     </bean>
+    
+   <bean id="sessionControlFilter" class="com.ztx.world.common.shiro.SessionControlFilter">  
+        <property name="loginUrl" value="/base/user/tologin"/>
+    </bean>
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
@@ -53,6 +57,7 @@
 		<property name="filters">
 			<map>
 				<entry key="kickout" value-ref="kickoutControlFilter"/>
+				<entry key="session" value-ref="sessionControlFilter"/>
 			</map>
 		</property>
 		<property name="filterChainDefinitions">
@@ -62,7 +67,7 @@
 				/base/user/tologin = anon
 				/base/user/login = anon
 				/base/user/logout = anon
-                /** = authc,kickout
+                /** = authc,session,kickout
 			</value>
 		</property>
 	</bean>

@@ -16,6 +16,7 @@ import com.ztx.world.base.service.ConfigService;
 import com.ztx.world.base.vo.ConfigVo;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.redis.RedisOperator;
@@ -32,7 +33,7 @@ public class ConfigServiceImpl implements ConfigService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Config> getConfigByType(String configType) {
-		String cacheType = "config." + configType;
+		String cacheType = ConfigConstants.CONFIG_PRE + configType;
 		List<Config> configList = null;
 		if(redisOperator.hasKey(cacheType)){
 			configList = (List<Config>)redisOperator.get(cacheType);
@@ -132,7 +133,7 @@ public class ConfigServiceImpl implements ConfigService {
 		configMapper.updateByPrimaryKeySelective(config);
 		
 		// 删除缓存信息
-		String cacheType = "config." + config.getConfigType();
+		String cacheType = ConfigConstants.CONFIG_PRE + config.getConfigType();
 		if(redisOperator.hasKey(cacheType)){
 			redisOperator.del(cacheType);
 		}
@@ -149,7 +150,7 @@ public class ConfigServiceImpl implements ConfigService {
 				configMapper.updateByPrimaryKeySelective(config);
 				
 				// 删除缓存信息
-				String cacheType = "config." + config.getConfigType();
+				String cacheType = ConfigConstants.CONFIG_PRE + config.getConfigType();
 				if(redisOperator.hasKey(cacheType)){
 					redisOperator.del(cacheType);
 				}

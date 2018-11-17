@@ -20,6 +20,7 @@ import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
+import com.ztx.world.common.redis.RedisOperator;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -29,6 +30,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 	
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private RedisOperator redisOperator;
 
 	@Override
 	public Long saveDepartment(DepartmentVo department) {

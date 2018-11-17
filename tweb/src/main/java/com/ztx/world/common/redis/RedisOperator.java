@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -24,6 +25,14 @@ public class RedisOperator {
 
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
+	
+	/**
+	 * 清空redis缓存
+	 */
+	public void clear(){
+    	RedisConnection redisConnection = redisTemplate.getConnectionFactory().getConnection();
+    	redisConnection.flushDb();
+	}
 	
 	/**
 	 * 指定缓存失效时间

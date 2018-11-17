@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local_mysql
+Source Server         : mysql_local
 Source Server Version : 50630
 Source Host           : localhost:3306
 Source Database       : tworld
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-16 21:01:29
+Date: 2018-11-17 16:58:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -293,6 +293,7 @@ CREATE TABLE `base_user` (
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
   `user_status` int(4) DEFAULT NULL COMMENT '用户状态，0正常',
+  `session_version` varchar(64) NOT NULL COMMENT 'session版本号，uuid',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_USER_CODE` (`status`,`user_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -300,7 +301,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '0', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'SuperAdmin', '超级管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-11-16 19:59:53', '0');
+INSERT INTO `base_user` VALUES ('1', '0', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'SuperAdmin', '超级管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-11-17 14:36:42', '0', 'init');
 
 -- ----------------------------
 -- Table structure for base_user_role

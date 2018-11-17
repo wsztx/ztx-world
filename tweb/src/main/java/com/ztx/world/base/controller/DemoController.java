@@ -79,7 +79,7 @@ public class DemoController extends BaseController {
     @RequestMapping(value="/test4", method=RequestMethod.GET)
     public BaseResponse test4(HttpServletRequest request, HttpServletResponse response) 
     		throws Exception{
-    	shiroUtil.deleteSession("SuperAdmin");
+    	shiroUtil.updateCurrentSession();
     	return success();
     }
 }

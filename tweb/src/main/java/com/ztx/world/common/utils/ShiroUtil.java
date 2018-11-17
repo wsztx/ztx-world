@@ -42,7 +42,7 @@ public class ShiroUtil {
 	 * 获取当前登录用户
 	 * @return
 	 */
-	public CustomSession getCustomSession(){
+	public CustomSession getCurrentSession(){
 		return (CustomSession)getSubject().getPrincipal();
 	}
     
@@ -122,6 +122,9 @@ public class ShiroUtil {
             		SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
             		CustomSession mySession = (CustomSession)principalCollection.getPrimaryPrincipal();
             		if(userCode.equals(mySession.getUserCode())){
+            			// 此方法只会退出用户,不会删除权限
+//            			session.setTimeout(0);
+//            			sessionDAO.update(session);
             			Subject subject = new Subject.Builder().sessionId(session.getId()).buildSubject();
             			subject.logout();
             		}
@@ -151,7 +154,7 @@ public class ShiroUtil {
     }
     
     /**
-     * 更新session
+     * 更新指定用户session
      * @param userCode
      */
     public void updateSession(String userCode){
@@ -160,13 +163,29 @@ public class ShiroUtil {
         	if(!CollectionUtils.isEmpty(sessions)){
             	for(Session session : sessions){
             		SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-            		CustomSession mySession = (CustomSession)principalCollection.getPrimaryPrincipal();
-            		if(userCode.equals(mySession.getUserCode())){
-            			mySession.setUserName("哇哈哈哈");
-            			Subject subject = new Subject.Builder().sessionId(session.getId()).buildSubject();
-            		}
+            		CustomSession customSession = (CustomSession)principalCollection.getPrimaryPrincipal();
+                	CustomSession newSession = userExtMapper.getSessionByUserId(customSession.getUserId());
+                	if(newSession != null){
+                    	Subject subject = new Subject.Builder().sessionId(session.getId()).buildSubject();
+                    	SimplePrincipalCollection principals = new SimplePrincipalCollection(newSession, subject.getPrincipals().getRealmNames().iterator().next());
+                    	subject.runAs(principals);
+                	}
             	}
         	}
+    	}
+    }
+    
+    /**
+     * 更新当前用户session
+     * @param userCode
+     */
+	public void updateCurrentSession(){
+    	Subject subject = getSubject();
+    	CustomSession customSession = (CustomSession)subject.getPrincipal();
+    	CustomSession newSession = userExtMapper.getSessionByUserId(customSession.getUserId());
+    	if(newSession != null){
+        	SimplePrincipalCollection principals = new SimplePrincipalCollection(newSession, subject.getPrincipals().getRealmNames().iterator().next());
+        	getSubject().runAs(principals);
     	}
     }
 }

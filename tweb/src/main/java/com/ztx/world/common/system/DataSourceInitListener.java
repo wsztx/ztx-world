@@ -17,6 +17,7 @@ import com.ztx.world.base.mapper.DictionaryMapper;
 import com.ztx.world.base.mapper.ext.ConfigExtMapper;
 import com.ztx.world.base.mapper.ext.DictionaryExtMapper;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.redis.RedisOperator;
 
 /**
@@ -61,7 +62,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
 				example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS).andConfigTypeEqualTo(type);
 				List<Config> list = configMapper.selectByExample(example);
 				if(!CollectionUtils.isEmpty(list)){
-					String cacheKey = "config." + type;
+					String cacheKey = ConfigConstants.CONFIG_PRE + type;
 					redisOperator.set(cacheKey, list);
 				}
 			}
@@ -76,7 +77,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
 				example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS).andDictionaryTypeEqualTo(type);
 				List<Dictionary> list = dictionaryMapper.selectByExample(example);
 				if(!CollectionUtils.isEmpty(list)){
-					String cacheKey = "dictionary." + type;
+					String cacheKey = ConfigConstants.DICTIONARY_PRE + type;
 					redisOperator.set(cacheKey, list);
 				}
 			}

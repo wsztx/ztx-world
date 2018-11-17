@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import com.ztx.world.base.entity.DepartmentExample;
 import com.ztx.world.base.entity.Organization;
 import com.ztx.world.base.entity.OrganizationExample;
+import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
 import com.ztx.world.base.mapper.DepartmentMapper;
 import com.ztx.world.base.mapper.OrganizationMapper;
@@ -20,8 +21,10 @@ import com.ztx.world.base.service.OrganizationService;
 import com.ztx.world.base.vo.OrganizationVo;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
+import com.ztx.world.common.redis.RedisOperator;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
@@ -34,6 +37,9 @@ public class OrganizationServiceImpl implements OrganizationService {
 	
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private RedisOperator redisOperator;
 
 	@Override
 	public Long saveOrganization(OrganizationVo organization) {

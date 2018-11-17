@@ -21,11 +21,14 @@ import com.ztx.world.base.service.UserService;
 import com.ztx.world.base.vo.UserVo;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
+import com.ztx.world.common.redis.RedisOperator;
 import com.ztx.world.common.shiro.ShiroToken;
 import com.ztx.world.common.utils.MD5Util;
 import com.ztx.world.common.utils.ShiroUtil;
+import com.ztx.world.common.utils.UUIDUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,13 +37,13 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 	
 	@Autowired
-	private UserExtMapper userExtMapper;
-	
-	@Autowired
 	private UserRoleMapper userRoleMapper;
 	
 	@Autowired
 	private ShiroUtil shiroUtil;
+	
+	@Autowired
+	private RedisOperator redisOperator;
 	
 	@Override
 	public void login(UserVo user) {
@@ -84,11 +87,9 @@ public class UserServiceImpl implements UserService {
 				user.setId(id);
 				user.setStatus(-id);
 				userMapper.updateByPrimaryKeySelective(user);
+				// 通知缓存用户改了
+				redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 			}
-			
-			List<String> codes = userExtMapper.findUserCodesByIds(ids);
-			// 强制将用户登出
-			shiroUtil.deleteSession(codes);
 		}
 	}
 
@@ -110,6 +111,7 @@ public class UserServiceImpl implements UserService {
 		user.setStatus(BaseConstants.UNDELETE_STATUS);
 		user.setCreateTime(new Date());
 		user.setUpdateTime(new Date());
+		user.setSessionVersion(UUIDUtil.getUUID());
 		CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
 		user.setCreateUserId(customSession.getUserId());
 		// 设置用户初始密码为password
@@ -118,6 +120,8 @@ public class UserServiceImpl implements UserService {
 		if(user.getId() == null){
 			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增用户失败.");
 		}
+		// 通知缓存用户版本
+		redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 		return user.getId();
 	}
 
@@ -141,8 +145,13 @@ public class UserServiceImpl implements UserService {
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名" + user.getUserCode() + "已存在.");
 		}
 		user.setUpdateTime(new Date());
+		user.setSessionVersion(UUIDUtil.getUUID());
+		// 无法修改密码和用户名
 		user.setPassword(null);
+		user.setUserCode(null);
 		userMapper.updateByPrimaryKeySelective(user);
+		// 通知缓存用户版本
+		redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 		return user.getId();
 	}
 
@@ -170,6 +179,8 @@ public class UserServiceImpl implements UserService {
 		if(user != null){
 			shiroUtil.clearAuthCache(user.getUserCode());
 		}
+		// 通知缓存用户版本
+		redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 	}
 
 	@Override

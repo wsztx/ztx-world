@@ -69,7 +69,7 @@ public class UserExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-11-16
+     * @date 2018-11-17
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -931,6 +931,76 @@ public class UserExample {
             addCriterion("user_status not between", value1, value2, "userStatus");
             return (Criteria) this;
         }
+
+        public Criteria andSessionVersionIsNull() {
+            addCriterion("session_version is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionIsNotNull() {
+            addCriterion("session_version is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionEqualTo(String value) {
+            addCriterion("session_version =", value, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionNotEqualTo(String value) {
+            addCriterion("session_version <>", value, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionGreaterThan(String value) {
+            addCriterion("session_version >", value, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionGreaterThanOrEqualTo(String value) {
+            addCriterion("session_version >=", value, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionLessThan(String value) {
+            addCriterion("session_version <", value, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionLessThanOrEqualTo(String value) {
+            addCriterion("session_version <=", value, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionLike(String value) {
+            addCriterion("session_version like", value, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionNotLike(String value) {
+            addCriterion("session_version not like", value, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionIn(List<String> values) {
+            addCriterion("session_version in", values, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionNotIn(List<String> values) {
+            addCriterion("session_version not in", values, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionBetween(String value1, String value2) {
+            addCriterion("session_version between", value1, value2, "sessionVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionVersionNotBetween(String value1, String value2) {
+            addCriterion("session_version not between", value1, value2, "sessionVersion");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -945,7 +1015,7 @@ public class UserExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-11-16
+     * @date 2018-11-17
      */
     public static class Criterion {
         private String condition;

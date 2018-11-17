@@ -49,7 +49,7 @@
 		</javaClientGenerator>
 		
 		<!-- 指定数据库表 -->
-		<table tableName="base_organization" domainObjectName="Organization" schema="" >
+		<table tableName="base_user" domainObjectName="User" schema="" >
             <generatedKey column="id" sqlStatement="MySql" identity="false"/>
 		</table>
 		
