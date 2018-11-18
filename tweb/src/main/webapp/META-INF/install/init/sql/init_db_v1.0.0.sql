@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-18 19:44:47
+Date: 2018-11-18 20:30:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -303,7 +303,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '0', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'SuperAdmin', '超级管理员', '407ec58e5b61475836123dbac712ec68', '1', '1', null, '2018-11-17 14:36:42', '0', 'init');
+INSERT INTO `base_user` VALUES ('1', '0', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'SuperAdmin', '超级管理员', '1ac534761ddc61971850b795f078719b', '1', '1', null, '2018-11-18 20:07:57', '0', '1fe1e4c17f614220a67dbb825b71bd4e');
 
 -- ----------------------------
 -- Table structure for base_user_role
