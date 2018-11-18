@@ -116,7 +116,7 @@ public class UserServiceImpl implements UserService {
 		user.setStatus(BaseConstants.UNDELETE_STATUS);
 		user.setCreateTime(new Date());
 		user.setUpdateTime(new Date());
-		user.setSessionVersion(UUIDUtil.getUUID());
+		user.setSessionVersion(new Date().getTime());
 		CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
 		user.setCreateUserId(customSession.getUserId());
 		// 设置用户初始密码为password
@@ -165,7 +165,7 @@ public class UserServiceImpl implements UserService {
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名" + user.getUserCode() + "已存在.");
 		}
 		user.setUpdateTime(new Date());
-		user.setSessionVersion(UUIDUtil.getUUID());
+		user.setSessionVersion(new Date().getTime());
 		// 无法修改密码和用户名
 		user.setPassword(null);
 		user.setUserCode(null);
@@ -225,7 +225,7 @@ public class UserServiceImpl implements UserService {
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "原密码不正确.");
 		}
 		record.setId(id);
-		record.setSessionVersion(UUIDUtil.getUUID());
+		record.setSessionVersion(new Date().getTime());
 		record.setPassword(MD5Util.md5(newPassword));
 		userMapper.updateByPrimaryKeySelective(record);
 		// 通知缓存用户版本
@@ -242,7 +242,7 @@ public class UserServiceImpl implements UserService {
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在.");
 		}
 		user.setId(id);
-		user.setSessionVersion(UUIDUtil.getUUID());
+		user.setSessionVersion(new Date().getTime());
 		user.setPassword(MD5Util.md5("password"));
 		userMapper.updateByPrimaryKeySelective(user);
 		// 通知缓存用户版本

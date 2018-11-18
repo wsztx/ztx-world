@@ -30,7 +30,6 @@ import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.model.RoleModel;
 import com.ztx.world.common.redis.RedisOperator;
 import com.ztx.world.common.utils.ShiroUtil;
-import com.ztx.world.common.utils.UUIDUtil;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -214,7 +213,7 @@ public class RoleServiceImpl implements RoleService {
 		List<User> userList = roleExtMapper.findUsersByRoleId(role.getId());
 		if(CollectionUtils.isEmpty(userList)){
 			for(User user : userList){
-				user.setSessionVersion(UUIDUtil.getUUID());
+				user.setSessionVersion(new Date().getTime());
 				userMapper.updateByPrimaryKeySelective(user);
 				// 通知缓存用户改了
 				redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());

@@ -25,7 +25,6 @@ import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.redis.RedisOperator;
-import com.ztx.world.common.utils.UUIDUtil;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
@@ -122,7 +121,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 		List<User> userList = userMapper.selectByExample(userExample);
 		if(CollectionUtils.isEmpty(userList)){
 			for(User user : userList){
-				user.setSessionVersion(UUIDUtil.getUUID());
+				user.setSessionVersion(new Date().getTime());
 				userMapper.updateByPrimaryKeySelective(user);
 				// 通知缓存用户改了
 				redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());

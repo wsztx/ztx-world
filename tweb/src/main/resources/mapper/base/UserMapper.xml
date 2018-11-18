@@ -16,7 +16,7 @@
         <result column="description" property="description" jdbcType="VARCHAR" />
         <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
         <result column="user_status" property="userStatus" jdbcType="INTEGER" />
-        <result column="session_version" property="sessionVersion" jdbcType="VARCHAR" />
+        <result column="session_version" property="sessionVersion" jdbcType="BIGINT" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -131,7 +131,7 @@
             #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{userCode,jdbcType=VARCHAR}, 
             #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, 
             #{deptId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
-            #{userStatus,jdbcType=INTEGER}, #{sessionVersion,jdbcType=VARCHAR})
+            #{userStatus,jdbcType=INTEGER}, #{sessionVersion,jdbcType=BIGINT})
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.User" >
@@ -220,7 +220,7 @@
                 #{userStatus,jdbcType=INTEGER},
             </if>
             <if test="sessionVersion != null" >
-                #{sessionVersion,jdbcType=VARCHAR},
+                #{sessionVersion,jdbcType=BIGINT},
             </if>
         </trim>
     </insert>
@@ -275,7 +275,7 @@
                 user_status = #{record.userStatus,jdbcType=INTEGER},
             </if>
             <if test="record.sessionVersion != null" >
-                session_version = #{record.sessionVersion,jdbcType=VARCHAR},
+                session_version = #{record.sessionVersion,jdbcType=BIGINT},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -298,7 +298,7 @@
             description = #{record.description,jdbcType=VARCHAR},
             last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
             user_status = #{record.userStatus,jdbcType=INTEGER},
-            session_version = #{record.sessionVersion,jdbcType=VARCHAR}
+            session_version = #{record.sessionVersion,jdbcType=BIGINT}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -344,7 +344,7 @@
                 user_status = #{userStatus,jdbcType=INTEGER},
             </if>
             <if test="sessionVersion != null" >
-                session_version = #{sessionVersion,jdbcType=VARCHAR},
+                session_version = #{sessionVersion,jdbcType=BIGINT},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
@@ -364,7 +364,7 @@
             description = #{description,jdbcType=VARCHAR},
             last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
             user_status = #{userStatus,jdbcType=INTEGER},
-            session_version = #{sessionVersion,jdbcType=VARCHAR}
+            session_version = #{sessionVersion,jdbcType=BIGINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-18 20:30:23
+Date: 2018-11-19 00:27:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -295,7 +295,7 @@ CREATE TABLE `base_user` (
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
   `user_status` int(4) DEFAULT NULL COMMENT '用户状态，0正常',
-  `session_version` varchar(64) NOT NULL COMMENT 'session版本号，uuid',
+  `session_version` bigint(32) NOT NULL COMMENT 'session版本号，时间戳',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_USER_CODE` (`status`,`user_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -303,7 +303,7 @@ CREATE TABLE `base_user` (
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '0', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'SuperAdmin', '超级管理员', '1ac534761ddc61971850b795f078719b', '1', '1', null, '2018-11-18 20:07:57', '0', '1fe1e4c17f614220a67dbb825b71bd4e');
+INSERT INTO `base_user` VALUES ('1', '0', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'SuperAdmin', '超级管理员', '1ac534761ddc61971850b795f078719b', '1', '1', null, '2018-11-18 20:07:57', '0', '1542558231967');
 
 -- ----------------------------
 -- Table structure for base_user_role

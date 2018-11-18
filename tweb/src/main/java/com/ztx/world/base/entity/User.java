@@ -5,9 +5,9 @@ import java.util.Date;
 /**
  * 
  * 
- * @author wcyong
+ * @author ztx
  * 
- * @date 2018-11-17
+ * @date 2018-11-19
  */
 public class User {
     /**
@@ -76,9 +76,9 @@ public class User {
     private Integer userStatus;
 
     /**
-     * session版本号，uuid
+     * session版本号，时间戳
      */
-    private String sessionVersion;
+    private Long sessionVersion;
 
     public Long getId() {
         return id;
@@ -184,11 +184,11 @@ public class User {
         this.userStatus = userStatus;
     }
 
-    public String getSessionVersion() {
+    public Long getSessionVersion() {
         return sessionVersion;
     }
 
-    public void setSessionVersion(String sessionVersion) {
-        this.sessionVersion = sessionVersion == null ? null : sessionVersion.trim();
+    public void setSessionVersion(Long sessionVersion) {
+        this.sessionVersion = sessionVersion;
     }
 }

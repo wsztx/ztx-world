@@ -47,9 +47,9 @@ public class SessionControlFilter extends AccessControlFilter {
 		
 		if(!StringUtils.isEmpty(userCode)){
 			if(redisOperator.hasKey(ConfigConstants.LOGOUT_PRE + userCode)){
-				String version = (String)redisOperator.get(ConfigConstants.LOGOUT_PRE + userCode);
+				long version = (long)redisOperator.get(ConfigConstants.LOGOUT_PRE + userCode);
 				// 如果用户强退版本更新,则强制登出用户
-				if(!StringUtils.isEmpty(version) && !version.equals(mySession.getSessionVersion())){
+				if(mySession.getSessionVersion() < version){
 					try {
 						subject.logout();
 					} catch (Exception e) {}
@@ -70,8 +70,8 @@ public class SessionControlFilter extends AccessControlFilter {
 				}
 			}
 			if(redisOperator.hasKey(ConfigConstants.VERSION_PRE + userCode)){
-				String version = (String)redisOperator.get(ConfigConstants.VERSION_PRE + userCode);
-				if(!StringUtils.isEmpty(version) && !version.equals(mySession.getSessionVersion())){
+				long version = (long)redisOperator.get(ConfigConstants.VERSION_PRE + userCode);
+				if(mySession.getSessionVersion() < version){
 					CustomSession newSession = userExtMapper.getSessionByUserId(mySession.getUserId());
 					if(newSession != null){
 						// 切换用户信息
@@ -80,9 +80,6 @@ public class SessionControlFilter extends AccessControlFilter {
 				    	PrincipalCollection newPrincipalCollection = 
 				    			new SimplePrincipalCollection(newSession, realmName);
 				    	subject.runAs(newPrincipalCollection);
-				        // 更新缓存中用户版本为最新
-				        redisOperator.set(ConfigConstants.VERSION_PRE + userCode, newSession.getSessionVersion());
-				        redisOperator.set(ConfigConstants.LOGOUT_PRE + userCode, newSession.getSessionVersion());
 					}else{
 						// 如果sessions是空的,说明用户被删了
 						try {
