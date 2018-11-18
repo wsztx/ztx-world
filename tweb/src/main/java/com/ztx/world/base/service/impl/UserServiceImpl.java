@@ -10,13 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import com.ztx.world.base.entity.Role;
+import com.ztx.world.base.entity.RoleExample;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
 import com.ztx.world.base.entity.UserRole;
 import com.ztx.world.base.entity.UserRoleExample;
+import com.ztx.world.base.mapper.RoleMapper;
 import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.mapper.UserRoleMapper;
-import com.ztx.world.base.mapper.ext.UserExtMapper;
 import com.ztx.world.base.service.UserService;
 import com.ztx.world.base.vo.UserVo;
 import com.ztx.world.common.config.CustomSession;
@@ -38,6 +40,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRoleMapper userRoleMapper;
+	
+	@Autowired
+	private RoleMapper roleMapper;
 	
 	@Autowired
 	private ShiroUtil shiroUtil;
@@ -119,6 +124,17 @@ public class UserServiceImpl implements UserService {
 		userMapper.insertSelective(user);
 		if(user.getId() == null){
 			throw new BasicException(ResultCode.BASE_DATA_ERROR, "新增用户失败.");
+		}
+		// 分配默认角色普通用户
+		RoleExample roleExample = new RoleExample();
+		roleExample.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+			.andRoleCodeEqualTo("OrdinaryUser");
+		List<Role> roleList = roleMapper.selectByExample(roleExample);
+		if(!CollectionUtils.isEmpty(roleList)){
+			UserRole userRole = new UserRole();
+			userRole.setRoleId(roleList.get(0).getId());
+			userRole.setUserId(user.getId());
+			userRoleMapper.insertSelective(userRole);
 		}
 		// 通知缓存用户版本
 		redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());

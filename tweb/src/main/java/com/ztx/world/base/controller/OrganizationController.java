@@ -90,7 +90,7 @@ public class OrganizationController extends BaseController {
     
     @ResponseBody
     @RequiresPermissions(value = {"base:organization:delete"})
-    @RequestMapping(value="/delete", method = RequestMethod.GET)
+    @RequestMapping(value="/delete", method = RequestMethod.POST)
     public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
     		List<Long> ids) throws Exception{
     	organizationService.deleteOrganization(ids);

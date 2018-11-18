@@ -90,7 +90,7 @@ public class DepartmentController extends BaseController {
     
     @ResponseBody
     @RequiresPermissions(value = {"base:department:delete"})
-    @RequestMapping(value="/delete", method = RequestMethod.GET)
+    @RequestMapping(value="/delete", method = RequestMethod.POST)
     public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
     		List<Long> ids) throws Exception{
     	departmentService.deleteDepartment(ids);

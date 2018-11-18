@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql_local
+Source Server         : local_mysql
 Source Server Version : 50630
 Source Host           : localhost:3306
 Source Database       : tworld
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-17 16:58:48
+Date: 2018-11-18 19:44:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -125,7 +125,7 @@ CREATE TABLE `base_permission` (
   `description` varchar(256) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_PERMISSION_CODE` (`status`,`permission_code`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_permission
@@ -179,9 +179,10 @@ INSERT INTO `base_permission` VALUES ('46', '0', '2018-10-23 17:59:55', '2018-10
 INSERT INTO `base_permission` VALUES ('47', '0', '2018-10-23 19:00:09', '2018-10-23 19:00:10', '1', '01006006', '用户新增', 'base:user:save', '');
 INSERT INTO `base_permission` VALUES ('48', '0', '2018-10-23 19:02:31', '2018-10-23 19:02:33', '1', '01006007', '用户修改', 'base:user:update', '');
 INSERT INTO `base_permission` VALUES ('49', '0', '2018-10-23 19:02:40', '2018-10-23 19:02:42', '1', '01006008', '用户删除', 'base:user:delete', '');
-INSERT INTO `base_permission` VALUES ('50', '0', '2018-11-16 18:20:58', '2018-11-16 18:21:00', '1', '01006009', '用户分配角色', 'base:user:distributerole', null);
-INSERT INTO `base_permission` VALUES ('51', '0', '2018-11-16 18:23:25', '2018-11-16 18:23:26', '1', '01006010', '用户修改密码', 'base:user:modifypassword', null);
+INSERT INTO `base_permission` VALUES ('50', '0', '2018-11-16 18:20:58', '2018-11-16 18:21:00', '1', '01006009', '用户分配角色', 'base:user:saveuserrole', null);
+INSERT INTO `base_permission` VALUES ('51', '0', '2018-11-16 18:23:25', '2018-11-16 18:23:26', '1', '01006010', '用户修改密码', 'base:user:updatepassword', null);
 INSERT INTO `base_permission` VALUES ('52', '0', '2018-11-16 18:24:27', '2018-11-16 18:24:29', '1', '01006011', '用户重置密码', 'base:user:resetpassword', null);
+INSERT INTO `base_permission` VALUES ('53', '0', '2018-11-18 19:42:34', '2018-11-18 19:42:36', '1', '01007001', '缓存清空', 'base:cache:clear', null);
 
 -- ----------------------------
 -- Table structure for base_role
@@ -217,7 +218,7 @@ CREATE TABLE `base_role_permission` (
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(32) DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_role_permission
@@ -274,6 +275,7 @@ INSERT INTO `base_role_permission` VALUES ('49', '1', '49');
 INSERT INTO `base_role_permission` VALUES ('50', '1', '50');
 INSERT INTO `base_role_permission` VALUES ('51', '1', '51');
 INSERT INTO `base_role_permission` VALUES ('52', '1', '52');
+INSERT INTO `base_role_permission` VALUES ('53', '1', '53');
 
 -- ----------------------------
 -- Table structure for base_user

@@ -73,6 +73,15 @@ public class RoleServiceImpl implements RoleService {
 					if("SuperAdmin".equals(role.getRoleCode())){
 						throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色超级管理员无法删除.");
 					}
+					if("SystemAdmin".equals(role.getRoleCode())){
+						throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色系统管理员无法删除.");
+					}
+					if("BussinessAdmin".equals(role.getRoleCode())){
+						throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色业务管理员无法删除.");
+					}
+					if("OrdinaryUser".equals(role.getRoleCode())){
+						throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色普通用户无法删除.");
+					}
 					UserRoleExample example = new UserRoleExample();
 					example.createCriteria().andRoleIdEqualTo(id);
 					int count = userRoleMapper.countByExample(example);

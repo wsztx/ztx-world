@@ -90,7 +90,7 @@ public class ConfigController extends BaseController {
     
     @ResponseBody
     @RequiresPermissions(value = {"base:config:delete"})
-    @RequestMapping(value="/delete", method = RequestMethod.GET)
+    @RequestMapping(value="/delete", method = RequestMethod.POST)
     public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
     		List<Long> ids) throws Exception{
     	configService.deleteConfig(ids);

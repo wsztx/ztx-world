@@ -121,7 +121,7 @@ public class UserController extends BaseController{
     
     @ResponseBody
     @RequiresPermissions(value = {"base:user:delete"})
-    @RequestMapping(value="/delete", method = RequestMethod.GET)
+    @RequestMapping(value="/delete", method = RequestMethod.POST)
     public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
     		List<Long> ids) throws Exception{
     	userService.deleteUser(ids);
@@ -129,8 +129,8 @@ public class UserController extends BaseController{
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base:user:distributerole"})
-    @RequestMapping(value="/distributerole", method = RequestMethod.POST)
+    @RequiresPermissions(value = {"base:user:saveuserrole"})
+    @RequestMapping(value="/saveuserrole", method = RequestMethod.POST)
     public BaseResponse distributeRole(HttpServletRequest request, HttpServletResponse response, 
     		UserVo user) throws Exception{
 		if(user == null){
@@ -143,9 +143,9 @@ public class UserController extends BaseController{
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base:user:modifypassword"})
-    @RequestMapping(value="/modifypassword", method = RequestMethod.POST)
-    public BaseResponse modifyPassword(HttpServletRequest request, HttpServletResponse response, 
+    @RequiresPermissions(value = {"base:user:updatepassword"})
+    @RequestMapping(value="/updatepassword", method = RequestMethod.POST)
+    public BaseResponse updatePassword(HttpServletRequest request, HttpServletResponse response, 
     		UserVo user) throws Exception{
 		if(user == null){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "数据不能为空!");

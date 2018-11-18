@@ -90,7 +90,7 @@ public class RoleController extends BaseController {
     
     @ResponseBody
     @RequiresPermissions(value = {"base:role:delete"})
-    @RequestMapping(value="/delete", method = RequestMethod.GET)
+    @RequestMapping(value="/delete", method = RequestMethod.POST)
     public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
     		List<Long> ids) throws Exception{
     	roleService.deleteRole(ids);
