@@ -38,7 +38,12 @@ public class ConfigConstants {
 	public static final String CONFIG_PRE = "config.";
 	
 	/**
-	 * 版本缓存
+	 * 用户版本缓存
 	 */
 	public static final String VERSION_PRE = "version.";
+	
+	/**
+	 * 用户强退缓存
+	 */
+	public static final String LOGOUT_PRE = "logout.";
 }

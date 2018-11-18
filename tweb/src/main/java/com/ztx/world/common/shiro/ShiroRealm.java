@@ -29,6 +29,8 @@ import com.ztx.world.base.service.PermissionService;
 import com.ztx.world.base.service.RoleService;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ConfigConstants;
+import com.ztx.world.common.redis.RedisOperator;
 
 public class ShiroRealm extends AuthorizingRealm {
 	
@@ -45,6 +47,9 @@ public class ShiroRealm extends AuthorizingRealm {
     
     @Autowired
     private PermissionService permissionService;
+    
+    @Autowired
+    private RedisOperator redisOperator;
     
 	@Override
 	public void setName(String name) {
@@ -80,6 +85,9 @@ public class ShiroRealm extends AuthorizingRealm {
 			customSession = userExtMapper.getSessionByUserId(user.getId());
 		}
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customSession, user.getPassword(), getName());
+        // 更新缓存中用户版本为最新
+        redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+        redisOperator.set(ConfigConstants.LOGOUT_PRE + user.getUserCode(), user.getSessionVersion());
 		return info;
 	}
 
