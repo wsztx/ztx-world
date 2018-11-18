@@ -13,4 +13,10 @@
 		inner join base_user_role ur on u.id = ur.user_id and ur.role_id = #{id}
 		where u.status = 0 
 	</select>
+	
+	<select id="findUsersByRoleId" resultMap="com.ztx.world.base.mapper.UserMapper.BaseResultMap">
+		select user.* from base_user user
+		inner join base_user_role userRole on user.id = userRole.user_id and userRole.role_id = #{id}
+		where user.status = 0
+	</select>
 </mapper>

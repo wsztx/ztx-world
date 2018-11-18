@@ -13,19 +13,24 @@ import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.RoleExample;
 import com.ztx.world.base.entity.RolePermission;
 import com.ztx.world.base.entity.RolePermissionExample;
+import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserRoleExample;
 import com.ztx.world.base.mapper.RoleMapper;
 import com.ztx.world.base.mapper.RolePermissionMapper;
+import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.mapper.UserRoleMapper;
 import com.ztx.world.base.mapper.ext.RoleExtMapper;
 import com.ztx.world.base.service.RoleService;
 import com.ztx.world.base.vo.RoleVo;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.model.RoleModel;
+import com.ztx.world.common.redis.RedisOperator;
 import com.ztx.world.common.utils.ShiroUtil;
+import com.ztx.world.common.utils.UUIDUtil;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -37,6 +42,9 @@ public class RoleServiceImpl implements RoleService {
 	private RoleMapper roleMapper;
 	
 	@Autowired
+	private UserMapper userMapper;
+	
+	@Autowired
 	private UserRoleMapper userRoleMapper;
 	
 	@Autowired
@@ -44,6 +52,9 @@ public class RoleServiceImpl implements RoleService {
 	
 	@Autowired
 	private ShiroUtil shiroUtil;
+	
+	@Autowired
+	private RedisOperator redisOperator;
 
 	@Override
 	public List<Role> findRolesByUserId(Long id) {
@@ -188,6 +199,17 @@ public class RoleServiceImpl implements RoleService {
 		// 清除所有该角色的用户的权限缓存
 		List<String> codes = roleExtMapper.findUserCodesByRoleId(role.getId());
 		shiroUtil.clearAuthCache(codes);
+		
+		// 修改角色下用户版本
+		List<User> userList = roleExtMapper.findUsersByRoleId(role.getId());
+		if(CollectionUtils.isEmpty(userList)){
+			for(User user : userList){
+				user.setSessionVersion(UUIDUtil.getUUID());
+				userMapper.updateByPrimaryKeySelective(user);
+				// 通知缓存用户改了
+				redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+			}
+		}
 		return role.getId();
 	}
 

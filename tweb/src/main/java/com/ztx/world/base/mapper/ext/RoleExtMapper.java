@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ztx.world.base.entity.Role;
+import com.ztx.world.base.entity.User;
 
 public interface RoleExtMapper {
 
@@ -21,4 +22,11 @@ public interface RoleExtMapper {
 	 * @return
 	 */
 	List<String> findUserCodesByRoleId(@Param("id") Long id);
+	
+	/**
+	 * 根据角色id获取用户集合
+	 * @param id
+	 * @return
+	 */
+	List<User> findUsersByRoleId(@Param("id") Long id);
 }

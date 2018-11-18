@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import com.ztx.world.base.entity.Department;
 import com.ztx.world.base.entity.DepartmentExample;
+import com.ztx.world.base.entity.User;
 import com.ztx.world.base.entity.UserExample;
 import com.ztx.world.base.mapper.DepartmentMapper;
 import com.ztx.world.base.mapper.UserMapper;
@@ -18,9 +19,11 @@ import com.ztx.world.base.service.DepartmentService;
 import com.ztx.world.base.vo.DepartmentVo;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.redis.RedisOperator;
+import com.ztx.world.common.utils.UUIDUtil;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -94,6 +97,20 @@ public class DepartmentServiceImpl implements DepartmentService {
 		}
 		department.setUpdateTime(new Date());
 		departmentMapper.updateByPrimaryKeySelective(department);
+		
+		// 修改部门下用户版本
+		UserExample userExample = new UserExample();
+		userExample.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
+			.andDeptIdEqualTo(department.getId());
+		List<User> userList = userMapper.selectByExample(userExample);
+		if(CollectionUtils.isEmpty(userList)){
+			for(User user : userList){
+				user.setSessionVersion(UUIDUtil.getUUID());
+				userMapper.updateByPrimaryKeySelective(user);
+				// 通知缓存用户改了
+				redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+			}
+		}
 		return department.getId();
 	}
 
