@@ -113,6 +113,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 		if(org != null){
 			organization.setOrgPath(org.getOrgPath() + organization.getId() + ",");
 		}
+		org.setOrgCode(null);
 		organizationMapper.updateByPrimaryKeySelective(organization);
 		// 修改机构下用户版本
 		UserExample userExample = new UserExample();

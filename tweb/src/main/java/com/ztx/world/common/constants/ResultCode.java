@@ -36,4 +36,9 @@ public class ResultCode {
 	 * 用户被强制退出
 	 */
 	public static final Integer SHIRO_KICKOUT_ERROR = 10004;
+	
+	/**
+	 * 信息更新,重新登录
+	 */
+	public static final Integer DATA_UPDATE_ERROR = 10005;
 }

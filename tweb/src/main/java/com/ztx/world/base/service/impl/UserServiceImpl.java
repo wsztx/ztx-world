@@ -149,9 +149,13 @@ public class UserServiceImpl implements UserService {
 		if(user.getId() == null){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在.");
 		}
+		if(StringUtils.isEmpty(user.getUserCode())){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户名不能为空.");
+		}
 		if("SuperAdmin".equals(user.getUserCode())){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户超级管理员无法修改.");
 		}
+		String userCode = user.getUserCode();
 		UserExample example = new UserExample();
 		example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS)
 			.andUserCodeEqualTo(user.getUserCode())
@@ -167,7 +171,7 @@ public class UserServiceImpl implements UserService {
 		user.setUserCode(null);
 		userMapper.updateByPrimaryKeySelective(user);
 		// 通知缓存用户版本
-		redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+		redisOperator.set(ConfigConstants.VERSION_PRE + userCode, user.getSessionVersion());
 		return user.getId();
 	}
 
@@ -210,16 +214,22 @@ public class UserServiceImpl implements UserService {
 		if(StringUtils.isEmpty(newPassword)){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "新密码不能为空.");
 		}
+		User record = userMapper.selectByPrimaryKey(id);
+		if(record == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在.");
+		}
 		UserExample example = new UserExample();
 		example.createCriteria().andPasswordEqualTo(MD5Util.md5(oldPassword)).andIdEqualTo(id);
 		int count = userMapper.countByExample(example);
 		if(count == 0){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "原密码不正确.");
 		}
-		User record = new User();
 		record.setId(id);
+		record.setSessionVersion(UUIDUtil.getUUID());
 		record.setPassword(MD5Util.md5(newPassword));
 		userMapper.updateByPrimaryKeySelective(record);
+		// 通知缓存用户版本
+		redisOperator.set(ConfigConstants.VERSION_PRE + record.getUserCode(), record.getSessionVersion());
 	}
 
 	@Override
@@ -227,10 +237,16 @@ public class UserServiceImpl implements UserService {
 		if(id == null){
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在.");
 		}
-		User user = new User();
+		User user = userMapper.selectByPrimaryKey(id);
+		if(user == null){
+			throw new BasicException(ResultCode.BASE_ARG_ERROR, "用户不存在.");
+		}
 		user.setId(id);
+		user.setSessionVersion(UUIDUtil.getUUID());
 		user.setPassword(MD5Util.md5("password"));
 		userMapper.updateByPrimaryKeySelective(user);
+		// 通知缓存用户版本
+		redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 	}
 
 }

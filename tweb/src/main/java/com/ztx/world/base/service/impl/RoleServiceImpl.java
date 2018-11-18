@@ -189,6 +189,7 @@ public class RoleServiceImpl implements RoleService {
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "角色编码" + role.getRoleCode() + "已存在.");
 		}
 		role.setUpdateTime(new Date());
+		role.setRoleCode(null);
 		roleMapper.updateByPrimaryKeySelective(role);
 		// 删除原来的角色权限
 		RolePermissionExample example = new RolePermissionExample();

@@ -96,6 +96,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 			throw new BasicException(ResultCode.BASE_ARG_ERROR, "部门编码已存在.");
 		}
 		department.setUpdateTime(new Date());
+		department.setDeptCode(null);
 		departmentMapper.updateByPrimaryKeySelective(department);
 		
 		// 修改部门下用户版本
