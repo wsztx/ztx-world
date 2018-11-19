@@ -246,6 +246,11 @@ public class UserServiceImpl implements UserService {
 	public void updateSessionVersion(String type, List<String> userCodes) {
 		if(!CollectionUtils.isEmpty(userCodes)){
 			for(String userCode : userCodes){
+				if(type.equals(ConfigConstants.LOGIN_VERSION_PRE) && "SuperAdmin".equals(userCode)){
+					throw new BasicException(ResultCode.BASE_ARG_ERROR, "无法强制下线超级管理员.");
+				}
+			}
+			for(String userCode : userCodes){
 				UserExample example = new UserExample();
 				example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS).andUserCodeEqualTo(userCode);
 				User user = new User();
