@@ -29,7 +29,6 @@ import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.model.RoleModel;
 import com.ztx.world.common.redis.RedisOperator;
-import com.ztx.world.common.utils.ShiroUtil;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -48,9 +47,6 @@ public class RoleServiceImpl implements RoleService {
 	
 	@Autowired
 	private RolePermissionMapper rolePermissionMapper;
-	
-	@Autowired
-	private ShiroUtil shiroUtil;
 	
 	@Autowired
 	private RedisOperator redisOperator;
@@ -114,10 +110,6 @@ public class RoleServiceImpl implements RoleService {
 				UserRoleExample userRoleExample = new UserRoleExample();
 				userRoleExample.createCriteria().andRoleIdEqualTo(id);
 				userRoleMapper.deleteByExample(userRoleExample);
-				
-				// 清除所有该角色的用户的权限缓存,理论上不存在
-				List<String> codes = roleExtMapper.findUserCodesByRoleId(id);
-				shiroUtil.clearAuthCache(codes);
 			}
 		}
 	}
@@ -205,18 +197,15 @@ public class RoleServiceImpl implements RoleService {
 			}
 		}
 		
-		// 清除所有该角色的用户的权限缓存
-		List<String> codes = roleExtMapper.findUserCodesByRoleId(role.getId());
-		shiroUtil.clearAuthCache(codes);
-		
 		// 修改角色下用户版本
 		List<User> userList = roleExtMapper.findUsersByRoleId(role.getId());
 		if(CollectionUtils.isEmpty(userList)){
 			for(User user : userList){
 				user.setSessionVersion(new Date().getTime());
 				userMapper.updateByPrimaryKeySelective(user);
-				// 通知缓存用户改了
+				// 通知缓存session版本
 				redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+				redisOperator.set(ConfigConstants.AUTH_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 			}
 		}
 		return role.getId();

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.redis.RedisCacheManager;
 import com.ztx.world.common.redis.RedisOperator;
 import com.ztx.world.common.utils.ResponseUtil;
 import com.ztx.world.common.utils.ResultCodeUtil;
@@ -32,6 +34,9 @@ public class SessionControlFilter extends AccessControlFilter {
 	
 	@Autowired
 	private UserExtMapper userExtMapper;
+	
+	@Autowired
+	private RedisCacheManager redisCacheManager;
 
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
@@ -101,6 +106,13 @@ public class SessionControlFilter extends AccessControlFilter {
 						}
 					}
 				}
+			}
+		}
+		if(redisOperator.hasKey(ConfigConstants.AUTH_VERSION_PRE + userCode)){
+			long version = (long)redisOperator.get(ConfigConstants.AUTH_VERSION_PRE + userCode);
+			if(mySession.getSessionVersion() < version){
+				SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)subject.getSession().getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+				redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").remove(principalCollection);
 			}
 		}
 

@@ -29,7 +29,6 @@ import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.redis.RedisOperator;
 import com.ztx.world.common.shiro.ShiroToken;
 import com.ztx.world.common.utils.MD5Util;
-import com.ztx.world.common.utils.ShiroUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,9 +41,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private RoleMapper roleMapper;
-	
-	@Autowired
-	private ShiroUtil shiroUtil;
 	
 	@Autowired
 	private RedisOperator redisOperator;
@@ -91,7 +87,7 @@ public class UserServiceImpl implements UserService {
 				user.setId(id);
 				user.setStatus(-id);
 				userMapper.updateByPrimaryKeySelective(user);
-				// 通知缓存用户改了
+				// 通知缓存session版本
 				redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 			}
 		}
@@ -135,7 +131,7 @@ public class UserServiceImpl implements UserService {
 			userRole.setUserId(user.getId());
 			userRoleMapper.insertSelective(userRole);
 		}
-		// 通知缓存用户版本
+		// 通知缓存session版本
 		redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 		return user.getId();
 	}
@@ -169,7 +165,7 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(null);
 		user.setUserCode(null);
 		userMapper.updateByPrimaryKeySelective(user);
-		// 通知缓存用户版本
+		// 通知缓存session版本
 		redisOperator.set(ConfigConstants.USER_VERSION_PRE + userCode, user.getSessionVersion());
 		return user.getId();
 	}
@@ -195,11 +191,9 @@ public class UserServiceImpl implements UserService {
 		}
 		// 删除用户的权限缓存信息
 		User user = userMapper.selectByPrimaryKey(id);
-		if(user != null){
-			shiroUtil.clearAuthCache(user.getUserCode());
-		}
-		// 通知缓存用户版本
+		// 通知缓存session版本
 		redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+		redisOperator.set(ConfigConstants.AUTH_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 	}
 
 	@Override
@@ -227,7 +221,7 @@ public class UserServiceImpl implements UserService {
 		record.setSessionVersion(new Date().getTime());
 		record.setPassword(MD5Util.md5(newPassword));
 		userMapper.updateByPrimaryKeySelective(record);
-		// 通知缓存用户版本
+		// 通知缓存session版本
 		redisOperator.set(ConfigConstants.LOGIN_VERSION_PRE + record.getUserCode(), record.getSessionVersion());
 	}
 
@@ -244,7 +238,7 @@ public class UserServiceImpl implements UserService {
 		user.setSessionVersion(new Date().getTime());
 		user.setPassword(MD5Util.md5("password"));
 		userMapper.updateByPrimaryKeySelective(user);
-		// 通知缓存用户版本
+		// 通知缓存session版本
 		redisOperator.set(ConfigConstants.LOGIN_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 	}
 

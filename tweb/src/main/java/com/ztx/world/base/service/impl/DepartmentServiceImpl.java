@@ -107,7 +107,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 			for(User user : userList){
 				user.setSessionVersion(new Date().getTime());
 				userMapper.updateByPrimaryKeySelective(user);
-				// 通知缓存用户改了
+				// 通知缓存session版本
 				redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 			}
 		}
