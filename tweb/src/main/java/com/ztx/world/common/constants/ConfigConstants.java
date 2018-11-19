@@ -30,20 +30,25 @@ public class ConfigConstants {
 	/**
 	 * 字典缓存
 	 */
-	public static final String DICTIONARY_PRE = "dictionary.";
+	public static final String DICTIONARY_PRE = "Dictionary.";
 	
 	/**
 	 * 配置缓存
 	 */
-	public static final String CONFIG_PRE = "config.";
+	public static final String CONFIG_PRE = "Config.";
 	
 	/**
-	 * 用户版本缓存
+	 * 用户信息版本缓存
 	 */
-	public static final String VERSION_PRE = "version.";
+	public static final String USER_VERSION_PRE = "UserVersion.";
 	
 	/**
-	 * 用户强退缓存
+	 * 用户登录版本缓存
 	 */
-	public static final String LOGOUT_PRE = "logout.";
+	public static final String LOGIN_VERSION_PRE = "LoginVersion.";
+	
+	/**
+	 * 用户权限版本缓存
+	 */
+	public static final String AUTH_VERSION_PRE = "AuthVersion.";
 }

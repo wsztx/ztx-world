@@ -30,7 +30,6 @@ import com.ztx.world.common.redis.RedisOperator;
 import com.ztx.world.common.shiro.ShiroToken;
 import com.ztx.world.common.utils.MD5Util;
 import com.ztx.world.common.utils.ShiroUtil;
-import com.ztx.world.common.utils.UUIDUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -93,7 +92,7 @@ public class UserServiceImpl implements UserService {
 				user.setStatus(-id);
 				userMapper.updateByPrimaryKeySelective(user);
 				// 通知缓存用户改了
-				redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+				redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 			}
 		}
 	}
@@ -137,7 +136,7 @@ public class UserServiceImpl implements UserService {
 			userRoleMapper.insertSelective(userRole);
 		}
 		// 通知缓存用户版本
-		redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+		redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 		return user.getId();
 	}
 
@@ -171,7 +170,7 @@ public class UserServiceImpl implements UserService {
 		user.setUserCode(null);
 		userMapper.updateByPrimaryKeySelective(user);
 		// 通知缓存用户版本
-		redisOperator.set(ConfigConstants.VERSION_PRE + userCode, user.getSessionVersion());
+		redisOperator.set(ConfigConstants.USER_VERSION_PRE + userCode, user.getSessionVersion());
 		return user.getId();
 	}
 
@@ -200,7 +199,7 @@ public class UserServiceImpl implements UserService {
 			shiroUtil.clearAuthCache(user.getUserCode());
 		}
 		// 通知缓存用户版本
-		redisOperator.set(ConfigConstants.VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+		redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 	}
 
 	@Override
@@ -229,7 +228,7 @@ public class UserServiceImpl implements UserService {
 		record.setPassword(MD5Util.md5(newPassword));
 		userMapper.updateByPrimaryKeySelective(record);
 		// 通知缓存用户版本
-		redisOperator.set(ConfigConstants.LOGOUT_PRE + record.getUserCode(), record.getSessionVersion());
+		redisOperator.set(ConfigConstants.LOGIN_VERSION_PRE + record.getUserCode(), record.getSessionVersion());
 	}
 
 	@Override
@@ -246,7 +245,7 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(MD5Util.md5("password"));
 		userMapper.updateByPrimaryKeySelective(user);
 		// 通知缓存用户版本
-		redisOperator.set(ConfigConstants.LOGOUT_PRE + user.getUserCode(), user.getSessionVersion());
+		redisOperator.set(ConfigConstants.LOGIN_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 	}
 
 }

@@ -46,9 +46,9 @@ public class SessionControlFilter extends AccessControlFilter {
 		String userCode = mySession.getUserCode();
 		
 		if(!StringUtils.isEmpty(userCode)){
-			if(redisOperator.hasKey(ConfigConstants.LOGOUT_PRE + userCode)){
-				long version = (long)redisOperator.get(ConfigConstants.LOGOUT_PRE + userCode);
-				// 如果用户强退版本更新,则强制登出用户
+			if(redisOperator.hasKey(ConfigConstants.LOGIN_VERSION_PRE + userCode)){
+				long version = (long)redisOperator.get(ConfigConstants.LOGIN_VERSION_PRE + userCode);
+				// 如果用户登录版本过旧,则强制登出用户
 				if(mySession.getSessionVersion() < version){
 					try {
 						subject.logout();
@@ -69,8 +69,8 @@ public class SessionControlFilter extends AccessControlFilter {
 					}
 				}
 			}
-			if(redisOperator.hasKey(ConfigConstants.VERSION_PRE + userCode)){
-				long version = (long)redisOperator.get(ConfigConstants.VERSION_PRE + userCode);
+			if(redisOperator.hasKey(ConfigConstants.USER_VERSION_PRE + userCode)){
+				long version = (long)redisOperator.get(ConfigConstants.USER_VERSION_PRE + userCode);
 				if(mySession.getSessionVersion() < version){
 					CustomSession newSession = userExtMapper.getSessionByUserId(mySession.getUserId());
 					if(newSession != null){
