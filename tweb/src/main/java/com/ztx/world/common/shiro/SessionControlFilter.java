@@ -74,6 +74,13 @@ public class SessionControlFilter extends AccessControlFilter {
 					}
 				}
 			}
+			if(redisOperator.hasKey(ConfigConstants.AUTH_VERSION_PRE + userCode)){
+				long version = (long)redisOperator.get(ConfigConstants.AUTH_VERSION_PRE + userCode);
+				if(mySession.getSessionVersion() < version){
+					SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)subject.getSession().getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+					redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").remove(principalCollection);
+				}
+			}
 			if(redisOperator.hasKey(ConfigConstants.USER_VERSION_PRE + userCode)){
 				long version = (long)redisOperator.get(ConfigConstants.USER_VERSION_PRE + userCode);
 				if(mySession.getSessionVersion() < version){
@@ -106,13 +113,6 @@ public class SessionControlFilter extends AccessControlFilter {
 						}
 					}
 				}
-			}
-		}
-		if(redisOperator.hasKey(ConfigConstants.AUTH_VERSION_PRE + userCode)){
-			long version = (long)redisOperator.get(ConfigConstants.AUTH_VERSION_PRE + userCode);
-			if(mySession.getSessionVersion() < version){
-				SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)subject.getSession().getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-				redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").remove(principalCollection);
 			}
 		}
 

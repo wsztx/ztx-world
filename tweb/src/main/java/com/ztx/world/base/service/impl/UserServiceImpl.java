@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
 				user.setStatus(-id);
 				userMapper.updateByPrimaryKeySelective(user);
 				// 通知缓存session版本
-				redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+				redisOperator.set(ConfigConstants.LOGIN_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 			}
 		}
 	}
