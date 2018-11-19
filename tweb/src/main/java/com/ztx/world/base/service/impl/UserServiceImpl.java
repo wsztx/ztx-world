@@ -242,4 +242,19 @@ public class UserServiceImpl implements UserService {
 		redisOperator.set(ConfigConstants.LOGIN_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
 	}
 
+	@Override
+	public void updateSessionVersion(String type, List<String> userCodes) {
+		if(!CollectionUtils.isEmpty(userCodes)){
+			for(String userCode : userCodes){
+				UserExample example = new UserExample();
+				example.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS).andUserCodeEqualTo(userCode);
+				User user = new User();
+				user.setSessionVersion(new Date().getTime());
+				userMapper.updateByExampleSelective(user, example);
+				// 通知缓存session版本
+				redisOperator.set(type + userCode, user.getSessionVersion());
+			}
+		}
+	}
+
 }

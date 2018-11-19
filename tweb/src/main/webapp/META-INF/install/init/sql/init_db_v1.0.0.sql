@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local_mysql
+Source Server         : mysql_local
 Source Server Version : 50630
 Source Host           : localhost:3306
 Source Database       : tworld
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-19 00:27:10
+Date: 2018-11-19 19:38:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -182,7 +182,8 @@ INSERT INTO `base_permission` VALUES ('49', '0', '2018-10-23 19:02:40', '2018-10
 INSERT INTO `base_permission` VALUES ('50', '0', '2018-11-16 18:20:58', '2018-11-16 18:21:00', '1', '01006009', '用户分配角色', 'base:user:saveuserrole', null);
 INSERT INTO `base_permission` VALUES ('51', '0', '2018-11-16 18:23:25', '2018-11-16 18:23:26', '1', '01006010', '用户修改密码', 'base:user:updatepassword', null);
 INSERT INTO `base_permission` VALUES ('52', '0', '2018-11-16 18:24:27', '2018-11-16 18:24:29', '1', '01006011', '用户重置密码', 'base:user:resetpassword', null);
-INSERT INTO `base_permission` VALUES ('53', '0', '2018-11-18 19:42:34', '2018-11-18 19:42:36', '1', '01007001', '缓存清空', 'base:cache:clear', null);
+INSERT INTO `base_permission` VALUES ('53', '0', '2018-11-19 19:36:55', '2018-11-19 19:36:57', '1', '01006012', '强制下线用户', 'base:user:downline', null);
+INSERT INTO `base_permission` VALUES ('54', '0', '2018-11-18 19:42:34', '2018-11-18 19:42:36', '1', '01007001', '缓存清空', 'base:cache:clear', null);
 
 -- ----------------------------
 -- Table structure for base_role

@@ -21,6 +21,7 @@ import com.ztx.world.base.service.UserService;
 import com.ztx.world.base.vo.UserVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
+import com.ztx.world.common.constants.ConfigConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.exception.BasicException;
 
@@ -166,5 +167,14 @@ public class UserController extends BaseController{
 		Long id = user.getId();
 		userService.resetPassword(id);
     	return success(id);
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base:user:downline"})
+    @RequestMapping(value="/downline", method = RequestMethod.POST)
+    public BaseResponse downline(HttpServletRequest request, HttpServletResponse response, 
+    		List<String> userCodes) throws Exception{
+		userService.updateSessionVersion(ConfigConstants.LOGIN_VERSION_PRE, userCodes);
+    	return success(userCodes);
     }
 }

@@ -57,4 +57,11 @@ public interface UserService {
 	 * @param id
 	 */
 	void resetPassword(Long id);
+	
+	/**
+	 * 修改session版本
+	 * @param type
+	 * @param ids
+	 */
+	void updateSessionVersion(String type, List<String> userCodes);
 }
