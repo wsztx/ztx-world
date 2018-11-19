@@ -48,52 +48,13 @@ public class SessionControlFilter extends AccessControlFilter {
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		Subject subject = getSubject(request, response);
 		CustomSession mySession = (CustomSession)subject.getPrincipal();
-		String userCode = mySession.getUserCode();
-		
-		if(!StringUtils.isEmpty(userCode)){
-			if(redisOperator.hasKey(ConfigConstants.LOGIN_VERSION_PRE + userCode)){
-				long version = (long)redisOperator.get(ConfigConstants.LOGIN_VERSION_PRE + userCode);
-				// 如果用户登录版本过旧,则强制登出用户
-				if(mySession.getSessionVersion() < version){
-					try {
-						subject.logout();
-					} catch (Exception e) {}
-					HttpServletRequest httpRequest = (HttpServletRequest)request;
-					HttpServletResponse httpResponse = (HttpServletResponse)response;
-					String requestType = httpRequest.getHeader("X-Requested-With");
-					if ("XMLHttpRequest".equals(requestType)) {
-			        	BaseResponse responseData = new BaseResponse();
-			        	responseData.setSuccess(false);
-			        	responseData.setCode(ResultCode.DATA_UPDATE_ERROR);
-			        	responseData.setMessage(ResultCodeUtil.get(ResultCode.DATA_UPDATE_ERROR));
-			        	ResponseUtil.writeJson(httpResponse, responseData);
-						return false;
-					} else {
-						WebUtils.issueRedirect(request, response, loginUrl);
-						return false;
-					}
-				}
-			}
-			if(redisOperator.hasKey(ConfigConstants.AUTH_VERSION_PRE + userCode)){
-				long version = (long)redisOperator.get(ConfigConstants.AUTH_VERSION_PRE + userCode);
-				if(mySession.getSessionVersion() < version){
-					SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)subject.getSession().getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-					redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").remove(principalCollection);
-				}
-			}
-			if(redisOperator.hasKey(ConfigConstants.USER_VERSION_PRE + userCode)){
-				long version = (long)redisOperator.get(ConfigConstants.USER_VERSION_PRE + userCode);
-				if(mySession.getSessionVersion() < version){
-					CustomSession newSession = userExtMapper.getSessionByUserId(mySession.getUserId());
-					if(newSession != null){
-						// 切换用户信息
-				    	PrincipalCollection principalCollection = subject.getPrincipals(); 
-				    	String realmName = principalCollection.getRealmNames().iterator().next();
-				    	PrincipalCollection newPrincipalCollection = 
-				    			new SimplePrincipalCollection(newSession, realmName);
-				    	subject.runAs(newPrincipalCollection);
-					}else{
-						// 如果sessions是空的,说明用户被删了
+		if(mySession != null){
+			String userCode = mySession.getUserCode();
+			if(!StringUtils.isEmpty(userCode)){
+				if(redisOperator.hasKey(ConfigConstants.LOGIN_VERSION_PRE + userCode)){
+					long version = (long)redisOperator.get(ConfigConstants.LOGIN_VERSION_PRE + userCode);
+					// 如果用户登录版本过旧,则强制登出用户
+					if(mySession.getSessionVersion() < version){
 						try {
 							subject.logout();
 						} catch (Exception e) {}
@@ -110,6 +71,46 @@ public class SessionControlFilter extends AccessControlFilter {
 						} else {
 							WebUtils.issueRedirect(request, response, loginUrl);
 							return false;
+						}
+					}
+				}
+				if(redisOperator.hasKey(ConfigConstants.AUTH_VERSION_PRE + userCode)){
+					long version = (long)redisOperator.get(ConfigConstants.AUTH_VERSION_PRE + userCode);
+					if(mySession.getSessionVersion() < version){
+						SimplePrincipalCollection principalCollection = (SimplePrincipalCollection)subject.getSession().getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+						redisCacheManager.getCache("com.ztx.world.common.shiro.ShiroRealm.authorizationCache").remove(principalCollection);
+					}
+				}
+				if(redisOperator.hasKey(ConfigConstants.USER_VERSION_PRE + userCode)){
+					long version = (long)redisOperator.get(ConfigConstants.USER_VERSION_PRE + userCode);
+					if(mySession.getSessionVersion() < version){
+						CustomSession newSession = userExtMapper.getSessionByUserId(mySession.getUserId());
+						if(newSession != null){
+							// 切换用户信息
+					    	PrincipalCollection principalCollection = subject.getPrincipals(); 
+					    	String realmName = principalCollection.getRealmNames().iterator().next();
+					    	PrincipalCollection newPrincipalCollection = 
+					    			new SimplePrincipalCollection(newSession, realmName);
+					    	subject.runAs(newPrincipalCollection);
+						}else{
+							// 如果sessions是空的,说明用户被删了
+							try {
+								subject.logout();
+							} catch (Exception e) {}
+							HttpServletRequest httpRequest = (HttpServletRequest)request;
+							HttpServletResponse httpResponse = (HttpServletResponse)response;
+							String requestType = httpRequest.getHeader("X-Requested-With");
+							if ("XMLHttpRequest".equals(requestType)) {
+					        	BaseResponse responseData = new BaseResponse();
+					        	responseData.setSuccess(false);
+					        	responseData.setCode(ResultCode.DATA_UPDATE_ERROR);
+					        	responseData.setMessage(ResultCodeUtil.get(ResultCode.DATA_UPDATE_ERROR));
+					        	ResponseUtil.writeJson(httpResponse, responseData);
+								return false;
+							} else {
+								WebUtils.issueRedirect(request, response, loginUrl);
+								return false;
+							}
 						}
 					}
 				}
