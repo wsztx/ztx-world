@@ -8,8 +8,7 @@
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- 配置数据源 ，使用的alibba的数据库 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-		init-method="init" destroy-method="close">
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="driverClassName" value="${db.driverClassName}" />
 		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.username}" />
@@ -26,16 +25,15 @@
 		<property name="testOnBorrow" value="false" />
 		<property name="testOnReturn" value="false" />
 
-		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。 -->
+		<!-- 打开PSCache,并且指定每个连接上PSCache的大小 如果用Oracle,则把poolPreparedStatements配置为true,mysql可以配置为false. -->
 		<property name="poolPreparedStatements" value="false" />
-		<property name="maxPoolPreparedStatementPerConnectionSize"
-			value="20" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
 
 		<!-- 配置监控统计拦截的filters -->
 		<property name="filters" value="wall,stat" />
 	</bean>
 
-	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+	<!-- spring和MyBatis完美整合,不需要mybatis的配置映射文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
@@ -56,23 +54,21 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 
-	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
 	<!-- 配置事务管理器 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<!-- 配置基于注解的声明式事务 -->
-	<!-- enables scanning for @Transactional annotations -->
 <!-- 	<tx:annotation-driven transaction-manager="transactionManager" /> -->
 	
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="get*" read-only="true"  />
-			<tx:method name="query*" read-only="true"  />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
 			<tx:method name="find*" read-only="true" />
 			<tx:method name="select*" read-only="true" />
+			<tx:method name="page*" read-only="true" />
 			<tx:method name="count*" read-only="true" />
 			<tx:method name="is*" read-only="true" />
 			<tx:method name="save*" propagation="REQUIRED" />
@@ -86,10 +82,9 @@
 	</tx:advice>    
    
 	<aop:config>
-		<!--声明所有包含Service的类的所有方法使用事务-->
+		<!-- 声明所有包含Service的类的所有方法使用事务 -->
 		<aop:pointcut id="service" expression="execution(* com.ztx.world.*.service.impl.*Service*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="service" />
 	</aop:config>
 	
-	<!--======= 事务配置 End =================== -->
 </beans>

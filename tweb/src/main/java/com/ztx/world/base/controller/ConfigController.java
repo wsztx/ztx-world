@@ -82,8 +82,8 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base:config:page"})
     @RequestMapping(value="/page", method = RequestMethod.GET)
-    public BaseResponse page(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
+    public BaseResponse page(HttpServletRequest request, HttpServletResponse response, 
+    		ConfigVo config) throws Exception{
     	
     	return success();
     }

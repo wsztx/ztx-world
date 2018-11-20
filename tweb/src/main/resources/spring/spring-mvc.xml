@@ -16,9 +16,7 @@
 	<mvc:annotation-driven />
 
 	<!-- 内容协商管理器 -->
-	<!--1、首先检查路径扩展名（如my.pdf）；2、其次检查Parameter（如my?format=pdf）；3、检查Accept Header -->
-	<bean id="contentNegotiationManager"
-		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<!-- 扩展名至mimeType的映射,即 /user.json => application/json -->
 		<property name="favorPathExtension" value="true" />
 		<!-- 用于开启 /userinfo/123?format=json 的支持 -->
@@ -26,7 +24,8 @@
 		<property name="parameterName" value="format" />
 		<!-- 是否忽略Accept Header -->
 		<property name="ignoreAcceptHeader" value="false" />
-		<property name="mediaTypes"> <!--扩展名到MIME的映射；favorPathExtension, favorParameter是true时起作用 -->
+		<!--扩展名到MIME的映射；favorPathExtension, favorParameter是true时起作用 -->
+		<property name="mediaTypes">
 			<value>
 				json=application/json
 				xml=application/xml
@@ -43,18 +42,13 @@
 	<mvc:resources mapping="/resource/**" location="/resource/" />
 
 	<!-- 对模型视图添加前后缀 -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/WEB-INF/view/" p:suffix=".jsp" />
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/view/" p:suffix=".jsp" />
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
-			<!-- 用户相关 -->
 			<mvc:mapping path="/**" />
 			<bean class="com.ztx.world.common.system.HttpInterceptorAdapter"></bean>
 		</mvc:interceptor>
-		<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
 	</mvc:interceptors>
 
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
