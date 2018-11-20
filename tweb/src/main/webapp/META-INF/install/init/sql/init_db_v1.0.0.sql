@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-19 19:38:18
+Date: 2018-11-20 20:10:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -83,6 +83,28 @@ CREATE TABLE `base_dictionary` (
 
 -- ----------------------------
 -- Records of base_dictionary
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_log
+-- ----------------------------
+DROP TABLE IF EXISTS `base_log`;
+CREATE TABLE `base_log` (
+  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
+  `operate_time` datetime NOT NULL COMMENT '操作时间',
+  `operate_user_id` bigint(32) NOT NULL COMMENT '操作人id',
+  `operate_type` varchar(64) DEFAULT NULL COMMENT '操作类型',
+  `model_name` varchar(64) DEFAULT NULL COMMENT '所属模块名称',
+  `operate_ip` varchar(64) DEFAULT NULL COMMENT '操作IP地址',
+  `operate_mac` varchar(64) DEFAULT NULL COMMENT '操作mac地址',
+  `operate_object` varchar(128) DEFAULT NULL COMMENT '操作对象',
+  `description` varchar(256) DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of base_log
 -- ----------------------------
 
 -- ----------------------------
