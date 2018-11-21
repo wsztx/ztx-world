@@ -3,7 +3,6 @@ package com.ztx.world.base.service.impl;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -12,7 +11,6 @@ import com.ztx.world.base.entity.Log;
 import com.ztx.world.base.entity.LogExample;
 import com.ztx.world.base.mapper.LogMapper;
 import com.ztx.world.base.service.LogService;
-import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
 
 @Service
@@ -40,11 +38,14 @@ public class LogServiceImpl implements LogService {
 	}
 
 	@Override
-	public Long saveLog() {
-		CustomSession session = (CustomSession)SecurityUtils.getSubject().getPrincipal();
-		Log log = new Log();
+	public Long saveLog(Log log) {
+		if(log == null){
+			return 0L;
+		}
 		log.setStatus(BaseConstants.UNDELETE_STATUS);
 		log.setOperateTime(new Date());
-		return null;
+		logMapper.insertSelective(log);
+		
+		return log.getId();
 	}
 }
