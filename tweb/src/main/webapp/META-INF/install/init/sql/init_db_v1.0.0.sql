@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-21 09:32:13
+Date: 2018-11-21 18:41:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,7 +38,7 @@ CREATE TABLE `base_config` (
 -- ----------------------------
 -- Records of base_config
 -- ----------------------------
-INSERT INTO `base_config` VALUES ('1', '0', '2018-10-24 18:26:26', '2018-10-24 18:26:28', '1', 'user.login', 'online.max', '用户同时最大在线数', '1', '1', '');
+INSERT INTO `base_config` VALUES ('1', '0', '2018-10-24 18:26:26', '2018-10-24 18:26:28', '1', 'User.Login', 'Online.Max', '同一用户最大在线数', '1', '1', '');
 
 -- ----------------------------
 -- Table structure for base_department
@@ -79,11 +79,30 @@ CREATE TABLE `base_dictionary` (
   `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_DICTIONARY` (`status`,`dictionary_type`,`dictionary_key`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_dictionary
 -- ----------------------------
+INSERT INTO `base_dictionary` VALUES ('1', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Login', '登录', '1', null);
+INSERT INTO `base_dictionary` VALUES ('2', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Logout', '登出', '2', '');
+INSERT INTO `base_dictionary` VALUES ('3', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Save', '新增', '3', '');
+INSERT INTO `base_dictionary` VALUES ('4', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Delete', '删除', '4', '');
+INSERT INTO `base_dictionary` VALUES ('5', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Update', '修改', '5', '');
+INSERT INTO `base_dictionary` VALUES ('6', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Query', '查询', '6', '');
+INSERT INTO `base_dictionary` VALUES ('7', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Export', '导出', '7', '');
+INSERT INTO `base_dictionary` VALUES ('8', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Import', '导入', '8', '');
+INSERT INTO `base_dictionary` VALUES ('9', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'UpdatePass', '修改密码', '9', '');
+INSERT INTO `base_dictionary` VALUES ('10', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'ResetPass', '重置密码', '10', '');
+INSERT INTO `base_dictionary` VALUES ('11', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'ClearCache', '清空缓存', '11', '');
+INSERT INTO `base_dictionary` VALUES ('12', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'User', '用户管理', '1', '');
+INSERT INTO `base_dictionary` VALUES ('13', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Role', '角色管理', '2', '');
+INSERT INTO `base_dictionary` VALUES ('14', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Department', '部门管理', '3', '');
+INSERT INTO `base_dictionary` VALUES ('15', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Organization', '机构管理', '4', '');
+INSERT INTO `base_dictionary` VALUES ('16', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Config', '配置管理', '5', '');
+INSERT INTO `base_dictionary` VALUES ('17', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Dictionary', '字典管理', '6', '');
+INSERT INTO `base_dictionary` VALUES ('18', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Log', '日志管理', '7', '');
+INSERT INTO `base_dictionary` VALUES ('19', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Cache', '缓存管理', '8', '');
 
 -- ----------------------------
 -- Table structure for base_log
@@ -93,9 +112,9 @@ CREATE TABLE `base_log` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
   `operate_time` datetime NOT NULL COMMENT '操作时间',
-  `operate_user_id` bigint(32) NOT NULL COMMENT '操作人id',
-  `operate_type` varchar(96) DEFAULT NULL COMMENT '操作类型',
-  `model_name` varchar(96) DEFAULT NULL COMMENT '所属模块名称',
+  `operate_user_id` bigint(32) DEFAULT NULL COMMENT '操作人id',
+  `operate_type` int(4) DEFAULT NULL COMMENT '操作类型',
+  `model_type` int(4) DEFAULT NULL COMMENT '所属模块',
   `operate_ip` varchar(96) DEFAULT NULL COMMENT '操作IP地址',
   `operate_mac` varchar(96) DEFAULT NULL COMMENT '操作mac地址',
   `operate_object` varchar(384) DEFAULT NULL COMMENT '操作对象',

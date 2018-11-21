@@ -7,8 +7,8 @@
         <result column="status" property="status" jdbcType="BIGINT" />
         <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
         <result column="operate_user_id" property="operateUserId" jdbcType="BIGINT" />
-        <result column="operate_type" property="operateType" jdbcType="VARCHAR" />
-        <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+        <result column="operate_type" property="operateType" jdbcType="INTEGER" />
+        <result column="model_type" property="modelType" jdbcType="INTEGER" />
         <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
         <result column="operate_mac" property="operateMac" jdbcType="VARCHAR" />
         <result column="operate_object" property="operateObject" jdbcType="VARCHAR" />
@@ -76,7 +76,7 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, status, operate_time, operate_user_id, operate_type, model_name, operate_ip, 
+        id, status, operate_time, operate_user_id, operate_type, model_type, operate_ip, 
         operate_mac, operate_object, description
     </sql>
 
@@ -119,11 +119,11 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into base_log (id, status, operate_time, 
-            operate_user_id, operate_type, model_name, 
+            operate_user_id, operate_type, model_type, 
             operate_ip, operate_mac, operate_object, 
             description)
         values (#{id,jdbcType=BIGINT}, #{status,jdbcType=BIGINT}, #{operateTime,jdbcType=TIMESTAMP}, 
-            #{operateUserId,jdbcType=BIGINT}, #{operateType,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, 
+            #{operateUserId,jdbcType=BIGINT}, #{operateType,jdbcType=INTEGER}, #{modelType,jdbcType=INTEGER}, 
             #{operateIp,jdbcType=VARCHAR}, #{operateMac,jdbcType=VARCHAR}, #{operateObject,jdbcType=VARCHAR}, 
             #{description,jdbcType=VARCHAR})
     </insert>
@@ -147,8 +147,8 @@
             <if test="operateType != null" >
                 operate_type,
             </if>
-            <if test="modelName != null" >
-                model_name,
+            <if test="modelType != null" >
+                model_type,
             </if>
             <if test="operateIp != null" >
                 operate_ip,
@@ -175,10 +175,10 @@
                 #{operateUserId,jdbcType=BIGINT},
             </if>
             <if test="operateType != null" >
-                #{operateType,jdbcType=VARCHAR},
+                #{operateType,jdbcType=INTEGER},
             </if>
-            <if test="modelName != null" >
-                #{modelName,jdbcType=VARCHAR},
+            <if test="modelType != null" >
+                #{modelType,jdbcType=INTEGER},
             </if>
             <if test="operateIp != null" >
                 #{operateIp,jdbcType=VARCHAR},
@@ -218,10 +218,10 @@
                 operate_user_id = #{record.operateUserId,jdbcType=BIGINT},
             </if>
             <if test="record.operateType != null" >
-                operate_type = #{record.operateType,jdbcType=VARCHAR},
+                operate_type = #{record.operateType,jdbcType=INTEGER},
             </if>
-            <if test="record.modelName != null" >
-                model_name = #{record.modelName,jdbcType=VARCHAR},
+            <if test="record.modelType != null" >
+                model_type = #{record.modelType,jdbcType=INTEGER},
             </if>
             <if test="record.operateIp != null" >
                 operate_ip = #{record.operateIp,jdbcType=VARCHAR},
@@ -247,8 +247,8 @@
             status = #{record.status,jdbcType=BIGINT},
             operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
             operate_user_id = #{record.operateUserId,jdbcType=BIGINT},
-            operate_type = #{record.operateType,jdbcType=VARCHAR},
-            model_name = #{record.modelName,jdbcType=VARCHAR},
+            operate_type = #{record.operateType,jdbcType=INTEGER},
+            model_type = #{record.modelType,jdbcType=INTEGER},
             operate_ip = #{record.operateIp,jdbcType=VARCHAR},
             operate_mac = #{record.operateMac,jdbcType=VARCHAR},
             operate_object = #{record.operateObject,jdbcType=VARCHAR},
@@ -271,10 +271,10 @@
                 operate_user_id = #{operateUserId,jdbcType=BIGINT},
             </if>
             <if test="operateType != null" >
-                operate_type = #{operateType,jdbcType=VARCHAR},
+                operate_type = #{operateType,jdbcType=INTEGER},
             </if>
-            <if test="modelName != null" >
-                model_name = #{modelName,jdbcType=VARCHAR},
+            <if test="modelType != null" >
+                model_type = #{modelType,jdbcType=INTEGER},
             </if>
             <if test="operateIp != null" >
                 operate_ip = #{operateIp,jdbcType=VARCHAR},
@@ -297,8 +297,8 @@
         set status = #{status,jdbcType=BIGINT},
             operate_time = #{operateTime,jdbcType=TIMESTAMP},
             operate_user_id = #{operateUserId,jdbcType=BIGINT},
-            operate_type = #{operateType,jdbcType=VARCHAR},
-            model_name = #{modelName,jdbcType=VARCHAR},
+            operate_type = #{operateType,jdbcType=INTEGER},
+            model_type = #{modelType,jdbcType=INTEGER},
             operate_ip = #{operateIp,jdbcType=VARCHAR},
             operate_mac = #{operateMac,jdbcType=VARCHAR},
             operate_object = #{operateObject,jdbcType=VARCHAR},

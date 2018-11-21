@@ -69,7 +69,7 @@ public class LogExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-11-20
+     * @date 2018-11-21
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -362,133 +362,113 @@ public class LogExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeEqualTo(String value) {
+        public Criteria andOperateTypeEqualTo(Integer value) {
             addCriterion("operate_type =", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeNotEqualTo(String value) {
+        public Criteria andOperateTypeNotEqualTo(Integer value) {
             addCriterion("operate_type <>", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeGreaterThan(String value) {
+        public Criteria andOperateTypeGreaterThan(Integer value) {
             addCriterion("operate_type >", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeGreaterThanOrEqualTo(String value) {
+        public Criteria andOperateTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("operate_type >=", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeLessThan(String value) {
+        public Criteria andOperateTypeLessThan(Integer value) {
             addCriterion("operate_type <", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeLessThanOrEqualTo(String value) {
+        public Criteria andOperateTypeLessThanOrEqualTo(Integer value) {
             addCriterion("operate_type <=", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeLike(String value) {
-            addCriterion("operate_type like", value, "operateType");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateTypeNotLike(String value) {
-            addCriterion("operate_type not like", value, "operateType");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateTypeIn(List<String> values) {
+        public Criteria andOperateTypeIn(List<Integer> values) {
             addCriterion("operate_type in", values, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeNotIn(List<String> values) {
+        public Criteria andOperateTypeNotIn(List<Integer> values) {
             addCriterion("operate_type not in", values, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeBetween(String value1, String value2) {
+        public Criteria andOperateTypeBetween(Integer value1, Integer value2) {
             addCriterion("operate_type between", value1, value2, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeNotBetween(String value1, String value2) {
+        public Criteria andOperateTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("operate_type not between", value1, value2, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameIsNull() {
-            addCriterion("model_name is null");
+        public Criteria andModelTypeIsNull() {
+            addCriterion("model_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameIsNotNull() {
-            addCriterion("model_name is not null");
+        public Criteria andModelTypeIsNotNull() {
+            addCriterion("model_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameEqualTo(String value) {
-            addCriterion("model_name =", value, "modelName");
+        public Criteria andModelTypeEqualTo(Integer value) {
+            addCriterion("model_type =", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameNotEqualTo(String value) {
-            addCriterion("model_name <>", value, "modelName");
+        public Criteria andModelTypeNotEqualTo(Integer value) {
+            addCriterion("model_type <>", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameGreaterThan(String value) {
-            addCriterion("model_name >", value, "modelName");
+        public Criteria andModelTypeGreaterThan(Integer value) {
+            addCriterion("model_type >", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameGreaterThanOrEqualTo(String value) {
-            addCriterion("model_name >=", value, "modelName");
+        public Criteria andModelTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("model_type >=", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameLessThan(String value) {
-            addCriterion("model_name <", value, "modelName");
+        public Criteria andModelTypeLessThan(Integer value) {
+            addCriterion("model_type <", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameLessThanOrEqualTo(String value) {
-            addCriterion("model_name <=", value, "modelName");
+        public Criteria andModelTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("model_type <=", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameLike(String value) {
-            addCriterion("model_name like", value, "modelName");
+        public Criteria andModelTypeIn(List<Integer> values) {
+            addCriterion("model_type in", values, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameNotLike(String value) {
-            addCriterion("model_name not like", value, "modelName");
+        public Criteria andModelTypeNotIn(List<Integer> values) {
+            addCriterion("model_type not in", values, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameIn(List<String> values) {
-            addCriterion("model_name in", values, "modelName");
+        public Criteria andModelTypeBetween(Integer value1, Integer value2) {
+            addCriterion("model_type between", value1, value2, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameNotIn(List<String> values) {
-            addCriterion("model_name not in", values, "modelName");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelNameBetween(String value1, String value2) {
-            addCriterion("model_name between", value1, value2, "modelName");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelNameNotBetween(String value1, String value2) {
-            addCriterion("model_name not between", value1, value2, "modelName");
+        public Criteria andModelTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("model_type not between", value1, value2, "modelType");
             return (Criteria) this;
         }
 
@@ -785,7 +765,7 @@ public class LogExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-11-20
+     * @date 2018-11-21
      */
     public static class Criterion {
         private String condition;

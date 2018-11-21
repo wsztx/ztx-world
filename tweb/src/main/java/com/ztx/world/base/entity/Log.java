@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  * @author ztx
  * 
- * @date 2018-11-20
+ * @date 2018-11-21
  */
 public class Log {
     /**
@@ -33,12 +33,12 @@ public class Log {
     /**
      * 操作类型
      */
-    private String operateType;
+    private Integer operateType;
 
     /**
-     * 所属模块名称
+     * 所属模块
      */
-    private String modelName;
+    private Integer modelType;
 
     /**
      * 操作IP地址
@@ -92,20 +92,20 @@ public class Log {
         this.operateUserId = operateUserId;
     }
 
-    public String getOperateType() {
+    public Integer getOperateType() {
         return operateType;
     }
 
-    public void setOperateType(String operateType) {
-        this.operateType = operateType == null ? null : operateType.trim();
+    public void setOperateType(Integer operateType) {
+        this.operateType = operateType;
     }
 
-    public String getModelName() {
-        return modelName;
+    public Integer getModelType() {
+        return modelType;
     }
 
-    public void setModelName(String modelName) {
-        this.modelName = modelName == null ? null : modelName.trim();
+    public void setModelType(Integer modelType) {
+        this.modelType = modelType;
     }
 
     public String getOperateIp() {

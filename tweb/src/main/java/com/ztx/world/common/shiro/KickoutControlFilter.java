@@ -23,7 +23,7 @@ import org.springframework.util.CollectionUtils;
 import com.ztx.world.base.service.ConfigService;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.config.CustomSession;
-import com.ztx.world.common.constants.ConfigTableConstants;
+import com.ztx.world.common.constants.TableConstants;
 import com.ztx.world.common.constants.ResultCode;
 import com.ztx.world.common.utils.ResponseUtil;
 import com.ztx.world.common.utils.ResultCodeUtil;
@@ -66,7 +66,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		// 最大同时在线数
-		Integer maxSession = Integer.valueOf(configService.getConfigValue(ConfigTableConstants.TYPE_USER_LOGIN, ConfigTableConstants.KEY_ONLINE_MAX));
+		Integer maxSession = Integer.valueOf(configService.getConfigValue(TableConstants.TYPE_USER_LOGIN, TableConstants.KEY_ONLINE_MAX));
 		
 		Subject subject = getSubject(request, response);
 		// 如果没有登录,直接进行之后的流程

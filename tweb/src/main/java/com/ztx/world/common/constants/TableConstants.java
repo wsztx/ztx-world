@@ -5,10 +5,10 @@ package com.ztx.world.common.constants;
  * @author ztx
  *
  */
-public class ConfigTableConstants {
+public class TableConstants {
 
 	// 登录相关配置
-	public static final String TYPE_USER_LOGIN = "user.login";
+	public static final String TYPE_USER_LOGIN = "User.Login";
 	// 同一用户最大在线数
-	public static final String KEY_ONLINE_MAX = "online.max";
+	public static final String KEY_ONLINE_MAX = "Online.Max";
 }

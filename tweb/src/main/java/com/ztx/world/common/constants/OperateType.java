@@ -2,25 +2,58 @@ package com.ztx.world.common.constants;
 
 public class OperateType {
 	
-	private static final String LOGIN = "登录";
+	/**
+	 * 登录
+	 */
+	private static final Integer LOGIN = 1;
 	
-	private static final String LOGOUT = "登出";
+	/**
+	 * 登出
+	 */
+	private static final Integer LOGOUT = 2;
 
-	private static final String SAVE = "新增";
+	/**
+	 * 新增
+	 */
+	private static final Integer SAVE = 3;
 	
-	private static final String DELETE = "删除";
+	/**
+	 * 删除
+	 */
+	private static final Integer DELETE = 4;
 	
-	private static final String UPDATE = "修改";
+	/**
+	 * 修改
+	 */
+	private static final Integer UPDATE = 5;
 	
-	private static final String QUERY = "查询";
+	/**
+	 * 查询
+	 */
+	private static final Integer QUERY = 6;
 	
-	private static final String EXPORT = "导出";
+	/**
+	 * 导出
+	 */
+	private static final Integer EXPORT = 7;
 	
-	private static final String IMPORT = "导入";
+	/**
+	 * 导入
+	 */
+	private static final Integer IMPORT = 8;
 	
-	private static final String UPDATE_PASS = "修改密码";
+	/**
+	 * 修改密码
+	 */
+	private static final Integer UPDATE_PASS = 9;
 	
-	private static final String RESET_PASS = "重置密码";
+	/**
+	 * 重置密码
+	 */
+	private static final Integer RESET_PASS = 10;
 	
-	private static final String CLEAR_CACHE = "清空缓存";
+	/**
+	 * 清空缓存
+	 */
+	private static final Integer CLEAR_CACHE = 11;
 }
