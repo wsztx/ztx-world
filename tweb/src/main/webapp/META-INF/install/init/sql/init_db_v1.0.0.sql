@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-20 20:10:47
+Date: 2018-11-21 09:32:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,12 +25,12 @@ CREATE TABLE `base_config` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `config_type` varchar(64) NOT NULL COMMENT '配置类型',
-  `config_key` varchar(64) NOT NULL COMMENT '配置键',
-  `config_name` varchar(64) DEFAULT NULL COMMENT '配置名称',
-  `config_value` varchar(64) DEFAULT NULL COMMENT '配置值',
+  `config_type` varchar(96) NOT NULL COMMENT '配置类型',
+  `config_key` varchar(96) NOT NULL COMMENT '配置键',
+  `config_name` varchar(96) DEFAULT NULL COMMENT '配置名称',
+  `config_value` varchar(96) DEFAULT NULL COMMENT '配置值',
   `use_status` int(2) DEFAULT NULL COMMENT '是否启用,1启用,0禁用',
-  `description` varchar(255) DEFAULT NULL COMMENT '描述',
+  `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_CONFIG` (`status`,`config_type`,`config_key`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -50,9 +50,9 @@ CREATE TABLE `base_department` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `dept_code` varchar(64) NOT NULL COMMENT '部门编码',
-  `dept_name` varchar(64) DEFAULT NULL COMMENT '部门名称',
-  `description` varchar(256) DEFAULT NULL COMMENT '描述',
+  `dept_code` varchar(96) NOT NULL COMMENT '部门编码',
+  `dept_name` varchar(96) DEFAULT NULL COMMENT '部门名称',
+  `description` varchar(384) DEFAULT NULL COMMENT '描述',
   `parent_id` bigint(32) NOT NULL COMMENT '上级机构id',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_DEPT_CODE` (`status`,`dept_code`) USING BTREE
@@ -72,11 +72,11 @@ CREATE TABLE `base_dictionary` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人id',
-  `dictionary_type` varchar(64) NOT NULL COMMENT '字典类型',
-  `dictionary_key` varchar(64) NOT NULL COMMENT '字典键',
-  `dictionary_name` varchar(64) DEFAULT NULL COMMENT '字典名称',
-  `dictionary_value` varchar(64) DEFAULT NULL COMMENT '字典值',
-  `description` varchar(256) DEFAULT NULL COMMENT '描述',
+  `dictionary_type` varchar(96) NOT NULL COMMENT '字典类型',
+  `dictionary_key` varchar(96) NOT NULL COMMENT '字典键',
+  `dictionary_name` varchar(96) DEFAULT NULL COMMENT '字典名称',
+  `dictionary_value` varchar(96) DEFAULT NULL COMMENT '字典值',
+  `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_DICTIONARY` (`status`,`dictionary_type`,`dictionary_key`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -94,12 +94,12 @@ CREATE TABLE `base_log` (
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
   `operate_time` datetime NOT NULL COMMENT '操作时间',
   `operate_user_id` bigint(32) NOT NULL COMMENT '操作人id',
-  `operate_type` varchar(64) DEFAULT NULL COMMENT '操作类型',
-  `model_name` varchar(64) DEFAULT NULL COMMENT '所属模块名称',
-  `operate_ip` varchar(64) DEFAULT NULL COMMENT '操作IP地址',
-  `operate_mac` varchar(64) DEFAULT NULL COMMENT '操作mac地址',
-  `operate_object` varchar(128) DEFAULT NULL COMMENT '操作对象',
-  `description` varchar(256) DEFAULT NULL COMMENT '描述',
+  `operate_type` varchar(96) DEFAULT NULL COMMENT '操作类型',
+  `model_name` varchar(96) DEFAULT NULL COMMENT '所属模块名称',
+  `operate_ip` varchar(96) DEFAULT NULL COMMENT '操作IP地址',
+  `operate_mac` varchar(96) DEFAULT NULL COMMENT '操作mac地址',
+  `operate_object` varchar(384) DEFAULT NULL COMMENT '操作对象',
+  `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -117,10 +117,10 @@ CREATE TABLE `base_organization` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `org_code` varchar(64) NOT NULL COMMENT '机构编码',
-  `org_name` varchar(64) DEFAULT NULL COMMENT '机构名称',
-  `description` varchar(256) DEFAULT NULL COMMENT '描述',
-  `org_path` varchar(64) DEFAULT NULL COMMENT '机构路径',
+  `org_code` varchar(96) NOT NULL COMMENT '机构编码',
+  `org_name` varchar(96) DEFAULT NULL COMMENT '机构名称',
+  `description` varchar(384) DEFAULT NULL COMMENT '描述',
+  `org_path` varchar(96) DEFAULT NULL COMMENT '机构路径',
   `parent_id` bigint(32) NOT NULL COMMENT '上级机构id',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ORG_CODE` (`status`,`org_code`) USING BTREE
@@ -141,13 +141,13 @@ CREATE TABLE `base_permission` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `permission_code` varchar(64) NOT NULL COMMENT '权限编码',
-  `permission_name` varchar(64) DEFAULT NULL COMMENT '权限名称',
-  `permission_value` varchar(64) DEFAULT NULL COMMENT '权限值',
-  `description` varchar(256) DEFAULT NULL COMMENT '描述',
+  `permission_code` varchar(96) NOT NULL COMMENT '权限编码',
+  `permission_name` varchar(96) DEFAULT NULL COMMENT '权限名称',
+  `permission_value` varchar(96) DEFAULT NULL COMMENT '权限值',
+  `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_PERMISSION_CODE` (`status`,`permission_code`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_permission
@@ -217,9 +217,9 @@ CREATE TABLE `base_role` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `role_code` varchar(64) NOT NULL COMMENT '角色编码',
-  `role_name` varchar(64) DEFAULT NULL COMMENT '角色名',
-  `description` varchar(255) DEFAULT NULL COMMENT '描述',
+  `role_code` varchar(96) NOT NULL COMMENT '角色编码',
+  `role_name` varchar(96) DEFAULT NULL COMMENT '角色名',
+  `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ROLE_CODE` (`status`,`role_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -310,12 +310,12 @@ CREATE TABLE `base_user` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
-  `user_code` varchar(64) NOT NULL COMMENT '用户编码，登录名',
-  `user_name` varchar(64) DEFAULT NULL COMMENT '名称',
-  `password` varchar(64) DEFAULT NULL COMMENT '密码',
+  `user_code` varchar(96) NOT NULL COMMENT '用户编码，登录名',
+  `user_name` varchar(96) DEFAULT NULL COMMENT '名称',
+  `password` varchar(96) DEFAULT NULL COMMENT '密码',
   `org_id` bigint(32) DEFAULT NULL COMMENT '所属机构id',
   `dept_id` bigint(32) DEFAULT NULL COMMENT '所属部门id',
-  `description` varchar(255) DEFAULT NULL COMMENT '描述',
+  `description` varchar(384) DEFAULT NULL COMMENT '描述',
   `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
   `user_status` int(4) DEFAULT NULL COMMENT '用户状态，0正常',
   `session_version` bigint(32) NOT NULL COMMENT 'session版本号，时间戳',
