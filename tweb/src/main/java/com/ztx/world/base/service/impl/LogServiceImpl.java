@@ -1,6 +1,5 @@
 package com.ztx.world.base.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import com.ztx.world.base.entity.Log;
 import com.ztx.world.base.entity.LogExample;
 import com.ztx.world.base.mapper.LogMapper;
 import com.ztx.world.base.service.LogService;
-import com.ztx.world.common.constants.BaseConstants;
 
 @Service
 public class LogServiceImpl implements LogService {
@@ -36,16 +34,5 @@ public class LogServiceImpl implements LogService {
 		LogExample example = new LogExample();
 		logMapper.deleteByExample(example);
 	}
-
-	@Override
-	public Long saveLog(Log log) {
-		if(log == null){
-			return 0L;
-		}
-		log.setStatus(BaseConstants.UNDELETE_STATUS);
-		log.setOperateTime(new Date());
-		logMapper.insertSelective(log);
-		
-		return log.getId();
-	}
+	
 }

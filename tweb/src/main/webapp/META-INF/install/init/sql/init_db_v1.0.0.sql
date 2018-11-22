@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-21 18:41:46
+Date: 2018-11-22 09:15:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -113,11 +113,12 @@ CREATE TABLE `base_log` (
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
   `operate_time` datetime NOT NULL COMMENT '操作时间',
   `operate_user_id` bigint(32) DEFAULT NULL COMMENT '操作人id',
-  `operate_type` int(4) DEFAULT NULL COMMENT '操作类型',
-  `model_type` int(4) DEFAULT NULL COMMENT '所属模块',
+  `operate_class` varchar(96) DEFAULT NULL COMMENT '操作类',
+  `operate_method` varchar(96) DEFAULT NULL COMMENT '操作方法',
+  `operate_object` varchar(384) DEFAULT NULL COMMENT '操作对象',
+  `operate_result` varchar(384) DEFAULT NULL COMMENT '操作结果',
   `operate_ip` varchar(96) DEFAULT NULL COMMENT '操作IP地址',
   `operate_mac` varchar(96) DEFAULT NULL COMMENT '操作mac地址',
-  `operate_object` varchar(384) DEFAULT NULL COMMENT '操作对象',
   `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

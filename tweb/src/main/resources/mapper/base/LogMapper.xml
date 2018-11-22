@@ -7,11 +7,12 @@
         <result column="status" property="status" jdbcType="BIGINT" />
         <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
         <result column="operate_user_id" property="operateUserId" jdbcType="BIGINT" />
-        <result column="operate_type" property="operateType" jdbcType="INTEGER" />
-        <result column="model_type" property="modelType" jdbcType="INTEGER" />
+        <result column="operate_class" property="operateClass" jdbcType="VARCHAR" />
+        <result column="operate_method" property="operateMethod" jdbcType="VARCHAR" />
+        <result column="operate_object" property="operateObject" jdbcType="VARCHAR" />
+        <result column="operate_result" property="operateResult" jdbcType="VARCHAR" />
         <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
         <result column="operate_mac" property="operateMac" jdbcType="VARCHAR" />
-        <result column="operate_object" property="operateObject" jdbcType="VARCHAR" />
         <result column="description" property="description" jdbcType="VARCHAR" />
     </resultMap>
 
@@ -76,8 +77,8 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, status, operate_time, operate_user_id, operate_type, model_type, operate_ip, 
-        operate_mac, operate_object, description
+        id, status, operate_time, operate_user_id, operate_class, operate_method, operate_object, 
+        operate_result, operate_ip, operate_mac, description
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.LogExample" >
@@ -119,13 +120,13 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into base_log (id, status, operate_time, 
-            operate_user_id, operate_type, model_type, 
-            operate_ip, operate_mac, operate_object, 
-            description)
+            operate_user_id, operate_class, operate_method, 
+            operate_object, operate_result, operate_ip, 
+            operate_mac, description)
         values (#{id,jdbcType=BIGINT}, #{status,jdbcType=BIGINT}, #{operateTime,jdbcType=TIMESTAMP}, 
-            #{operateUserId,jdbcType=BIGINT}, #{operateType,jdbcType=INTEGER}, #{modelType,jdbcType=INTEGER}, 
-            #{operateIp,jdbcType=VARCHAR}, #{operateMac,jdbcType=VARCHAR}, #{operateObject,jdbcType=VARCHAR}, 
-            #{description,jdbcType=VARCHAR})
+            #{operateUserId,jdbcType=BIGINT}, #{operateClass,jdbcType=VARCHAR}, #{operateMethod,jdbcType=VARCHAR}, 
+            #{operateObject,jdbcType=VARCHAR}, #{operateResult,jdbcType=VARCHAR}, #{operateIp,jdbcType=VARCHAR}, 
+            #{operateMac,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.Log" >
@@ -144,20 +145,23 @@
             <if test="operateUserId != null" >
                 operate_user_id,
             </if>
-            <if test="operateType != null" >
-                operate_type,
+            <if test="operateClass != null" >
+                operate_class,
             </if>
-            <if test="modelType != null" >
-                model_type,
+            <if test="operateMethod != null" >
+                operate_method,
+            </if>
+            <if test="operateObject != null" >
+                operate_object,
+            </if>
+            <if test="operateResult != null" >
+                operate_result,
             </if>
             <if test="operateIp != null" >
                 operate_ip,
             </if>
             <if test="operateMac != null" >
                 operate_mac,
-            </if>
-            <if test="operateObject != null" >
-                operate_object,
             </if>
             <if test="description != null" >
                 description,
@@ -174,20 +178,23 @@
             <if test="operateUserId != null" >
                 #{operateUserId,jdbcType=BIGINT},
             </if>
-            <if test="operateType != null" >
-                #{operateType,jdbcType=INTEGER},
+            <if test="operateClass != null" >
+                #{operateClass,jdbcType=VARCHAR},
             </if>
-            <if test="modelType != null" >
-                #{modelType,jdbcType=INTEGER},
+            <if test="operateMethod != null" >
+                #{operateMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="operateObject != null" >
+                #{operateObject,jdbcType=VARCHAR},
+            </if>
+            <if test="operateResult != null" >
+                #{operateResult,jdbcType=VARCHAR},
             </if>
             <if test="operateIp != null" >
                 #{operateIp,jdbcType=VARCHAR},
             </if>
             <if test="operateMac != null" >
                 #{operateMac,jdbcType=VARCHAR},
-            </if>
-            <if test="operateObject != null" >
-                #{operateObject,jdbcType=VARCHAR},
             </if>
             <if test="description != null" >
                 #{description,jdbcType=VARCHAR},
@@ -217,20 +224,23 @@
             <if test="record.operateUserId != null" >
                 operate_user_id = #{record.operateUserId,jdbcType=BIGINT},
             </if>
-            <if test="record.operateType != null" >
-                operate_type = #{record.operateType,jdbcType=INTEGER},
+            <if test="record.operateClass != null" >
+                operate_class = #{record.operateClass,jdbcType=VARCHAR},
             </if>
-            <if test="record.modelType != null" >
-                model_type = #{record.modelType,jdbcType=INTEGER},
+            <if test="record.operateMethod != null" >
+                operate_method = #{record.operateMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operateObject != null" >
+                operate_object = #{record.operateObject,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operateResult != null" >
+                operate_result = #{record.operateResult,jdbcType=VARCHAR},
             </if>
             <if test="record.operateIp != null" >
                 operate_ip = #{record.operateIp,jdbcType=VARCHAR},
             </if>
             <if test="record.operateMac != null" >
                 operate_mac = #{record.operateMac,jdbcType=VARCHAR},
-            </if>
-            <if test="record.operateObject != null" >
-                operate_object = #{record.operateObject,jdbcType=VARCHAR},
             </if>
             <if test="record.description != null" >
                 description = #{record.description,jdbcType=VARCHAR},
@@ -247,11 +257,12 @@
             status = #{record.status,jdbcType=BIGINT},
             operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
             operate_user_id = #{record.operateUserId,jdbcType=BIGINT},
-            operate_type = #{record.operateType,jdbcType=INTEGER},
-            model_type = #{record.modelType,jdbcType=INTEGER},
+            operate_class = #{record.operateClass,jdbcType=VARCHAR},
+            operate_method = #{record.operateMethod,jdbcType=VARCHAR},
+            operate_object = #{record.operateObject,jdbcType=VARCHAR},
+            operate_result = #{record.operateResult,jdbcType=VARCHAR},
             operate_ip = #{record.operateIp,jdbcType=VARCHAR},
             operate_mac = #{record.operateMac,jdbcType=VARCHAR},
-            operate_object = #{record.operateObject,jdbcType=VARCHAR},
             description = #{record.description,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -270,20 +281,23 @@
             <if test="operateUserId != null" >
                 operate_user_id = #{operateUserId,jdbcType=BIGINT},
             </if>
-            <if test="operateType != null" >
-                operate_type = #{operateType,jdbcType=INTEGER},
+            <if test="operateClass != null" >
+                operate_class = #{operateClass,jdbcType=VARCHAR},
             </if>
-            <if test="modelType != null" >
-                model_type = #{modelType,jdbcType=INTEGER},
+            <if test="operateMethod != null" >
+                operate_method = #{operateMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="operateObject != null" >
+                operate_object = #{operateObject,jdbcType=VARCHAR},
+            </if>
+            <if test="operateResult != null" >
+                operate_result = #{operateResult,jdbcType=VARCHAR},
             </if>
             <if test="operateIp != null" >
                 operate_ip = #{operateIp,jdbcType=VARCHAR},
             </if>
             <if test="operateMac != null" >
                 operate_mac = #{operateMac,jdbcType=VARCHAR},
-            </if>
-            <if test="operateObject != null" >
-                operate_object = #{operateObject,jdbcType=VARCHAR},
             </if>
             <if test="description != null" >
                 description = #{description,jdbcType=VARCHAR},
@@ -297,11 +311,12 @@
         set status = #{status,jdbcType=BIGINT},
             operate_time = #{operateTime,jdbcType=TIMESTAMP},
             operate_user_id = #{operateUserId,jdbcType=BIGINT},
-            operate_type = #{operateType,jdbcType=INTEGER},
-            model_type = #{modelType,jdbcType=INTEGER},
+            operate_class = #{operateClass,jdbcType=VARCHAR},
+            operate_method = #{operateMethod,jdbcType=VARCHAR},
+            operate_object = #{operateObject,jdbcType=VARCHAR},
+            operate_result = #{operateResult,jdbcType=VARCHAR},
             operate_ip = #{operateIp,jdbcType=VARCHAR},
             operate_mac = #{operateMac,jdbcType=VARCHAR},
-            operate_object = #{operateObject,jdbcType=VARCHAR},
             description = #{description,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>

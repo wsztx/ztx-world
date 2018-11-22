@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  * @author ztx
  * 
- * @date 2018-11-21
+ * @date 2018-11-22
  */
 public class Log {
     /**
@@ -31,14 +31,24 @@ public class Log {
     private Long operateUserId;
 
     /**
-     * 操作类型
+     * 操作类
      */
-    private Integer operateType;
+    private String operateClass;
 
     /**
-     * 所属模块
+     * 操作方法
      */
-    private Integer modelType;
+    private String operateMethod;
+
+    /**
+     * 操作对象
+     */
+    private String operateObject;
+
+    /**
+     * 操作结果
+     */
+    private String operateResult;
 
     /**
      * 操作IP地址
@@ -49,11 +59,6 @@ public class Log {
      * 操作mac地址
      */
     private String operateMac;
-
-    /**
-     * 操作对象
-     */
-    private String operateObject;
 
     /**
      * 描述
@@ -92,20 +97,36 @@ public class Log {
         this.operateUserId = operateUserId;
     }
 
-    public Integer getOperateType() {
-        return operateType;
+    public String getOperateClass() {
+        return operateClass;
     }
 
-    public void setOperateType(Integer operateType) {
-        this.operateType = operateType;
+    public void setOperateClass(String operateClass) {
+        this.operateClass = operateClass == null ? null : operateClass.trim();
     }
 
-    public Integer getModelType() {
-        return modelType;
+    public String getOperateMethod() {
+        return operateMethod;
     }
 
-    public void setModelType(Integer modelType) {
-        this.modelType = modelType;
+    public void setOperateMethod(String operateMethod) {
+        this.operateMethod = operateMethod == null ? null : operateMethod.trim();
+    }
+
+    public String getOperateObject() {
+        return operateObject;
+    }
+
+    public void setOperateObject(String operateObject) {
+        this.operateObject = operateObject == null ? null : operateObject.trim();
+    }
+
+    public String getOperateResult() {
+        return operateResult;
+    }
+
+    public void setOperateResult(String operateResult) {
+        this.operateResult = operateResult == null ? null : operateResult.trim();
     }
 
     public String getOperateIp() {
@@ -122,14 +143,6 @@ public class Log {
 
     public void setOperateMac(String operateMac) {
         this.operateMac = operateMac == null ? null : operateMac.trim();
-    }
-
-    public String getOperateObject() {
-        return operateObject;
-    }
-
-    public void setOperateObject(String operateObject) {
-        this.operateObject = operateObject == null ? null : operateObject.trim();
     }
 
     public String getDescription() {

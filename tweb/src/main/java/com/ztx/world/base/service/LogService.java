@@ -2,8 +2,6 @@ package com.ztx.world.base.service;
 
 import java.util.List;
 
-import com.ztx.world.base.entity.Log;
-
 public interface LogService {
 
 	/**
@@ -17,10 +15,4 @@ public interface LogService {
 	 */
 	void clearLog();
 	
-	/**
-	 * 新增日志
-	 * @param log
-	 * @return
-	 */
-	Long saveLog(Log log);
 }

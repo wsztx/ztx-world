@@ -69,7 +69,7 @@ public class LogExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-11-21
+     * @date 2018-11-22
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -352,123 +352,283 @@ public class LogExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeIsNull() {
-            addCriterion("operate_type is null");
+        public Criteria andOperateClassIsNull() {
+            addCriterion("operate_class is null");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeIsNotNull() {
-            addCriterion("operate_type is not null");
+        public Criteria andOperateClassIsNotNull() {
+            addCriterion("operate_class is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeEqualTo(Integer value) {
-            addCriterion("operate_type =", value, "operateType");
+        public Criteria andOperateClassEqualTo(String value) {
+            addCriterion("operate_class =", value, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeNotEqualTo(Integer value) {
-            addCriterion("operate_type <>", value, "operateType");
+        public Criteria andOperateClassNotEqualTo(String value) {
+            addCriterion("operate_class <>", value, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeGreaterThan(Integer value) {
-            addCriterion("operate_type >", value, "operateType");
+        public Criteria andOperateClassGreaterThan(String value) {
+            addCriterion("operate_class >", value, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("operate_type >=", value, "operateType");
+        public Criteria andOperateClassGreaterThanOrEqualTo(String value) {
+            addCriterion("operate_class >=", value, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeLessThan(Integer value) {
-            addCriterion("operate_type <", value, "operateType");
+        public Criteria andOperateClassLessThan(String value) {
+            addCriterion("operate_class <", value, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("operate_type <=", value, "operateType");
+        public Criteria andOperateClassLessThanOrEqualTo(String value) {
+            addCriterion("operate_class <=", value, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeIn(List<Integer> values) {
-            addCriterion("operate_type in", values, "operateType");
+        public Criteria andOperateClassLike(String value) {
+            addCriterion("operate_class like", value, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeNotIn(List<Integer> values) {
-            addCriterion("operate_type not in", values, "operateType");
+        public Criteria andOperateClassNotLike(String value) {
+            addCriterion("operate_class not like", value, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeBetween(Integer value1, Integer value2) {
-            addCriterion("operate_type between", value1, value2, "operateType");
+        public Criteria andOperateClassIn(List<String> values) {
+            addCriterion("operate_class in", values, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("operate_type not between", value1, value2, "operateType");
+        public Criteria andOperateClassNotIn(List<String> values) {
+            addCriterion("operate_class not in", values, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeIsNull() {
-            addCriterion("model_type is null");
+        public Criteria andOperateClassBetween(String value1, String value2) {
+            addCriterion("operate_class between", value1, value2, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeIsNotNull() {
-            addCriterion("model_type is not null");
+        public Criteria andOperateClassNotBetween(String value1, String value2) {
+            addCriterion("operate_class not between", value1, value2, "operateClass");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeEqualTo(Integer value) {
-            addCriterion("model_type =", value, "modelType");
+        public Criteria andOperateMethodIsNull() {
+            addCriterion("operate_method is null");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeNotEqualTo(Integer value) {
-            addCriterion("model_type <>", value, "modelType");
+        public Criteria andOperateMethodIsNotNull() {
+            addCriterion("operate_method is not null");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeGreaterThan(Integer value) {
-            addCriterion("model_type >", value, "modelType");
+        public Criteria andOperateMethodEqualTo(String value) {
+            addCriterion("operate_method =", value, "operateMethod");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("model_type >=", value, "modelType");
+        public Criteria andOperateMethodNotEqualTo(String value) {
+            addCriterion("operate_method <>", value, "operateMethod");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeLessThan(Integer value) {
-            addCriterion("model_type <", value, "modelType");
+        public Criteria andOperateMethodGreaterThan(String value) {
+            addCriterion("operate_method >", value, "operateMethod");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("model_type <=", value, "modelType");
+        public Criteria andOperateMethodGreaterThanOrEqualTo(String value) {
+            addCriterion("operate_method >=", value, "operateMethod");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeIn(List<Integer> values) {
-            addCriterion("model_type in", values, "modelType");
+        public Criteria andOperateMethodLessThan(String value) {
+            addCriterion("operate_method <", value, "operateMethod");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeNotIn(List<Integer> values) {
-            addCriterion("model_type not in", values, "modelType");
+        public Criteria andOperateMethodLessThanOrEqualTo(String value) {
+            addCriterion("operate_method <=", value, "operateMethod");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeBetween(Integer value1, Integer value2) {
-            addCriterion("model_type between", value1, value2, "modelType");
+        public Criteria andOperateMethodLike(String value) {
+            addCriterion("operate_method like", value, "operateMethod");
             return (Criteria) this;
         }
 
-        public Criteria andModelTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("model_type not between", value1, value2, "modelType");
+        public Criteria andOperateMethodNotLike(String value) {
+            addCriterion("operate_method not like", value, "operateMethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateMethodIn(List<String> values) {
+            addCriterion("operate_method in", values, "operateMethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateMethodNotIn(List<String> values) {
+            addCriterion("operate_method not in", values, "operateMethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateMethodBetween(String value1, String value2) {
+            addCriterion("operate_method between", value1, value2, "operateMethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateMethodNotBetween(String value1, String value2) {
+            addCriterion("operate_method not between", value1, value2, "operateMethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectIsNull() {
+            addCriterion("operate_object is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectIsNotNull() {
+            addCriterion("operate_object is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectEqualTo(String value) {
+            addCriterion("operate_object =", value, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectNotEqualTo(String value) {
+            addCriterion("operate_object <>", value, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectGreaterThan(String value) {
+            addCriterion("operate_object >", value, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectGreaterThanOrEqualTo(String value) {
+            addCriterion("operate_object >=", value, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectLessThan(String value) {
+            addCriterion("operate_object <", value, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectLessThanOrEqualTo(String value) {
+            addCriterion("operate_object <=", value, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectLike(String value) {
+            addCriterion("operate_object like", value, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectNotLike(String value) {
+            addCriterion("operate_object not like", value, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectIn(List<String> values) {
+            addCriterion("operate_object in", values, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectNotIn(List<String> values) {
+            addCriterion("operate_object not in", values, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectBetween(String value1, String value2) {
+            addCriterion("operate_object between", value1, value2, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateObjectNotBetween(String value1, String value2) {
+            addCriterion("operate_object not between", value1, value2, "operateObject");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultIsNull() {
+            addCriterion("operate_result is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultIsNotNull() {
+            addCriterion("operate_result is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultEqualTo(String value) {
+            addCriterion("operate_result =", value, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultNotEqualTo(String value) {
+            addCriterion("operate_result <>", value, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultGreaterThan(String value) {
+            addCriterion("operate_result >", value, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultGreaterThanOrEqualTo(String value) {
+            addCriterion("operate_result >=", value, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultLessThan(String value) {
+            addCriterion("operate_result <", value, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultLessThanOrEqualTo(String value) {
+            addCriterion("operate_result <=", value, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultLike(String value) {
+            addCriterion("operate_result like", value, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultNotLike(String value) {
+            addCriterion("operate_result not like", value, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultIn(List<String> values) {
+            addCriterion("operate_result in", values, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultNotIn(List<String> values) {
+            addCriterion("operate_result not in", values, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultBetween(String value1, String value2) {
+            addCriterion("operate_result between", value1, value2, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperateResultNotBetween(String value1, String value2) {
+            addCriterion("operate_result not between", value1, value2, "operateResult");
             return (Criteria) this;
         }
 
@@ -612,76 +772,6 @@ public class LogExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperateObjectIsNull() {
-            addCriterion("operate_object is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectIsNotNull() {
-            addCriterion("operate_object is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectEqualTo(String value) {
-            addCriterion("operate_object =", value, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectNotEqualTo(String value) {
-            addCriterion("operate_object <>", value, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectGreaterThan(String value) {
-            addCriterion("operate_object >", value, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectGreaterThanOrEqualTo(String value) {
-            addCriterion("operate_object >=", value, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectLessThan(String value) {
-            addCriterion("operate_object <", value, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectLessThanOrEqualTo(String value) {
-            addCriterion("operate_object <=", value, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectLike(String value) {
-            addCriterion("operate_object like", value, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectNotLike(String value) {
-            addCriterion("operate_object not like", value, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectIn(List<String> values) {
-            addCriterion("operate_object in", values, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectNotIn(List<String> values) {
-            addCriterion("operate_object not in", values, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectBetween(String value1, String value2) {
-            addCriterion("operate_object between", value1, value2, "operateObject");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateObjectNotBetween(String value1, String value2) {
-            addCriterion("operate_object not between", value1, value2, "operateObject");
-            return (Criteria) this;
-        }
-
         public Criteria andDescriptionIsNull() {
             addCriterion("description is null");
             return (Criteria) this;
@@ -765,7 +855,7 @@ public class LogExample {
      * 
      * @author wcyong
      * 
-     * @date 2018-11-21
+     * @date 2018-11-22
      */
     public static class Criterion {
         private String condition;
