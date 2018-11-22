@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql_local
+Source Server         : local_mysql
 Source Server Version : 50630
 Source Host           : localhost:3306
 Source Database       : tworld
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-22 09:15:08
+Date: 2018-11-22 21:48:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -84,25 +84,6 @@ CREATE TABLE `base_dictionary` (
 -- ----------------------------
 -- Records of base_dictionary
 -- ----------------------------
-INSERT INTO `base_dictionary` VALUES ('1', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Login', '登录', '1', null);
-INSERT INTO `base_dictionary` VALUES ('2', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Logout', '登出', '2', '');
-INSERT INTO `base_dictionary` VALUES ('3', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Save', '新增', '3', '');
-INSERT INTO `base_dictionary` VALUES ('4', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Delete', '删除', '4', '');
-INSERT INTO `base_dictionary` VALUES ('5', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Update', '修改', '5', '');
-INSERT INTO `base_dictionary` VALUES ('6', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Query', '查询', '6', '');
-INSERT INTO `base_dictionary` VALUES ('7', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Export', '导出', '7', '');
-INSERT INTO `base_dictionary` VALUES ('8', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'Import', '导入', '8', '');
-INSERT INTO `base_dictionary` VALUES ('9', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'UpdatePass', '修改密码', '9', '');
-INSERT INTO `base_dictionary` VALUES ('10', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'ResetPass', '重置密码', '10', '');
-INSERT INTO `base_dictionary` VALUES ('11', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.OperateType', 'ClearCache', '清空缓存', '11', '');
-INSERT INTO `base_dictionary` VALUES ('12', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'User', '用户管理', '1', '');
-INSERT INTO `base_dictionary` VALUES ('13', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Role', '角色管理', '2', '');
-INSERT INTO `base_dictionary` VALUES ('14', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Department', '部门管理', '3', '');
-INSERT INTO `base_dictionary` VALUES ('15', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Organization', '机构管理', '4', '');
-INSERT INTO `base_dictionary` VALUES ('16', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Config', '配置管理', '5', '');
-INSERT INTO `base_dictionary` VALUES ('17', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Dictionary', '字典管理', '6', '');
-INSERT INTO `base_dictionary` VALUES ('18', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Log', '日志管理', '7', '');
-INSERT INTO `base_dictionary` VALUES ('19', '0', '2018-11-21 18:11:28', '2018-11-21 18:11:30', '1', 'Log.ModelType', 'Cache', '缓存管理', '8', '');
 
 -- ----------------------------
 -- Table structure for base_log
@@ -113,10 +94,11 @@ CREATE TABLE `base_log` (
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
   `operate_time` datetime NOT NULL COMMENT '操作时间',
   `operate_user_id` bigint(32) DEFAULT NULL COMMENT '操作人id',
-  `operate_class` varchar(96) DEFAULT NULL COMMENT '操作类',
-  `operate_method` varchar(96) DEFAULT NULL COMMENT '操作方法',
+  `model_type` varchar(96) DEFAULT NULL COMMENT '模块类型',
+  `operate_type` varchar(96) DEFAULT NULL COMMENT '操作类型',
   `operate_object` varchar(384) DEFAULT NULL COMMENT '操作对象',
   `operate_result` varchar(384) DEFAULT NULL COMMENT '操作结果',
+  `time_span` bigint(32) DEFAULT NULL COMMENT '持续时间',
   `operate_ip` varchar(96) DEFAULT NULL COMMENT '操作IP地址',
   `operate_mac` varchar(96) DEFAULT NULL COMMENT '操作mac地址',
   `description` varchar(384) DEFAULT NULL COMMENT '描述',

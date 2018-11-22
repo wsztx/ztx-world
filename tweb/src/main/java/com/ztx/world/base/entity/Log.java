@@ -31,14 +31,14 @@ public class Log {
     private Long operateUserId;
 
     /**
-     * 操作类
+     * 模块类型
      */
-    private String operateClass;
+    private String modelType;
 
     /**
-     * 操作方法
+     * 操作类型
      */
-    private String operateMethod;
+    private String operateType;
 
     /**
      * 操作对象
@@ -49,6 +49,11 @@ public class Log {
      * 操作结果
      */
     private String operateResult;
+
+    /**
+     * 持续时间
+     */
+    private Long timeSpan;
 
     /**
      * 操作IP地址
@@ -97,20 +102,20 @@ public class Log {
         this.operateUserId = operateUserId;
     }
 
-    public String getOperateClass() {
-        return operateClass;
+    public String getModelType() {
+        return modelType;
     }
 
-    public void setOperateClass(String operateClass) {
-        this.operateClass = operateClass == null ? null : operateClass.trim();
+    public void setModelType(String modelType) {
+        this.modelType = modelType == null ? null : modelType.trim();
     }
 
-    public String getOperateMethod() {
-        return operateMethod;
+    public String getOperateType() {
+        return operateType;
     }
 
-    public void setOperateMethod(String operateMethod) {
-        this.operateMethod = operateMethod == null ? null : operateMethod.trim();
+    public void setOperateType(String operateType) {
+        this.operateType = operateType == null ? null : operateType.trim();
     }
 
     public String getOperateObject() {
@@ -127,6 +132,14 @@ public class Log {
 
     public void setOperateResult(String operateResult) {
         this.operateResult = operateResult == null ? null : operateResult.trim();
+    }
+
+    public Long getTimeSpan() {
+        return timeSpan;
+    }
+
+    public void setTimeSpan(Long timeSpan) {
+        this.timeSpan = timeSpan;
     }
 
     public String getOperateIp() {

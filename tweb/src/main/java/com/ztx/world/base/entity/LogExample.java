@@ -352,143 +352,143 @@ public class LogExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassIsNull() {
-            addCriterion("operate_class is null");
+        public Criteria andModelTypeIsNull() {
+            addCriterion("model_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassIsNotNull() {
-            addCriterion("operate_class is not null");
+        public Criteria andModelTypeIsNotNull() {
+            addCriterion("model_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassEqualTo(String value) {
-            addCriterion("operate_class =", value, "operateClass");
+        public Criteria andModelTypeEqualTo(String value) {
+            addCriterion("model_type =", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassNotEqualTo(String value) {
-            addCriterion("operate_class <>", value, "operateClass");
+        public Criteria andModelTypeNotEqualTo(String value) {
+            addCriterion("model_type <>", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassGreaterThan(String value) {
-            addCriterion("operate_class >", value, "operateClass");
+        public Criteria andModelTypeGreaterThan(String value) {
+            addCriterion("model_type >", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassGreaterThanOrEqualTo(String value) {
-            addCriterion("operate_class >=", value, "operateClass");
+        public Criteria andModelTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("model_type >=", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassLessThan(String value) {
-            addCriterion("operate_class <", value, "operateClass");
+        public Criteria andModelTypeLessThan(String value) {
+            addCriterion("model_type <", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassLessThanOrEqualTo(String value) {
-            addCriterion("operate_class <=", value, "operateClass");
+        public Criteria andModelTypeLessThanOrEqualTo(String value) {
+            addCriterion("model_type <=", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassLike(String value) {
-            addCriterion("operate_class like", value, "operateClass");
+        public Criteria andModelTypeLike(String value) {
+            addCriterion("model_type like", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassNotLike(String value) {
-            addCriterion("operate_class not like", value, "operateClass");
+        public Criteria andModelTypeNotLike(String value) {
+            addCriterion("model_type not like", value, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassIn(List<String> values) {
-            addCriterion("operate_class in", values, "operateClass");
+        public Criteria andModelTypeIn(List<String> values) {
+            addCriterion("model_type in", values, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassNotIn(List<String> values) {
-            addCriterion("operate_class not in", values, "operateClass");
+        public Criteria andModelTypeNotIn(List<String> values) {
+            addCriterion("model_type not in", values, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassBetween(String value1, String value2) {
-            addCriterion("operate_class between", value1, value2, "operateClass");
+        public Criteria andModelTypeBetween(String value1, String value2) {
+            addCriterion("model_type between", value1, value2, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateClassNotBetween(String value1, String value2) {
-            addCriterion("operate_class not between", value1, value2, "operateClass");
+        public Criteria andModelTypeNotBetween(String value1, String value2) {
+            addCriterion("model_type not between", value1, value2, "modelType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodIsNull() {
-            addCriterion("operate_method is null");
+        public Criteria andOperateTypeIsNull() {
+            addCriterion("operate_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodIsNotNull() {
-            addCriterion("operate_method is not null");
+        public Criteria andOperateTypeIsNotNull() {
+            addCriterion("operate_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodEqualTo(String value) {
-            addCriterion("operate_method =", value, "operateMethod");
+        public Criteria andOperateTypeEqualTo(String value) {
+            addCriterion("operate_type =", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodNotEqualTo(String value) {
-            addCriterion("operate_method <>", value, "operateMethod");
+        public Criteria andOperateTypeNotEqualTo(String value) {
+            addCriterion("operate_type <>", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodGreaterThan(String value) {
-            addCriterion("operate_method >", value, "operateMethod");
+        public Criteria andOperateTypeGreaterThan(String value) {
+            addCriterion("operate_type >", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodGreaterThanOrEqualTo(String value) {
-            addCriterion("operate_method >=", value, "operateMethod");
+        public Criteria andOperateTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("operate_type >=", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodLessThan(String value) {
-            addCriterion("operate_method <", value, "operateMethod");
+        public Criteria andOperateTypeLessThan(String value) {
+            addCriterion("operate_type <", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodLessThanOrEqualTo(String value) {
-            addCriterion("operate_method <=", value, "operateMethod");
+        public Criteria andOperateTypeLessThanOrEqualTo(String value) {
+            addCriterion("operate_type <=", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodLike(String value) {
-            addCriterion("operate_method like", value, "operateMethod");
+        public Criteria andOperateTypeLike(String value) {
+            addCriterion("operate_type like", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodNotLike(String value) {
-            addCriterion("operate_method not like", value, "operateMethod");
+        public Criteria andOperateTypeNotLike(String value) {
+            addCriterion("operate_type not like", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodIn(List<String> values) {
-            addCriterion("operate_method in", values, "operateMethod");
+        public Criteria andOperateTypeIn(List<String> values) {
+            addCriterion("operate_type in", values, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodNotIn(List<String> values) {
-            addCriterion("operate_method not in", values, "operateMethod");
+        public Criteria andOperateTypeNotIn(List<String> values) {
+            addCriterion("operate_type not in", values, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodBetween(String value1, String value2) {
-            addCriterion("operate_method between", value1, value2, "operateMethod");
+        public Criteria andOperateTypeBetween(String value1, String value2) {
+            addCriterion("operate_type between", value1, value2, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateMethodNotBetween(String value1, String value2) {
-            addCriterion("operate_method not between", value1, value2, "operateMethod");
+        public Criteria andOperateTypeNotBetween(String value1, String value2) {
+            addCriterion("operate_type not between", value1, value2, "operateType");
             return (Criteria) this;
         }
 
@@ -629,6 +629,66 @@ public class LogExample {
 
         public Criteria andOperateResultNotBetween(String value1, String value2) {
             addCriterion("operate_result not between", value1, value2, "operateResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanIsNull() {
+            addCriterion("time_span is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanIsNotNull() {
+            addCriterion("time_span is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanEqualTo(Long value) {
+            addCriterion("time_span =", value, "timeSpan");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanNotEqualTo(Long value) {
+            addCriterion("time_span <>", value, "timeSpan");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanGreaterThan(Long value) {
+            addCriterion("time_span >", value, "timeSpan");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanGreaterThanOrEqualTo(Long value) {
+            addCriterion("time_span >=", value, "timeSpan");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanLessThan(Long value) {
+            addCriterion("time_span <", value, "timeSpan");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanLessThanOrEqualTo(Long value) {
+            addCriterion("time_span <=", value, "timeSpan");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanIn(List<Long> values) {
+            addCriterion("time_span in", values, "timeSpan");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanNotIn(List<Long> values) {
+            addCriterion("time_span not in", values, "timeSpan");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanBetween(Long value1, Long value2) {
+            addCriterion("time_span between", value1, value2, "timeSpan");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeSpanNotBetween(Long value1, Long value2) {
+            addCriterion("time_span not between", value1, value2, "timeSpan");
             return (Criteria) this;
         }
 
