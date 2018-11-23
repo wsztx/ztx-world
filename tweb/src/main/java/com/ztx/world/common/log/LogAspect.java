@@ -18,6 +18,7 @@ import com.ztx.world.base.entity.Log;
 import com.ztx.world.base.mapper.LogMapper;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.utils.IPAndMacUtil;
 
 @Aspect
 @Component
@@ -48,7 +49,8 @@ public class LogAspect {
     	log.setOperateTime(startTime);
     	// 设置IP和MAC地址
         HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-        
+        log.setOperateIp(IPAndMacUtil.getIP(request));
+        log.setOperateIp(IPAndMacUtil.getMACAddress(log.getOperateIp()));
         // 如果已经登录,设置操作人id
         CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
         if(customSession != null){
