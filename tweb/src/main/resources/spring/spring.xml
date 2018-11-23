@@ -9,8 +9,6 @@
 	<!-- 扫描的包路径 -->
 	<context:component-scan base-package="com.ztx.world"></context:component-scan>
 	
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-	
 	<!-- 导入properties文件 -->
 	<context:property-placeholder location="classpath:spring/db.properties,classpath:spring/redis.properties" ignore-unresolvable="true" />
 

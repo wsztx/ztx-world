@@ -9,6 +9,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -24,13 +26,15 @@ import com.ztx.world.common.utils.IPAndMacUtil;
 @Component
 public class LogAspect {
 	
+	private static Logger logger = LoggerFactory.getLogger(LogAspect.class);
+	
 	@Autowired
 	private LogMapper logMapper;
 
     /**
      * 切点
      */
-    @Pointcut("execution(* com.ztx.world.*.*Controller*.*(..)))")
+    @Pointcut("execution(* com.ztx.world.*.controller.**))")
     public void controllerPointcut() {}
 
     /**
@@ -49,8 +53,12 @@ public class LogAspect {
     	log.setOperateTime(startTime);
     	// 设置IP和MAC地址
         HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-        log.setOperateIp(IPAndMacUtil.getIP(request));
-        log.setOperateIp(IPAndMacUtil.getMACAddress(log.getOperateIp()));
+        try {
+			log.setOperateIp(IPAndMacUtil.getIP(request));
+			log.setOperateIp(IPAndMacUtil.getMACAddress(log.getOperateIp()));
+		} catch (Exception e) {
+			logger.error("Get IP or MAC error.", e);
+		}
         // 如果已经登录,设置操作人id
         CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
         if(customSession != null){
