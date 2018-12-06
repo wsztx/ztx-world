@@ -114,26 +114,23 @@
     </delete>
 
     <insert id="insert" parameterType="com.ztx.world.base.entity.Permission" >
-        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into base_permission (id, status, create_time, 
-            update_time, create_user_id, permission_code, 
-            permission_name, permission_value, description
-            )
-        values (#{id,jdbcType=BIGINT}, #{status,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
-            #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{permissionCode,jdbcType=VARCHAR}, 
-            #{permissionName,jdbcType=VARCHAR}, #{permissionValue,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
-            )
+        insert into base_permission (status, create_time, update_time, 
+            create_user_id, permission_code, permission_name, 
+            permission_value, description)
+        values (#{status,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+            #{createUserId,jdbcType=BIGINT}, #{permissionCode,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}, 
+            #{permissionValue,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.Permission" >
-        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into base_permission
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            id,
             <if test="status != null" >
                 status,
             </if>
@@ -160,7 +157,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            #{id,jdbcType=BIGINT},
             <if test="status != null" >
                 #{status,jdbcType=BIGINT},
             </if>

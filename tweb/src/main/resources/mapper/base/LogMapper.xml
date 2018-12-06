@@ -117,28 +117,25 @@
     </delete>
 
     <insert id="insert" parameterType="com.ztx.world.base.entity.Log" >
-        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into base_log (id, status, operate_time, 
-            operate_user_id, model_type, operate_type, 
-            operate_object, operate_result, time_span, 
-            operate_ip, operate_mac, description
-            )
-        values (#{id,jdbcType=BIGINT}, #{status,jdbcType=BIGINT}, #{operateTime,jdbcType=TIMESTAMP}, 
-            #{operateUserId,jdbcType=BIGINT}, #{modelType,jdbcType=VARCHAR}, #{operateType,jdbcType=VARCHAR}, 
-            #{operateObject,jdbcType=VARCHAR}, #{operateResult,jdbcType=VARCHAR}, #{timeSpan,jdbcType=BIGINT}, 
-            #{operateIp,jdbcType=VARCHAR}, #{operateMac,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
-            )
+        insert into base_log (status, operate_time, operate_user_id, 
+            model_type, operate_type, operate_object, 
+            operate_result, time_span, operate_ip, 
+            operate_mac, description)
+        values (#{status,jdbcType=BIGINT}, #{operateTime,jdbcType=TIMESTAMP}, #{operateUserId,jdbcType=BIGINT}, 
+            #{modelType,jdbcType=VARCHAR}, #{operateType,jdbcType=VARCHAR}, #{operateObject,jdbcType=VARCHAR}, 
+            #{operateResult,jdbcType=VARCHAR}, #{timeSpan,jdbcType=BIGINT}, #{operateIp,jdbcType=VARCHAR}, 
+            #{operateMac,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.Log" >
-        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into base_log
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            id,
             <if test="status != null" >
                 status,
             </if>
@@ -174,7 +171,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            #{id,jdbcType=BIGINT},
             <if test="status != null" >
                 #{status,jdbcType=BIGINT},
             </if>

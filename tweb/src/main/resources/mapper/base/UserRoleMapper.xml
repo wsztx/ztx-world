@@ -107,22 +107,19 @@
     </delete>
 
     <insert id="insert" parameterType="com.ztx.world.base.entity.UserRole" >
-        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into base_user_role (id, user_id, role_id
-            )
-        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}
-            )
+        insert into base_user_role (user_id, role_id)
+        values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.UserRole" >
-        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into base_user_role
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            id,
             <if test="userId != null" >
                 user_id,
             </if>
@@ -131,7 +128,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            #{id,jdbcType=BIGINT},
             <if test="userId != null" >
                 #{userId,jdbcType=BIGINT},
             </if>

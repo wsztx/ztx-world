@@ -49,8 +49,8 @@
 		</javaClientGenerator>
 		
 		<!-- 指定数据库表 -->
-		<table tableName="base_log" domainObjectName="Log" schema="" >
-            <generatedKey column="id" sqlStatement="MySql" identity="false"/>
+		<table tableName="base_user_role" domainObjectName="UserRole" schema="" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
 		</table>
 		
 		<!-- 有些表的字段需要指定java类型
