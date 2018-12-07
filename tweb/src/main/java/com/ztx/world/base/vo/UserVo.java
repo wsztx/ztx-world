@@ -35,5 +35,16 @@ public class UserVo extends User{
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
+
+	@Override
+	public String toString() {
+		return "UserVo [roleIds=" + roleIds + ", oldPassword=" + oldPassword + ", newPassword=" + newPassword
+				+ ", getId()=" + getId() + ", getStatus()=" + getStatus() + ", getCreateTime()=" + getCreateTime()
+				+ ", getUpdateTime()=" + getUpdateTime() + ", getCreateUserId()=" + getCreateUserId()
+				+ ", getUserCode()=" + getUserCode() + ", getUserName()=" + getUserName() + ", getPassword()="
+				+ getPassword() + ", getOrgId()=" + getOrgId() + ", getDeptId()=" + getDeptId() + ", getDescription()="
+				+ getDescription() + ", getLastLoginTime()=" + getLastLoginTime() + ", getUserStatus()="
+				+ getUserStatus() + ", getSessionVersion()=" + getSessionVersion() + "]";
+	}
 	
 }

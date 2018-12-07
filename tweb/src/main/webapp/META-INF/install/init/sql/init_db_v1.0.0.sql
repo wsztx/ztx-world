@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2018-11-22 21:48:09
+Date: 2018-12-07 19:39:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,7 +56,7 @@ CREATE TABLE `base_department` (
   `parent_id` bigint(32) NOT NULL COMMENT '上级机构id',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_DEPT_CODE` (`status`,`dept_code`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_department
@@ -79,7 +79,7 @@ CREATE TABLE `base_dictionary` (
   `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_DICTIONARY` (`status`,`dictionary_type`,`dictionary_key`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_dictionary
@@ -96,14 +96,14 @@ CREATE TABLE `base_log` (
   `operate_user_id` bigint(32) DEFAULT NULL COMMENT '操作人id',
   `model_type` varchar(96) DEFAULT NULL COMMENT '模块类型',
   `operate_type` varchar(96) DEFAULT NULL COMMENT '操作类型',
-  `operate_object` varchar(384) DEFAULT NULL COMMENT '操作对象',
-  `operate_result` varchar(384) DEFAULT NULL COMMENT '操作结果',
+  `operate_object` varchar(3840) DEFAULT NULL COMMENT '操作对象',
+  `operate_result` varchar(3840) DEFAULT NULL COMMENT '操作结果',
   `time_span` bigint(32) DEFAULT NULL COMMENT '持续时间',
   `operate_ip` varchar(96) DEFAULT NULL COMMENT '操作IP地址',
   `operate_mac` varchar(96) DEFAULT NULL COMMENT '操作mac地址',
   `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_log
@@ -323,12 +323,12 @@ CREATE TABLE `base_user` (
   `session_version` bigint(32) NOT NULL COMMENT 'session版本号，时间戳',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_USER_CODE` (`status`,`user_code`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_user
 -- ----------------------------
-INSERT INTO `base_user` VALUES ('1', '0', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'SuperAdmin', '超级管理员', '1ac534761ddc61971850b795f078719b', '1', '1', null, '2018-11-18 20:07:57', '0', '1542558231967');
+INSERT INTO `base_user` VALUES ('1', '0', '2018-10-19 23:35:57', '2018-10-19 23:36:00', '1', 'SuperAdmin', '超级管理员', '1ac534761ddc61971850b795f078719b', '1', '1', null, '2018-12-06 18:44:19', '0', '1542558231967');
 
 -- ----------------------------
 -- Table structure for base_user_role

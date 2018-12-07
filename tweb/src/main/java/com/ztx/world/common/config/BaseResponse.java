@@ -66,5 +66,10 @@ public class BaseResponse implements Serializable {
 	public String toJSONString() {
         return JSON.toJSONString(this);
     }
+
+	@Override
+	public String toString() {
+		return toJSONString();
+	}
 	
 }

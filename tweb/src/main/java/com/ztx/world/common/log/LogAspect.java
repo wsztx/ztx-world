@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.tools.ant.util.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +71,7 @@ public class LogAspect {
         
         // 设置操作对象(传入参数)
         Object[] params = point.getArgs();
-        log.setOperateObject(params.toString());
+        log.setOperateObject(StringUtils.join(params, ","));
 
         Object object;
         try {
