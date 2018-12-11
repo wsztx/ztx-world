@@ -6,11 +6,12 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 public class PropertiesUtil {
 
 	private static final String DEFAULT_ERRORCODE_FILE = "config.properties";
-	private static Properties errorCodes = new Properties();
+	private static Properties config = new Properties();
 	private static final Logger log = LoggerFactory.getLogger(PropertiesUtil.class);
 
 	private static boolean isLoad;
@@ -25,7 +26,7 @@ public class PropertiesUtil {
 				return ret;
 			}
 
-			errorCodes.load(fis);
+			config.load(fis);
 			isLoad = true;
 			ret = true;
 			
@@ -35,15 +36,15 @@ public class PropertiesUtil {
 		return ret;
 	}
 
-	public static String get(Integer key){
+	public static String get(String key){
 		try{
-			if(key == null){
+			if(StringUtils.isEmpty(key)){
 				return "";
 			}
 			if (!isLoad){
 				init();
 			}
-			String ret = errorCodes.getProperty(String.valueOf(key));
+			String ret = config.getProperty(key);
 
 			if (ret == null){
 				return "";
