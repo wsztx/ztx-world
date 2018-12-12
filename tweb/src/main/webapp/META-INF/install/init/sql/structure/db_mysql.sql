@@ -1,24 +1,27 @@
-/*
-Navicat MySQL Data Transfer
+-- MySQL dump 10.13  Distrib 5.6.30, for Win64 (x86_64)
+--
+-- Host: localhost    Database: tworld
+-- ------------------------------------------------------
+-- Server version	5.6.30
 
-Source Server         : local_mysql
-Source Server Version : 50630
-Source Host           : localhost:3306
-Source Database       : tworld
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-Target Server Type    : MYSQL
-Target Server Version : 50630
-File Encoding         : 65001
+--
+-- Table structure for table `base_config`
+--
 
-Date: 2018-12-11 20:28:27
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for base_config
--- ----------------------------
 DROP TABLE IF EXISTS `base_config`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_config` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
@@ -34,11 +37,15 @@ CREATE TABLE `base_config` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_CONFIG` (`status`,`config_type`,`config_key`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for base_department
--- ----------------------------
+--
+-- Table structure for table `base_department`
+--
+
 DROP TABLE IF EXISTS `base_department`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_department` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
@@ -52,11 +59,15 @@ CREATE TABLE `base_department` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_DEPT_CODE` (`status`,`dept_code`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for base_dictionary
--- ----------------------------
+--
+-- Table structure for table `base_dictionary`
+--
+
 DROP TABLE IF EXISTS `base_dictionary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_dictionary` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
@@ -71,11 +82,15 @@ CREATE TABLE `base_dictionary` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_DICTIONARY` (`status`,`dictionary_type`,`dictionary_key`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for base_log
--- ----------------------------
+--
+-- Table structure for table `base_log`
+--
+
 DROP TABLE IF EXISTS `base_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_log` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
@@ -91,11 +106,15 @@ CREATE TABLE `base_log` (
   `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for base_organization
--- ----------------------------
+--
+-- Table structure for table `base_organization`
+--
+
 DROP TABLE IF EXISTS `base_organization`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_organization` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
@@ -110,11 +129,15 @@ CREATE TABLE `base_organization` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ORG_CODE` (`status`,`org_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for base_permission
--- ----------------------------
+--
+-- Table structure for table `base_permission`
+--
+
 DROP TABLE IF EXISTS `base_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_permission` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
@@ -128,11 +151,15 @@ CREATE TABLE `base_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_PERMISSION_CODE` (`status`,`permission_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for base_role
--- ----------------------------
+--
+-- Table structure for table `base_role`
+--
+
 DROP TABLE IF EXISTS `base_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_role` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
@@ -145,22 +172,30 @@ CREATE TABLE `base_role` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ROLE_CODE` (`status`,`role_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for base_role_permission
--- ----------------------------
+--
+-- Table structure for table `base_role_permission`
+--
+
 DROP TABLE IF EXISTS `base_role_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_role_permission` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(32) DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for base_user
--- ----------------------------
+--
+-- Table structure for table `base_user`
+--
+
 DROP TABLE IF EXISTS `base_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_user` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` bigint(32) NOT NULL COMMENT '逻辑删除位，0未删除',
@@ -179,14 +214,30 @@ CREATE TABLE `base_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_USER_CODE` (`status`,`user_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for base_user_role
--- ----------------------------
+--
+-- Table structure for table `base_user_role`
+--
+
 DROP TABLE IF EXISTS `base_user_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_user_role` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `user_id` bigint(32) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-12-12 20:13:05
