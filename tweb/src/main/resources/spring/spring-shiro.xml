@@ -21,7 +21,7 @@
     </bean>
     
     <bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <constructor-arg name="name" value="CustomSession" />
+        <constructor-arg name="name" value="CustomSessionID" />
         <property name="path" value="/" />
         <property name="httpOnly" value="true"/>
         <!-- 默认记住7天（单位：秒） -->
