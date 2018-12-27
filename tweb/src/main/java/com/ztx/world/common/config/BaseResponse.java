@@ -3,6 +3,7 @@ package com.ztx.world.common.config;
 import java.io.Serializable;
 
 import com.alibaba.fastjson.JSON;
+import com.ztx.world.common.enums.ResultEnum;
 
 public class BaseResponse implements Serializable {
 
@@ -31,7 +32,18 @@ public class BaseResponse implements Serializable {
 	 */
 	private Boolean success;
 	
-    public Integer getCode() {
+	public BaseResponse() {
+		super();
+	}
+	
+    public BaseResponse(ResultEnum renum) {
+		super();
+		this.code = renum.getCode();
+		this.message = renum.getMessage();
+		this.success = renum.getCode().equals(1) ? true : false;
+	}
+
+	public Integer getCode() {
 		return code;
 	}
 

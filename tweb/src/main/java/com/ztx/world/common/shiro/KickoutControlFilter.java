@@ -24,9 +24,8 @@ import com.ztx.world.base.service.ConfigService;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.TableConstants;
-import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.enums.ResultEnum;
 import com.ztx.world.common.utils.ResponseUtil;
-import com.ztx.world.common.utils.ResultCodeUtil;
 
 public class KickoutControlFilter extends AccessControlFilter {
 	// 踢出后到的地址
@@ -123,10 +122,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 			HttpServletResponse httpResponse = (HttpServletResponse)response;
 			String requestType = httpRequest.getHeader("X-Requested-With");
 			if ("XMLHttpRequest".equals(requestType)) {
-	        	BaseResponse responseData = new BaseResponse();
-	        	responseData.setSuccess(false);
-	        	responseData.setCode(ResultCode.SHIRO_KICKOUT_ERROR);
-	        	responseData.setMessage(ResultCodeUtil.get(ResultCode.SHIRO_KICKOUT_ERROR));
+	        	BaseResponse responseData = new BaseResponse(ResultEnum.SHIRO_KICKOUT_ERROR);
 	        	ResponseUtil.writeJson(httpResponse, responseData);
 				return false;
 			} else {

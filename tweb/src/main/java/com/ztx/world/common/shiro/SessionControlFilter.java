@@ -18,11 +18,10 @@ import com.ztx.world.base.mapper.ext.UserExtMapper;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.ConfigConstants;
-import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.enums.ResultEnum;
 import com.ztx.world.common.redis.RedisCacheManager;
 import com.ztx.world.common.redis.RedisOperator;
 import com.ztx.world.common.utils.ResponseUtil;
-import com.ztx.world.common.utils.ResultCodeUtil;
 
 public class SessionControlFilter extends AccessControlFilter {
 	
@@ -62,10 +61,7 @@ public class SessionControlFilter extends AccessControlFilter {
 						HttpServletResponse httpResponse = (HttpServletResponse)response;
 						String requestType = httpRequest.getHeader("X-Requested-With");
 						if ("XMLHttpRequest".equals(requestType)) {
-				        	BaseResponse responseData = new BaseResponse();
-				        	responseData.setSuccess(false);
-				        	responseData.setCode(ResultCode.DATA_UPDATE_ERROR);
-				        	responseData.setMessage(ResultCodeUtil.get(ResultCode.DATA_UPDATE_ERROR));
+				        	BaseResponse responseData = new BaseResponse(ResultEnum.DATA_UPDATE_ERROR);
 				        	ResponseUtil.writeJson(httpResponse, responseData);
 							return false;
 						} else {
@@ -101,10 +97,7 @@ public class SessionControlFilter extends AccessControlFilter {
 							HttpServletResponse httpResponse = (HttpServletResponse)response;
 							String requestType = httpRequest.getHeader("X-Requested-With");
 							if ("XMLHttpRequest".equals(requestType)) {
-					        	BaseResponse responseData = new BaseResponse();
-					        	responseData.setSuccess(false);
-					        	responseData.setCode(ResultCode.DATA_UPDATE_ERROR);
-					        	responseData.setMessage(ResultCodeUtil.get(ResultCode.DATA_UPDATE_ERROR));
+					        	BaseResponse responseData = new BaseResponse(ResultEnum.DATA_UPDATE_ERROR);
 					        	ResponseUtil.writeJson(httpResponse, responseData);
 								return false;
 							} else {

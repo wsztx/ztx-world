@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,8 +19,6 @@ import com.ztx.world.base.service.DictionaryService;
 import com.ztx.world.base.vo.DictionaryVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
-import com.ztx.world.common.constants.ResultCode;
-import com.ztx.world.common.exception.BasicException;
 
 @Controller
 @RequestMapping(value = "/base/dictionary")

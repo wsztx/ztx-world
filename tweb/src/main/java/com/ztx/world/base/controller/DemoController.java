@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ztx.world.base.entity.User;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
-import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.enums.ResultEnum;
 import com.ztx.world.common.exception.BasicException;
 import com.ztx.world.common.utils.ShiroUtil;
 
@@ -60,7 +60,7 @@ public class DemoController extends BaseController {
     	if(CollectionUtils.isEmpty(list)){
     		log.debug("list is empty.");
     		// 手动抛出的异常
-    		throw new BasicException(ResultCode.BASE_ARG_ERROR);
+    		throw new BasicException(ResultEnum.BASE_ARG_ERROR);
     	}
     	return success("传到后台的数据");
     }

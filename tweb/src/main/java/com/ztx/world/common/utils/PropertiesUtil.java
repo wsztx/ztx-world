@@ -18,7 +18,7 @@ public class PropertiesUtil {
 
 	private static synchronized boolean init(){
 		boolean ret = false;
-		try(InputStream fis = ResultCodeUtil.class.getClassLoader()
+		try(InputStream fis = PropertiesUtil.class.getClassLoader()
 				.getResourceAsStream("config/" + DEFAULT_ERRORCODE_FILE);){
 			// 构造时获取到项目的物理根目录
 			if (fis == null){

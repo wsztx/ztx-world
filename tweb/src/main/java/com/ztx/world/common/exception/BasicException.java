@@ -2,7 +2,7 @@ package com.ztx.world.common.exception;
 
 import java.text.MessageFormat;
 
-import com.ztx.world.common.utils.ResultCodeUtil;
+import com.ztx.world.common.enums.ResultEnum;
 
 /**
  * 自定义基础异常
@@ -48,13 +48,25 @@ public class BasicException extends RuntimeException {
 	public BasicException(){
         super();
     }
+	
+	public BasicException(ResultEnum renum) {
+		super(renum.getMessage());
+		this.code = renum.getCode();
+		this.msg = renum.getMessage();
+	}
+	
+	public BasicException(ResultEnum renum, String message) {
+		super(message);
+		this.code = renum.getCode();
+		this.msg = message;
+	}
 
 	/**
 	 * 异常构造器
 	 * @param code
 	 */
 	public BasicException(Integer code) {
-		this(code, ResultCodeUtil.get(code));
+		this(code, ResultEnum.getMessage(code));
 	}
 	
 	/**

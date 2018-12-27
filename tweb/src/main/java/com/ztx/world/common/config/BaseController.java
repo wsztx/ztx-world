@@ -1,8 +1,7 @@
 package com.ztx.world.common.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ztx.world.common.constants.ResultCode;
-import com.ztx.world.common.utils.ResultCodeUtil;
+import com.ztx.world.common.enums.ResultEnum;
 
 public class BaseController {
 	
@@ -16,15 +15,15 @@ public class BaseController {
 	}
 	
 	protected BaseResponse success(){
-		return result(true, ResultCode.SYS_OPERATION_SUCCESS, ResultCodeUtil.get(ResultCode.SYS_OPERATION_SUCCESS), null);
+		return result(true, ResultEnum.OPERATION_SUCCESS.getCode(), ResultEnum.OPERATION_SUCCESS.getMessage(), null);
 	}
 
 	protected BaseResponse success(Object data){
-		return result(true, ResultCode.SYS_OPERATION_SUCCESS, ResultCodeUtil.get(ResultCode.SYS_OPERATION_SUCCESS), JSONObject.toJSONString(data));
+		return result(true, ResultEnum.OPERATION_SUCCESS.getCode(), ResultEnum.OPERATION_SUCCESS.getMessage(), JSONObject.toJSONString(data));
 	}
 	
 	protected BaseResponse error(Integer code){
-		return result(false, code, ResultCodeUtil.get(code), null);
+		return result(false, code, ResultEnum.getMessage(code), null);
 	}
 	
 	protected BaseResponse error(Integer code, String message){

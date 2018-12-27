@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ztx.world.common.config.BaseResponse;
-import com.ztx.world.common.constants.ResultCode;
+import com.ztx.world.common.enums.ResultEnum;
 import com.ztx.world.common.utils.ResponseUtil;
 
 @ControllerAdvice
@@ -44,13 +44,13 @@ public class GlobalExceptionHandler {
     	if("XMLHttpRequest".equals(requestType)){
         	BaseResponse responseData = new BaseResponse();
         	responseData.setSuccess(false);
-        	responseData.setCode(ResultCode.SYS_OPERATION_FAILED);
+        	responseData.setCode(ResultEnum.OPERATION_FAILED.getCode());
         	responseData.setMessage(exception.getMessage());
         	ResponseUtil.writeJson(response, responseData);
     		return null;
     	}else{
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("code", ResultCode.SYS_OPERATION_FAILED);                   
+            modelAndView.addObject("code", ResultEnum.OPERATION_FAILED.getCode());                   
             modelAndView.addObject("message", exception.getMessage());   
             modelAndView.setViewName(DEFAUL_ERROR_VIEW);
             return modelAndView;
@@ -97,13 +97,13 @@ public class GlobalExceptionHandler {
     	if("XMLHttpRequest".equals(requestType)){
         	BaseResponse responseData = new BaseResponse();
         	responseData.setSuccess(false);
-        	responseData.setCode(ResultCode.BASE_AUTH_ERROR);
+        	responseData.setCode(ResultEnum.BASE_AUTH_ERROR.getCode());
         	responseData.setMessage(exception.getMessage());
         	ResponseUtil.writeJson(response, responseData);
     		return null;
     	}else{
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("code", ResultCode.BASE_AUTH_ERROR);                   
+            modelAndView.addObject("code", ResultEnum.BASE_AUTH_ERROR.getCode());                   
             modelAndView.addObject("message", exception.getMessage());   
             modelAndView.setViewName(DEFAUL_ERROR_VIEW);
             return modelAndView;
