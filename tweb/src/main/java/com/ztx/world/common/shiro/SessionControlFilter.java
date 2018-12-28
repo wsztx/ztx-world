@@ -61,7 +61,7 @@ public class SessionControlFilter extends AccessControlFilter {
 						HttpServletResponse httpResponse = (HttpServletResponse)response;
 						String requestType = httpRequest.getHeader("X-Requested-With");
 						if ("XMLHttpRequest".equals(requestType)) {
-				        	BaseResponse responseData = new BaseResponse(ResultEnum.DATA_UPDATE_ERROR);
+				        	BaseResponse responseData = new BaseResponse(false, ResultEnum.DATA_UPDATE_ERROR);
 				        	ResponseUtil.writeJson(httpResponse, responseData);
 							return false;
 						} else {
@@ -97,7 +97,7 @@ public class SessionControlFilter extends AccessControlFilter {
 							HttpServletResponse httpResponse = (HttpServletResponse)response;
 							String requestType = httpRequest.getHeader("X-Requested-With");
 							if ("XMLHttpRequest".equals(requestType)) {
-					        	BaseResponse responseData = new BaseResponse(ResultEnum.DATA_UPDATE_ERROR);
+					        	BaseResponse responseData = new BaseResponse(false, ResultEnum.DATA_UPDATE_ERROR);
 					        	ResponseUtil.writeJson(httpResponse, responseData);
 								return false;
 							} else {

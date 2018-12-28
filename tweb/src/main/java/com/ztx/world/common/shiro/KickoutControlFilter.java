@@ -122,7 +122,7 @@ public class KickoutControlFilter extends AccessControlFilter {
 			HttpServletResponse httpResponse = (HttpServletResponse)response;
 			String requestType = httpRequest.getHeader("X-Requested-With");
 			if ("XMLHttpRequest".equals(requestType)) {
-	        	BaseResponse responseData = new BaseResponse(ResultEnum.SHIRO_KICKOUT_ERROR);
+	        	BaseResponse responseData = new BaseResponse(false, ResultEnum.SHIRO_KICKOUT_ERROR);
 	        	ResponseUtil.writeJson(httpResponse, responseData);
 				return false;
 			} else {

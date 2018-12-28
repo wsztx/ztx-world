@@ -29,6 +29,7 @@ import com.ztx.world.base.service.PermissionService;
 import com.ztx.world.base.service.RoleService;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
+import com.ztx.world.common.enums.UserStatusEnum;
 
 public class ShiroRealm extends AuthorizingRealm {
 	
@@ -67,7 +68,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		User user = null;
 		if(CollectionUtils.isEmpty(userList)){
 			throw new AccountException("用户名或密码不正确.");
-		}else if(userList.get(0).getUserStatus() != BaseConstants.UserStatusType.USER_NORMAL){
+		}else if(!userList.get(0).getUserStatus().equals(UserStatusEnum.USER_NORMAL.getCode())){
 			throw new DisabledAccountException("用户被禁止登录.");
 		}else{
 			user = userList.get(0);

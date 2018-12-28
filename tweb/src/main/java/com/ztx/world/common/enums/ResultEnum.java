@@ -9,11 +9,11 @@ public enum ResultEnum {
 	
 	OPERATION_SUCCESS(1, "操作成功."),
 	OPERATION_FAILED(0, "操作失败."),
-	BASE_ARG_ERROR(10001, "操作失败."),
-	BASE_DATA_ERROR(10002, "操作失败."),
-	BASE_AUTH_ERROR(10003, "操作失败."),
-	SHIRO_KICKOUT_ERROR(10004, "操作失败."),
-	DATA_UPDATE_ERROR(10005, "操作失败.");
+	BASE_ARG_ERROR(10001, "参数异常."),
+	BASE_DATA_ERROR(10002, "数据异常."),
+	BASE_AUTH_ERROR(10003, "权限异常."),
+	SHIRO_KICKOUT_ERROR(10004, "用户被强制退出."),
+	DATA_UPDATE_ERROR(10005, "用户信息更细.");
 	
 	private ResultEnum(Integer code, String message) {
 		this.code = code;

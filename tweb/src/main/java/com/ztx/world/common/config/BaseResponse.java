@@ -36,11 +36,11 @@ public class BaseResponse implements Serializable {
 		super();
 	}
 	
-    public BaseResponse(ResultEnum renum) {
+    public BaseResponse(Boolean success, ResultEnum renum) {
 		super();
+		this.success = success;
 		this.code = renum.getCode();
 		this.message = renum.getMessage();
-		this.success = renum.getCode().equals(1) ? true : false;
 	}
 
 	public Integer getCode() {

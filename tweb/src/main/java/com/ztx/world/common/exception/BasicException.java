@@ -55,12 +55,6 @@ public class BasicException extends RuntimeException {
 		this.msg = renum.getMessage();
 	}
 	
-	public BasicException(ResultEnum renum, String message) {
-		super(message);
-		this.code = renum.getCode();
-		this.msg = message;
-	}
-
 	/**
 	 * 异常构造器
 	 * @param code

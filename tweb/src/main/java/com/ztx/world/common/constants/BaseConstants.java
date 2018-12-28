@@ -22,12 +22,4 @@ public class BaseConstants {
 	 */
 	public static final int USE_STATUS = 1;
 	
-	/**
-	 * 用户状态常量
-	 * @author zhoutianxiang
-	 *
-	 */
-	public static final class UserStatusType{
-		public static final Integer USER_NORMAL = 0;
-	}
 }

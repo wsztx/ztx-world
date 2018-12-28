@@ -135,7 +135,7 @@ public class UserController extends BaseController{
     public BaseResponse distributeRole(HttpServletRequest request, HttpServletResponse response, 
     		UserVo user) throws Exception{
 		if(user == null){
-			throw new BasicException(ResultEnum.BASE_ARG_ERROR, "数据不能为空.");
+			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空.");
 		}
 		Long id = user.getId();
 		List<Long> roleIds = user.getRoleIds();
@@ -149,7 +149,7 @@ public class UserController extends BaseController{
     public BaseResponse updatePassword(HttpServletRequest request, HttpServletResponse response, 
     		UserVo user) throws Exception{
 		if(user == null){
-			throw new BasicException(ResultEnum.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空!");
 		}
 		Long id = user.getId();
 		userService.updatePassword(id, user.getOldPassword(), user.getNewPassword());
@@ -162,7 +162,7 @@ public class UserController extends BaseController{
     public BaseResponse resetPassword(HttpServletRequest request, HttpServletResponse response, 
     		UserVo user) throws Exception{
 		if(user == null){
-			throw new BasicException(ResultEnum.BASE_ARG_ERROR, "数据不能为空!");
+			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空!");
 		}
 		Long id = user.getId();
 		userService.resetPassword(id);
