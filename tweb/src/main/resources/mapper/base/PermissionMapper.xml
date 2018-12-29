@@ -9,6 +9,7 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
         <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
         <result column="permission_code" property="permissionCode" jdbcType="VARCHAR" />
+        <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
         <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
         <result column="permission_value" property="permissionValue" jdbcType="VARCHAR" />
         <result column="description" property="description" jdbcType="VARCHAR" />
@@ -75,8 +76,8 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, status, create_time, update_time, create_user_id, permission_code, permission_name, 
-        permission_value, description
+        id, status, create_time, update_time, create_user_id, permission_code, parent_code, 
+        permission_name, permission_value, description
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ztx.world.base.entity.PermissionExample" >
@@ -118,11 +119,13 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into base_permission (status, create_time, update_time, 
-            create_user_id, permission_code, permission_name, 
-            permission_value, description)
+            create_user_id, permission_code, parent_code, 
+            permission_name, permission_value, description
+            )
         values (#{status,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-            #{createUserId,jdbcType=BIGINT}, #{permissionCode,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}, 
-            #{permissionValue,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+            #{createUserId,jdbcType=BIGINT}, #{permissionCode,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR}, 
+            #{permissionName,jdbcType=VARCHAR}, #{permissionValue,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+            )
     </insert>
 
     <insert id="insertSelective" parameterType="com.ztx.world.base.entity.Permission" >
@@ -145,6 +148,9 @@
             </if>
             <if test="permissionCode != null" >
                 permission_code,
+            </if>
+            <if test="parentCode != null" >
+                parent_code,
             </if>
             <if test="permissionName != null" >
                 permission_name,
@@ -171,6 +177,9 @@
             </if>
             <if test="permissionCode != null" >
                 #{permissionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="parentCode != null" >
+                #{parentCode,jdbcType=VARCHAR},
             </if>
             <if test="permissionName != null" >
                 #{permissionName,jdbcType=VARCHAR},
@@ -212,6 +221,9 @@
             <if test="record.permissionCode != null" >
                 permission_code = #{record.permissionCode,jdbcType=VARCHAR},
             </if>
+            <if test="record.parentCode != null" >
+                parent_code = #{record.parentCode,jdbcType=VARCHAR},
+            </if>
             <if test="record.permissionName != null" >
                 permission_name = #{record.permissionName,jdbcType=VARCHAR},
             </if>
@@ -235,6 +247,7 @@
             update_time = #{record.updateTime,jdbcType=TIMESTAMP},
             create_user_id = #{record.createUserId,jdbcType=BIGINT},
             permission_code = #{record.permissionCode,jdbcType=VARCHAR},
+            parent_code = #{record.parentCode,jdbcType=VARCHAR},
             permission_name = #{record.permissionName,jdbcType=VARCHAR},
             permission_value = #{record.permissionValue,jdbcType=VARCHAR},
             description = #{record.description,jdbcType=VARCHAR}
@@ -261,6 +274,9 @@
             <if test="permissionCode != null" >
                 permission_code = #{permissionCode,jdbcType=VARCHAR},
             </if>
+            <if test="parentCode != null" >
+                parent_code = #{parentCode,jdbcType=VARCHAR},
+            </if>
             <if test="permissionName != null" >
                 permission_name = #{permissionName,jdbcType=VARCHAR},
             </if>
@@ -281,6 +297,7 @@
             update_time = #{updateTime,jdbcType=TIMESTAMP},
             create_user_id = #{createUserId,jdbcType=BIGINT},
             permission_code = #{permissionCode,jdbcType=VARCHAR},
+            parent_code = #{parentCode,jdbcType=VARCHAR},
             permission_name = #{permissionName,jdbcType=VARCHAR},
             permission_value = #{permissionValue,jdbcType=VARCHAR},
             description = #{description,jdbcType=VARCHAR}

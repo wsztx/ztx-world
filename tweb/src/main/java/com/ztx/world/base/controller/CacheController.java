@@ -3,6 +3,7 @@ package com.ztx.world.base.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class CacheController extends BaseController {
 	private CacheService cacheService;
 	
     @ResponseBody
-    @RequiresPermissions(value = {"base:cache:clear"})
+    @RequiresPermissions(value = {"base", "base:cache", "base:cache:clear"}, logical = Logical.AND)
     @RequestMapping(value = "/clear", method = RequestMethod.POST)
     public BaseResponse clear(HttpServletRequest request, HttpServletResponse response){
     	cacheService.clearCache();

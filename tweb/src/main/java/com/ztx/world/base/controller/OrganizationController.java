@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class OrganizationController extends BaseController {
 	@Autowired
 	private OrganizationService organizationService;
 	
-	@RequiresPermissions(value = {"base:organization:tolist"})
+	@RequiresPermissions(value = {"base", "base:organization", "base:organization:tolist"}, logical = Logical.AND)
     @RequestMapping(value="/tolist", method = RequestMethod.GET)
     public String toList(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
@@ -37,7 +38,7 @@ public class OrganizationController extends BaseController {
     	return "base/organization/list";
     }
 	
-	@RequiresPermissions(value = {"base:organization:toadd"})
+	@RequiresPermissions(value = {"base", "base:organization", "base:organization:toadd"}, logical = Logical.AND)
     @RequestMapping(value="/toadd", method = RequestMethod.GET)
     public String toAdd(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
@@ -45,7 +46,7 @@ public class OrganizationController extends BaseController {
     	return "base/organization/add";
     }
 	
-	@RequiresPermissions(value = {"base:organization:toedit"})
+	@RequiresPermissions(value = {"base", "base:organization", "base:organization:toedit"}, logical = Logical.AND)
     @RequestMapping(value="/toedit", method = RequestMethod.GET)
     public String toEdit(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
@@ -53,7 +54,7 @@ public class OrganizationController extends BaseController {
     	return "base/organization/edit";
     }
 	
-	@RequiresPermissions(value = {"base:organization:toview"})
+	@RequiresPermissions(value = {"base", "base:organization", "base:organization:toview"}, logical = Logical.AND)
     @RequestMapping(value="/toview", method = RequestMethod.GET)
     public String toView(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
@@ -62,7 +63,7 @@ public class OrganizationController extends BaseController {
     }
 	
     @ResponseBody
-    @RequiresPermissions(value = {"base:organization:save"})
+    @RequiresPermissions(value = {"base", "base:organization", "base:organization:save"}, logical = Logical.AND)
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
     		OrganizationVo organization) throws Exception{
@@ -71,7 +72,7 @@ public class OrganizationController extends BaseController {
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base:organization:update"})
+    @RequiresPermissions(value = {"base", "base:organization", "base:organization:update"}, logical = Logical.AND)
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
     		OrganizationVo organization) throws Exception{
@@ -80,7 +81,7 @@ public class OrganizationController extends BaseController {
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base:organization:page"})
+    @RequiresPermissions(value = {"base", "base:organization", "base:organization:page"}, logical = Logical.AND)
     @RequestMapping(value="/page", method = RequestMethod.GET)
     public BaseResponse page(HttpServletRequest request, HttpServletResponse response) 
     		throws Exception{
@@ -89,7 +90,7 @@ public class OrganizationController extends BaseController {
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base:organization:delete"})
+    @RequiresPermissions(value = {"base", "base:organization", "base:organization:delete"}, logical = Logical.AND)
     @RequestMapping(value="/delete", method = RequestMethod.POST)
     public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
     		List<Long> ids) throws Exception{

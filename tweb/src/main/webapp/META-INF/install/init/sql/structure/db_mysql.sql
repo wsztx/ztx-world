@@ -105,7 +105,7 @@ CREATE TABLE `base_log` (
   `operate_mac` varchar(96) DEFAULT NULL COMMENT '操作mac地址',
   `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,12 +145,13 @@ CREATE TABLE `base_permission` (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_user_id` bigint(32) DEFAULT NULL COMMENT '创建人id',
   `permission_code` varchar(96) NOT NULL COMMENT '权限编码',
+  `parent_code` varchar(96) NOT NULL COMMENT '父权限编码',
   `permission_name` varchar(96) DEFAULT NULL COMMENT '权限名称',
   `permission_value` varchar(96) DEFAULT NULL COMMENT '权限值',
   `description` varchar(384) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_PERMISSION_CODE` (`status`,`permission_code`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +187,7 @@ CREATE TABLE `base_role_permission` (
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(32) DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,4 +241,4 @@ CREATE TABLE `base_user_role` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-12 20:13:05
+-- Dump completed on 2018-12-29 21:01:44

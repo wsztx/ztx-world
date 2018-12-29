@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class RoleController extends BaseController {
 	@Autowired
 	private RoleService roleService;
 
-	@RequiresPermissions(value = {"base:role:tolist"})
+	@RequiresPermissions(value = {"base", "base:role", "base:role:tolist"}, logical = Logical.AND)
     @RequestMapping(value="/tolist", method = RequestMethod.GET)
     public String toList(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
@@ -37,7 +38,7 @@ public class RoleController extends BaseController {
     	return "base/role/list";
     }
 	
-	@RequiresPermissions(value = {"base:role:toadd"})
+	@RequiresPermissions(value = {"base", "base:role", "base:role:toadd"}, logical = Logical.AND)
     @RequestMapping(value="/toadd", method = RequestMethod.GET)
     public String toAdd(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
@@ -45,7 +46,7 @@ public class RoleController extends BaseController {
     	return "base/role/add";
     }
 	
-	@RequiresPermissions(value = {"base:role:toedit"})
+	@RequiresPermissions(value = {"base", "base:role", "base:role:toedit"}, logical = Logical.AND)
     @RequestMapping(value="/toedit", method = RequestMethod.GET)
     public String toEdit(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
@@ -53,7 +54,7 @@ public class RoleController extends BaseController {
     	return "base/role/edit";
     }
 	
-	@RequiresPermissions(value = {"base:role:toview"})
+	@RequiresPermissions(value = {"base", "base:role", "base:role:toview"}, logical = Logical.AND)
     @RequestMapping(value="/toview", method = RequestMethod.GET)
     public String toView(HttpServletRequest request, HttpServletResponse response, 
     		Model model) throws Exception{
@@ -62,7 +63,7 @@ public class RoleController extends BaseController {
     }
 	
     @ResponseBody
-    @RequiresPermissions(value = {"base:role:save"})
+    @RequiresPermissions(value = {"base", "base:role", "base:role:save"}, logical = Logical.AND)
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
     		RoleVo role) throws Exception{
@@ -71,7 +72,7 @@ public class RoleController extends BaseController {
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base:role:update"})
+    @RequiresPermissions(value = {"base", "base:role", "base:role:update"}, logical = Logical.AND)
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
     		RoleVo role) throws Exception{
@@ -80,7 +81,7 @@ public class RoleController extends BaseController {
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base:role:page"})
+    @RequiresPermissions(value = {"base", "base:role", "base:role:page"}, logical = Logical.AND)
     @RequestMapping(value="/page", method = RequestMethod.GET)
     public BaseResponse page(HttpServletRequest request, HttpServletResponse response) 
     		throws Exception{
@@ -89,7 +90,7 @@ public class RoleController extends BaseController {
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base:role:delete"})
+    @RequiresPermissions(value = {"base", "base:role", "base:role:delete"}, logical = Logical.AND)
     @RequestMapping(value="/delete", method = RequestMethod.POST)
     public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
     		List<Long> ids) throws Exception{

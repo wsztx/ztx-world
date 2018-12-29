@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  * @author ztx
  * 
- * @date 2018-12-06
+ * @date 2018-12-29
  */
 public class Permission {
     /**
@@ -39,6 +39,11 @@ public class Permission {
      * 权限编码
      */
     private String permissionCode;
+
+    /**
+     * 父权限编码
+     */
+    private String parentCode;
 
     /**
      * 权限名称
@@ -101,6 +106,14 @@ public class Permission {
 
     public void setPermissionCode(String permissionCode) {
         this.permissionCode = permissionCode == null ? null : permissionCode.trim();
+    }
+
+    public String getParentCode() {
+        return parentCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode == null ? null : parentCode.trim();
     }
 
     public String getPermissionName() {
