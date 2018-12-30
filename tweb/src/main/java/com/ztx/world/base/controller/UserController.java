@@ -139,7 +139,7 @@ public class UserController extends BaseController{
     @RequestMapping(value="/updatepassword", method = RequestMethod.POST)
     public BaseResponse updatePassword(UserVo user) throws Exception{
 		if(user == null){
-			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空!");
+			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空.");
 		}
 		Long id = user.getId();
 		userService.updatePassword(id, user.getOldPassword(), user.getNewPassword());
@@ -151,7 +151,7 @@ public class UserController extends BaseController{
     @RequestMapping(value="/resetpassword", method = RequestMethod.POST)
     public BaseResponse resetPassword(UserVo user) throws Exception{
 		if(user == null){
-			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空!");
+			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空.");
 		}
 		Long id = user.getId();
 		userService.resetPassword(id);
