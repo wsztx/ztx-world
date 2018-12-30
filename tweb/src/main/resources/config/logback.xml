@@ -121,7 +121,7 @@
 		<appender-ref ref="warn" />
 	</logger> -->
  
-	<root level="info">
+	<root>
 		<level value="${log.lever}" />
 		<appender-ref ref="console" />
 		<appender-ref ref="all" />
