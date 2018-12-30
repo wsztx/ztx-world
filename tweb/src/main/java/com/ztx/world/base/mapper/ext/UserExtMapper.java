@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.ztx.world.base.vo.UserVo;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.model.RoleModel;
 
@@ -35,5 +36,11 @@ public interface UserExtMapper {
 	 * @param ids
 	 * @return
 	 */
-	List<String> findUserCodesByIds(@Param("ids")List<Long> ids);
+	List<String> findUserCodeByIds(@Param("ids")List<Long> ids);
+	
+	/**
+	 * 获取用户列表
+	 * @return
+	 */
+	List<UserVo> findUserList(UserVo condition);
 }

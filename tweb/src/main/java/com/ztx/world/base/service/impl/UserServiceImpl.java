@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ztx.world.base.entity.Role;
 import com.ztx.world.base.entity.RoleExample;
 import com.ztx.world.base.entity.User;
@@ -19,6 +21,7 @@ import com.ztx.world.base.entity.UserRoleExample;
 import com.ztx.world.base.mapper.RoleMapper;
 import com.ztx.world.base.mapper.UserMapper;
 import com.ztx.world.base.mapper.UserRoleMapper;
+import com.ztx.world.base.mapper.ext.UserExtMapper;
 import com.ztx.world.base.service.UserService;
 import com.ztx.world.base.vo.UserVo;
 import com.ztx.world.common.config.CustomSession;
@@ -35,6 +38,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private UserExtMapper userExtMapper;
 	
 	@Autowired
 	private UserRoleMapper userRoleMapper;
@@ -260,6 +266,14 @@ public class UserServiceImpl implements UserService {
 				redisOperator.set(type + userCode, user.getSessionVersion());
 			}
 		}
+	}
+
+	@Override
+	public PageInfo<UserVo> page(UserVo condition) {
+	    PageHelper.startPage(condition.getPageNum(), condition.getPageSize());
+	    List<UserVo> list = userExtMapper.findUserList(condition);
+	    PageInfo<UserVo> page = new PageInfo<>(list);
+		return page;
 	}
 
 }

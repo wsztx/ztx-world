@@ -15,6 +15,23 @@
         <result column="org_name" property="orgName" jdbcType="VARCHAR" />
         <collection property="roleList" column="id=user_id" select="findRoleModelList" />
     </resultMap>
+    
+    <resultMap id="ListMap" type="com.ztx.world.base.vo.UserVo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="status" property="status" jdbcType="BIGINT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+        <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="dept_id" property="deptId" jdbcType="BIGINT" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+        <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+        <result column="session_version" property="sessionVersion" jdbcType="BIGINT" />
+    </resultMap>
 
 	<select id="getSessionByUserId" resultMap="SessionResultMap">
 		select user.id as user_id, user.user_code, user.user_name, user.session_version, dept.id as dept_id, 
@@ -41,10 +58,14 @@
 		where role.status = 0 and userRole.role_id = role.id 
 	</select>
 	
-	<select id="findUserCodesByIds" resultType="java.lang.String">
+	<select id="findUserCodeByIds" resultType="java.lang.String">
 		select user_code from base_user where id in 
 		<foreach collection="ids" index="index" item="id" open="(" close=")" separator=",">
 			#{id}
 		</foreach>
+	</select>
+	
+	<select id="findUserList" resultMap="ListMap">
+		select * from base_user where status = 0
 	</select>
 </mapper>

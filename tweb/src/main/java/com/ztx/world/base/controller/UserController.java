@@ -2,9 +2,6 @@ package com.ztx.world.base.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageInfo;
 import com.ztx.world.base.service.UserService;
 import com.ztx.world.base.vo.UserVo;
 import com.ztx.world.common.config.BaseController;
@@ -36,7 +35,7 @@ public class UserController extends BaseController{
     private UserService userService;
     
     @RequestMapping(value = "/tologin", method = RequestMethod.GET)
-    public String toLogin(HttpServletRequest request){
+    public String toLogin(){
     	Subject currentUser = SecurityUtils.getSubject();
     	if (currentUser.isAuthenticated()){
     		return "redirect:/index";
@@ -48,15 +47,14 @@ public class UserController extends BaseController{
     
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public BaseResponse login(HttpServletRequest request, HttpServletResponse response, 
-    		UserVo user){
+    public BaseResponse login(UserVo user){
     	userService.login(user);
         return success();
     }
     
     @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public BaseResponse logout(HttpServletRequest request, HttpServletResponse response){
+    public BaseResponse logout(){
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
         return success();
@@ -64,32 +62,28 @@ public class UserController extends BaseController{
     
 	@RequiresPermissions(value = {"base", "base:user", "base:user:tolist"}, logical = Logical.AND)
     @RequestMapping(value="/tolist", method = RequestMethod.GET)
-    public String toList(HttpServletRequest request, HttpServletResponse response, 
-    		Model model) throws Exception{
+    public String toList(Model model) throws Exception{
     	
     	return "base/user/list";
     }
 	
 	@RequiresPermissions(value = {"base", "base:user", "base:user:toadd"}, logical = Logical.AND)
     @RequestMapping(value="/toadd", method = RequestMethod.GET)
-    public String toAdd(HttpServletRequest request, HttpServletResponse response, 
-    		Model model) throws Exception{
+    public String toAdd(Model model) throws Exception{
     	
     	return "base/user/add";
     }
 	
 	@RequiresPermissions(value = {"base", "base:user", "base:user:toedit"}, logical = Logical.AND)
     @RequestMapping(value="/toedit", method = RequestMethod.GET)
-    public String toEdit(HttpServletRequest request, HttpServletResponse response, 
-    		Model model) throws Exception{
+    public String toEdit(Model model) throws Exception{
     	
     	return "base/user/edit";
     }
 	
 	@RequiresPermissions(value = {"base", "base:user", "base:user:toview"}, logical = Logical.AND)
     @RequestMapping(value="/toview", method = RequestMethod.GET)
-    public String toView(HttpServletRequest request, HttpServletResponse response, 
-    		Model model) throws Exception{
+    public String toView(Model model) throws Exception{
     	
     	return "base/user/view";
     }
@@ -97,8 +91,7 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:user", "base:user:save"}, logical = Logical.AND)
     @RequestMapping(value="/save", method = RequestMethod.POST)
-    public BaseResponse save(HttpServletRequest request, HttpServletResponse response, 
-    		UserVo user) throws Exception{
+    public BaseResponse save(UserVo user) throws Exception{
 		Long id = userService.saveUser(user);
     	return success(id);
     }
@@ -106,8 +99,7 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:user", "base:user:update"}, logical = Logical.AND)
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
-    		UserVo user) throws Exception{
+    public BaseResponse update(UserVo user) throws Exception{
 		Long id = userService.updateUser(user);
     	return success(id);
     }
@@ -115,17 +107,16 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:user", "base:user:page"}, logical = Logical.AND)
     @RequestMapping(value="/page", method = RequestMethod.GET)
-    public BaseResponse page(HttpServletRequest request, HttpServletResponse response) 
+    public BaseResponse page(UserVo user) 
     		throws Exception{
-    	
-    	return success();
+    	PageInfo<UserVo> page = userService.page(user);
+    	return success(page);
     }
     
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:user", "base:user:delete"}, logical = Logical.AND)
     @RequestMapping(value="/delete", method = RequestMethod.POST)
-    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
-    		List<Long> ids) throws Exception{
+    public BaseResponse delete(@RequestParam List<Long> ids) throws Exception{
     	userService.deleteUser(ids);
     	return success(ids);
     }
@@ -133,8 +124,7 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:user", "base:user:saveuserrole"}, logical = Logical.AND)
     @RequestMapping(value="/saveuserrole", method = RequestMethod.POST)
-    public BaseResponse distributeRole(HttpServletRequest request, HttpServletResponse response, 
-    		UserVo user) throws Exception{
+    public BaseResponse distributeRole(UserVo user) throws Exception{
 		if(user == null){
 			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空.");
 		}
@@ -147,8 +137,7 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:user", "base:user:updatepassword"}, logical = Logical.AND)
     @RequestMapping(value="/updatepassword", method = RequestMethod.POST)
-    public BaseResponse updatePassword(HttpServletRequest request, HttpServletResponse response, 
-    		UserVo user) throws Exception{
+    public BaseResponse updatePassword(UserVo user) throws Exception{
 		if(user == null){
 			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空!");
 		}
@@ -160,8 +149,7 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:user", "base:user:resetpassword"}, logical = Logical.AND)
     @RequestMapping(value="/resetpassword", method = RequestMethod.POST)
-    public BaseResponse resetPassword(HttpServletRequest request, HttpServletResponse response, 
-    		UserVo user) throws Exception{
+    public BaseResponse resetPassword(UserVo user) throws Exception{
 		if(user == null){
 			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空!");
 		}
@@ -173,8 +161,7 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:user", "base:user:downline"}, logical = Logical.AND)
     @RequestMapping(value="/downline", method = RequestMethod.POST)
-    public BaseResponse downline(HttpServletRequest request, HttpServletResponse response, 
-    		List<String> userCodes) throws Exception{
+    public BaseResponse downline(@RequestParam List<String> userCodes) throws Exception{
 		userService.updateSessionVersion(ConfigConstants.LOGIN_VERSION_PRE, userCodes);
     	return success(userCodes);
     }

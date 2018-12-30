@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ztx.world.base.mapper.ext.RoleExtMapper">
 
-	<select id="findRolesByUserId" resultMap="com.ztx.world.base.mapper.RoleMapper.BaseResultMap">
+	<select id="findRoleByUserId" resultMap="com.ztx.world.base.mapper.RoleMapper.BaseResultMap">
 		select role.* from base_role role
 		inner join base_user_role userRole on role.id = userRole.role_id and userRole.user_id = #{id}
 		where role.status = 0
 	</select>
 	
-	<select id="findUserCodesByRoleId" resultType="java.lang.String">
+	<select id="findUserCodeByRoleId" resultType="java.lang.String">
 		select u.user_code from base_user u 
 		inner join base_user_role ur on u.id = ur.user_id and ur.role_id = #{id}
 		where u.status = 0 
 	</select>
 	
-	<select id="findUsersByRoleId" resultMap="com.ztx.world.base.mapper.UserMapper.BaseResultMap">
+	<select id="findUserByRoleId" resultMap="com.ztx.world.base.mapper.UserMapper.BaseResultMap">
 		select user.* from base_user user
 		inner join base_user_role userRole on user.id = userRole.user_id and userRole.role_id = #{id}
 		where user.status = 0

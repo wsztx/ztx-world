@@ -54,7 +54,7 @@ public class DataInitServiceImpl implements DataInitService {
 	
 	
 	private void configCacheInit(){
-		List<String> typeList = configExtMapper.findConfigTypes();
+		List<String> typeList = configExtMapper.findConfigType();
 		if(!CollectionUtils.isEmpty(typeList)){
 			for(String type : typeList){
 				ConfigExample example = new ConfigExample();
@@ -69,7 +69,7 @@ public class DataInitServiceImpl implements DataInitService {
 	}
 	
 	private void dictionaryCacheInit(){
-		List<String> typeList = dictionaryExtMapper.findDictionaryTypes();
+		List<String> typeList = dictionaryExtMapper.findDictionaryType();
 		if(!CollectionUtils.isEmpty(typeList)){
 			for(String type : typeList){
 				DictionaryExample example = new DictionaryExample();

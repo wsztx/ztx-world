@@ -53,7 +53,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public List<Role> findRolesByUserId(Long id) {
-		List<Role> list = roleExtMapper.findRolesByUserId(id);
+		List<Role> list = roleExtMapper.findRoleByUserId(id);
 		return list;
 	}
 
@@ -198,7 +198,7 @@ public class RoleServiceImpl implements RoleService {
 		}
 		
 		// 修改角色下用户版本
-		List<User> userList = roleExtMapper.findUsersByRoleId(role.getId());
+		List<User> userList = roleExtMapper.findUserByRoleId(role.getId());
 		if(CollectionUtils.isEmpty(userList)){
 			for(User user : userList){
 				user.setSessionVersion(new Date().getTime());

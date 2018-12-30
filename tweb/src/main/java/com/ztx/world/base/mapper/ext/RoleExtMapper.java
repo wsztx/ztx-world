@@ -14,19 +14,19 @@ public interface RoleExtMapper {
 	 * @param id
 	 * @return
 	 */
-	List<Role> findRolesByUserId(@Param("id") Long id);
+	List<Role> findRoleByUserId(@Param("id") Long id);
 	
 	/**
 	 * 根据角色id获取所有登录名
 	 * @param id
 	 * @return
 	 */
-	List<String> findUserCodesByRoleId(@Param("id") Long id);
+	List<String> findUserCodeByRoleId(@Param("id") Long id);
 	
 	/**
 	 * 根据角色id获取用户集合
 	 * @param id
 	 * @return
 	 */
-	List<User> findUsersByRoleId(@Param("id") Long id);
+	List<User> findUserByRoleId(@Param("id") Long id);
 }

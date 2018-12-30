@@ -11,6 +11,10 @@ public class UserVo extends User{
 	private String oldPassword;
 	
 	private String newPassword;
+	
+	private int pageNum = 1;
+	
+	private int pageSize = 20;
 
 	public List<Long> getRoleIds() {
 		return roleIds;
@@ -36,15 +40,30 @@ public class UserVo extends User{
 		this.newPassword = newPassword;
 	}
 
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
 	@Override
 	public String toString() {
-		return "UserVo [roleIds=" + roleIds + ", oldPassword=" + oldPassword + ", newPassword=" + newPassword
-				+ ", getId()=" + getId() + ", getStatus()=" + getStatus() + ", getCreateTime()=" + getCreateTime()
+		return "UserVo [getId()=" + getId() + ", getStatus()=" + getStatus() + ", getCreateTime()=" + getCreateTime()
 				+ ", getUpdateTime()=" + getUpdateTime() + ", getCreateUserId()=" + getCreateUserId()
 				+ ", getUserCode()=" + getUserCode() + ", getUserName()=" + getUserName() + ", getPassword()="
 				+ getPassword() + ", getOrgId()=" + getOrgId() + ", getDeptId()=" + getDeptId() + ", getDescription()="
 				+ getDescription() + ", getLastLoginTime()=" + getLastLoginTime() + ", getUserStatus()="
 				+ getUserStatus() + ", getSessionVersion()=" + getSessionVersion() + "]";
 	}
-	
+
 }

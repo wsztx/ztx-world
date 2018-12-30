@@ -13,6 +13,6 @@ public interface PermissionExtMapper {
 	 * @param id
 	 * @return
 	 */
-	List<Permission> findPermissionsByRoleId(@Param("id") Long id);
+	List<Permission> findPermissionByRoleId(@Param("id") Long id);
 	
 }

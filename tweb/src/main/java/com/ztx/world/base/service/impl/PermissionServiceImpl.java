@@ -17,7 +17,7 @@ public class PermissionServiceImpl implements PermissionService {
 	
 	@Override
 	public List<Permission> findPermissionsByRoleId(Long id) {
-		List<Permission> list = permissionExtMapper.findPermissionsByRoleId(id);
+		List<Permission> list = permissionExtMapper.findPermissionByRoleId(id);
 		return list;
 	}
 

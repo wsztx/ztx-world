@@ -1,7 +1,5 @@
 package com.ztx.world.base.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -19,7 +17,7 @@ public class HomeController extends BaseController {
 
 	@RequiresPermissions(value = {"index"}, logical = Logical.AND)
     @RequestMapping(value="/index", method=RequestMethod.GET)
-    public String index(HttpServletRequest request) throws Exception{
+    public String index() throws Exception{
     	log.info("Home Page.");
         return "index";
     }

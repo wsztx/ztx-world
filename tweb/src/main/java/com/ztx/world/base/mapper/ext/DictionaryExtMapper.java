@@ -8,5 +8,5 @@ public interface DictionaryExtMapper {
 	 * 获取所有字典类型
 	 * @return
 	 */
-	List<String> findDictionaryTypes();
+	List<String> findDictionaryType();
 }

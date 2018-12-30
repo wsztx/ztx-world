@@ -2,9 +2,6 @@ package com.ztx.world.base.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ztx.world.base.service.ConfigService;
@@ -32,32 +30,28 @@ public class ConfigController extends BaseController {
 
 	@RequiresPermissions(value = {"base", "base:config", "base:config:tolist"}, logical = Logical.AND)
     @RequestMapping(value="/tolist", method = RequestMethod.GET)
-    public String toList(HttpServletRequest request, HttpServletResponse response, 
-    		Model model) throws Exception{
+    public String toList(Model model) throws Exception{
     	
     	return "base/config/list";
     }
 	
 	@RequiresPermissions(value = {"base", "base:config", "base:config:toadd"}, logical = Logical.AND)
     @RequestMapping(value="/toadd", method = RequestMethod.GET)
-    public String toAdd(HttpServletRequest request, HttpServletResponse response, 
-    		Model model) throws Exception{
+    public String toAdd(Model model) throws Exception{
     	
     	return "base/config/add";
     }
 	
 	@RequiresPermissions(value = {"base", "base:config", "base:config:toedit"}, logical = Logical.AND)
     @RequestMapping(value="/toedit", method = RequestMethod.GET)
-    public String toEdit(HttpServletRequest request, HttpServletResponse response, 
-    		Model model) throws Exception{
+    public String toEdit(Model model) throws Exception{
     	
     	return "base/config/edit";
     }
 	
 	@RequiresPermissions(value = {"base", "base:config", "base:config:toview"}, logical = Logical.AND)
     @RequestMapping(value="/toview", method = RequestMethod.GET)
-    public String toView(HttpServletRequest request, HttpServletResponse response, 
-    		Model model) throws Exception{
+    public String toView(Model model) throws Exception{
     	
     	return "base/config/view";
     }
@@ -65,8 +59,7 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:config", "base:config:save"}, logical = Logical.AND)
     @RequestMapping(value="/save", method = RequestMethod.POST)
-    public BaseResponse save(HttpServletRequest request, HttpServletResponse response,
-    		ConfigVo config) throws Exception{
+    public BaseResponse save(ConfigVo config) throws Exception{
     	Long id = configService.saveConfig(config);
     	return success(id);
     }
@@ -74,8 +67,7 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:config", "base:config:update"}, logical = Logical.AND)
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public BaseResponse update(HttpServletRequest request, HttpServletResponse response, 
-    		ConfigVo config) throws Exception{
+    public BaseResponse update(ConfigVo config) throws Exception{
     	Long id = configService.updateConfig(config);
     	return success(id);
     }
@@ -83,8 +75,7 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:config", "base:config:page"}, logical = Logical.AND)
     @RequestMapping(value="/page", method = RequestMethod.GET)
-    public BaseResponse page(HttpServletRequest request, HttpServletResponse response, 
-    		ConfigVo config) throws Exception{
+    public BaseResponse page(ConfigVo config) throws Exception{
     	
     	return success();
     }
@@ -92,8 +83,7 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:config", "base:config:delete"}, logical = Logical.AND)
     @RequestMapping(value="/delete", method = RequestMethod.POST)
-    public BaseResponse delete(HttpServletRequest request, HttpServletResponse response, 
-    		List<Long> ids) throws Exception{
+    public BaseResponse delete(@RequestParam List<Long> ids) throws Exception{
     	configService.deleteConfig(ids);
     	return success();
     }

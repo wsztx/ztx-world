@@ -2,6 +2,7 @@ package com.ztx.world.base.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.ztx.world.base.vo.UserVo;
 
 /**
@@ -64,4 +65,11 @@ public interface UserService {
 	 * @param ids
 	 */
 	void updateSessionVersion(String type, List<String> userCodes);
+	
+	/**
+	 * 分页查询用户
+	 * @param user
+	 * @return
+	 */
+	PageInfo<UserVo> page(UserVo condition);
 }

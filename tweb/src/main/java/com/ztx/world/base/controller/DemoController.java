@@ -3,9 +3,6 @@ package com.ztx.world.base.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +31,11 @@ public class DemoController extends BaseController {
 	private ShiroUtil shiroUtil;
     
     @RequestMapping(value="/test1", method=RequestMethod.GET)
-    public String test1(HttpServletRequest request, HttpServletResponse response, 
-    		Model model) throws Exception{
+    public String test1(Model model) throws Exception{
     	model.addAttribute("listData", "listData123");
     	model.addAttribute("data", "data123");
     	
-    	// 发生异常，由GlobalExceptionHandler统一处理
+    	// 除0
     	int avg = 100/0;
     	System.out.println(avg);
     	
@@ -48,37 +44,32 @@ public class DemoController extends BaseController {
     
     @ResponseBody
     @RequestMapping(value="/test2", method=RequestMethod.GET)
-    public BaseResponse test2(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
+    public BaseResponse test2() throws Exception{
     	String test = "";
     	List<String> list = new ArrayList<String>();
-    	// 字符串工具类
+    	// 工具类判空
     	if(StringUtils.isEmpty(test)){
     		log.debug("test is empty.");
     	}
-    	// 集合工具类
     	if(CollectionUtils.isEmpty(list)){
     		log.debug("list is empty.");
-    		// 手动抛出的异常
     		throw new BasicException(ResultEnum.BASE_ARG_ERROR);
     	}
-    	return success("传到后台的数据");
+    	return success("操作成功");
     }
     
     @ResponseBody
     @RequestMapping(value="/test3", method=RequestMethod.GET)
-    public BaseResponse test3(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
+    public BaseResponse test3() throws Exception{
     	User user = new User();
     	user.setId(123L);
-    	user.setUserName("测试");
+    	user.setUserName("张三");
     	return success(user);
     }
     
     @ResponseBody
     @RequestMapping(value="/test4", method=RequestMethod.GET)
-    public BaseResponse test4(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception{
+    public BaseResponse test4() throws Exception{
     	shiroUtil.updateCurrentSession();
     	return success();
     }
