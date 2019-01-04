@@ -27,7 +27,7 @@
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<pattern>%${log.pattern}</pattern>
+			<pattern>${log.pattern}</pattern>
 		</layout>
 	</appender>
  
