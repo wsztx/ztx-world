@@ -67,7 +67,7 @@
 				/base/user/tologin = anon
 				/base/user/login = anon
 				/base/user/logout = anon
-                /** = authc,session,kickout
+                /** = user,session,kickout
 			</value>
 		</property>
 	</bean>
