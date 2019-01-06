@@ -9,8 +9,8 @@
 <script>  
 	var baseUrl = "${base}";  
 </script>
-<link rel="stylesheet" href="${base}/resource/plugin/bootstrap-4.0.0/css/bootstrap.min.css">
 <script type="text/javascript" src="${base}/resource/plugin/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="${base}/resource/plugin/bootstrap-4.0.0/css/bootstrap.min.css">
 <script src="${base}/resource/plugin/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${base}/resource/style/login/login.css">
 <script type="text/javascript" src="${base}/resource/javascript/login/login.js"></script>
@@ -60,7 +60,6 @@
 				用户登陆
 			</div>
 			<div class="card-body">
-				<form>
 					<table style="border-collapse: separate;border-spacing: 0px 10px;">
 						<tr>
 							<td class="margin-top:10">
@@ -85,11 +84,10 @@
 						</label>
 					</div>
 					<div class="footer">
-					<button type="submit" class="btn btn-primary" onclick="doLogin();">登陆</button>
+					<button class="btn btn-primary" onclick="doLogin('${base}');">登陆</button>
 					<button type="" class="btn btn-secondary" onclick="toRegister();">注册</button>
 					<button type="button" class="btn btn-link"><small>忘记密码？</small></button>
 					</div>
-				</form>
 			</div>
 		</div>
 		</div>

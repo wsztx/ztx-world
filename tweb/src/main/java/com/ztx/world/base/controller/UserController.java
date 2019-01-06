@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,13 +47,13 @@ public class UserController extends BaseController{
     
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public BaseResponse login(@RequestBody UserVo user){
+    public BaseResponse login(UserVo user){
     	userService.login(user);
         return success();
     }
     
     @ResponseBody
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/logout", method = {RequestMethod.POST, RequestMethod.GET})
     public BaseResponse logout(){
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();

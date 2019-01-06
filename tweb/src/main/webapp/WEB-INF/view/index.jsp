@@ -8,21 +8,19 @@
 <title>Home Page</title>
 <script type="text/javascript" src="${base}/resource/plugin/jquery-3.3.1/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-function doOperate(){
+function doLogout(){
 	$.ajax({
-		type: "GET",
-		url: "${base}/demo/test4", 
+		type: "POST",
+		url: "${base}/base/user/logout", 
 		dataType: "json",
-		data: {},
 		success: function(result){
 			if(result.success){
-				
+				location.href = "${base}/base/user/tologin";
 			}else{
 				alert(result.message);
 			}
 		},
 		error: function(result){
-
 		}
 	});
 }
@@ -30,6 +28,6 @@ function doOperate(){
 </head>
 <body>
 Welcome to home page.
-<button onclick = "doOperate()">操作</button>
+<button onclick = "doLogout()">退出</button>
 </body>
 </html>

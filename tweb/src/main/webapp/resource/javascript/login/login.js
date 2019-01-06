@@ -1,13 +1,12 @@
-function doLogin(){
-	alert(baseUrl + "/base/user/login")
+function doLogin(baseUrl){
 	$.ajax({
 		type: "POST",
-		url: baseUrl + "/base/user/login", 
+		url: baseUrl + "/base/user/login",
 		dataType: "json",
-		data: {"userCode":$("#userCode"), "password":$("#password")},
+		data: {"userCode":$("#userCode").val(), "password":$("#password").val()},
 		success: function(result){
 			if(result.success){
-				location.href = "${base}/index";
+				location.href = baseUrl + "/index";
 			}else{
 				alert(result.message);
 			}
