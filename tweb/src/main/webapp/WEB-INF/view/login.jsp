@@ -63,7 +63,7 @@
 								<label>用户名：</label>
 							</td>
 							<td>
-								<input type="text" id="userCode">
+								<input type="text" name="userCode" id="userCode">
 							</td>
 						</tr>
 						<tr>
@@ -71,13 +71,13 @@
 								<label for="pwd">密码:</label>
 							</td>
 							<td>
-								<input type="password" id="password" >
+								<input type="password" name="password" id="password" >
 							</td>
 						</tr>
 					</table>
 					<div class="form-check">
 						<label class="form-check-label">
-							<input type="checkbox" name="" class="form-check-input">记住密码
+							<input type="checkbox" name="rememberMe" id="rememberMe" class="form-check-input">记住密码
 						</label>
 					</div>
 					<div class="footer">
