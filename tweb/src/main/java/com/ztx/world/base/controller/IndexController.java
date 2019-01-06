@@ -11,14 +11,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ztx.world.common.config.BaseController;
 
 @Controller
-public class HomeController extends BaseController {
+public class IndexController extends BaseController {
 	
-	private static Logger log = LoggerFactory.getLogger(HomeController.class);
+	private static Logger log = LoggerFactory.getLogger(IndexController.class);
 
 	@RequiresPermissions(value = {"index"}, logical = Logical.AND)
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index() throws Exception{
     	log.info("Home Page.");
         return "index";
+    }
+	
+	@RequiresPermissions(value = {"error"}, logical = Logical.AND)
+    @RequestMapping(value="/error", method=RequestMethod.GET)
+    public String error() throws Exception{
+    	log.info("Error Page.");
+        return "error/error";
     }
 }

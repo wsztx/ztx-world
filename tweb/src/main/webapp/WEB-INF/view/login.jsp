@@ -6,9 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录</title>
-<script>  
-	var baseUrl = "${base}";  
-</script>
 <script type="text/javascript" src="${base}/resource/plugin/jquery-3.3.1/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="${base}/resource/plugin/bootstrap-4.0.0/css/bootstrap.min.css">
 <script src="${base}/resource/plugin/bootstrap-4.0.0/js/bootstrap.min.js"></script>
@@ -84,7 +81,7 @@
 						</label>
 					</div>
 					<div class="footer">
-					<button class="btn btn-primary" onclick="doLogin('${base}');">登陆</button>
+					<button type="submit" class="btn btn-primary" onclick="doLogin('${base}');">登陆</button>
 					<button type="" class="btn btn-secondary" onclick="toRegister();">注册</button>
 					<button type="button" class="btn btn-link"><small>忘记密码？</small></button>
 					</div>

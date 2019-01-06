@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     /**
      * 默认处理异常页面
      */
-    public static final String DEFAUL_ERROR_VIEW = "forward:/web/error/error.jsp";
+    public static final String DEFAUL_ERROR_VIEW = "forward:/error";
 
     /**
      * 默认处理异常方法

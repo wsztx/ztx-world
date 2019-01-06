@@ -21,6 +21,7 @@ function doLogout(){
 			}
 		},
 		error: function(result){
+			alert("服务器异常.")
 		}
 	});
 }

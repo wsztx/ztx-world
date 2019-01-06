@@ -45,7 +45,7 @@
         <property name="kickoutUrl" value="/base/user/tologin"/>  
     </bean>
     
-   <bean id="sessionControlFilter" class="com.ztx.world.common.shiro.SessionControlFilter">  
+	<bean id="sessionControlFilter" class="com.ztx.world.common.shiro.SessionControlFilter">  
         <property name="loginUrl" value="/base/user/tologin"/>
     </bean>
 
@@ -53,7 +53,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/base/user/tologin" />
 		<property name="successUrl" value="/index" />
-		<property name="unauthorizedUrl" value="/base/user/tologin" />
+		<property name="unauthorizedUrl" value="/error" />
 		<property name="filters">
 			<map>
 				<entry key="kickout" value-ref="kickoutControlFilter"/>
