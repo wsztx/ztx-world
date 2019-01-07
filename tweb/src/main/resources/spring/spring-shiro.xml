@@ -48,16 +48,19 @@
 	<bean id="sessionControlFilter" class="com.ztx.world.common.shiro.SessionControlFilter">  
         <property name="loginUrl" value="/base/user/tologin"/>
     </bean>
+    
+    <bean id="authenticationFilter" class="org.apache.shiro.web.filter.authc.PassThruAuthenticationFilter"></bean>
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/base/user/tologin" />
-		<property name="successUrl" value="/index" />
+		<!-- <property name="successUrl" value="/index" /> -->
 		<property name="unauthorizedUrl" value="/error" />
 		<property name="filters">
 			<map>
 				<entry key="kickout" value-ref="kickoutControlFilter"/>
 				<entry key="session" value-ref="sessionControlFilter"/>
+				<entry key="authc" value-ref="authenticationFilter"/>
 			</map>
 		</property>
 		<property name="filterChainDefinitions">
@@ -67,7 +70,7 @@
 				/base/user/tologin = anon
 				/base/user/login = anon
 				/base/user/logout = anon
-                /** = user,session,kickout
+                /** = authc,session,kickout
 			</value>
 		</property>
 	</bean>
