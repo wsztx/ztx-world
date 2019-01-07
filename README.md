@@ -1,5 +1,5 @@
 # ztx-world
-world项目
+world项目:spring + springmvc + mybatis + shiro + jsp + bootstrap
 
 1、文件说明
   tweb为项目源码；
