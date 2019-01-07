@@ -3,7 +3,7 @@ function doLogin(baseUrl){
 		type: "POST",
 		url: baseUrl + "/base/user/login",
 		dataType: "json",
-		data: {"userCode":$("#userCode").val(), "password":$("#password").val(), "rememberMe":$("#rememberMe").val()},
+		data: {"userCode":$("#userCode").val(), "password":$("#password").val(), "rememberMe":$("#rememberMe").prop('checked')},
 		success: function(result){
 			if(result.success){
 				location.href = baseUrl + "/index";

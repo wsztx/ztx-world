@@ -90,7 +90,7 @@
 		</div>
  		</div>
 		<div class="jumbotron bg-light jumheight2">
-			<p class="footer2">@Master_zhoutx</p>
+			<p class="footer2">@Master_zhoutianxiang</p>
 		</div>
 	</div>
 </body>

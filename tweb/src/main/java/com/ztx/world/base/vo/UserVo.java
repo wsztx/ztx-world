@@ -12,6 +12,8 @@ public class UserVo extends User{
 	
 	private String newPassword;
 	
+	private boolean rememberMe;
+	
 	private int pageNum = 1;
 	
 	private int pageSize = 20;
@@ -56,14 +58,24 @@ public class UserVo extends User{
 		this.pageSize = pageSize;
 	}
 
-	@Override
-	public String toString() {
-		return "UserVo [getId()=" + getId() + ", getStatus()=" + getStatus() + ", getCreateTime()=" + getCreateTime()
-				+ ", getUpdateTime()=" + getUpdateTime() + ", getCreateUserId()=" + getCreateUserId()
-				+ ", getUserCode()=" + getUserCode() + ", getUserName()=" + getUserName() + ", getPassword()="
-				+ getPassword() + ", getOrgId()=" + getOrgId() + ", getDeptId()=" + getDeptId() + ", getDescription()="
-				+ getDescription() + ", getLastLoginTime()=" + getLastLoginTime() + ", getUserStatus()="
-				+ getUserStatus() + ", getSessionVersion()=" + getSessionVersion() + "]";
+	public boolean isRememberMe() {
+		return rememberMe;
 	}
 
+	public void setRememberMe(boolean rememberMe) {
+		this.rememberMe = rememberMe;
+	}
+
+	@Override
+	public String toString() {
+		return "UserVo [getRoleIds()=" + getRoleIds() + ", getOldPassword()=" + getOldPassword() + ", getNewPassword()="
+				+ getNewPassword() + ", getPageNum()=" + getPageNum() + ", getPageSize()=" + getPageSize()
+				+ ", isRememberMe()=" + isRememberMe() + ", getId()=" + getId() + ", getStatus()=" + getStatus()
+				+ ", getCreateTime()=" + getCreateTime() + ", getUpdateTime()=" + getUpdateTime()
+				+ ", getCreateUserId()=" + getCreateUserId() + ", getUserCode()=" + getUserCode() + ", getUserName()="
+				+ getUserName() + ", getPassword()=" + getPassword() + ", getOrgId()=" + getOrgId() + ", getDeptId()="
+				+ getDeptId() + ", getDescription()=" + getDescription() + ", getLastLoginTime()=" + getLastLoginTime()
+				+ ", getUserStatus()=" + getUserStatus() + ", getSessionVersion()=" + getSessionVersion() + "]";
+	}
+	
 }
