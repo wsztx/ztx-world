@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     /**
      * 默认处理异常页面
      */
-    public static final String DEFAUL_ERROR_VIEW = "forward:/error";
+    public static final String DEFAUL_ERROR_VIEW = "forward:/error/error";
 
     /**
      * 默认处理异常方法
@@ -68,14 +68,25 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BasicException.class)
     @Order(value = 1)
     @ResponseBody
-    public BaseResponse basicExceptionHandler(HttpServletRequest request, HttpServletResponse response, 
+    public ModelAndView basicExceptionHandler(HttpServletRequest request, HttpServletResponse response, 
     		BasicException exception) throws Exception{
     	log.error("BasicException occurred.", exception);
-    	BaseResponse responseData = new BaseResponse();
-    	responseData.setSuccess(false);
-    	responseData.setCode(exception.getCode());
-    	responseData.setMessage(exception.getMessage());
-        return responseData;
+    	String requestType = request.getHeader("X-Requested-With");
+    	// 如果是ajax请求
+    	if("XMLHttpRequest".equals(requestType)){
+        	BaseResponse responseData = new BaseResponse();
+        	responseData.setSuccess(false);
+        	responseData.setCode(exception.getCode());
+        	responseData.setMessage(exception.getMessage());
+        	ResponseUtil.writeJson(response, responseData);
+    		return null;
+    	}else{
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("code", exception.getCode());                   
+            modelAndView.addObject("message", exception.getMessage());   
+            modelAndView.setViewName(DEFAUL_ERROR_VIEW);
+            return modelAndView;
+    	}
     }
 
     /**

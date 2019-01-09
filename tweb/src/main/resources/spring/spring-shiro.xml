@@ -55,7 +55,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/base/user/tologin" />
 		<!-- <property name="successUrl" value="/index" /> -->
-		<property name="unauthorizedUrl" value="/error" />
+		<!-- <property name="unauthorizedUrl" value="/error" /> -->
 		<property name="filters">
 			<map>
 				<entry key="kickout" value-ref="kickoutControlFilter"/>
@@ -67,6 +67,7 @@
 			<value>
 				/resource/** = anon
 				/demo/** = anon
+				/error/** = anon
 				/base/user/tologin = anon
 				/base/user/login = anon
 				/base/user/logout = anon

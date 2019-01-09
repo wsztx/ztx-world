@@ -22,10 +22,4 @@ public class IndexController extends BaseController {
         return "index";
     }
 	
-	@RequiresPermissions(value = {"error"}, logical = Logical.AND)
-    @RequestMapping(value="/error", method=RequestMethod.GET)
-    public String error() throws Exception{
-    	log.info("Error Page.");
-        return "error/error";
-    }
 }
