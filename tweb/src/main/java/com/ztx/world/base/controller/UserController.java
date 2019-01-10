@@ -78,7 +78,7 @@ public class UserController extends BaseController{
     @RequestMapping(value="/toedit", method = RequestMethod.GET)
     public String toEdit(Model model) throws Exception{
     	
-    	return "base/user/edit";
+    	return "base/user/add";
     }
 	
 	@RequiresPermissions(value = {"base", "base:user", "base:user:toview"}, logical = Logical.AND)

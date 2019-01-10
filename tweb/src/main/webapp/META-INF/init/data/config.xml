@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<config configType="User.Login" configKey="Online.Max" configName="同一用户最大在线数" configValue="1" useStatus="1" description=""></config>
+</configs>

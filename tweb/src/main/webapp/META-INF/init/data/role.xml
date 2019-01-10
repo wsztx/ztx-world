@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roles>
+	<role roleCode="SuperAdmin" roleName="超级管理员" description=""></role>
+	<role roleCode="SystemAdmin" roleName="系统管理员" description=""></role>
+	<role roleCode="BussinessAdmin" roleName="业务管理员" description=""></role>
+	<role roleCode="OrdinaryUser" roleName="普通用户" description=""></role>
+</roles>

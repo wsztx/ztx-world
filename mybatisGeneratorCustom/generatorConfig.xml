@@ -27,7 +27,7 @@
 		</javaTypeResolver>
 
 		<!-- targetProject:生成PO类的位置 -->
-		<javaModelGenerator targetPackage="com.ztx.world.base.entity"
+		<javaModelGenerator targetPackage="com.ztx.world.system.entity"
 			targetProject=".\src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
@@ -35,21 +35,21 @@
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
         <!-- targetProject:mapper映射文件生成的位置 -->
-		<sqlMapGenerator targetPackage="mapper.base" 
+		<sqlMapGenerator targetPackage="mapper.system" 
 			targetProject=".\src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		<!-- targetPackage：mapper接口生成的位置 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.ztx.world.base.mapper" 
+			targetPackage="com.ztx.world.system.mapper" 
 			targetProject=".\src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		
 		<!-- 指定数据库表 -->
-		<table tableName="base_permission" domainObjectName="Permission" schema="" >
+		<table tableName="system_dictionary" domainObjectName="Dictionary" schema="" >
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
 		</table>
 		

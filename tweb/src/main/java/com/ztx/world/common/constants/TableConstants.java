@@ -1,7 +1,7 @@
 package com.ztx.world.common.constants;
 
 /**
- * base_config表的常量类
+ * system_config表的常量类
  * @author ztx
  *
  */

@@ -1,4 +1,4 @@
-package com.ztx.world.base.controller;
+package com.ztx.world.system.controller;
 
 import java.util.List;
 
@@ -14,66 +14,66 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ztx.world.base.service.OrganizationService;
-import com.ztx.world.base.vo.OrganizationVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
+import com.ztx.world.system.service.DictionaryService;
+import com.ztx.world.system.vo.DictionaryVo;
 
 @Controller
-@RequestMapping(value = "/base/organization")
-public class OrganizationController extends BaseController {
+@RequestMapping(value = "/base/dictionary")
+public class DictionaryController extends BaseController {
 
-	private static Logger log = LoggerFactory.getLogger(OrganizationController.class);
+	private static Logger log = LoggerFactory.getLogger(DictionaryController.class);
 	
 	@Autowired
-	private OrganizationService organizationService;
+	private DictionaryService dictionaryService;
 	
-	@RequiresPermissions(value = {"base", "base:organization", "base:organization:tolist"}, logical = Logical.AND)
+	@RequiresPermissions(value = {"system", "system:dictionary", "system:dictionary:tolist"}, logical = Logical.AND)
     @RequestMapping(value="/tolist", method = RequestMethod.GET)
     public String toList(Model model) throws Exception{
     	
-    	return "base/organization/list";
+    	return "system/dictionary/list";
     }
 	
-	@RequiresPermissions(value = {"base", "base:organization", "base:organization:toadd"}, logical = Logical.AND)
+	@RequiresPermissions(value = {"system", "system:dictionary", "system:dictionary:toadd"}, logical = Logical.AND)
     @RequestMapping(value="/toadd", method = RequestMethod.GET)
     public String toAdd(Model model) throws Exception{
     	
-    	return "base/organization/add";
+    	return "system/dictionary/add";
     }
 	
-	@RequiresPermissions(value = {"base", "base:organization", "base:organization:toedit"}, logical = Logical.AND)
+	@RequiresPermissions(value = {"system", "system:dictionary", "system:dictionary:toedit"}, logical = Logical.AND)
     @RequestMapping(value="/toedit", method = RequestMethod.GET)
     public String toEdit(Model model) throws Exception{
     	
-    	return "base/organization/add";
+    	return "system/dictionary/add";
     }
 	
-	@RequiresPermissions(value = {"base", "base:organization", "base:organization:toview"}, logical = Logical.AND)
+	@RequiresPermissions(value = {"system", "system:dictionary", "system:dictionary:toview"}, logical = Logical.AND)
     @RequestMapping(value="/toview", method = RequestMethod.GET)
     public String toView(Model model) throws Exception{
     	
-    	return "base/organization/view";
+    	return "system/dictionary/view";
     }
 	
     @ResponseBody
-    @RequiresPermissions(value = {"base", "base:organization", "base:organization:save"}, logical = Logical.AND)
+    @RequiresPermissions(value = {"system", "system:dictionary", "system:dictionary:save"}, logical = Logical.AND)
     @RequestMapping(value="/save", method = RequestMethod.POST)
-    public BaseResponse save(OrganizationVo organization) throws Exception{
-    	Long id = organizationService.saveOrganization(organization);
+    public BaseResponse save(DictionaryVo dictionary) throws Exception{
+    	Long id = dictionaryService.saveDictionary(dictionary);
     	return success(id);
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base", "base:organization", "base:organization:update"}, logical = Logical.AND)
+    @RequiresPermissions(value = {"system", "system:dictionary", "system:dictionary:update"}, logical = Logical.AND)
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public BaseResponse update(OrganizationVo organization) throws Exception{
-    	Long id = organizationService.updateOrganization(organization);
+    public BaseResponse update(DictionaryVo dictionary) throws Exception{
+    	Long id = dictionaryService.updateDictionary(dictionary);
     	return success(id);
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base", "base:organization", "base:organization:page"}, logical = Logical.AND)
+    @RequiresPermissions(value = {"system", "system:dictionary", "system:dictionary:page"}, logical = Logical.AND)
     @RequestMapping(value="/page", method = RequestMethod.GET)
     public BaseResponse page() 
     		throws Exception{
@@ -82,10 +82,10 @@ public class OrganizationController extends BaseController {
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base", "base:organization", "base:organization:delete"}, logical = Logical.AND)
+    @RequiresPermissions(value = {"system", "system:dictionary", "system:dictionary:delete"}, logical = Logical.AND)
     @RequestMapping(value="/delete", method = RequestMethod.POST)
     public BaseResponse delete(@RequestParam List<Long> ids) throws Exception{
-    	organizationService.deleteOrganization(ids);
-    	return success(ids);
+    	dictionaryService.deleteDictionary(ids);
+    	return success();
     }
 }

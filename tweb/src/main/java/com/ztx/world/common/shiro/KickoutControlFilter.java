@@ -20,12 +20,12 @@ import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
-import com.ztx.world.base.service.ConfigService;
 import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.TableConstants;
 import com.ztx.world.common.enums.ResultEnum;
 import com.ztx.world.common.utils.ResponseUtil;
+import com.ztx.world.system.service.ConfigService;
 
 public class KickoutControlFilter extends AccessControlFilter {
 	// 踢出后到的地址

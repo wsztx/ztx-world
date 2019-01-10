@@ -5,8 +5,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import com.ztx.world.base.service.DataInitService;
 import com.ztx.world.common.utils.PropertiesUtil;
+import com.ztx.world.system.service.DataInitService;
 
 /**
  * 数据初始化

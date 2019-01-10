@@ -1,4 +1,4 @@
-package com.ztx.world.base.controller;
+package com.ztx.world.system.controller;
 
 import java.util.List;
 
@@ -14,78 +14,77 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ztx.world.base.service.DepartmentService;
-import com.ztx.world.base.vo.DepartmentVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
+import com.ztx.world.system.service.ConfigService;
+import com.ztx.world.system.vo.ConfigVo;
 
 @Controller
-@RequestMapping(value = "/base/department")
-public class DepartmentController extends BaseController {
-
-	private static Logger log = LoggerFactory.getLogger(DepartmentController.class);
+@RequestMapping(value = "/base/config")
+public class ConfigController extends BaseController {
+	
+	private static Logger log = LoggerFactory.getLogger(ConfigController.class);
 	
 	@Autowired
-	private DepartmentService departmentService;
-	
-	@RequiresPermissions(value = {"base", "base:department", "base:department:tolist"}, logical = Logical.AND)
+	private ConfigService configService;
+
+	@RequiresPermissions(value = {"system", "system:config", "system:config:tolist"}, logical = Logical.AND)
     @RequestMapping(value="/tolist", method = RequestMethod.GET)
     public String toList(Model model) throws Exception{
     	
-    	return "base/department/list";
+    	return "system/config/list";
     }
 	
-	@RequiresPermissions(value = {"base", "base:department", "base:department:toadd"}, logical = Logical.AND)
+	@RequiresPermissions(value = {"system", "system:config", "system:config:toadd"}, logical = Logical.AND)
     @RequestMapping(value="/toadd", method = RequestMethod.GET)
     public String toAdd(Model model) throws Exception{
     	
-    	return "base/department/add";
+    	return "system/config/add";
     }
 	
-	@RequiresPermissions(value = {"base", "base:department", "base:department:toedit"}, logical = Logical.AND)
+	@RequiresPermissions(value = {"system", "system:config", "system:config:toedit"}, logical = Logical.AND)
     @RequestMapping(value="/toedit", method = RequestMethod.GET)
     public String toEdit(Model model) throws Exception{
     	
-    	return "base/department/add";
+    	return "system/config/add";
     }
 	
-	@RequiresPermissions(value = {"base", "base:department", "base:department:toview"}, logical = Logical.AND)
+	@RequiresPermissions(value = {"system", "system:config", "system:config:toview"}, logical = Logical.AND)
     @RequestMapping(value="/toview", method = RequestMethod.GET)
     public String toView(Model model) throws Exception{
     	
-    	return "base/department/view";
+    	return "system/config/view";
     }
 	
     @ResponseBody
-    @RequiresPermissions(value = {"base", "base:department", "base:department:save"}, logical = Logical.AND)
+    @RequiresPermissions(value = {"system", "system:config", "system:config:save"}, logical = Logical.AND)
     @RequestMapping(value="/save", method = RequestMethod.POST)
-    public BaseResponse save(DepartmentVo department) throws Exception{
-    	Long id = departmentService.saveDepartment(department);
+    public BaseResponse save(ConfigVo config) throws Exception{
+    	Long id = configService.saveConfig(config);
     	return success(id);
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base", "base:department", "base:department:update"}, logical = Logical.AND)
+    @RequiresPermissions(value = {"system", "system:config", "system:config:update"}, logical = Logical.AND)
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public BaseResponse update(DepartmentVo department) throws Exception{
-    	Long id = departmentService.updateDepartment(department);
+    public BaseResponse update(ConfigVo config) throws Exception{
+    	Long id = configService.updateConfig(config);
     	return success(id);
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base", "base:department", "base:department:page"}, logical = Logical.AND)
+    @RequiresPermissions(value = {"system", "system:config", "system:config:page"}, logical = Logical.AND)
     @RequestMapping(value="/page", method = RequestMethod.GET)
-    public BaseResponse page() 
-    		throws Exception{
+    public BaseResponse page(ConfigVo config) throws Exception{
     	
     	return success();
     }
     
     @ResponseBody
-    @RequiresPermissions(value = {"base", "base:department", "base:department:delete"}, logical = Logical.AND)
+    @RequiresPermissions(value = {"system", "system:config", "system:config:delete"}, logical = Logical.AND)
     @RequestMapping(value="/delete", method = RequestMethod.POST)
     public BaseResponse delete(@RequestParam List<Long> ids) throws Exception{
-    	departmentService.deleteDepartment(ids);
-    	return success(ids);
+    	configService.deleteConfig(ids);
+    	return success();
     }
 }

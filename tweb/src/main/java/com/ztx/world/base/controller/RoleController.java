@@ -46,7 +46,7 @@ public class RoleController extends BaseController {
     @RequestMapping(value="/toedit", method = RequestMethod.GET)
     public String toEdit(Model model) throws Exception{
     	
-    	return "base/role/edit";
+    	return "base/role/add";
     }
 	
 	@RequiresPermissions(value = {"base", "base:role", "base:role:toview"}, logical = Logical.AND)

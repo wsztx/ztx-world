@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.ztx.world.base.entity.Log;
-import com.ztx.world.base.mapper.LogMapper;
 import com.ztx.world.common.config.CustomSession;
 import com.ztx.world.common.constants.BaseConstants;
 import com.ztx.world.common.utils.IPAndMacUtil;
+import com.ztx.world.system.entity.Log;
+import com.ztx.world.system.mapper.LogMapper;
 
 public class LogAspect {
 	
