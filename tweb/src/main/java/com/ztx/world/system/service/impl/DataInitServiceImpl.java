@@ -1,7 +1,13 @@
 package com.ztx.world.system.service.impl;
 
+import java.io.File;
 import java.util.List;
 
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -21,6 +27,13 @@ import com.ztx.world.system.service.DataInitService;
 
 @Service
 public class DataInitServiceImpl implements DataInitService {
+	
+	private static Logger log = LoggerFactory.getLogger(DataInitServiceImpl.class);
+	
+	/**
+	 * 初始化数据xml路径
+	 */
+	private static final String DB_DATA_XML = "META-INF/init/data/";
 	
 	@Autowired
 	private ConfigMapper configMapper;
@@ -47,8 +60,17 @@ public class DataInitServiceImpl implements DataInitService {
 
 	@Override
 	public void dbInit() {
-		// TODO Auto-generated method stub
-		
+		if(roleInit()){
+			if(userInit()){
+				if(permissionInit()){
+					if(configInit()){
+						if(dictionaryInit()){
+							log.info("数据初始化成功.");
+						}
+					}
+				}
+			}
+		}
 	}
 
 	
@@ -80,6 +102,76 @@ public class DataInitServiceImpl implements DataInitService {
 					redisOperator.set(cacheKey, list);
 				}
 			}
+		}
+	}
+	
+	private boolean roleInit(){
+        try {
+			SAXReader reader = new SAXReader();
+			File file = new File(DB_DATA_XML + "role.xml");
+			Document document = reader.read(file);
+			Element root = document.getRootElement();
+			
+			return true;
+		} catch (Exception e) {
+			log.error("角色初始化失败.", e);
+			return false;
+		}
+	}
+	
+	private boolean userInit(){
+        try {
+			SAXReader reader = new SAXReader();
+			File file = new File(DB_DATA_XML + "user.xml");
+			Document document = reader.read(file);
+			Element root = document.getRootElement();
+			
+			return true;
+		} catch (Exception e) {
+			log.error("用户初始化失败.", e);
+			return false;
+		}
+	}
+	
+	private boolean permissionInit(){
+        try {
+			SAXReader reader = new SAXReader();
+			File file = new File(DB_DATA_XML + "permission.xml");
+			Document document = reader.read(file);
+			Element root = document.getRootElement();
+			
+			return true;
+		} catch (Exception e) {
+			log.error("权限初始化失败.", e);
+			return false;
+		}
+	}
+	
+	private boolean configInit(){
+        try {
+			SAXReader reader = new SAXReader();
+			File file = new File(DB_DATA_XML + "config.xml");
+			Document document = reader.read(file);
+			Element root = document.getRootElement();
+			
+			return true;
+		} catch (Exception e) {
+			log.error("配置初始化失败.", e);
+			return false;
+		}
+	}
+	
+	private boolean dictionaryInit(){
+        try {
+			SAXReader reader = new SAXReader();
+			File file = new File(DB_DATA_XML + "dictionary.xml");
+			Document document = reader.read(file);
+			Element root = document.getRootElement();
+			
+			return true;
+		} catch (Exception e) {
+			log.error("字典初始化失败.", e);
+			return false;
 		}
 	}
 }

@@ -25,6 +25,7 @@
 		<cglib.version>3.2.8</cglib.version>
 		<aspectjrt.version>1.8.4</aspectjrt.version>
 		<aspectjweaver.version>1.8.4</aspectjweaver.version>
+		<dom4j.version>2.1.1</dom4j.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -292,6 +293,12 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.dom4j/dom4j -->
+		<dependency>
+    		<groupId>org.dom4j</groupId>
+    		<artifactId>dom4j</artifactId>
+    		<version>${dom4j.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
