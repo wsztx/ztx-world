@@ -20,7 +20,7 @@ import com.ztx.world.system.service.DictionaryService;
 import com.ztx.world.system.vo.DictionaryVo;
 
 @Controller
-@RequestMapping(value = "/base/dictionary")
+@RequestMapping(value = "/system/dictionary")
 public class DictionaryController extends BaseController {
 
 	private static Logger log = LoggerFactory.getLogger(DictionaryController.class);

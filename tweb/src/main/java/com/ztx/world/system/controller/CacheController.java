@@ -15,7 +15,7 @@ import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
 
 @Controller
-@RequestMapping(value = "/base/cache")
+@RequestMapping(value = "/system/cache")
 public class CacheController extends BaseController {
 
 	private static Logger log = LoggerFactory.getLogger(ConfigController.class);

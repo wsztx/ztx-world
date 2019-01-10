@@ -20,7 +20,7 @@ import com.ztx.world.system.service.ConfigService;
 import com.ztx.world.system.vo.ConfigVo;
 
 @Controller
-@RequestMapping(value = "/base/config")
+@RequestMapping(value = "/system/config")
 public class ConfigController extends BaseController {
 	
 	private static Logger log = LoggerFactory.getLogger(ConfigController.class);

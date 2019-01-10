@@ -19,7 +19,7 @@ import com.ztx.world.common.config.BaseResponse;
 import com.ztx.world.system.service.LogService;
 
 @Controller
-@RequestMapping(value = "/base/log")
+@RequestMapping(value = "/system/log")
 public class LogController extends BaseController {
 
 	private static Logger log = LoggerFactory.getLogger(LogController.class);
