@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<permission permissionCode="01000000" parentCode="-1" permissionName="系统管理" permissionValue="system"></permission>
+	<permission permissionCode="02000000" parentCode="-1" permissionName="基础管理" permissionValue="base"></permission>
+	
+	<permission permissionCode="01001000" parentCode="01000000" permissionName="配置管理" permissionValue="system:config"></permission>
+	<permission permissionCode="01001001" parentCode="01001000" permissionName="配置列表页面" permissionValue="system:config:tolist"></permission>
+	<permission permissionCode="01001002" parentCode="01001000" permissionName="配置新增页面" permissionValue="system:config:toadd"></permission>
+	<permission permissionCode="01001003" parentCode="01001000" permissionName="配置编辑页面" permissionValue="system:config:toedit"></permission>
+	<permission permissionCode="01001004" parentCode="01001000" permissionName="配置查看页面" permissionValue="system:config:toview"></permission>
+	<permission permissionCode="01001005" parentCode="01001000" permissionName="配置查询" permissionValue="system:config:page"></permission>
+	<permission permissionCode="01001006" parentCode="01001000" permissionName="配置新增" permissionValue="system:config:save"></permission>
+	<permission permissionCode="01001007" parentCode="01001000" permissionName="配置修改" permissionValue="system:config:update"></permission>
+	<permission permissionCode="01001008" parentCode="01001000" permissionName="配置删除" permissionValue="system:config:delete"></permission>
+		
+	<permission permissionCode="01002000" parentCode="01000000" permissionName="字典管理" permissionValue="system:dictionary"></permission>
+	<permission permissionCode="01002001" parentCode="01002000" permissionName="字典列表页面" permissionValue="system:dictionary:tolist"></permission>
+	<permission permissionCode="01002002" parentCode="01002000" permissionName="字典新增页面" permissionValue="system:dictionary:toadd"></permission>
+	<permission permissionCode="01002003" parentCode="01002000" permissionName="字典编辑页面" permissionValue="system:dictionary:toedit"></permission>
+	<permission permissionCode="01002004" parentCode="01002000" permissionName="字典查看页面" permissionValue="system:dictionary:toview"></permission>
+	<permission permissionCode="01002005" parentCode="01002000" permissionName="字典查询" permissionValue="system:dictionary:page"></permission>
+	<permission permissionCode="01002006" parentCode="01002000" permissionName="字典新增" permissionValue="system:dictionary:save"></permission>
+	<permission permissionCode="01002007" parentCode="01002000" permissionName="字典修改" permissionValue="system:dictionary:update"></permission>
+	<permission permissionCode="01002008" parentCode="01002000" permissionName="字典删除" permissionValue="system:dictionary:delete"></permission>
+		
+	<permission permissionCode="01003000" parentCode="01000000" permissionName="日志管理" permissionValue="system:log"></permission>
+	<permission permissionCode="01003001" parentCode="01003000" permissionName="日志列表页面" permissionValue="system:log:tolist"></permission>
+	<permission permissionCode="01003002" parentCode="01003000" permissionName="日志查看页面" permissionValue="system:log:toview"></permission>
+	<permission permissionCode="01003003" parentCode="01003000" permissionName="日志查询" permissionValue="system:log:page"></permission>
+	<permission permissionCode="01003004" parentCode="01003000" permissionName="日志删除" permissionValue="system:log:delete"></permission>
+	<permission permissionCode="01003005" parentCode="01003000" permissionName="日志清理" permissionValue="system:log:clear"></permission>
+		
+	<permission permissionCode="01004000" parentCode="01000000" permissionName="緩存管理" permissionValue="system:cache"></permission>
+	<permission permissionCode="01004001" parentCode="01004000" permissionName="缓存清空" permissionValue="system:cache:clear"></permission>
+	
+	<permission permissionCode="02001000" parentCode="02000000" permissionName="机构管理" permissionValue="base:organization"></permission>
+	<permission permissionCode="02001001" parentCode="02001000" permissionName="机构列表页面" permissionValue="base:organization:tolist"></permission>
+	<permission permissionCode="02001002" parentCode="02001000" permissionName="机构新增页面" permissionValue="base:organization:toadd"></permission>
+	<permission permissionCode="02001003" parentCode="02001000" permissionName="机构编辑页面" permissionValue="base:organization:toedit"></permission>
+	<permission permissionCode="02001004" parentCode="02001000" permissionName="机构查看页面" permissionValue="base:organization:toview"></permission>
+	<permission permissionCode="02001005" parentCode="02001000" permissionName="机构查询" permissionValue="base:organization:page"></permission>
+	<permission permissionCode="02001006" parentCode="02001000" permissionName="机构新增" permissionValue="base:organization:save"></permission>
+	<permission permissionCode="02001007" parentCode="02001000" permissionName="机构修改" permissionValue="base:organization:update"></permission>
+	<permission permissionCode="02001008" parentCode="02001000" permissionName="机构删除" permissionValue="base:organization:delete"></permission>
+		
+	<permission permissionCode="02002000" parentCode="02000000" permissionName="部门管理" permissionValue="base:department"></permission>
+	<permission permissionCode="02002001" parentCode="02002000" permissionName="部门列表页面" permissionValue="base:department:tolist"></permission>
+	<permission permissionCode="02002002" parentCode="02002000" permissionName="部门新增页面" permissionValue="base:department:toadd"></permission>
+	<permission permissionCode="02002003" parentCode="02002000" permissionName="部门编辑页面" permissionValue="base:department:toedit"></permission>
+	<permission permissionCode="02002004" parentCode="02002000" permissionName="部门查看页面" permissionValue="base:department:toview"></permission>
+	<permission permissionCode="02002005" parentCode="02002000" permissionName="部门查询" permissionValue="base:department:page"></permission>
+	<permission permissionCode="02002006" parentCode="02002000" permissionName="部门新增" permissionValue="base:department:save"></permission>
+	<permission permissionCode="02002007" parentCode="02002000" permissionName="部门修改" permissionValue="base:department:update"></permission>
+	<permission permissionCode="02002008" parentCode="02002000" permissionName="部门删除" permissionValue="base:department:delete"></permission>
+		
+	<permission permissionCode="02003000" parentCode="02000000" permissionName="角色管理" permissionValue="base:role"></permission>
+	<permission permissionCode="02003001" parentCode="02003000" permissionName="角色列表页面" permissionValue="base:role:tolist"></permission>
+	<permission permissionCode="02003002" parentCode="02003000" permissionName="角色新增页面" permissionValue="base:role:toadd"></permission>
+	<permission permissionCode="02003003" parentCode="02003000" permissionName="角色编辑页面" permissionValue="base:role:toedit"></permission>
+	<permission permissionCode="02003004" parentCode="02003000" permissionName="角色查看页面" permissionValue="base:role:toview"></permission>
+	<permission permissionCode="02003005" parentCode="02003000" permissionName="角色查询" permissionValue="base:role:page"></permission>
+	<permission permissionCode="02003006" parentCode="02003000" permissionName="角色新增" permissionValue="base:role:save"></permission>
+	<permission permissionCode="02003007" parentCode="02003000" permissionName="角色修改" permissionValue="base:role:update"></permission>
+	<permission permissionCode="02003008" parentCode="02003000" permissionName="角色删除" permissionValue="base:role:delete"></permission>
+		
+	<permission permissionCode="02004000" parentCode="02000000" permissionName="用户管理" permissionValue="base:user"></permission>
+	<permission permissionCode="02004001" parentCode="02004000" permissionName="用户列表页面" permissionValue="base:user:tolist"></permission>
+	<permission permissionCode="02004002" parentCode="02004000" permissionName="用户新增页面" permissionValue="base:user:toadd"></permission>
+	<permission permissionCode="02004003" parentCode="02004000" permissionName="用户编辑页面" permissionValue="base:user:toedit"></permission>
+	<permission permissionCode="02004004" parentCode="02004000" permissionName="用户查看页面" permissionValue="base:user:toview"></permission>
+	<permission permissionCode="02004005" parentCode="02004000" permissionName="用户查询" permissionValue="base:user:page"></permission>
+	<permission permissionCode="02004006" parentCode="02004000" permissionName="用户新增" permissionValue="base:user:save"></permission>
+	<permission permissionCode="02004007" parentCode="02004000" permissionName="用户修改" permissionValue="base:user:update"></permission>
+	<permission permissionCode="02004008" parentCode="02004000" permissionName="用户删除" permissionValue="base:user:delete"></permission>
+	<permission permissionCode="02004009" parentCode="02004000" permissionName="用户分配角色" permissionValue="base:user:saveuserrole"></permission>
+	<permission permissionCode="02004010" parentCode="02004000" permissionName="用户修改密码" permissionValue="base:user:updatepassword"></permission>
+	<permission permissionCode="02004011" parentCode="02004000" permissionName="用户重置密码" permissionValue="base:user:resetpassword"></permission>
+	<permission permissionCode="02004012" parentCode="02004000" permissionName="强制下线用户" permissionValue="base:user:downline"></permission>
+</permissions>

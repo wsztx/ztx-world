@@ -29,7 +29,7 @@ public class HttpInterceptorAdapter extends HandlerInterceptorAdapter {
 		modelAndView.addObject("base", basePath);
 		// 登录信息
 		CustomSession customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
-		modelAndView.addObject("custom.session", customSession);
+		modelAndView.addObject("CustomSession", customSession);
 		super.postHandle(request, response, handler, modelAndView);
 	}
 	

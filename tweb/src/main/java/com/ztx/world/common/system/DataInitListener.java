@@ -23,16 +23,16 @@ public class DataInitListener implements ApplicationListener<ContextRefreshedEve
 	public void onApplicationEvent(ContextRefreshedEvent event) {
         // 防止重复执行。
         if(event.getApplicationContext().getParent() == null){
-        	// 是否初始化缓存
-        	String cacheInit = PropertiesUtil.get("init.cache");
-        	if(cacheInit.equals("1")){
-        		dataInitService.cacheInit();
-        	}
-        	
         	// 是否初始化数据库
         	String dbInit = PropertiesUtil.get("init.db");
         	if(dbInit.equals("1")){
         		dataInitService.dbInit();
+        	}
+        	
+        	// 是否初始化缓存
+        	String cacheInit = PropertiesUtil.get("init.cache");
+        	if(cacheInit.equals("1")){
+        		dataInitService.cacheInit();
         	}
         }
 	}

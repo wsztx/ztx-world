@@ -15,4 +15,9 @@ public interface PermissionExtMapper {
 	 */
 	List<Permission> findPermissionByRoleId(@Param("id") Long id);
 	
+	/**
+	 * 获取所有权限id
+	 * @return
+	 */
+	List<Long> findAllIds();
 }

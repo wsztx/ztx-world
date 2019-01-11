@@ -8,4 +8,7 @@
 		where perm.status = 0
 	</select>
 	
+	<select id="findAllIds" resultType="java.lang.Long">
+		select id from base_permission where status = 0
+	</select>
 </mapper>
