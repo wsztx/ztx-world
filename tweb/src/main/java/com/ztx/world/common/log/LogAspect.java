@@ -23,6 +23,8 @@ public class LogAspect {
 	
 	private static Logger logger = LoggerFactory.getLogger(LogAspect.class);
 	
+	private static final int MAX_LENGTH = (64 * 1024) / 3;
+	
 	@Autowired
 	private LogMapper logMapper;
     
@@ -71,14 +73,24 @@ public class LogAspect {
         
         // 设置操作对象(传入参数)
         Object[] params = point.getArgs();
-        log.setOperateObject(StringUtils.join(params, ","));
+        String paramsStr = StringUtils.join(params, ",");
+        if(paramsStr.length() > MAX_LENGTH){
+        	log.setOperateObject(paramsStr.substring(0, MAX_LENGTH));
+        }else{
+        	log.setOperateObject(paramsStr);
+        }
 
         Object object;
         try {
             object = point.proceed();
         } catch (Exception exception) {
+        	String exceptStr = exception.getMessage();
             // 设置操作结果
-            log.setOperateResult(exception.getMessage());
+        	if(exceptStr.length() > MAX_LENGTH){
+        		log.setOperateResult(exceptStr.substring(0, MAX_LENGTH));
+        	}else{
+        		log.setOperateResult(exceptStr);
+        	}
         	// 如果操作前未登录,操作后再次设置操作人id
         	if(log.getOperateUserId() == null){
         		customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
@@ -93,7 +105,12 @@ public class LogAspect {
             throw exception;
         }
         // 设置操作结果(方法返回结果)
-        log.setOperateResult(object.toString());
+        String objStr = object == null ? "" : object.toString();
+        if(objStr.length() > MAX_LENGTH){
+        	log.setOperateResult(objStr.substring(0, MAX_LENGTH));
+        }else{
+        	log.setOperateResult(objStr);
+        }
     	// 如果操作前未登录,操作后再次设置操作人id
     	if(log.getOperateUserId() == null){
     		customSession = (CustomSession)SecurityUtils.getSubject().getPrincipal();
