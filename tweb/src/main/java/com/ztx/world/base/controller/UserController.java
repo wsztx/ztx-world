@@ -40,7 +40,6 @@ public class UserController extends BaseController{
     	if (currentUser.isAuthenticated()){
     		return "redirect:/index";
     	}else{
-        	log.info("Login Page.");
             return "login";
     	}
     }
@@ -124,7 +123,7 @@ public class UserController extends BaseController{
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:user", "base:user:saveuserrole"}, logical = Logical.AND)
     @RequestMapping(value="/saveuserrole", method = RequestMethod.POST)
-    public BaseResponse distributeRole(UserVo user) throws Exception{
+    public BaseResponse saveUserRole(UserVo user) throws Exception{
 		if(user == null){
 			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空.");
 		}

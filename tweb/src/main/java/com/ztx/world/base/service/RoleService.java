@@ -33,4 +33,11 @@ public interface RoleService {
 	 * @return
 	 */
 	Long updateRole(RoleVo role);
+	
+	/**
+	 * 保存角色的权限
+	 * @param id
+	 * @param permissionIds
+	 */
+	void saveRolePermission(Long id, List<Long> permissionIds);
 }

@@ -197,9 +197,13 @@ public class UserServiceImpl implements UserService {
 		}
 		// 删除用户的权限缓存信息
 		User user = userMapper.selectByPrimaryKey(id);
+		User newuser = new User();
+		newuser.setId(id);
+		newuser.setSessionVersion(new Date().getTime());
+		userMapper.updateByPrimaryKey(newuser);
 		// 通知缓存session版本
-		redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
-		redisOperator.set(ConfigConstants.AUTH_VERSION_PRE + user.getUserCode(), user.getSessionVersion());
+		redisOperator.set(ConfigConstants.USER_VERSION_PRE + user.getUserCode(), newuser.getSessionVersion());
+		redisOperator.set(ConfigConstants.AUTH_VERSION_PRE + user.getUserCode(), newuser.getSessionVersion());
 	}
 
 	@Override

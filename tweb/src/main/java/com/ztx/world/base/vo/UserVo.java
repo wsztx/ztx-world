@@ -2,6 +2,7 @@ package com.ztx.world.base.vo;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ztx.world.base.entity.User;
 
 public class UserVo extends User{
@@ -68,14 +69,7 @@ public class UserVo extends User{
 
 	@Override
 	public String toString() {
-		return "UserVo [getRoleIds()=" + getRoleIds() + ", getOldPassword()=" + getOldPassword() + ", getNewPassword()="
-				+ getNewPassword() + ", getPageNum()=" + getPageNum() + ", getPageSize()=" + getPageSize()
-				+ ", isRememberMe()=" + isRememberMe() + ", getId()=" + getId() + ", getStatus()=" + getStatus()
-				+ ", getCreateTime()=" + getCreateTime() + ", getUpdateTime()=" + getUpdateTime()
-				+ ", getCreateUserId()=" + getCreateUserId() + ", getUserCode()=" + getUserCode() + ", getUserName()="
-				+ getUserName() + ", getPassword()=" + getPassword() + ", getOrgId()=" + getOrgId() + ", getDeptId()="
-				+ getDeptId() + ", getDescription()=" + getDescription() + ", getLastLoginTime()=" + getLastLoginTime()
-				+ ", getUserStatus()=" + getUserStatus() + ", getSessionVersion()=" + getSessionVersion() + "]";
+		return "UserVo:" + JSONObject.toJSONString(this);
 	}
 	
 }

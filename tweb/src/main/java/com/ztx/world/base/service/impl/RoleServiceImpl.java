@@ -14,6 +14,7 @@ import com.ztx.world.base.entity.RoleExample;
 import com.ztx.world.base.entity.RolePermission;
 import com.ztx.world.base.entity.RolePermissionExample;
 import com.ztx.world.base.entity.User;
+import com.ztx.world.base.entity.UserExample;
 import com.ztx.world.base.entity.UserRoleExample;
 import com.ztx.world.base.mapper.RoleMapper;
 import com.ztx.world.base.mapper.RolePermissionMapper;
@@ -209,6 +210,41 @@ public class RoleServiceImpl implements RoleService {
 			}
 		}
 		return role.getId();
+	}
+
+	@Override
+	public void saveRolePermission(Long id, List<Long> permissionIds) {
+		if(id == null){
+			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "角色不存在.");
+		}
+		if(CollectionUtils.isEmpty(permissionIds)){
+			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "角色权限不能为空.");
+		}
+		// 删除原有分配的权限
+		RolePermissionExample example = new RolePermissionExample();
+		example.createCriteria().andRoleIdEqualTo(id);
+		rolePermissionMapper.deleteByExample(example);
+		// 插入角色权限关联表
+		for(Long permissionId : permissionIds){
+			RolePermission rolePermission = new RolePermission();
+			rolePermission.setRoleId(id);
+			rolePermission.setPermissionId(permissionId);
+			rolePermissionMapper.insertSelective(rolePermission);
+		}
+		// 删除角色的权限缓存信息
+		List<String> userCodes = roleExtMapper.findUserCodeByRoleId(id);
+		if(!CollectionUtils.isEmpty(userCodes)){
+			for(String userCode : userCodes){
+				UserExample ex = new UserExample();
+				ex.createCriteria().andStatusEqualTo(BaseConstants.UNDELETE_STATUS).andUserCodeEqualTo(userCode);
+				User user = new User();
+				user.setSessionVersion(new Date().getTime());;
+				userMapper.updateByExampleSelective(user, ex);
+				// 通知缓存session版本
+				redisOperator.set(ConfigConstants.USER_VERSION_PRE + userCode, user.getSessionVersion());
+				redisOperator.set(ConfigConstants.AUTH_VERSION_PRE + userCode, user.getSessionVersion());
+			}
+		}
 	}
 
 }

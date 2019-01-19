@@ -62,6 +62,7 @@
 	<permission permissionCode="02003006" parentCode="02003000" permissionName="角色新增" permissionValue="base:role:save"></permission>
 	<permission permissionCode="02003007" parentCode="02003000" permissionName="角色修改" permissionValue="base:role:update"></permission>
 	<permission permissionCode="02003008" parentCode="02003000" permissionName="角色删除" permissionValue="base:role:delete"></permission>
+	<permission permissionCode="02003009" parentCode="02003000" permissionName="角色分配权限" permissionValue="base:role:saverolepermission"></permission>
 		
 	<permission permissionCode="02004000" parentCode="02000000" permissionName="用户管理" permissionValue="base:user"></permission>
 	<permission permissionCode="02004001" parentCode="02004000" permissionName="用户列表页面" permissionValue="base:user:tolist"></permission>

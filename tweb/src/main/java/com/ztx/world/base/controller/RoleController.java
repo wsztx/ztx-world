@@ -18,6 +18,8 @@ import com.ztx.world.base.service.RoleService;
 import com.ztx.world.base.vo.RoleVo;
 import com.ztx.world.common.config.BaseController;
 import com.ztx.world.common.config.BaseResponse;
+import com.ztx.world.common.enums.ResultEnum;
+import com.ztx.world.common.exception.BasicException;
 
 @Controller
 @RequestMapping(value = "/base/role")
@@ -75,8 +77,7 @@ public class RoleController extends BaseController {
     @ResponseBody
     @RequiresPermissions(value = {"base", "base:role", "base:role:page"}, logical = Logical.AND)
     @RequestMapping(value="/page", method = RequestMethod.GET)
-    public BaseResponse page() 
-    		throws Exception{
+    public BaseResponse page() throws Exception{
     	
     	return success();
     }
@@ -87,5 +88,18 @@ public class RoleController extends BaseController {
     public BaseResponse delete(@RequestParam List<Long> ids) throws Exception{
     	roleService.deleteRole(ids);
     	return success(ids);
+    }
+    
+    @ResponseBody
+    @RequiresPermissions(value = {"base", "base:role", "base:role:saverolepermission"}, logical = Logical.AND)
+    @RequestMapping(value="/saverolepermission", method = RequestMethod.POST)
+    public BaseResponse saveRolePermission(RoleVo role) throws Exception{
+		if(role == null){
+			throw new BasicException(ResultEnum.BASE_ARG_ERROR.getCode(), "数据不能为空.");
+		}
+		Long id = role.getId();
+		List<Long> permissionIds = role.getPermissionIds();
+		roleService.saveRolePermission(id, permissionIds);
+    	return success(id);
     }
 }

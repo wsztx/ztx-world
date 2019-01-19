@@ -8,7 +8,7 @@ public class BaseController {
 	protected BaseResponse result(Boolean success, Integer code, String message, Object data){
 		BaseResponse result = new BaseResponse();
         result.setCode(code);
-        result.setData(data);
+        result.setData(data == null ? null : JSONObject.toJSONString(data));
         result.setSuccess(success);
         result.setMessage(message);
         return result;
